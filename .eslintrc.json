@@ -1,0 +1,23 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "next",
+    "import",
+    "next/core-web-vitals"
+  ],
+  "rules": {
+    "prettier/prettier": "error"
+  }
+}
