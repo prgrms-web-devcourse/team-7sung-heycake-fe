@@ -4,16 +4,14 @@ import { LoginIcon, UserIcon, LogoutIcon } from './icon';
 
 export default function Header() {
   return (
-    <>
-      <Container>
-        <Image src="/images/logo.png" alt="로고" width={40} height={40} />
-        <ButtonContainer>
-          <LogoutIcon aria-label="로그아웃" w={10} h={10} />
-          <UserIcon aria-label="유저" w={10} h={10} />
-          <LoginIcon aria-label="로그인" w={10} h={10} />
-        </ButtonContainer>
-      </Container>
-    </>
+    <Container>
+      <Image src="/images/logo.png" alt="로고" width={40} height={40} />
+      <ButtonContainer>
+        <LogoutIcon aria-label="로그아웃" w={10} h={10} />
+        <UserIcon aria-label="유저" w={10} h={10} />
+        <LoginIcon aria-label="로그인" w={10} h={10} />
+      </ButtonContainer>
+    </Container>
   );
 }
 
