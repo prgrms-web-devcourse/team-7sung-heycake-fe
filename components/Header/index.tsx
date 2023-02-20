@@ -1,4 +1,3 @@
-import { IconButton } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import { LoginIcon, UserIcon, LogoutIcon } from './icon';
@@ -26,7 +25,7 @@ const Container = styled.div`
   padding: 10px;
 `;
 
-const ButtonContainer = styled.div`
+const ButtonContainer = styled.button`
   display: flex;
   gap: 10px;
 `;
