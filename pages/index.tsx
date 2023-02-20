@@ -1,8 +1,10 @@
+import Header from '@/components/Header';
 import Head from 'next/head';
 
 export default function Home() {
   return (
     <>
+      <Header />
       <Head>
         <title>next-ts-boilerplate</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
