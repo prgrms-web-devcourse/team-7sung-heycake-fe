@@ -6,7 +6,7 @@ export const heyTheme = extendTheme({
       main: '#F96400',
       sub: '#F7B500',
       darkGray: '#777777',
-      lingtGray: '#D9D9D9',
+      lightGray: '#D9D9D9',
       red: '#E53E3E',
       lightOrange: '#FEEBCB',
     },
