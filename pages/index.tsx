@@ -1,10 +1,13 @@
-import Header from '@/components/Header';
-import Head from 'next/head';
-import Image from 'next/image';
+import { heyTheme } from '@/public/theme/theme';
 import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+import Head from 'next/head';
+import Image from 'next/image';
+import { RiKakaoTalkFill } from 'react-icons/ri';
 
 export default function Home() {
+  const { sub, lightOrange } = heyTheme.colors.hey;
+
   return (
     <>
       <Head>
@@ -13,12 +16,14 @@ export default function Home() {
       </Head>
       <ImageContainer>
         <Image src="/images/logo.png" alt="로고" width={300} height={300} />
+        <ImageTitle>커스텀 케이크 제작 의뢰 플랫폼</ImageTitle>
       </ImageContainer>
       <ButtonContainer>
-        <Button bg="#F7B500" width="20rem" margin="1rem">
-          카카오톡으로 로그인
+        <Button bg={sub} width="20rem" margin="1rem">
+          <RiKakaoTalkFill />
+          &nbsp;카카오톡으로 로그인
         </Button>
-        <Button bg="#FFEAB2" width="20rem">
+        <Button bg={lightOrange} width="20rem">
           비회원으로 둘러보기
         </Button>
       </ButtonContainer>
@@ -28,13 +33,18 @@ export default function Home() {
 
 const ImageContainer = styled.main`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 7rem;
+`;
+
+const ImageTitle = styled.div`
+  color: #cbd5e0;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3rem;
+  margin-top: 5rem;
 `;
