@@ -30,7 +30,7 @@ export default function DataTabs({ data }) {
               {tab.content}
               <CakeItem />
               <CakeItem />
-              <CakeItem />
+              <CakeItem isComplited />
               <CakeItem />
               <CakeItem />
               <CakeItem />
