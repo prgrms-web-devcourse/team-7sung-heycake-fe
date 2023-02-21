@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
       <ImageContainer>
         <Image src="/images/logo.png" alt="로고" width={300} height={300} />
-        <ImageTitle>커스텀 케이크 제작 의뢰 플랫폼</ImageTitle>
+        <ServiceDescription>커스텀 케이크 제작 의뢰 플랫폼</ServiceDescription>
       </ImageContainer>
       <LoginButtonContainer>
         <Button bg="hey.sub" width="20rem" margin="1rem">
@@ -35,7 +35,7 @@ const ImageContainer = styled.main`
   margin-top: 7rem;
 `;
 
-const ImageTitle = styled.div`
+const ServiceDescription = styled.div`
   color: #cbd5e0;
 `;
 
