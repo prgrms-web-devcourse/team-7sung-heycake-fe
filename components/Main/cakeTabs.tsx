@@ -4,33 +4,20 @@ import {
   TabList,
   TabPanels,
   TabPanel,
-  Select,
   Box,
+  Flex,
 } from '@chakra-ui/react';
+import CakeItem from './cakeItem';
+import SelectBox from './selectBox';
 
 export default function DataTabs({ data }) {
   return (
-    <Tabs colorScheme="heys" isFitted>
-      <Box overflow="hidden" w="max-content">
-        <TabList>
-          <Select
-            color="hey.main"
-            textColor="black"
-            borderColor="hey.main"
-            focusBorderColor="hey.main"
-            borderWidth={2}
-            placeholder="정렬 기준"
-            w={32}
-            onChange={(e) => {
-              console.log(e.target.value);
-            }}
-          >
-            <option value="Option 1">Option 1</option>
-            <option value="Option 2">Option 2</option>
-            <option value="Option 3">Option 3</option>
-          </Select>
+    <Tabs colorScheme="heys">
+      <Box overflow="scroll">
+        <TabList w="max-content" alignItems="center" h="60px" p={2}>
+          <SelectBox />
           {data.map((tab, index) => (
-            <Tab key={index} w={20}>
+            <Tab key={index} h="60px">
               {tab.label}
             </Tab>
           ))}
@@ -38,8 +25,16 @@ export default function DataTabs({ data }) {
       </Box>
       <TabPanels>
         {data.map((tab, index) => (
-          <TabPanel p={4} key={index}>
-            {tab.content}
+          <TabPanel p={3} key={index}>
+            <Flex padding={0} gap={4} flexDirection="column">
+              {tab.content}
+              <CakeItem />
+              <CakeItem />
+              <CakeItem />
+              <CakeItem />
+              <CakeItem />
+              <CakeItem />
+            </Flex>
           </TabPanel>
         ))}
       </TabPanels>
