@@ -13,7 +13,14 @@ import SelectBox from './selectBox';
 export default function DataTabs({ data }) {
   return (
     <Tabs colorScheme="heys">
-      <Box overflow="scroll">
+      <Box
+        overflow="scroll"
+        sx={{
+          '::-webkit-scrollbar': {
+            display: 'none',
+          },
+        }}
+      >
         <TabList w="max-content" alignItems="center" h="60px" p={2}>
           <SelectBox />
           {data.map((tab, index) => (
