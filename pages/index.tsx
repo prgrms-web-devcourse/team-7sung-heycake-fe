@@ -1,14 +1,9 @@
 import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import Head from 'next/head';
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>Hey, cake</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
       <ImageContainer>
         <img src="/images/logo.png" alt="로고" width={300} height={300} />
         <ServiceDescription>커스텀 케이크 제작 의뢰 플랫폼</ServiceDescription>
