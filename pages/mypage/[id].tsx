@@ -1,13 +1,14 @@
 import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-
+import Header from '@/components/Header';
 export default function Detail() {
   const router = useRouter();
   const { id } = router.query || ['LOADING'];
 
   return (
     <div>
+      <Header />
       <MypageContainer>
         <MessageContainer>
           <strong>{id}님</strong>
