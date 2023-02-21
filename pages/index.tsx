@@ -1,4 +1,3 @@
-import { heyTheme } from '@/public/theme/theme';
 import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Head from 'next/head';
@@ -6,8 +5,6 @@ import Image from 'next/image';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 
 export default function Home() {
-  const { sub, lightOrange } = heyTheme.colors.hey;
-
   return (
     <>
       <Head>
@@ -19,11 +16,11 @@ export default function Home() {
         <ImageTitle>커스텀 케이크 제작 의뢰 플랫폼</ImageTitle>
       </ImageContainer>
       <LoginButtonContainer>
-        <Button bg={sub} width="20rem" margin="1rem">
+        <Button bg="hey.sub" width="20rem" margin="1rem">
           <RiKakaoTalkFill />
           &nbsp;카카오톡으로 로그인
         </Button>
-        <Button bg={lightOrange} width="20rem">
+        <Button bg="hey.lightOrange" width="20rem">
           비회원으로 둘러보기
         </Button>
       </LoginButtonContainer>
