@@ -18,7 +18,7 @@ export default function Home() {
         <Image src="/images/logo.png" alt="로고" width={300} height={300} />
         <ImageTitle>커스텀 케이크 제작 의뢰 플랫폼</ImageTitle>
       </ImageContainer>
-      <ButtonContainer>
+      <LoginButtonContainer>
         <Button bg={sub} width="20rem" margin="1rem">
           <RiKakaoTalkFill />
           &nbsp;카카오톡으로 로그인
@@ -26,7 +26,7 @@ export default function Home() {
         <Button bg={lightOrange} width="20rem">
           비회원으로 둘러보기
         </Button>
-      </ButtonContainer>
+      </LoginButtonContainer>
     </>
   );
 }
@@ -42,7 +42,7 @@ const ImageTitle = styled.div`
   color: #cbd5e0;
 `;
 
-const ButtonContainer = styled.div`
+const LoginButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
