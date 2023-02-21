@@ -10,7 +10,7 @@ import {
 import CakeItem from './cakeItem';
 import SelectBox from './selectBox';
 
-export default function DataTabs({ data }) {
+export default function CakeMain({ data }) {
   return (
     <Tabs colorScheme="heys">
       <Box

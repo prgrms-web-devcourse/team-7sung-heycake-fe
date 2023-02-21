@@ -1,7 +1,7 @@
 import Header from '@/components/Header';
-import DataTabs from '@/components/Main/cakeTabs';
+import CakeMain from '@/components/Main/cakeMain';
 
-export default function Home() {
+export default function Main() {
   const tabData = [
     {
       label: '전체',
@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <DataTabs data={tabData} />
+      <CakeMain data={tabData} />
     </>
   );
 }
