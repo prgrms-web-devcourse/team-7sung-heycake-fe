@@ -14,9 +14,8 @@ export default function CakeItem() {
     <Card
       borderColor="hey.sub"
       borderWidth="2px"
-      bgColor="orange.100"
+      bgColor="orange.50"
       direction="row"
-      overflow="hidden"
       variant="outline"
       alignItems="center"
       justifyContent="space-between"
