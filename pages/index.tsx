@@ -1,15 +1,26 @@
 import Header from '@/components/Header';
-import Head from 'next/head';
+import DataTabs from '@/components/Main/cakeTabs';
 
 export default function Home() {
+  const tabData = [
+    {
+      label: '전체',
+      content: '전체 케이크',
+    },
+    {
+      label: '생크림',
+      content: '초콜릿 케이크',
+    },
+    {
+      label: '쵸코',
+      content: '초콜릿 케이크',
+    },
+  ];
+
   return (
     <>
       <Header />
-      <Head>
-        <title>next-ts-boilerplate</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <main>next-ts-boilerplate</main>
+      <DataTabs data={tabData} />
     </>
   );
 }
