@@ -10,6 +10,7 @@ export const heyTheme = extendTheme({
       red: '#E53E3E',
       lightOrange: '#FEEBCB',
     },
+
     heys: {
       50: '#FFFAF0',
       100: '#FEEBC8',

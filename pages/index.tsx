@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import DataTabs from '@/components/Main/cakeTabs';
+import { Flex } from '@chakra-ui/react';
 
 export default function Home() {
   const tabData = [
@@ -15,12 +16,30 @@ export default function Home() {
       label: '쵸코',
       content: '초콜릿 케이크',
     },
+    {
+      label: '쵸코',
+      content: '초콜릿 케이크',
+    },
+    {
+      label: '쵸코',
+      content: '초콜릿 케이크',
+    },
+    {
+      label: '쵸코',
+      content: '초콜릿 케이크',
+    },
+    {
+      label: '쵸코',
+      content: '초콜릿 케이크',
+    },
   ];
 
   return (
     <>
       <Header />
-      <DataTabs data={tabData} />
+      <Flex>
+        <DataTabs data={tabData} />
+      </Flex>
     </>
   );
 }
