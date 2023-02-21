@@ -2,6 +2,11 @@ import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export default function Home() {
+  function loginWithKakao() {
+    window.Kakao.Auth.authorize({
+      redirectUri: 'http://localhost:3000/',
+    });
+  }
   return (
     <>
       <ImageContainer>
@@ -9,7 +14,13 @@ export default function Home() {
         <ServiceDescription>커스텀 케이크 제작 의뢰 플랫폼</ServiceDescription>
       </ImageContainer>
       <LoginButtonContainer>
-        <img src="/images/kakao_login_medium_wide.png" alt="로고" width={310} />
+        <img
+          src="/images/kakao_login_medium_wide.png"
+          alt="로고"
+          width={310}
+          onClick={() => loginWithKakao()}
+        />
+
         <Button
           bg="hey.lightOrange"
           width="310px"
