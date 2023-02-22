@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import { LoginIcon, UserIcon, LogoutIcon } from './icon';
+
+import { LoginIcon, LogoutIcon, UserIcon } from './icon';
 
 export default function Header() {
   return (
