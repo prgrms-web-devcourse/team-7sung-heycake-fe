@@ -13,21 +13,21 @@ export default function Header() {
           <IconButton
             variant="ghost"
             aria-label="로그아웃"
-            icon={<LogoutIcon w={10} h={10} />}
+            icon={<LogoutIcon w={8} h={8} />}
           />
         </Link>
         <Link href="/market/prgs">
           <IconButton
             variant="ghost"
             aria-label="유저"
-            icon={<UserIcon w={10} h={10} />}
+            icon={<UserIcon w={8} h={8} />}
           />
         </Link>
         <Link href="/login">
           <IconButton
             variant="ghost"
             aria-label="로그인"
-            icon={<LoginIcon w={10} h={10} />}
+            icon={<LoginIcon w={8} h={8} />}
           />
         </Link>
       </ButtonContainer>
