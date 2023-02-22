@@ -1,12 +1,13 @@
-import { Container, Text, Divider, Flex } from '@chakra-ui/react';
+import { Container, Divider, Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
-import StoreTitle from './storetitle';
+
 import {
   StoreAddressIcon,
   StoreInfoIcon,
   StoreOpeningIcon,
   StoreTelIcon,
 } from './icon';
+import StoreTitle from './storetitle';
 
 export default function StoreProfile() {
   return (
