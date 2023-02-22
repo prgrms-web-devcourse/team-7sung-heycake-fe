@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import { ArrowBackIcon } from './icon';
 
-export default function StoreTitle() {
+export default function MarketTitle() {
   return (
     <>
       <Container>

@@ -2,22 +2,22 @@ import { Container, Divider, Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import {
-  StoreAddressIcon,
-  StoreInfoIcon,
-  StoreOpeningIcon,
-  StoreTelIcon,
+  MarketAddressIcon,
+  MarketInfoIcon,
+  MarketOpeningIcon,
+  MarketTelIcon,
 } from './icon';
-import StoreTitle from './storetitle';
+import MarketTitle from './markettitle';
 
-export default function StoreProfile() {
+export default function MarketProfile() {
   return (
     <>
-      <StoreTitle />
+      <MarketTitle />
       <Container centerContent gap={5} padding={4}>
         <Image src="/images/prgms.png" alt="로고" width={240} height={240} />
         <Container padding={0}>
           <Flex align="center" gap={2}>
-            <StoreInfoIcon w={7} h={7} />
+            <MarketInfoIcon w={7} h={7} />
             <Text color="hey.main" fontWeight={800} fontSize="xl">
               업체 소개
             </Text>
@@ -31,7 +31,7 @@ export default function StoreProfile() {
         <Divider borderColor="hey.main" />
         <Container padding={0}>
           <Flex align="center" gap={2}>
-            <StoreAddressIcon w={8} h={8} />
+            <MarketAddressIcon w={8} h={8} />
             <Text color="hey.main" fontWeight={800} fontSize="xl">
               주소
             </Text>
@@ -41,7 +41,7 @@ export default function StoreProfile() {
         <Divider borderColor="hey.main" />
         <Container padding={0}>
           <Flex align="center" gap={2}>
-            <StoreTelIcon w={7} h={7} />
+            <MarketTelIcon w={7} h={7} />
             <Text color="hey.main" fontWeight={800} fontSize="xl">
               전화번호
             </Text>
@@ -51,7 +51,7 @@ export default function StoreProfile() {
         <Divider borderColor="hey.main" />
         <Container padding={0}>
           <Flex align="center" gap={2}>
-            <StoreOpeningIcon w={7} h={7} />
+            <MarketOpeningIcon w={7} h={7} />
             <Text color="hey.main" fontWeight={800} fontSize="xl">
               영업시간
             </Text>

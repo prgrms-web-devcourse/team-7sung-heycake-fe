@@ -11,8 +11,8 @@ export const ArrowBackIcon = createIcon({
   ),
 });
 
-export const StoreInfoIcon = createIcon({
-  displayName: 'StoreInfoIcon',
+export const MarketInfoIcon = createIcon({
+  displayName: 'MarketInfoIcon',
   viewBox: '0 0 23 22',
   path: (
     <path
@@ -22,8 +22,8 @@ export const StoreInfoIcon = createIcon({
   ),
 });
 
-export const StoreAddressIcon = createIcon({
-  displayName: 'StoreAddressIcon',
+export const MarketAddressIcon = createIcon({
+  displayName: 'MarketAddressIcon',
   viewBox: '0 0 23 22',
   path: (
     <>
@@ -39,8 +39,8 @@ export const StoreAddressIcon = createIcon({
   ),
 });
 
-export const StoreTelIcon = createIcon({
-  displayName: 'StoreTelIcon',
+export const MarketTelIcon = createIcon({
+  displayName: 'MarketTelIcon',
   viewBox: '0 0 23 22',
   path: (
     <>
@@ -56,8 +56,8 @@ export const StoreTelIcon = createIcon({
   ),
 });
 
-export const StoreOpeningIcon = createIcon({
-  displayName: 'StoreOpeningIcon',
+export const MarketOpeningIcon = createIcon({
+  displayName: 'MarketOpeningIcon',
   viewBox: '0 0 23 22',
   path: (
     <>
