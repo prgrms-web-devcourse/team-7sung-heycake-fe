@@ -1,3 +1,4 @@
+import { heyTheme } from '@/public/theme/theme';
 import { ChakraProvider } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -5,8 +6,6 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
 import { useEffect } from 'react';
-
-import { heyTheme } from '@/public/theme/theme';
 
 const queryClient = new QueryClient();
 
