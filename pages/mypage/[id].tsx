@@ -1,9 +1,10 @@
-import Header from '@/components/Header';
 import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
-export default function detail() {
+import Header from '@/components/Header';
+
+export default function Detail() {
   const router = useRouter();
   const { id } = router.query || ['LOADING'];
 
