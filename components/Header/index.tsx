@@ -1,8 +1,9 @@
+import { IconButton } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import { IconButton } from '@chakra-ui/react';
-import { LoginIcon, LogoutIcon, UserIcon } from './icon';
 import Link from 'next/link';
+
+import { LoginIcon, LogoutIcon, UserIcon } from './icon';
 
 export default function Header() {
   return (

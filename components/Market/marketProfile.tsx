@@ -7,7 +7,7 @@ import {
   MarketOpeningIcon,
   MarketTelIcon,
 } from './icon';
-import MarketTitle from './markettitle';
+import MarketTitle from './marketTitle';
 
 export default function MarketProfile() {
   return (
