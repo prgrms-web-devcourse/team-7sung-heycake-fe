@@ -10,13 +10,18 @@ export default function Home() {
   return (
     <>
       <ImageContainer>
-        <img src="/images/logo.png" alt="로고" width={300} height={300} />
+        <img
+          src="/images/logo.png"
+          alt="헤이케이크 로고 이미지"
+          width={300}
+          height={300}
+        />
         <ServiceDescription>커스텀 케이크 제작 의뢰 플랫폼</ServiceDescription>
       </ImageContainer>
       <LoginButtonContainer>
         <img
           src="/images/kakao_login_medium_wide.png"
-          alt="로고"
+          alt="카카오 로그인 이미지"
           width={310}
           onClick={() => loginWithKakao()}
         />
