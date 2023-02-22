@@ -1,14 +1,11 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 
-import Header from '@/components/Header';
-
 import DataTable from './components/DataTable';
 
 export default function Orders() {
   return (
     <>
-      <Header />
       <Image alt="cake" src="/images/cake.png" width={1000} height={1000} />
       <OrderWrapper>
         <div>
@@ -60,6 +57,7 @@ const OrderRequestCount = styled.span`
   color: white;
   background-color: #e53e3e;
   padding: 0 1rem;
+  padding-bottom: 2px;
   border-radius: 1rem;
 `;
 
