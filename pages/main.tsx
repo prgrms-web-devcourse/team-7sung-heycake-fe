@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import CakeMain from '@/components/Main/cakeMain';
 
 export default function Main() {
-  const tabData = [
+  const DUMMY_DATA = [
     {
       label: '전체',
       content: '전체 케이크',
@@ -32,7 +32,7 @@ export default function Main() {
   return (
     <>
       <Header />
-      <CakeMain data={tabData} />
+      <CakeMain data={DUMMY_DATA} />
     </>
   );
 }

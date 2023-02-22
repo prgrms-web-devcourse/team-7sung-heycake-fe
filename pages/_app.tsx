@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={heyTheme}>
         <Head>
-          <title>next-ts-boilerplate</title>
+          <title>Hey, cake</title>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=1"

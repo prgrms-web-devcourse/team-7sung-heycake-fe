@@ -12,7 +12,7 @@ export default function SelectBox() {
       mr={6}
       w={32}
       onChange={(e) => {
-        console.log(e.target.value);
+        alert(e.target.value);
       }}
     >
       <option value="Option 1">Option 1</option>
