@@ -1,12 +1,13 @@
 import {
-  Tab,
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel,
   Box,
   Flex,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
 } from '@chakra-ui/react';
+
 import CakeItem from './cakeItem';
 import SelectBox from './selectBox';
 

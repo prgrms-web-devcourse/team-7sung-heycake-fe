@@ -1,12 +1,12 @@
 import {
+  Badge,
   Card,
+  CardBody,
+  Divider,
+  Flex,
   Image,
   Stack,
-  CardBody,
-  Badge,
   Text,
-  Flex,
-  Divider,
 } from '@chakra-ui/react';
 
 export default function CakeItem({ ...props }) {
