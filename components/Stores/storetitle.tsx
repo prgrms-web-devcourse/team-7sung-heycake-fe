@@ -1,5 +1,6 @@
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+
 import { ArrowBackIcon } from './icon';
 
 export default function StoreTitle() {
