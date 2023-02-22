@@ -1,5 +1,8 @@
 import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+import Image from 'next/image';
+
+import kakaoLoginImage from '../public/images/kakao_login_medium_wide.png';
 
 export default function Home() {
   function loginWithKakao() {
@@ -10,7 +13,7 @@ export default function Home() {
   return (
     <>
       <ImageContainer>
-        <img
+        <Image
           src="/images/logo.png"
           alt="헤이케이크 로고 이미지"
           width={300}
@@ -19,16 +22,15 @@ export default function Home() {
         <ServiceDescription>커스텀 케이크 제작 의뢰 플랫폼</ServiceDescription>
       </ImageContainer>
       <LoginButtonContainer>
-        <img
-          src="/images/kakao_login_medium_wide.png"
+        <Image
+          src={kakaoLoginImage}
           alt="카카오 로그인 이미지"
-          width={310}
           onClick={() => loginWithKakao()}
         />
 
         <Button
           bg="hey.lightOrange"
-          width="310px"
+          width="300px"
           height="46.5px"
           marginTop="1rem"
           fontSize="15px"
