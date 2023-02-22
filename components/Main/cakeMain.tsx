@@ -38,7 +38,7 @@ export default function CakeMain({ data }) {
               {tab.content}
               <CakeItem />
               <CakeItem />
-              <CakeItem isComplited />
+              <CakeItem isCompleted />
               <CakeItem />
               <CakeItem />
               <CakeItem />
