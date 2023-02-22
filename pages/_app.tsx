@@ -17,15 +17,10 @@ declare global {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    try {
-      if (!window.Kakao.isInitialized() && window.Kakao) {
-        window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_KEY);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  function kakaoInit() {
+    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_KEY);
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={heyTheme}>
@@ -33,7 +28,10 @@ export default function App({ Component, pageProps }: AppProps) {
           <title>Hey, cake</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
-        <Script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"></Script>
+        <Script
+          src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+          onLoad={kakaoInit}
+        ></Script>
         <Component {...pageProps} />
         <ReactQueryDevtools />
       </ChakraProvider>
