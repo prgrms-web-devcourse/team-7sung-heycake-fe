@@ -1,19 +1,19 @@
 import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 
 import { ArrowBackIcon } from './icon';
 
 export default function MarketTitle() {
+  const router = useRouter();
   return (
-    <>
-      <Container>
-        <ArrowBackIcon w={10} h={10} />
-        <Text fontSize="2xl" align="center" fontWeight="700">
-          프그케이크 강남점
-        </Text>
-        <Box w={10} h={10} />
-      </Container>
-    </>
+    <Container>
+      <ArrowBackIcon w={10} h={10} onClick={() => router.back()} />
+      <Text fontSize="2xl" align="center" fontWeight="700">
+        프그케이크 강남점
+      </Text>
+      <Box w={10} h={10} />
+    </Container>
   );
 }
 
