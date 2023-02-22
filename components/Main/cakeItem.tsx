@@ -12,7 +12,7 @@ import {
 export default function CakeItem({ ...props }) {
   return (
     <Card
-      bgImage={props.isComplited ? '/images/complitedCake.png' : ''}
+      bgImage={props.isCompleted? '/images/complitedCake.png' : ''}
       bgPosition="center"
     >
       <Card
