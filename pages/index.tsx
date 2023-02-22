@@ -28,7 +28,6 @@ export default function Home() {
           alt="카카오 로그인 이미지"
           onClick={loginWithKakao}
         />
-
         <Button
           bg="hey.lightOrange"
           width="300px"
