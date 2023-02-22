@@ -1,8 +1,9 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import Head from 'next/head';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import Script from 'next/script';
 import { useEffect } from 'react';
 
 import { heyTheme } from '@/public/theme/theme';
@@ -30,10 +31,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Hey, cake</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script
+        <Script
           defer
           src="https://developers.kakao.com/sdk/js/kakao.js"
-        ></script>
+        ></Script>
       </Head>
       <QueryClientProvider client={queryClient}>
         <ChakraProvider theme={heyTheme}>
