@@ -12,7 +12,7 @@ import {
 export default function CakeItem({ ...props }) {
   return (
     <Card
-      bgImage={props.isCompleted? '/images/complitedCake.png' : ''}
+      bgImage={props.isCompleted ? '/images/completedCake.png' : ''}
       bgPosition="center"
     >
       <Card
@@ -23,7 +23,7 @@ export default function CakeItem({ ...props }) {
         variant="outline"
         alignItems="center"
         justifyContent="space-between"
-        opacity={props.isCompleted? '0.4' : '1'}
+        opacity={props.isCompleted ? '0.4' : '1'}
       >
         <Image
           p={2}

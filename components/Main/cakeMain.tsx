@@ -10,8 +10,36 @@ import {
 
 import CakeItem from './cakeItem';
 import SelectBox from './selectBox';
+import { ICakeList } from './types';
 
-export default function CakeMain({ data }) {
+export default function CakeMain() {
+  const DUMMY_DATA: ICakeList[] = [
+    {
+      label: '전체',
+      content: '전체 케이크',
+    },
+    {
+      label: '생크림',
+      content: '생크림 케이크',
+    },
+    {
+      label: '쵸코',
+      content: '초콜릿 케이크',
+    },
+    {
+      label: '전체',
+      content: '전체 케이크',
+    },
+    {
+      label: '생크림',
+      content: '생크림 케이크',
+    },
+    {
+      label: '쵸코',
+      content: '초콜릿 케이크',
+    },
+  ];
+
   return (
     <Tabs colorScheme="heys">
       <Box
@@ -24,7 +52,7 @@ export default function CakeMain({ data }) {
       >
         <TabList w="max-content" alignItems="center" h="60px" p={2}>
           <SelectBox />
-          {data.map((tab, index) => (
+          {DUMMY_DATA.map((tab, index) => (
             <Tab key={index} h="60px">
               {tab.label}
             </Tab>
@@ -32,7 +60,7 @@ export default function CakeMain({ data }) {
         </TabList>
       </Box>
       <TabPanels>
-        {data.map((tab, index) => (
+        {DUMMY_DATA.map((tab, index) => (
           <TabPanel p={3} key={index}>
             <Flex padding={0} gap={4} flexDirection="column">
               {tab.content}
