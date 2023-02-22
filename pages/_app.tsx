@@ -22,26 +22,21 @@ export default function App({ Component, pageProps }: AppProps) {
       if (!window.Kakao.isInitialized() && window.Kakao) {
         window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_KEY);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
     }
   }, []);
   return (
-    <>
-      <Head>
-        <title>Hey, cake</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Script
-          defer
-          src="https://developers.kakao.com/sdk/js/kakao.js"
-        ></Script>
-      </Head>
-      <QueryClientProvider client={queryClient}>
-        <ChakraProvider theme={heyTheme}>
-          <Component {...pageProps} />
-          <ReactQueryDevtools />
-        </ChakraProvider>
-      </QueryClientProvider>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider theme={heyTheme}>
+        <Head>
+          <title>Hey, cake</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <Script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"></Script>
+        </Head>
+        <Component {...pageProps} />
+        <ReactQueryDevtools />
+      </ChakraProvider>
+    </QueryClientProvider>
   );
 }
