@@ -26,7 +26,7 @@ export default function Home() {
         <Image
           src={kakaoLoginImage}
           alt="카카오 로그인 이미지"
-          onClick={() => loginWithKakao()}
+          onClick={loginWithKakao}
         />
 
         <Button
