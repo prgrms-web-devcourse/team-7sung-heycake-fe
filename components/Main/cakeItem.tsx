@@ -23,7 +23,7 @@ export default function CakeItem({ ...props }) {
         variant="outline"
         alignItems="center"
         justifyContent="space-between"
-        opacity={props.isComplited ? '0.4' : '1'}
+        opacity={props.isCompleted? '0.4' : '1'}
       >
         <Image
           p={2}
