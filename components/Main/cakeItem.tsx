@@ -39,41 +39,39 @@ export default function CakeItem({ ...props }) {
         <Stack>
           <CardBody p={0}>
             <Flex padding={0} gap={1} flexDirection="column">
-              <Flex align="center" gap={4}>
-                <Text color="hey.main">케익 모양</Text>
-                <Text fontSize="sm">동그라미</Text>
+              <Flex align="center" gap={4} justifyContent="space-between">
+                <Text color="hey.main">카테고리</Text>
+                <Text fontSize="sm">포토</Text>
               </Flex>
               <Divider borderColor="hey.main" />
-              <Flex align="center" gap={4}>
+              <Flex align="center" gap={4} justifyContent="space-between">
                 <Text color="hey.main">케익 크기</Text>
                 <Text fontSize="sm">1호</Text>
               </Flex>
               <Divider borderColor="hey.main" />
-              <Flex align="center" gap={4}>
-                <Text color="hey.main">케익 종류</Text>
-                <Text fontSize="sm">화이트</Text>
+              <Flex align="center" gap={4} justifyContent="space-between">
+                <Text color="hey.main">케익 맛</Text>
+                <Text fontSize="sm">초코</Text>
               </Flex>
               <Divider borderColor="hey.main" />
             </Flex>
           </CardBody>
         </Stack>
-        <Stack>
-          <Flex
-            flexDirection="column"
-            justifyContent="space-between"
-            alignItems="end"
-            w={24}
-            h={32}
-            p={2}
-          >
-            <Badge bgColor="red.200" color="hey.red">
-              ~1 일
-            </Badge>
-            <Badge bgColor="orange.100" colorScheme="red" color="hey.red">
-              ~ ₩ 130,000
-            </Badge>
-          </Flex>
-        </Stack>
+        <Flex
+          flexDirection="column"
+          justifyContent="space-between"
+          alignItems="end"
+          w={24}
+          h={32}
+          p={2}
+        >
+          <Badge bgColor="red.200" color="hey.red">
+            ~1 일
+          </Badge>
+          <Badge bgColor="orange.100" colorScheme="red" color="hey.red">
+            ~ ₩ 130,000
+          </Badge>
+        </Flex>
       </Card>
     </Card>
   );

@@ -16,27 +16,27 @@ export default function CakeMain() {
   const DUMMY_DATA: ICakeList[] = [
     {
       label: '전체',
-      content: '전체 케이크',
+      content: '전체',
     },
     {
-      label: '생크림',
-      content: '생크림 케이크',
+      label: '포토',
+      content: '포토',
     },
     {
-      label: '쵸코',
-      content: '초콜릿 케이크',
+      label: '레터링',
+      content: '레터링',
     },
     {
-      label: '전체',
-      content: '전체 케이크',
+      label: '캐릭터 - 그림',
+      content: '캐릭터 - 그림',
     },
     {
-      label: '생크림',
-      content: '생크림 케이크',
+      label: '캐릭터 - 입체',
+      content: '캐릭터 - 입체',
     },
     {
-      label: '쵸코',
-      content: '초콜릿 케이크',
+      label: '기타',
+      content: '기타',
     },
   ];
 
