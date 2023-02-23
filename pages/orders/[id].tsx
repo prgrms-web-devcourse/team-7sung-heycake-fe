@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 
-import DataTable from './components/DataTable';
+import DataTable from '@/components/Orders/DataTable';
 
 export default function Orders() {
   return (
