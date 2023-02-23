@@ -23,7 +23,7 @@ import LocationListItem from './locationListItem';
 
 export default function LocationSelectBox() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [location, setLocation] = useState('광진구');
+  const [location, setLocation] = useState('강남구');
   return (
     <>
       <Flex
@@ -56,7 +56,12 @@ export default function LocationSelectBox() {
                 <AccordionPanel pb={4}>
                   <Grid gap={3} gridTemplateColumns="repeat(3, 1fr)">
                     <LocationListItem
-                      name="강북구"
+                      name="강남구"
+                      onClose={onClose}
+                      setLocation={setLocation}
+                    />
+                    <LocationListItem
+                      name="강동구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
@@ -66,67 +71,52 @@ export default function LocationSelectBox() {
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="강서구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="관악구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="광진구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="구로구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="금천구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="노원구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="도봉구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="동대문구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="동작구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
-                      onClose={onClose}
-                      setLocation={setLocation}
-                    />
-                    <LocationListItem
-                      name="강북구"
-                      onClose={onClose}
-                      setLocation={setLocation}
-                    />
-                    <LocationListItem
-                      name="강북구"
-                      onClose={onClose}
-                      setLocation={setLocation}
-                    />
-                    <LocationListItem
-                      name="강북구"
+                      name="마포구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
@@ -146,77 +136,62 @@ export default function LocationSelectBox() {
                 <AccordionPanel pb={4}>
                   <Grid gap={3} gridTemplateColumns="repeat(3, 1fr)">
                     <LocationListItem
-                      name="강북구"
+                      name="서대문구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="서초구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="성동구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="성북구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="송파구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="양천구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="영등포구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="용산구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="은평구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="종로구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
+                      name="중구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
                     <LocationListItem
-                      name="강북구"
-                      onClose={onClose}
-                      setLocation={setLocation}
-                    />
-                    <LocationListItem
-                      name="강북구"
-                      onClose={onClose}
-                      setLocation={setLocation}
-                    />
-                    <LocationListItem
-                      name="강북구"
-                      onClose={onClose}
-                      setLocation={setLocation}
-                    />
-                    <LocationListItem
-                      name="강북구"
+                      name="중량구"
                       onClose={onClose}
                       setLocation={setLocation}
                     />
