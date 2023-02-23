@@ -13,6 +13,7 @@ const queryClient = new QueryClient();
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Kakao: any;
   }
 }
@@ -30,6 +31,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <ChakraProvider theme={heyTheme}>
           <Head>
             <title>Hey, cake</title>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=1"
+            />
           </Head>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           <Component {...pageProps} />
