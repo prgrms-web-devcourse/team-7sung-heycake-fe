@@ -31,6 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Head>
             <title>Hey, cake</title>
           </Head>
+          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           <Component {...pageProps} />
           <ReactQueryDevtools />
         </ChakraProvider>
@@ -50,6 +51,7 @@ export default function App({ Component, pageProps }: AppProps) {
           onLoad={kakaoInit}
         />
         <Header />
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Component {...pageProps} />
         <ReactQueryDevtools />
       </ChakraProvider>
