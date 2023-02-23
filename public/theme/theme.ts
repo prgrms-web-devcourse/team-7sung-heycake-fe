@@ -1,6 +1,6 @@
 import { extendTheme } from '@chakra-ui/react';
 
-export const heyTheme = extendTheme({
+const heyTheme = extendTheme({
   colors: {
     hey: {
       main: '#F96400',
@@ -25,3 +25,5 @@ export const heyTheme = extendTheme({
     },
   },
 });
+
+export default heyTheme;

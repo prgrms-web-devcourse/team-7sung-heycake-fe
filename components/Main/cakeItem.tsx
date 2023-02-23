@@ -10,9 +10,11 @@ import {
 } from '@chakra-ui/react';
 
 export default function CakeItem({ ...props }) {
+  // eslint-disable-next-line react/prop-types
+  const isComplete = props.isCompleted;
   return (
     <Card
-      bgImage={props.isCompleted ? '/images/completedCake.png' : ''}
+      bgImage={isComplete ? '/images/completedCake.png' : ''}
       bgPosition="center"
     >
       <Card
@@ -23,7 +25,7 @@ export default function CakeItem({ ...props }) {
         variant="outline"
         alignItems="center"
         justifyContent="space-between"
-        opacity={props.isCompleted ? '0.4' : '1'}
+        opacity={isComplete ? '0.4' : '1'}
       >
         <Image
           p={2}
