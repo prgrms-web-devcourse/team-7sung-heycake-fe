@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 
 import CakeItem from './cakeItem';
-import SelectBox from './selectBox';
+import LocationSelectBox from './locationSelectBox';
 import { ICakeList } from './types';
 
 export default function CakeMain() {
@@ -51,7 +51,7 @@ export default function CakeMain() {
         }}
       >
         <TabList w="max-content" alignItems="center" h="60px" p={2}>
-          <SelectBox />
+          <LocationSelectBox />
           {DUMMY_DATA.map((tab, index) => (
             <Tab key={index} h="60px">
               {tab.label}
