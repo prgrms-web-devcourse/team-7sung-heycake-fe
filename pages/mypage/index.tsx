@@ -4,13 +4,12 @@ import { useRouter } from 'next/router';
 
 export default function Detail() {
   const router = useRouter();
-  const { id } = router.query || ['LOADING'];
 
   return (
     <div>
       <MypageContainer>
         <MessageContainer>
-          <strong>{id}님</strong>
+          <strong>허지연님</strong>
           <br />
           환영합니다!
         </MessageContainer>
