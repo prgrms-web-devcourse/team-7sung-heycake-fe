@@ -30,6 +30,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <ChakraProvider theme={heyTheme}>
           <Head>
             <title>Hey, cake</title>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1, minimum-scale=1"
+            />
           </Head>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           <Component {...pageProps} />
@@ -44,7 +48,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <ChakraProvider theme={heyTheme}>
         <Head>
           <title>Hey, cake</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, minimum-scale=1"
+          />
         </Head>
         <Script
           src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
