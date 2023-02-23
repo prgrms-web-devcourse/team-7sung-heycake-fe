@@ -5,10 +5,10 @@ import Image from 'next/image';
 import kakaoLoginImage from '../public/images/kakao_login_medium_wide.png';
 
 function loginWithKakao() {
-    window.Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:3000/',
-    });
-  }
+  window.Kakao.Auth.authorize({
+    redirectUri: 'http://localhost:3000/',
+  });
+}
 
 export default function Home() {
   return (
