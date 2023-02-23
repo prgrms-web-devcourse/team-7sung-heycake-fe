@@ -52,16 +52,16 @@ export default function CakeMain() {
       >
         <TabList w="max-content" alignItems="center" h="60px" p={2}>
           <SelectBox />
-          {DUMMY_DATA.map((tab, index) => (
-            <Tab key={index} h="60px">
+          {DUMMY_DATA.map((tab) => (
+            <Tab key={tab.label} h="60px">
               {tab.label}
             </Tab>
           ))}
         </TabList>
       </Box>
       <TabPanels>
-        {DUMMY_DATA.map((tab, index) => (
-          <TabPanel p={3} key={index}>
+        {DUMMY_DATA.map((tab) => (
+          <TabPanel p={3} key={tab.content}>
             <Flex padding={0} gap={4} flexDirection="column">
               {tab.content}
               <CakeItem />
