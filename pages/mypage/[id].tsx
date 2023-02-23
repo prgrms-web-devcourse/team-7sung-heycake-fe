@@ -22,6 +22,7 @@ export default function Detail() {
             margin="1.5rem"
             fontSize="1.3rem"
             _hover={{ bg: 'hey.sub' }}
+            onClick={() => router.push('/mypage/orderlist')}
           >
             내 주문 리스트
           </Button>
@@ -31,6 +32,7 @@ export default function Detail() {
             height="3rem"
             fontSize="1.3rem"
             _hover={{ bg: 'hey.sub' }}
+            onClick={() => router.push('/mypage/enrollment')}
           >
             업체 정보 등록
           </Button>
