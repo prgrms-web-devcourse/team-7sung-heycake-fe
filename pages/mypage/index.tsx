@@ -6,38 +6,36 @@ export default function Detail() {
   const router = useRouter();
 
   return (
-    <div>
-      <MypageContainer>
-        <MessageContainer>
-          <strong>허지연님</strong>
-          <br />
-          환영합니다!
-        </MessageContainer>
-        <MypageButtonContainer>
-          <Button
-            bg="hey.lightOrange"
-            width="20rem"
-            height="3rem"
-            margin="1.5rem"
-            fontSize="1.3rem"
-            _hover={{ bg: 'hey.sub' }}
-            onClick={() => router.push('/mypage/orderlist')}
-          >
-            내 주문 리스트
-          </Button>
-          <Button
-            bg="hey.lightOrange"
-            width="20rem"
-            height="3rem"
-            fontSize="1.3rem"
-            _hover={{ bg: 'hey.sub' }}
-            onClick={() => router.push('/mypage/enrollment')}
-          >
-            업체 정보 등록
-          </Button>
-        </MypageButtonContainer>
-      </MypageContainer>
-    </div>
+    <MypageContainer>
+      <MessageContainer>
+        <strong>허지연님</strong>
+        <br />
+        환영합니다!
+      </MessageContainer>
+      <MypageButtonContainer>
+        <Button
+          bg="hey.lightOrange"
+          width="20rem"
+          height="3rem"
+          margin="1.5rem"
+          fontSize="1.3rem"
+          _hover={{ bg: 'hey.sub' }}
+          onClick={() => router.push('/mypage/orderlist')}
+        >
+          내 주문 리스트
+        </Button>
+        <Button
+          bg="hey.lightOrange"
+          width="20rem"
+          height="3rem"
+          fontSize="1.3rem"
+          _hover={{ bg: 'hey.sub' }}
+          onClick={() => router.push('/mypage/enrollment')}
+        >
+          업체 정보 등록
+        </Button>
+      </MypageButtonContainer>
+    </MypageContainer>
   );
 }
 
