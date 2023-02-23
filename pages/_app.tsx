@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 
 import Header from '@/components/Header';
-import { heyTheme } from '@/public/theme/theme';
+import heyTheme from '@/public/theme/theme';
 
 const queryClient = new QueryClient();
 
@@ -36,6 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
               content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=1"
             />
           </Head>
+          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           <Component {...pageProps} />
           <ReactQueryDevtools />
         </ChakraProvider>
@@ -55,6 +56,7 @@ export default function App({ Component, pageProps }: AppProps) {
           onLoad={kakaoInit}
         />
         <Header />
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Component {...pageProps} />
         <ReactQueryDevtools />
       </ChakraProvider>
