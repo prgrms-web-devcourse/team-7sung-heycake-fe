@@ -3,17 +3,16 @@ import styled from '@emotion/styled';
 interface BorderData {
   title: string;
   value: string;
-  bottom?: 'bottom';
 }
 
-const DataTable = ({ title, value, bottom }: BorderData) => {
+function DataTable({ title, value }: BorderData) {
   return (
-    <Wrapper id={bottom}>
+    <Wrapper>
       <Title>{title}</Title>
       <div>{value}</div>
     </Wrapper>
   );
-};
+}
 
 export default DataTable;
 
@@ -25,10 +24,6 @@ const Wrapper = styled.div`
   padding: 1.2rem 0;
   border-bottom: 1px solid #c7c7c7;
   font-size: 0.8rem;
-
-  &#bottom {
-    border-bottom: 1px solid #c7c7c7;
-  }
 `;
 
 const Title = styled.div`
