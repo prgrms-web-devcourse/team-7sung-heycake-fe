@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 
 import Header from '@/components/Header';
-import { heyTheme } from '@/public/theme/theme';
+import heyTheme from '@/public/theme/theme';
 
 const queryClient = new QueryClient();
 
