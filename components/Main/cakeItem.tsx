@@ -1,12 +1,13 @@
 import {
   Badge,
+  Box,
   Card,
   CardBody,
   Divider,
   Flex,
-  Image,
   Text,
 } from '@chakra-ui/react';
+import Image from 'next/image';
 
 export default function CakeItem({ ...props }) {
   // eslint-disable-next-line react/prop-types
@@ -26,15 +27,9 @@ export default function CakeItem({ ...props }) {
         justifyContent="space-between"
         opacity={isComplete ? '0.4' : '1'}
       >
-        <Image
-          p={2}
-          borderRadius="12px"
-          objectFit="cover"
-          w="120px"
-          h="120px"
-          src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-          alt="Cake"
-        />
+        <Box p={2} borderRadius="12px">
+          <Image width={120} height={120} src="/images/cake.png" alt="Cake" />
+        </Box>
         <CardBody px={2}>
           <Flex padding={0} gap={1} flexDirection="column">
             <Flex align="center" gap={4} justifyContent="space-between">
