@@ -7,7 +7,12 @@ export default function MypageTitle({ ...props }) {
   return (
     <TitleContainer>
       <AiOutlineLeft fontSize={30} />
-      <Text fontSize="2xl" align="center" fontWeight="700">
+      <Text
+        fontSize="2xl"
+        marginLeft="4.5rem"
+        fontWeight="700"
+        paddingBottom="1rem"
+      >
         {props.title}
       </Text>
     </TitleContainer>
@@ -15,5 +20,7 @@ export default function MypageTitle({ ...props }) {
 }
 
 const TitleContainer = styled.div`
+  display: flex;
   margin: 1rem;
+  border-bottom: 1px solid grey;
 `;
