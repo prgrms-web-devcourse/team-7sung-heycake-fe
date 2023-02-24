@@ -66,6 +66,7 @@ export default function LocationSelectBox() {
             <Grid gap={3} py={2} gridTemplateColumns="repeat(2, 1fr)">
               {SEOUL_AREA.map((cityName) => (
                 <LocationListItem
+                  key={cityName}
                   name={cityName}
                   onClose={onClose}
                   setLocation={setLocation}

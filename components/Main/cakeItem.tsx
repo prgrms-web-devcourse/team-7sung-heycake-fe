@@ -28,7 +28,7 @@ export default function CakeItem({ ...props }) {
         opacity={isComplete ? '0.4' : '1'}
       >
         <Box p={2} borderRadius="12px">
-          <Image width={120} height={120} src="/images/cake.png" alt="Cake" />
+          <Image width={100} height={100} src="/images/cake.png" alt="Cake" />
         </Box>
         <CardBody px={2}>
           <Flex padding={0} gap={1} flexDirection="column">
