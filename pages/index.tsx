@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import Image from 'next/image';
 
 function loginWithKakao() {
-  window.Kakao?.Auth.authorize({
+  window.Kakao.Auth.authorize({
     redirectUri: 'http://localhost:3000/',
   });
 }
