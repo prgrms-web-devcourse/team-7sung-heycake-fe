@@ -9,7 +9,8 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-export default function CakeItem({ ...props }: any) {
+export default function CakeItem({ ...props }) {
+  // eslint-disable-next-line react/prop-types
   const isComplete = props.isCompleted;
   return (
     <Card
