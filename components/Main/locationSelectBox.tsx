@@ -5,7 +5,6 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Button,
   Drawer,
   DrawerBody,
   DrawerContent,

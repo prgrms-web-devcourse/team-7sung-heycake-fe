@@ -1,6 +1,11 @@
 import { Button } from '@chakra-ui/react';
 
-export default function LocationListItem({ name, onClose, setLocation }) {
+interface ILocationListItem {
+  name: string;
+  onClose: string;
+  setLocation: string;
+}
+export default function LocationListItem({ name, onClose, setLocation }: any) {
   return (
     <Button
       bgColor="hey.lightOrange"
