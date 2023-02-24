@@ -5,7 +5,6 @@ import {
   Divider,
   Flex,
   Image,
-  Stack,
   Text,
 } from '@chakra-ui/react';
 
