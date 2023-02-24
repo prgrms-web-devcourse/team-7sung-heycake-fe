@@ -12,6 +12,7 @@ export default function MypageTitle({ ...props }) {
         marginLeft="4.5rem"
         fontWeight="700"
         paddingBottom="1rem"
+        alignItems="center"
       >
         {props.title}
       </Text>
