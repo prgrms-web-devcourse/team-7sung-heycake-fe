@@ -36,6 +36,10 @@ export default function App({ Component, pageProps }: AppProps) {
             />
           </Head>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+          <Script
+            src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+            onLoad={kakaoInit}
+          />
           <Component {...pageProps} />
           <ReactQueryDevtools />
         </ChakraProvider>
