@@ -25,7 +25,7 @@ function kakaoInit() {
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  if (router.pathname === '/') {
+  if (router.pathname === '/' || router.pathname === '/mypage/orderlist') {
     return (
       <QueryClientProvider client={queryClient}>
         <ChakraProvider theme={heyTheme}>
@@ -36,6 +36,10 @@ export default function App({ Component, pageProps }: AppProps) {
               content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=1"
             />
           </Head>
+          <Script
+            src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+            onLoad={kakaoInit}
+          />
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           <Component {...pageProps} />
           <ReactQueryDevtools />
