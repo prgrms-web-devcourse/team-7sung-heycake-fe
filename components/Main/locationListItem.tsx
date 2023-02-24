@@ -1,10 +1,7 @@
 import { Button } from '@chakra-ui/react';
 
-interface ILocationListItem {
-  name: string;
-  onClose: () => void;
-  setLocation: (name: string) => void;
-}
+import { ILocationListItem } from './types';
+
 export default function LocationListItem({
   name,
   onClose,
