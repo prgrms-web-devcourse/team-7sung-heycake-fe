@@ -1,4 +1,4 @@
-import { Container, Text } from '@chakra-ui/react';
+import { Box, Container, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 
@@ -11,13 +11,16 @@ export default function Post() {
       padding="1rem"
       width="100"
       borderRadius="10"
+      boxShadow="5px 2px 2px grey"
     >
-      <Image
-        src="/images/prgms.png"
-        width={60}
-        height={50}
-        alt="케이크 이미지"
-      />
+      <Box w="70px" h="70px">
+        <Image
+          src="/images/prgms.png"
+          width={70}
+          height={70}
+          alt="케이크 이미지"
+        />
+      </Box>
       <Container margin="0 0 0 5px" border="0" padding="0">
         <OrderRequestCount>+ 3</OrderRequestCount>
         <Container padding="0">
