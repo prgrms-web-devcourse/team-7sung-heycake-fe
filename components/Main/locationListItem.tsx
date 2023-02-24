@@ -9,6 +9,8 @@ export default function LocationListItem({
 }: ILocationListItem) {
   return (
     <Button
+      h={14}
+      fontSize="2xl"
       bgColor="hey.lightOrange"
       onClick={() => {
         setLocation(name);

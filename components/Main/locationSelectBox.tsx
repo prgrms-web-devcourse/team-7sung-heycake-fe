@@ -1,10 +1,4 @@
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
   Drawer,
   DrawerBody,
   DrawerContent,
@@ -23,7 +17,7 @@ import LocationListItem from './locationListItem';
 export default function LocationSelectBox() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [location, setLocation] = useState('강남구');
-  const FIRST_SEOUL_AREA = [
+  const SEOUL_AREA = [
     '강남구',
     '강동구',
     '강북구',
@@ -37,8 +31,6 @@ export default function LocationSelectBox() {
     '동대문구',
     '동작구',
     '마포구',
-  ];
-  const SECOND_SEOUL_AREA = [
     '서대문구',
     '서초구',
     '성동구',
@@ -66,56 +58,20 @@ export default function LocationSelectBox() {
       </Flex>
       <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
-        <DrawerContent h="60%">
+        <DrawerContent h="50%">
           <DrawerHeader borderBottomWidth="1px">
             지역을 선택해주세요
           </DrawerHeader>
           <DrawerBody>
-            <Accordion defaultIndex={[0]} allowToggle>
-              <AccordionItem>
-                <h2>
-                  <AccordionButton>
-                    <Box as="span" flex="1" textAlign="left">
-                      ㄱ ~ ㅁ
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  <Grid gap={3} gridTemplateColumns="repeat(3, 1fr)">
-                    {FIRST_SEOUL_AREA.map((cityName) => (
-                      <LocationListItem
-                        name={cityName}
-                        onClose={onClose}
-                        setLocation={setLocation}
-                      />
-                    ))}
-                  </Grid>
-                </AccordionPanel>
-              </AccordionItem>
-
-              <AccordionItem>
-                <h2>
-                  <AccordionButton>
-                    <Box as="span" flex="1" textAlign="left">
-                      ㅂ ~ ㅈ
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  <Grid gap={3} gridTemplateColumns="repeat(3, 1fr)">
-                    {SECOND_SEOUL_AREA.map((cityName) => (
-                      <LocationListItem
-                        name={cityName}
-                        onClose={onClose}
-                        setLocation={setLocation}
-                      />
-                    ))}
-                  </Grid>
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
+            <Grid gap={3} py={2} gridTemplateColumns="repeat(2, 1fr)">
+              {SEOUL_AREA.map((cityName) => (
+                <LocationListItem
+                  name={cityName}
+                  onClose={onClose}
+                  setLocation={setLocation}
+                />
+              ))}
+            </Grid>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
