@@ -36,27 +36,25 @@ export default function CakeItem({ ...props }) {
           src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
           alt="Cake"
         />
-        <Stack>
-          <CardBody p={0}>
-            <Flex padding={0} gap={1} flexDirection="column">
-              <Flex align="center" gap={4} justifyContent="space-between">
-                <Text color="hey.main">카테고리</Text>
-                <Text fontSize="sm">포토</Text>
-              </Flex>
-              <Divider borderColor="hey.main" />
-              <Flex align="center" gap={4} justifyContent="space-between">
-                <Text color="hey.main">케익 크기</Text>
-                <Text fontSize="sm">1호</Text>
-              </Flex>
-              <Divider borderColor="hey.main" />
-              <Flex align="center" gap={4} justifyContent="space-between">
-                <Text color="hey.main">케익 맛</Text>
-                <Text fontSize="sm">초코</Text>
-              </Flex>
-              <Divider borderColor="hey.main" />
+        <CardBody px={2}>
+          <Flex padding={0} gap={1} flexDirection="column">
+            <Flex align="center" gap={4} justifyContent="space-between">
+              <Text color="hey.main">카테고리</Text>
+              <Text fontSize="sm">포토</Text>
             </Flex>
-          </CardBody>
-        </Stack>
+            <Divider borderColor="hey.main" />
+            <Flex align="center" gap={4} justifyContent="space-between">
+              <Text color="hey.main">케익 크기</Text>
+              <Text fontSize="sm">1호</Text>
+            </Flex>
+            <Divider borderColor="hey.main" />
+            <Flex align="center" gap={4} justifyContent="space-between">
+              <Text color="hey.main">케익 맛</Text>
+              <Text fontSize="sm">초코</Text>
+            </Flex>
+            <Divider borderColor="hey.main" />
+          </Flex>
+        </CardBody>
         <Flex
           flexDirection="column"
           justifyContent="space-between"
