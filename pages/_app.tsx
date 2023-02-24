@@ -24,7 +24,7 @@ function kakaoInit() {
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  if (router.pathname === '/' || router.pathname === '/mypage/orderlist') {
+  if (router.pathname === '/') {
     return (
       <QueryClientProvider client={queryClient}>
         <ChakraProvider theme={heyTheme}>
