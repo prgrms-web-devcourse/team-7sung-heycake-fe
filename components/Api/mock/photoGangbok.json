@@ -1,0 +1,166 @@
+{
+  "data": {
+    "content": [
+      {
+        "postId": 1,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코 - 강북데이터",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 2,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 3,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 4,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 5,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 6,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 7,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 8,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 9,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 10,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 11,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 12,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 13,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 14,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 15,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 16,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 17,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 18,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 19,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      },
+      {
+        "postId": 20,
+        "category": "포토",
+        "size": "1호",
+        "flavor": "초코",
+        "image": "/images/cake.png",
+        "price": "130,000"
+      }
+    ]
+  }
+}

@@ -8,11 +8,17 @@ import {
   Tabs,
 } from '@chakra-ui/react';
 
+import getCakeList from '../Api/getCakeList';
 import CakeItem from './cakeItem';
 import LocationSelectBox from './locationSelectBox';
 import { ICakeList } from './types';
 
 export default function CakeMain() {
+  const data = getCakeList({
+    location: 'gangnam',
+    category: 'photo',
+  });
+  console.log(data);
   // 이후 통신할 데이터 주소를 contents로 넣어서 활용
   // Sprint 4 이후 작업
   const DUMMY_DATA: ICakeList[] = [
