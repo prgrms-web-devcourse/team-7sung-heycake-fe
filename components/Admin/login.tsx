@@ -8,7 +8,7 @@ import {
   Grid,
   Input,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 export default function AdminLogin() {
   const [inputId, setInputId] = useState('');
@@ -16,7 +16,7 @@ export default function AdminLogin() {
   const isErrorId = inputId === '';
   const isErrorPassword = inputPassword === '';
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
     // Api와 연동하여 아이디 비밀번호 확인
     /* console.log(e);

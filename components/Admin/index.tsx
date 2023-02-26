@@ -11,6 +11,8 @@ export default function Admin() {
         <MarketItem />
         <MarketItem />
         <MarketItem />
+        <MarketItem />
+        <MarketItem />
       </Grid>
     </Container>
   );

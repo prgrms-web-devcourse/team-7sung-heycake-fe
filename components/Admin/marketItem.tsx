@@ -12,7 +12,7 @@ import { useState } from 'react';
 
 export default function MarketItem() {
   const [marketSwitch, onMarketSwitch] = useState(false);
-  console.log(marketSwitch);
+  /* console.log(marketSwitch); */
 
   return (
     <Card
@@ -38,10 +38,7 @@ export default function MarketItem() {
           <Divider borderColor="hey.main" />
           <Flex align="center" gap={4} justifyContent="space-between">
             <Text fontWeight="600">412-23-13145</Text>
-            <Switch
-              marginLeft="auto"
-              onChange={() => onMarketSwitch(!marketSwitch)}
-            />
+            <Switch onChange={() => onMarketSwitch(!marketSwitch)} />
           </Flex>
         </Flex>
       </CardBody>
