@@ -18,6 +18,7 @@ type Inputs = {
   businessNumber: string;
   ownerName: string;
   openDate: string;
+  marketName: string;
   phoneNumber: string;
   city: string;
   district: string;
@@ -71,6 +72,10 @@ export default function EnrollmentForm() {
       </FormControl>
       <FormControl height={100} width={350}>
         <FormLabel>상호명</FormLabel>
+        <Input type="text" {...register('marketName', { required: true })} />
+      </FormControl>
+      <FormControl height={100} width={350}>
+        <FormLabel>업체 전화번호</FormLabel>
         <Input type="text" {...register('phoneNumber', { required: true })} />
       </FormControl>
       <FormControl height={150} width={350}>
