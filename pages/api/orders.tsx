@@ -29,5 +29,5 @@ export default async function getCakeList(
       return response.status(200).end(JSON.stringify(letteringGangbok));
     }
   }
-  return response.status(500).end(JSON.stringify(err));
+  return response.status(500).end('err');
 }
