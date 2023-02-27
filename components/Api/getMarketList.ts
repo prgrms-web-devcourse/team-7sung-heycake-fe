@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import internalApi from '.';
 
 export default async function getMarketList() {
@@ -8,6 +7,7 @@ export default async function getMarketList() {
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
+  return console.error('마켓 승인 리스트를 받아오는데 에러가 발생했습니다');
 }
