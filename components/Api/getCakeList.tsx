@@ -1,13 +1,10 @@
 /* eslint-disable consistent-return */
 import internalApi from '.';
 
-export default async function getCakeList({
-  location,
-  category,
-  cursor = 0,
-}: any) {
+export default async function getCakeList({ location, category }: any) {
   try {
-    const response = await internalApi.post(`/api/orders/${cursor}`, {
+    console.log(location, category);
+    const response = await internalApi.post(`/api/orders/`, {
       location,
       category,
     });

@@ -10,28 +10,27 @@ export default async function getCakeList(
   response: NextApiResponse
 ) {
   const { location, category } = request.body;
-  const cursur = request.query.id;
 
-  if (category === 'photo') {
-    if (location === 'gangnam') {
+  if (category === 'PHOTO') {
+    if (location === '강남구') {
       return response
         .status(200)
         .end(JSON.stringify(photoGangnam.data.content));
     }
-    if (location === 'gangbok') {
+    if (location === '강북구') {
       return response
         .status(200)
         .end(JSON.stringify(photoGangbok.data.content));
     }
   }
 
-  if (category === 'lettering') {
-    if (location === 'gangnam') {
+  if (category === 'LETTERING') {
+    if (location === '강남구') {
       return response
         .status(200)
         .end(JSON.stringify(letteringGangnam.data.content));
     }
-    if (location === 'gangbok') {
+    if (location === '강북구') {
       return response
         .status(200)
         .end(JSON.stringify(letteringGangbok.data.content));
