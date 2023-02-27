@@ -14,7 +14,7 @@ import SEOUL_AREA from '@/constants/seoulArea';
 
 const { CHECK_BUSINESS_NUMBER, CHECK_OWNER_NAME } = ERROR_MESSAGES;
 
-type inputProps = {
+type InputProps = {
   businessNumber: string;
   ownerName: string;
   openDate: string;
@@ -35,8 +35,8 @@ export default function EnrollmentForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<inputProps>();
-  const onSubmit: SubmitHandler<inputProps> = (data) => console.log(data);
+  } = useForm<InputProps>();
+  const onSubmit: SubmitHandler<InputProps> = (data) => console.log(data);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
