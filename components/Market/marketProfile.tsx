@@ -10,6 +10,7 @@ import {
   MarketOpeningIcon,
   MarketTelIcon,
 } from './icon';
+import MarketProfileSkeleton from './marketProfileSkeleton';
 import MarketTitle from './marketTitle';
 
 export default function MarketProfile() {
@@ -17,7 +18,7 @@ export default function MarketProfile() {
   const { status, data } = useQuery([router.query.id], () => getMarketDetail());
 
   if (status === 'loading' || !router.isReady) {
-    return <span>Loading...</span>;
+    return <MarketProfileSkeleton />;
   }
 
   const address = `${data.address.city} ${data.address.district} ${data.address.detailAddress}`;
