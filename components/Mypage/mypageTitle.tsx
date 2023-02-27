@@ -1,12 +1,15 @@
 /* eslint-disable react/prop-types */
 import { Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 import { AiOutlineLeft } from 'react-icons/ai';
 
 export default function MypageTitle({ ...props }) {
+  const router = useRouter();
+
   return (
     <TitleContainer>
-      <AiOutlineLeft fontSize={30} />
+      <AiOutlineLeft fontSize={30} onClick={router.back} />
       <Text
         fontSize="2xl"
         marginLeft="4.5rem"
