@@ -15,7 +15,9 @@ import MarketTitle from './marketTitle';
 
 export default function MarketProfile() {
   const router = useRouter();
-  const { status, data } = useQuery([router.query.id], () => getMarketDetail());
+  const { status, data } = useQuery([router.query.id], () =>
+    getMarketDetail({ enrollmentId: router.query.id })
+  );
 
   if (status === 'loading' || !router.isReady) {
     return <MarketProfileSkeleton />;
