@@ -9,7 +9,7 @@ export default function CakeMain() {
   const [location, setLocation] = useState('강남구');
 
   return (
-    <Tabs colorScheme="heys">
+    <Tabs colorScheme="heys" isLazy>
       <Box
         overflow="scroll"
         sx={{

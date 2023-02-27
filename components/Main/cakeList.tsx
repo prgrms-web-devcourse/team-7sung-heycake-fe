@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import getCakeList from '../Api/getCakeList';
 import CakeItem from './cakeItem';
+import CakeListSkeleton from './cakeListSkeleton';
 
 export default function CakeList({ category, location }: any) {
   const { status, data } = useQuery(
@@ -16,7 +17,7 @@ export default function CakeList({ category, location }: any) {
   );
 
   if (status === 'loading') {
-    return <span>Loading...</span>;
+    return <CakeListSkeleton />;
   }
 
   return (
