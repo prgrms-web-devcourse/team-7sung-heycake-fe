@@ -1,4 +1,4 @@
-import { Grid, Text } from '@chakra-ui/react';
+import { Grid } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 
 import getCakeList from '../Api/getCakeList';
