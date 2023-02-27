@@ -1,14 +1,13 @@
-/* eslint-disable consistent-return */
 import internalApi from '.';
 
 export default async function getMarketDetail() {
   try {
-    // enrollmentID = 632463
     const response = await internalApi.get(`/api/enrollments/632463`, {});
     if (response.status === 200) {
       return response.data;
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
+  return console.error('마켓 상세 정보를 받아오는데 에러가 발생했습니다');
 }
