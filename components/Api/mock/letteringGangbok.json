@@ -3,93 +3,103 @@
     "content": [
       {
         "orderId": 1,
-        "title": "축제케이크 만들어주세요",
+        "title": "강북 케이크 제작 1",
         "cakeCategory": "LETTERING",
-        "cakeSize": "2호",
+        "cakeSize": "MINI",
         "image": "/images/cake.png",
         "price": "13000",
-        "end_date": "2023-03-05-18:00"
+        "orderStatus": "NEW",
+        "end_date": "2023-03-10-18:00"
       },
       {
         "orderId": 2,
-        "title": "생일케이크 만들어주세요",
+        "title": "강북 케이크 제작 2",
         "cakeCategory": "LETTERING",
-        "cakeSize": "1호",
+        "cakeSize": "SIZE_ONE",
         "image": "/images/cake.png",
         "price": "13000",
-        "end_date": "2023-03-04-18:00"
+        "orderStatus": "NEW",
+        "end_date": "2023-03-09-18:00"
       },
       {
         "orderId": 3,
-        "title": "생일케이크 만들어주세요",
+        "title": "강북 케이크 제작 3",
         "cakeCategory": "LETTERING",
-        "cakeSize": "1호",
+        "cakeSize": "SIZE_ONE",
         "image": "/images/cake.png",
         "price": "13000",
-        "end_date": "2023-03-03-18:00"
+        "orderStatus": "NEW",
+        "end_date": "2023-03-08-18:00"
       },
       {
         "orderId": 4,
-        "title": "생일케이크 만들어주세요",
+        "title": "강북 케이크 제작 1",
         "cakeCategory": "LETTERING",
-        "cakeSize": "1호",
+        "cakeSize": "SIZE_TWO",
         "image": "/images/cake.png",
         "price": "13000",
-        "end_date": "2023-03-02-18:00"
+        "orderStatus": "RESERVED",
+        "end_date": "2023-03-07-18:00"
       },
       {
         "orderId": 5,
-        "title": "생일케이크 만들어주세요",
+        "title": "강북 케이크 제작 1",
         "cakeCategory": "LETTERING",
-        "cakeSize": "1호",
+        "cakeSize": "SIZE_TWO",
         "image": "/images/cake.png",
         "price": "13000",
-        "end_date": "2023-03-01-18:00"
+        "orderStatus": "RESERVED",
+        "end_date": "2023-03-06-18:00"
       },
       {
         "orderId": 6,
-        "title": "생일케이크 만들어주세요",
+        "title": "강북 케이크 제작 1",
         "cakeCategory": "LETTERING",
-        "cakeSize": "1호",
+        "cakeSize": "MINI",
         "image": "/images/cake.png",
         "price": "13000",
-        "end_date": "2023-02-28-18:00"
+        "orderStatus": "NEW",
+        "end_date": "2023-03-05-18:00"
       },
       {
         "orderId": 7,
-        "title": "생일케이크 만들어주세요",
+        "title": "강북 케이크 제작 1",
         "cakeCategory": "LETTERING",
-        "cakeSize": "1호",
+        "cakeSize": "MINI",
         "image": "/images/cake.png",
         "price": "13000",
-        "end_date": "2023-02-27-18:00"
+        "orderStatus": "NEW",
+        "end_date": "2023-03-04-18:00"
       },
       {
         "orderId": 8,
-        "title": "생일케이크 만들어주세요",
+        "title": "강북 케이크 제작 1",
         "cakeCategory": "LETTERING",
-        "cakeSize": "1호",
+        "cakeSize": "MINI",
         "image": "/images/cake.png",
         "price": "13000",
-        "end_date": "2023-02-26-18:00"
+        "orderStatus": "RESERVED",
+        "end_date": "2023-03-03-18:00"
       },
       {
         "orderId": 9,
-        "title": "생일케이크 만들어주세요",
+        "title": "강북 케이크 제작 1",
         "cakeCategory": "LETTERING",
-        "cakeSize": "1호",
+        "cakeSize": "MINI",
         "image": "/images/cake.png",
         "price": "13000",
-        "end_date": "2023-02-25-18:00"
+        "orderStatus": "NEW",
+        "end_date": "2023-03-02-18:00"
       },
       {
         "orderId": 10,
-        "title": "생일케이크 만들어주세요",
+        "title": "강북 케이크 제작 1",
         "cakeCategory": "LETTERING",
-        "cakeSize": "1호",
+        "cakeSize": "MINI",
         "image": "/images/cake.png",
         "price": "13000",
-        "end_date": "2023-02-24-18:00"
+        "orderStatus": "NEW",
+        "end_date": "2023-03-01-18:00"
       }
     ]
   }
