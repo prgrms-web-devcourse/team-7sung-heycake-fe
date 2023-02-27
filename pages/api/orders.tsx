@@ -40,5 +40,7 @@ export default async function getCakeList(
         .end(JSON.stringify(letteringGangbok.data.content));
     }
   }
-  return response.status(500).end('err');
+  // return response.status(500).end('err');
+  // 임시로 예외 사항일 때 200으로 기본데이터를 쏘게 변경
+  return response.status(200).end(JSON.stringify(allGangnam.data.content));
 }
