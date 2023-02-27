@@ -1,6 +1,8 @@
 import { Container, Divider, Flex, Text } from '@chakra-ui/react';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 
+import getMarketDetail from '../Api/getMarketDetail';
 import {
   MarketAddressIcon,
   MarketInfoIcon,
@@ -10,6 +12,14 @@ import {
 import MarketTitle from './marketTitle';
 
 export default function MarketProfile() {
+  const { status, data } = useQuery(['prgms'], () => getMarketDetail());
+
+  if (status === 'loading') {
+    return <span>Loading...</span>;
+  }
+
+  console.log(data);
+
   return (
     <>
       <MarketTitle />
