@@ -10,6 +10,8 @@ export default async function getCakeList(
   response: NextApiResponse
 ) {
   const { location, category } = request.body;
+  const cursur = request.query.id;
+
   if (category === 'photo') {
     if (location === 'gangnam') {
       return response
@@ -17,16 +19,22 @@ export default async function getCakeList(
         .end(JSON.stringify(photoGangnam.data.content));
     }
     if (location === 'gangbok') {
-      return response.status(200).end(JSON.stringify(photoGangbok));
+      return response
+        .status(200)
+        .end(JSON.stringify(photoGangbok.data.content));
     }
   }
 
   if (category === 'lettering') {
     if (location === 'gangnam') {
-      return response.status(200).end(JSON.stringify(letteringGangnam));
+      return response
+        .status(200)
+        .end(JSON.stringify(letteringGangnam.data.content));
     }
     if (location === 'gangbok') {
-      return response.status(200).end(JSON.stringify(letteringGangbok));
+      return response
+        .status(200)
+        .end(JSON.stringify(letteringGangbok.data.content));
     }
   }
   return response.status(500).end('err');
