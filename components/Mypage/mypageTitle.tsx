@@ -9,7 +9,7 @@ export default function MypageTitle({ ...props }) {
 
   return (
     <TitleContainer>
-      <AiOutlineLeft fontSize={30} onClick={() => router.back()} />
+      <AiOutlineLeft fontSize={30} onClick={router.back} />
       <Text
         fontSize="2xl"
         marginLeft="4.5rem"
