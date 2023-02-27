@@ -1,9 +1,8 @@
 /* eslint-disable consistent-return */
 import internalApi from '.';
 
-export default async function getMarketDetail({ enrollmentId }) {
+export default async function getMarketDetail({ enrollmentId }: any) {
   try {
-    // enrollmentID = 632463
     const response = await internalApi.get(
       `/api/enrollments/${enrollmentId}`,
       {}
