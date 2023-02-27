@@ -3,7 +3,6 @@ import internalApi from '.';
 
 export default async function getCakeList({ location, category }: any) {
   try {
-    console.log(location, category);
     const response = await internalApi.post(`/api/orders/`, {
       location,
       category,
