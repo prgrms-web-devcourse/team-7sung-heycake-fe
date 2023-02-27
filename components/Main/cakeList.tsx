@@ -17,26 +17,20 @@ export default function CakeList({ category, location }: any) {
   if (status === 'loading') {
     return <span>Loading...</span>;
   }
+
   return (
     <Grid padding={0} gap={4} flexDirection="column">
       {data?.map((item: any) => (
-        <Grid>
-          <Text>{item.orderId}</Text>
-          <Text>{item.title}</Text>
-          <Text>{item.cakeCategory}</Text>
-          <Text>{item.cakeSize}</Text>
-          <Text>{item.image}</Text>
-          <Text>{item.price}</Text>
-          <Text>{item.orderStatus}</Text>
-          <Text>{item.end_date}</Text>
-        </Grid>
+        <CakeItem
+          title={item.title}
+          category={item.cakeCategory}
+          cakeSize={item.cakeSize}
+          image={item.image}
+          price={item.price}
+          status={item.orderStatus}
+          endDate={item.end_date}
+        />
       ))}
-      <CakeItem />
-      <CakeItem />
-      <CakeItem isCompleted />
-      <CakeItem />
-      <CakeItem />
-      <CakeItem />
     </Grid>
   );
 }
