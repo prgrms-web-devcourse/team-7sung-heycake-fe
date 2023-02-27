@@ -35,8 +35,8 @@ export default function EnrollmentForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  } = useForm<inputProps>();
+  const onSubmit: SubmitHandler<inputProps> = (data) => console.log(data);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
