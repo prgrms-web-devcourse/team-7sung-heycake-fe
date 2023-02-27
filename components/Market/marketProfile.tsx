@@ -20,16 +20,14 @@ export default function MarketProfile() {
     return <span>Loading...</span>;
   }
 
+  const address = `${data.address.city} ${data.address.district} ${data.address.detailAddress}`;
+  const openingHours = `${data.openTime} ~ ${data.endTime}`;
+
   return (
     <>
-      <MarketTitle />
+      <MarketTitle title={data.marketName} />
       <Container centerContent gap={5} padding={4}>
-        <Image
-          src="https://i.imgur.com/agjDBqa.png"
-          alt="로고"
-          width={240}
-          height={240}
-        />
+        <Image src={data.marketImage} alt="로고" width={240} height={240} />
         <Container padding={0}>
           <Flex align="center" gap={2}>
             <MarketInfoIcon w={7} h={7} />
@@ -47,7 +45,7 @@ export default function MarketProfile() {
               주소
             </Text>
           </Flex>
-          <Text padding={2}>asd</Text>
+          <Text padding={2}>{address}</Text>
         </Container>
         <Divider borderColor="hey.main" />
         <Container padding={0}>
@@ -67,7 +65,7 @@ export default function MarketProfile() {
               영업시간
             </Text>
           </Flex>
-          <Text padding={2}>연중무휴 일요일은 쉽니다</Text>
+          <Text padding={2}>{openingHours}</Text>
         </Container>
         <Divider borderColor="hey.main" />
       </Container>

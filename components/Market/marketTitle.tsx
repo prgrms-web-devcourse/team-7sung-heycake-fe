@@ -4,13 +4,13 @@ import { useRouter } from 'next/router';
 
 import { ArrowBackIcon } from './icon';
 
-export default function MarketTitle() {
+export default function MarketTitle({ title }: any) {
   const router = useRouter();
   return (
     <Container>
       <ArrowBackIcon w={10} h={10} onClick={() => router.back()} />
       <Text fontSize="2xl" align="center" fontWeight="700">
-        프그케이크 강남점
+        {title}
       </Text>
       <Box w={10} h={10} />
     </Container>
