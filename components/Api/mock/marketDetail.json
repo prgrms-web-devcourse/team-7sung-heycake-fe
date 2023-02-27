@@ -1,0 +1,15 @@
+{
+  "data": {
+    "phoneNumber": "0212345678",
+    "city": "서울특별시",
+    "district": "강남구",
+    "detailAddress": "테헤란로",
+    "openTime": "09:00",
+    "endTime": "18:00",
+    "description": "맛있어요",
+    "marketName": "hey, cake",
+    "businessNumber": "1234567890",
+    "ownerName": "권성준",
+    "marketImage": "/images/prgms.png"
+  }
+}

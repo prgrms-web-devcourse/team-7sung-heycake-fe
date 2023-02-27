@@ -1,0 +1,114 @@
+{
+  "data": [
+    {
+      "enrollmentId": 1,
+      "businessNumber": "1111111",
+      "address": "서울특별시",
+      "marketName": "hey, cake",
+      "phoneNumber": "0212345678",
+      "ownerName": "권성준",
+      "status": "approved",
+      "marketImage": "/images/prgms.png",
+      "createdAt": "2023-01-19 18:30:00"
+    },
+    {
+      "enrollmentId": 2,
+      "businessNumber": "2222222",
+      "address": "서울특별시",
+      "marketName": "프그케이크",
+      "phoneNumber": "01022222222",
+      "ownerName": "권성준",
+      "status": "waited",
+      "marketImage": "/images/prgms.png",
+      "createdAt": "2023-01-19 18:30:00"
+    },
+    {
+      "enrollmentId": 3,
+      "businessNumber": "3333333",
+      "address": "서울특별시",
+      "marketName": "서울케이크",
+      "phoneNumber": "0103333333",
+      "ownerName": "권성준",
+      "status": "approved",
+      "marketImage": "/images/prgms.png",
+      "createdAt": "2023-01-19 18:30:00"
+    },
+    {
+      "enrollmentId": 4,
+      "businessNumber": "1234567890",
+      "address": "서울특별시",
+      "marketName": "hey, cake",
+      "phoneNumber": "0212345678",
+      "ownerName": "권성준",
+      "status": "approved",
+      "marketImage": "/images/prgms.png",
+      "createdAt": "2023-01-19 18:30:00"
+    },
+    {
+      "enrollmentId": 5,
+      "businessNumber": "1234567890",
+      "address": "서울특별시",
+      "marketName": "hey, cake",
+      "phoneNumber": "0212345678",
+      "ownerName": "권성준",
+      "status": "waited",
+      "marketImage": "/images/prgms.png",
+      "createdAt": "2023-01-19 18:30:00"
+    },
+    {
+      "enrollmentId": 6,
+      "businessNumber": "1234567890",
+      "address": "서울특별시",
+      "marketName": "hey, cake",
+      "phoneNumber": "0212345678",
+      "ownerName": "권성준",
+      "status": "approved",
+      "marketImage": "/images/prgms.png",
+      "createdAt": "2023-01-19 18:30:00"
+    },
+    {
+      "enrollmentId": 7,
+      "businessNumber": "1234567890",
+      "address": "서울특별시",
+      "marketName": "hey, cake",
+      "phoneNumber": "0212345678",
+      "ownerName": "권성준",
+      "status": "approved",
+      "marketImage": "/images/prgms.png",
+      "createdAt": "2023-01-19 18:30:00"
+    },
+    {
+      "enrollmentId": 8,
+      "businessNumber": "1234567890",
+      "address": "서울특별시",
+      "marketName": "hey, cake",
+      "phoneNumber": "0212345678",
+      "ownerName": "권성준",
+      "status": "approved",
+      "marketImage": "/images/prgms.png",
+      "createdAt": "2023-01-19 18:30:00"
+    },
+    {
+      "enrollmentId": 9,
+      "businessNumber": "1234567890",
+      "address": "서울특별시",
+      "marketName": "hey, cake",
+      "phoneNumber": "0212345678",
+      "ownerName": "권성준",
+      "status": "approved",
+      "marketImage": "/images/prgms.png",
+      "createdAt": "2023-01-19 18:30:00"
+    },
+    {
+      "enrollmentId": 10,
+      "businessNumber": "1234567890",
+      "address": "서울특별시",
+      "marketName": "hey, cake",
+      "phoneNumber": "0212345678",
+      "ownerName": "권성준",
+      "status": "approved",
+      "marketImage": "/images/prgms.png",
+      "createdAt": "2023-01-19 18:30:00"
+    }
+  ]
+}
