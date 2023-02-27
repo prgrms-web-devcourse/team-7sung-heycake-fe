@@ -1,6 +1,5 @@
 export interface ICakeList {
   label: string;
-  content: string;
 }
 
 export interface ILocationListItem {
