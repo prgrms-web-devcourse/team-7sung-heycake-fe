@@ -14,7 +14,7 @@ import SEOUL_AREA from '@/constants/seoulArea';
 
 const { CHECK_BUSINESS_NUMBER, CHECK_OWNER_NAME } = ERROR_MESSAGES;
 
-type Inputs = {
+type inputProps = {
   businessNumber: string;
   ownerName: string;
   openDate: string;
