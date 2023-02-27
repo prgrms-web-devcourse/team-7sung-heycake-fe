@@ -1,5 +1,6 @@
 import { Grid } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 
 import getCakeList from '../Api/getCakeList';
 import CakeItem from './cakeItem';
@@ -21,15 +22,18 @@ export default function CakeList({ category, location }: any) {
   return (
     <Grid padding={0} gap={4} flexDirection="column">
       {data?.map((item: any) => (
-        <CakeItem
-          title={item.title}
-          category={item.cakeCategory}
-          cakeSize={item.cakeSize}
-          image={item.image}
-          price={item.price}
-          status={item.orderStatus}
-          endDate={item.end_date}
-        />
+        <Link href={`/orderlist/${item.orderId}`}>
+          <CakeItem
+            orderId={item.orderId}
+            title={item.title}
+            category={item.cakeCategory}
+            cakeSize={item.cakeSize}
+            image={item.image}
+            price={item.price}
+            status={item.orderStatus}
+            endDate={item.end_date}
+          />
+        </Link>
       ))}
     </Grid>
   );
