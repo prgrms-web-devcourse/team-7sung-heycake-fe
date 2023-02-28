@@ -21,6 +21,7 @@ export default function MarketList({ category }: any) {
     <Grid gap={4}>
       {data?.map((item: any) => (
         <MarketItem
+          enrollmentId={item.enrollmentId}
           marketImage={item.marketImage}
           marketName={item.marketName}
           businessNumber={item.businessNumber}
