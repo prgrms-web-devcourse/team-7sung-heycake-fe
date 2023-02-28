@@ -16,19 +16,17 @@ export default function MarketList({ category }: any) {
   }
 
   return (
-    <Container mt={4}>
-      <Grid gap={4}>
-        {data?.map((item: any) => (
-          <MarketItem
-            marketImage={item.marketImage}
-            marketName={item.marketName}
-            businessNumber={item.businessNumber}
-            status={item.status}
-          />
-          /*       <Link key={item.enrollmentId} href={`/market/${item.enrollmentId}`}></Link>
+    <Grid gap={4}>
+      {data?.map((item: any) => (
+        <MarketItem
+          marketImage={item.marketImage}
+          marketName={item.marketName}
+          businessNumber={item.businessNumber}
+          status={item.status}
+        />
+        /*       <Link key={item.enrollmentId} href={`/market/${item.enrollmentId}`}></Link>
           </Link> */
-        ))}
-      </Grid>
-    </Container>
+      ))}
+    </Grid>
   );
 }

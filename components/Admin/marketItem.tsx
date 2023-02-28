@@ -17,9 +17,7 @@ export default function MarketItem({
   businessNumber,
   status,
 }: any) {
-  const [marketSwitch, onMarketSwitch] = useState(false);
-  if (status === 'approve') onMarketSwitch(true);
-
+  const [marketSwitch, setMarketSwitch] = useState(false);
   return (
     <Card
       borderColor="hey.sub"
@@ -36,7 +34,7 @@ export default function MarketItem({
       <CardBody px={2}>
         <Flex padding={0} gap={3} flexDirection="column">
           <Flex align="center" gap={4} justifyContent="space-between">
-            <Text fontSize="lg" fontWeight="700" color="hey.main">
+            <Text fontWeight="700" color="hey.main">
               업체명
             </Text>
             <Flex gap={2} alignItems="center">
@@ -50,8 +48,8 @@ export default function MarketItem({
             <Flex gap={2}>
               <Text>승인</Text>
               <Switch
-                isChecked
-                onChange={() => onMarketSwitch(!marketSwitch)}
+                isChecked={status === 'approved'}
+                onChange={() => setMarketSwitch(!marketSwitch)}
               />
             </Flex>
           </Flex>
