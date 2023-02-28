@@ -23,7 +23,7 @@ export default function CakeList({ category, location }: any) {
   return (
     <Grid padding={0} gap={4} flexDirection="column">
       {data?.map((item: any) => (
-        <Link key={item.orderId} href={`/orderlist/${item.orderId}`}>
+        <Link key={item.orderId} href={`/orders/${item.orderId}`}>
           <CakeItem
             orderId={item.orderId}
             title={item.title}
