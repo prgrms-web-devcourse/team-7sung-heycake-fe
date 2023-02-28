@@ -1,4 +1,4 @@
-import internalApi from '.';
+import { internalApi } from '.';
 
 export default async function getCakeList({ location, category }: any) {
   try {

@@ -22,10 +22,15 @@ const options = {
   timeout: 10000,
 };
 
-const internalApi = setInterceptor(
+export const internalApi = setInterceptor(
   axios.create({
     ...options,
   })
 );
 
-export default internalApi;
+export const publicApi = setInterceptor(
+  axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    ...options,
+  })
+);
