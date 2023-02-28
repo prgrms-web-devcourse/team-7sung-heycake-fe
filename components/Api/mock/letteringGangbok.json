@@ -2,164 +2,104 @@
   "data": {
     "content": [
       {
-        "postId": 1,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
+        "orderId": 1,
+        "title": "강북 케이크 제작 1",
+        "cakeCategory": "LETTERING",
+        "cakeSize": "MINI",
         "image": "/images/cake.png",
-        "price": "130,000"
+        "price": "13000",
+        "orderStatus": "NEW",
+        "end_date": "2023-03-10-18:00"
       },
       {
-        "postId": 2,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
+        "orderId": 2,
+        "title": "강북 케이크 제작 2",
+        "cakeCategory": "LETTERING",
+        "cakeSize": "SIZE_ONE",
         "image": "/images/cake.png",
-        "price": "130,000"
+        "price": "13000",
+        "orderStatus": "NEW",
+        "end_date": "2023-03-09-18:00"
       },
       {
-        "postId": 3,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
+        "orderId": 3,
+        "title": "강북 케이크 제작 3",
+        "cakeCategory": "LETTERING",
+        "cakeSize": "SIZE_ONE",
         "image": "/images/cake.png",
-        "price": "130,000"
+        "price": "13000",
+        "orderStatus": "NEW",
+        "end_date": "2023-03-08-18:00"
       },
       {
-        "postId": 4,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
+        "orderId": 4,
+        "title": "강북 케이크 제작 1",
+        "cakeCategory": "LETTERING",
+        "cakeSize": "SIZE_TWO",
         "image": "/images/cake.png",
-        "price": "130,000"
+        "price": "13000",
+        "orderStatus": "RESERVED",
+        "end_date": "2023-03-07-18:00"
       },
       {
-        "postId": 5,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
+        "orderId": 5,
+        "title": "강북 케이크 제작 1",
+        "cakeCategory": "LETTERING",
+        "cakeSize": "SIZE_TWO",
         "image": "/images/cake.png",
-        "price": "130,000"
+        "price": "13000",
+        "orderStatus": "RESERVED",
+        "end_date": "2023-03-06-18:00"
       },
       {
-        "postId": 6,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
+        "orderId": 6,
+        "title": "강북 케이크 제작 1",
+        "cakeCategory": "LETTERING",
+        "cakeSize": "MINI",
         "image": "/images/cake.png",
-        "price": "130,000"
+        "price": "13000",
+        "orderStatus": "NEW",
+        "end_date": "2023-03-05-18:00"
       },
       {
-        "postId": 7,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
+        "orderId": 7,
+        "title": "강북 케이크 제작 1",
+        "cakeCategory": "LETTERING",
+        "cakeSize": "MINI",
         "image": "/images/cake.png",
-        "price": "130,000"
+        "price": "13000",
+        "orderStatus": "NEW",
+        "end_date": "2023-03-04-18:00"
       },
       {
-        "postId": 8,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
+        "orderId": 8,
+        "title": "강북 케이크 제작 1",
+        "cakeCategory": "LETTERING",
+        "cakeSize": "MINI",
         "image": "/images/cake.png",
-        "price": "130,000"
+        "price": "13000",
+        "orderStatus": "RESERVED",
+        "end_date": "2023-03-03-18:00"
       },
       {
-        "postId": 9,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
+        "orderId": 9,
+        "title": "강북 케이크 제작 1",
+        "cakeCategory": "LETTERING",
+        "cakeSize": "MINI",
         "image": "/images/cake.png",
-        "price": "130,000"
+        "price": "13000",
+        "orderStatus": "NEW",
+        "end_date": "2023-03-02-18:00"
       },
       {
-        "postId": 10,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
+        "orderId": 10,
+        "title": "강북 케이크 제작 1",
+        "cakeCategory": "LETTERING",
+        "cakeSize": "MINI",
         "image": "/images/cake.png",
-        "price": "130,000"
-      },
-      {
-        "postId": 11,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
-        "image": "/images/cake.png",
-        "price": "130,000"
-      },
-      {
-        "postId": 12,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
-        "image": "/images/cake.png",
-        "price": "130,000"
-      },
-      {
-        "postId": 13,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
-        "image": "/images/cake.png",
-        "price": "130,000"
-      },
-      {
-        "postId": 14,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
-        "image": "/images/cake.png",
-        "price": "130,000"
-      },
-      {
-        "postId": 15,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
-        "image": "/images/cake.png",
-        "price": "130,000"
-      },
-      {
-        "postId": 16,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
-        "image": "/images/cake.png",
-        "price": "130,000"
-      },
-      {
-        "postId": 17,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
-        "image": "/images/cake.png",
-        "price": "130,000"
-      },
-      {
-        "postId": 18,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
-        "image": "/images/cake.png",
-        "price": "130,000"
-      },
-      {
-        "postId": 19,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
-        "image": "/images/cake.png",
-        "price": "130,000"
-      },
-      {
-        "postId": 20,
-        "category": "레터링",
-        "size": "1호",
-        "flavor": "초코",
-        "image": "/images/cake.png",
-        "price": "130,000"
+        "price": "13000",
+        "orderStatus": "NEW",
+        "end_date": "2023-03-01-18:00"
       }
     ]
   }

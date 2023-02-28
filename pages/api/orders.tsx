@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import allGangnam from '@/components/Api/mock/allGangnam.json';
 import letteringGangbok from '@/components/Api/mock/letteringGangbok.json';
 import letteringGangnam from '@/components/Api/mock/letteringGangnam.json';
 import photoGangbok from '@/components/Api/mock/photoGangbok.json';
@@ -10,24 +11,36 @@ export default async function getCakeList(
   response: NextApiResponse
 ) {
   const { location, category } = request.body;
-  if (category === 'photo') {
-    if (location === 'gangnam') {
+  if (category === 'ALL') {
+    return response.status(200).end(JSON.stringify(allGangnam.data.content));
+  }
+
+  if (category === 'PHOTO') {
+    if (location === '강남구') {
       return response
         .status(200)
         .end(JSON.stringify(photoGangnam.data.content));
     }
-    if (location === 'gangbok') {
-      return response.status(200).end(JSON.stringify(photoGangbok));
+    if (location === '강북구') {
+      return response
+        .status(200)
+        .end(JSON.stringify(photoGangbok.data.content));
     }
   }
 
-  if (category === 'lettering') {
-    if (location === 'gangnam') {
-      return response.status(200).end(JSON.stringify(letteringGangnam));
+  if (category === 'LETTERING') {
+    if (location === '강남구') {
+      return response
+        .status(200)
+        .end(JSON.stringify(letteringGangnam.data.content));
     }
-    if (location === 'gangbok') {
-      return response.status(200).end(JSON.stringify(letteringGangbok));
+    if (location === '강북구') {
+      return response
+        .status(200)
+        .end(JSON.stringify(letteringGangbok.data.content));
     }
   }
-  return response.status(500).end('err');
+  // return response.status(500).end('err');
+  // 임시로 예외 사항일 때 200으로 기본데이터를 쏘게 변경
+  return response.status(200).end(JSON.stringify(allGangnam.data.content));
 }

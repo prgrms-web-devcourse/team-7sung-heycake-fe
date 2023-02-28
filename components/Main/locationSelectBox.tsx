@@ -9,41 +9,14 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { useState } from 'react';
 import { BiCurrentLocation } from 'react-icons/bi';
 
+import { SEOUL_AREA } from './constants';
 import LocationListItem from './locationListItem';
 
-export default function LocationSelectBox() {
+export default function LocationSelectBox({ location, setLocation }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [location, setLocation] = useState('강남구');
-  const SEOUL_AREA = [
-    '강남구',
-    '강동구',
-    '강북구',
-    '강서구',
-    '관악구',
-    '광진구',
-    '구로구',
-    '금천구',
-    '노원구',
-    '도봉구',
-    '동대문구',
-    '동작구',
-    '마포구',
-    '서대문구',
-    '서초구',
-    '성동구',
-    '성북구',
-    '송파구',
-    '양천구',
-    '영등포구',
-    '용산구',
-    '은평구',
-    '종로구',
-    '중구',
-    '중량구',
-  ];
+
   return (
     <>
       <Flex
