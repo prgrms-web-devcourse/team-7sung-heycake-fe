@@ -6,5 +6,5 @@ export default async function getMarketList(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  return response.status(200).end(JSON.stringify(marketList));
+  return response.status(200).end(JSON.stringify(marketList.data));
 }

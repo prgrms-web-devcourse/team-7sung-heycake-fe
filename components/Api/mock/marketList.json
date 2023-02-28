@@ -8,7 +8,7 @@
       "phoneNumber": "0212345678",
       "ownerName": "권성준",
       "status": "approved",
-      "marketImage": "/images/prgms.png",
+      "marketImage": "https://i.imgur.com/agjDBqa.png",
       "createdAt": "2023-01-19 18:30:00"
     },
     {
@@ -19,7 +19,7 @@
       "phoneNumber": "01022222222",
       "ownerName": "권성준",
       "status": "waited",
-      "marketImage": "/images/prgms.png",
+      "marketImage": "https://i.imgur.com/agjDBqa.png",
       "createdAt": "2023-01-19 18:30:00"
     },
     {
@@ -30,7 +30,7 @@
       "phoneNumber": "0103333333",
       "ownerName": "권성준",
       "status": "approved",
-      "marketImage": "/images/prgms.png",
+      "marketImage": "https://i.imgur.com/agjDBqa.png",
       "createdAt": "2023-01-19 18:30:00"
     },
     {
@@ -41,7 +41,7 @@
       "phoneNumber": "0212345678",
       "ownerName": "권성준",
       "status": "approved",
-      "marketImage": "/images/prgms.png",
+      "marketImage": "https://i.imgur.com/agjDBqa.png",
       "createdAt": "2023-01-19 18:30:00"
     },
     {
@@ -52,7 +52,7 @@
       "phoneNumber": "0212345678",
       "ownerName": "권성준",
       "status": "waited",
-      "marketImage": "/images/prgms.png",
+      "marketImage": "https://i.imgur.com/agjDBqa.png",
       "createdAt": "2023-01-19 18:30:00"
     },
     {
@@ -63,7 +63,7 @@
       "phoneNumber": "0212345678",
       "ownerName": "권성준",
       "status": "approved",
-      "marketImage": "/images/prgms.png",
+      "marketImage": "https://i.imgur.com/agjDBqa.png",
       "createdAt": "2023-01-19 18:30:00"
     },
     {
@@ -74,7 +74,7 @@
       "phoneNumber": "0212345678",
       "ownerName": "권성준",
       "status": "approved",
-      "marketImage": "/images/prgms.png",
+      "marketImage": "https://i.imgur.com/agjDBqa.png",
       "createdAt": "2023-01-19 18:30:00"
     },
     {
@@ -85,7 +85,7 @@
       "phoneNumber": "0212345678",
       "ownerName": "권성준",
       "status": "approved",
-      "marketImage": "/images/prgms.png",
+      "marketImage": "https://i.imgur.com/agjDBqa.png",
       "createdAt": "2023-01-19 18:30:00"
     },
     {
@@ -96,7 +96,7 @@
       "phoneNumber": "0212345678",
       "ownerName": "권성준",
       "status": "approved",
-      "marketImage": "/images/prgms.png",
+      "marketImage": "https://i.imgur.com/agjDBqa.png",
       "createdAt": "2023-01-19 18:30:00"
     },
     {
@@ -107,7 +107,7 @@
       "phoneNumber": "0212345678",
       "ownerName": "권성준",
       "status": "approved",
-      "marketImage": "/images/prgms.png",
+      "marketImage": "https://i.imgur.com/agjDBqa.png",
       "createdAt": "2023-01-19 18:30:00"
     }
   ]

@@ -2,17 +2,35 @@ import {
   Box,
   Card,
   CardBody,
+  CloseButton,
   Divider,
   Flex,
+  Grid,
   Switch,
   Text,
 } from '@chakra-ui/react';
 import Image from 'next/image';
-import { useState } from 'react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-export default function MarketItem() {
-  const [marketSwitch, onMarketSwitch] = useState(false);
-  /* console.log(marketSwitch); */
+export default function MarketItem({
+  enrollmentId,
+  marketImage,
+  marketName,
+  businessNumber,
+  status,
+}: any) {
+  const [marketSwitch, setMarketSwitch] = useState(false);
+
+  const onSwitchHandler = () => {
+    setMarketSwitch(!marketSwitch);
+  };
+
+  useEffect(() => {
+    if (status === 'approved') {
+      onSwitchHandler();
+    }
+  }, [status]);
 
   return (
     <Card
@@ -25,23 +43,29 @@ export default function MarketItem() {
       justifyContent="space-between"
     >
       <Box p={2} borderRadius="12px">
-        <Image width={100} height={100} src="/images/prgms.png" alt="Cake" />
+        <Link key={enrollmentId} href={`/market/${enrollmentId}`}>
+          <Image width={100} height={100} src={marketImage} alt="Cake" />
+        </Link>
       </Box>
       <CardBody px={2}>
-        <Flex padding={0} gap={2} flexDirection="column">
-          <Flex align="center" gap={4} justifyContent="space-between">
-            <Text fontSize="lg" fontWeight="700" color="hey.main">
-              업체명
-            </Text>
-            <Text>프그케이크</Text>
+        <Link key={enrollmentId} href={`/market/${enrollmentId}`}>
+          <Flex padding={0} gap={3} flexDirection="column">
+            <Flex align="center" gap={4} justifyContent="space-between">
+              <Text>{marketName}</Text>
+            </Flex>
+            <Divider borderColor="hey.main" />
+            <Flex align="center" gap={4} justifyContent="space-between">
+              <Text fontWeight="600">{businessNumber}</Text>
+            </Flex>
           </Flex>
-          <Divider borderColor="hey.main" />
-          <Flex align="center" gap={4} justifyContent="space-between">
-            <Text fontWeight="600">412-23-13145</Text>
-            <Switch onChange={() => onMarketSwitch(!marketSwitch)} />
-          </Flex>
-        </Flex>
+        </Link>
       </CardBody>
+      <Box px={2}>
+        <Grid padding={0} gap={10}>
+          <CloseButton bgColor="red.500" color="white" />
+          <Switch isChecked={marketSwitch} onChange={onSwitchHandler} />
+        </Grid>
+      </Box>
     </Card>
   );
 }
