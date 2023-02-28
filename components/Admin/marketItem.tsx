@@ -34,7 +34,6 @@ export default function MarketItem({
 
   return (
     <Card
-      key={enrollmentId}
       borderColor="hey.sub"
       borderWidth="2px"
       bgColor="orange.50"

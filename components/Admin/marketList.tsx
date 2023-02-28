@@ -1,6 +1,5 @@
-import { Grid } from '@chakra-ui/react';
+import { Box, Grid } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
-import Link from 'next/link';
 
 import getMarketList from '../Api/getMarketList';
 import CakeListSkeleton from '../Main/cakeListSkeleton';
@@ -15,18 +14,18 @@ export default function MarketList({ category }: any) {
     return <CakeListSkeleton />;
   }
 
-  /* <Link key={item.enrollmentId} href={`/market/${item.enrollmentId}`}></Link> */
-
   return (
     <Grid gap={4}>
       {data?.map((item: any) => (
-        <MarketItem
-          enrollmentId={item.enrollmentId}
-          marketImage={item.marketImage}
-          marketName={item.marketName}
-          businessNumber={item.businessNumber}
-          status={item.status}
-        />
+        <Box key={item.enrollmentId}>
+          <MarketItem
+            enrollmentId={item.enrollmentId}
+            marketImage={item.marketImage}
+            marketName={item.marketName}
+            businessNumber={item.businessNumber}
+            status={item.status}
+          />
+        </Box>
       ))}
     </Grid>
   );
