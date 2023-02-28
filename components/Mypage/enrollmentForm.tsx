@@ -61,10 +61,17 @@ export default function EnrollmentForm() {
           {...register('ownerName', {
             required: true,
             minLength: 2,
-            maxLength: 20,
+            maxLength: {
+              value: 20,
+              message: '* 올바른 이름을 작성해주세요',
+            },
+            pattern: {
+              value: /[ㄱ-ㅎ|가-힣|a-z|A-Z]/,
+              message: '* 한글 또는 영어로 작성해주세요',
+            },
           })}
         />
-        {errors.ownerName && <ErrorSpan>{CHECK_OWNER_NAME}</ErrorSpan>}
+        {errors.ownerName && <ErrorSpan>{errors.ownerName.message}</ErrorSpan>}
       </FormControl>
       <FormControl height={100} width={350}>
         <FormLabel>개업 일자</FormLabel>
