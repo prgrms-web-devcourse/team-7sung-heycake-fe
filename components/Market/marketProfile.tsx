@@ -1,20 +1,36 @@
 import { Container, Divider, Flex, Text } from '@chakra-ui/react';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
+import getMarketDetail from '../Api/getMarketDetail';
 import {
   MarketAddressIcon,
   MarketInfoIcon,
   MarketOpeningIcon,
   MarketTelIcon,
 } from './icon';
+import MarketProfileSkeleton from './marketProfileSkeleton';
 import MarketTitle from './marketTitle';
 
 export default function MarketProfile() {
+  const router = useRouter();
+  const { status, data } = useQuery([router.query.id], () =>
+    getMarketDetail({ enrollmentId: router.query.id })
+  );
+
+  if (status === 'loading' || !router.isReady) {
+    return <MarketProfileSkeleton />;
+  }
+
+  const address = `${data.address.city} ${data.address.district} ${data.address.detailAddress}`;
+  const openingHours = `${data.openTime} ~ ${data.endTime}`;
+
   return (
     <>
-      <MarketTitle />
+      <MarketTitle title={data.marketName} />
       <Container centerContent gap={5} padding={4}>
-        <Image src="/images/prgms.png" alt="로고" width={240} height={240} />
+        <Image src={data.marketImage} alt="로고" width={240} height={240} />
         <Container padding={0}>
           <Flex align="center" gap={2}>
             <MarketInfoIcon w={7} h={7} />
@@ -22,11 +38,7 @@ export default function MarketProfile() {
               업체 소개
             </Text>
           </Flex>
-          <Text padding={2}>
-            프로그래머스 케이크 강남점입니다 소개는 최소 3줄은 해야하니까 3줄에
-            맞는거 하려고 했는데 4줄은 필요하겠내 4줄은 필요하겠내 4줄은
-            필요하겠내 4줄은 필요하겠내
-          </Text>
+          <Text padding={2}>{data.description}</Text>
         </Container>
         <Divider borderColor="hey.main" />
         <Container padding={0}>
@@ -36,7 +48,7 @@ export default function MarketProfile() {
               주소
             </Text>
           </Flex>
-          <Text padding={2}>서울시 강남구 서초동</Text>
+          <Text padding={2}>{address}</Text>
         </Container>
         <Divider borderColor="hey.main" />
         <Container padding={0}>
@@ -46,7 +58,7 @@ export default function MarketProfile() {
               전화번호
             </Text>
           </Flex>
-          <Text padding={2}>010-2022-2356</Text>
+          <Text padding={2}>{data.phoneNumber}</Text>
         </Container>
         <Divider borderColor="hey.main" />
         <Container padding={0}>
@@ -56,7 +68,7 @@ export default function MarketProfile() {
               영업시간
             </Text>
           </Flex>
-          <Text padding={2}>연중무휴 일요일은 쉽니다</Text>
+          <Text padding={2}>{openingHours}</Text>
         </Container>
         <Divider borderColor="hey.main" />
       </Container>
