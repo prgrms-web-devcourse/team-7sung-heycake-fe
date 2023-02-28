@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import Image from 'next/image';
 
 import DataTable from '@/components/Orders/DataTable';
+import Thread from '@/components/Orders/Thread';
 
 export default function Orders() {
   return (
@@ -38,6 +39,7 @@ export default function Orders() {
           />
           신청한 케이크 업체 3개
         </OrderRequestCountCard>
+        <Thread />
       </OrderWrapper>
     </>
   );
@@ -45,6 +47,9 @@ export default function Orders() {
 
 const OrderWrapper = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   padding: 1rem;
 `;
 
