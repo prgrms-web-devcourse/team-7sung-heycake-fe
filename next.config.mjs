@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -14,9 +13,15 @@ const nextConfig = {
         port: '',
         pathname: '/image/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'hey-cake.s3.ap-northeast-2.amazonaws.com',
+        port: '',
+        pathname: '/images/**',
+      },
     ],
   },
   reactStrictMode: true,
 };
 
-module.exports = nextConfig;
+export default nextConfig;

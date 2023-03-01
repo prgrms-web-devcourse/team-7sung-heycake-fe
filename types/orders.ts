@@ -5,6 +5,7 @@ export interface Order {
   region: string;
   orderStatus: 'NEW' | 'RESERVED' | 'PAID';
   hopePrice: number;
+  images: string[];
   visitDate: string;
   cakeInfo: {
     cakeCategory:
