@@ -29,13 +29,11 @@ export default function MarketItem({
   const onRejectClickHandler = () => {
     setIsDeleted(true);
     patchMarketStatus({ status: 'DELETED', enrollmentId });
-    console.log('거절', enrollmentId);
   };
 
   const onApproveClickHandler = () => {
     setCurrentStatus('APPROVED');
     patchMarketStatus({ status: 'APPROVED', enrollmentId });
-    console.log('승인', enrollmentId);
   };
 
   // (category === '' && status === 'DELETED') 는 백엔드 전체리스트 수정후 변경.
