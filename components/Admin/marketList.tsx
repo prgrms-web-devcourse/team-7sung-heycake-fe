@@ -21,6 +21,7 @@ export default function MarketList({ category }: any) {
       {data?.map((item: any) => (
         <Box key={item.enrollmentId}>
           <MarketItem
+            categort={category}
             enrollmentId={item.enrollmentId}
             marketImage={item.marketImage}
             marketName={item.marketName}

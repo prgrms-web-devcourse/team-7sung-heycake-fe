@@ -7,14 +7,13 @@ import {
   Divider,
   Flex,
   Grid,
-  Switch,
   Text,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 export default function MarketItem({
+  category,
   enrollmentId,
   marketImage,
   marketName,
@@ -57,20 +56,24 @@ export default function MarketItem({
           </Flex>
         </Link>
       </CardBody>
-      <Box px={2}>
-        <Grid my={2} gap={10} justifyItems="flex-end">
-          <CloseButton
-            bgColor="red.500"
-            color="white"
-            onClick={onRejectClickHandler}
-          />
-          {status === 'APPROVE' ? (
-            <Button onClick={onApproveClickHandler}>승인</Button>
-          ) : (
-            <Button>승인됨</Button>
-          )}
-        </Grid>
-      </Box>
+      {category !== 'DELETE' ? (
+        <Box px={2}>
+          <Grid my={2} gap={10} justifyItems="flex-end">
+            <CloseButton
+              bgColor="red.500"
+              color="white"
+              onClick={onRejectClickHandler}
+            />
+            {status === 'APPROVE' ? (
+              <Button onClick={onApproveClickHandler}>승인</Button>
+            ) : (
+              <Button>승인됨</Button>
+            )}
+          </Grid>
+        </Box>
+      ) : (
+        <Box />
+      )}
     </Card>
   );
 }
