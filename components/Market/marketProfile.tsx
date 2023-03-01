@@ -23,7 +23,7 @@ export default function MarketProfile() {
     return <MarketProfileSkeleton />;
   }
 
-  const address = `${data.address.city} ${data.address.district} ${data.address.detailAddress}`;
+  const address = `${data.marketAddress.city} ${data.marketAddress.district} ${data.marketAddress.detailAddress}`;
   const openingHours = `${data.openTime} ~ ${data.endTime}`;
 
   return (
