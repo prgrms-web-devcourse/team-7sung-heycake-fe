@@ -19,7 +19,7 @@ export default function Header() {
             icon={<LogoutIcon w={8} h={8} />}
           />
         </Link>
-        <Link href="/market/prgs">
+        <Link href="/admin">
           <IconButton
             variant="ghost"
             aria-label="유저"
