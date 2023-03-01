@@ -14,7 +14,7 @@ interface OrderProps {
 export default function Orders({ order }: OrderProps) {
   return (
     <>
-      <Image alt="cake" src="/images/cake.png" width={1000} height={1000} />
+      <Image alt="cake" src={order.images[0]} width={1000} height={1000} />
       <OrderWrapper>
         <div>
           <OrderRequestCount>+ {order.offerCount}</OrderRequestCount>
