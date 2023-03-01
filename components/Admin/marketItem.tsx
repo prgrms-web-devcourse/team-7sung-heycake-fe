@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardBody,
   CloseButton,
@@ -20,17 +21,13 @@ export default function MarketItem({
   businessNumber,
   status,
 }: any) {
-  const [marketSwitch, setMarketSwitch] = useState(false);
-
-  const onSwitchHandler = () => {
-    setMarketSwitch(!marketSwitch);
+  const onRejectClickHandler = () => {
+    console.log('거절', enrollmentId);
   };
 
-  useEffect(() => {
-    if (status === 'approved') {
-      onSwitchHandler();
-    }
-  }, [status]);
+  const onApproveClickHandler = () => {
+    console.log('승인', enrollmentId);
+  };
 
   return (
     <Card
@@ -61,9 +58,17 @@ export default function MarketItem({
         </Link>
       </CardBody>
       <Box px={2}>
-        <Grid padding={0} gap={10}>
-          <CloseButton bgColor="red.500" color="white" />
-          <Switch isChecked={marketSwitch} onChange={onSwitchHandler} />
+        <Grid my={2} gap={10} justifyItems="flex-end">
+          <CloseButton
+            bgColor="red.500"
+            color="white"
+            onClick={onRejectClickHandler}
+          />
+          {status === 'APPROVE' ? (
+            <Button onClick={onApproveClickHandler}>승인</Button>
+          ) : (
+            <Button>승인됨</Button>
+          )}
         </Grid>
       </Box>
     </Card>
