@@ -7,7 +7,7 @@ import CakeListSkeleton from '../Main/cakeListSkeleton';
 import MarketItem from './marketItem';
 
 export default function MarketList({ category }: any) {
-  const [cursor, setCursur] = useState('');
+  const [cursor, setCursor] = useState('');
   const { status, data } = useQuery(['승인 마켓 리스트', category], () =>
     getMarketList({ cursor, category })
   );
