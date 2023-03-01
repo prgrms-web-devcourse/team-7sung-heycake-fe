@@ -15,7 +15,7 @@ import Link from 'next/link';
 export default function MarketItem({
   category,
   enrollmentId,
-  marketImage,
+  imageUrl,
   marketName,
   businessNumber,
   status,
@@ -40,7 +40,7 @@ export default function MarketItem({
     >
       <Box p={2} borderRadius="12px">
         <Link key={enrollmentId} href={`/market/${enrollmentId}`}>
-          <Image width={100} height={100} src={marketImage} alt="Cake" />
+          <Image width={100} height={100} src={imageUrl} alt="Cake" />
         </Link>
       </Box>
       <CardBody px={2}>
@@ -56,7 +56,7 @@ export default function MarketItem({
           </Flex>
         </Link>
       </CardBody>
-      {category !== 'DELETE' ? (
+      {category !== 'DELETED' ? (
         <Box px={2}>
           <Grid my={2} gap={10} justifyItems="flex-end">
             <CloseButton
@@ -64,10 +64,14 @@ export default function MarketItem({
               color="white"
               onClick={onRejectClickHandler}
             />
-            {status === 'APPROVE' ? (
-              <Button onClick={onApproveClickHandler}>승인</Button>
+            {status === 'WAITING' ? (
+              <Button colorScheme="heys" onClick={onApproveClickHandler}>
+                승인
+              </Button>
             ) : (
-              <Button>승인됨</Button>
+              <Button colorScheme="heys" isDisabled>
+                승인됨
+              </Button>
             )}
           </Grid>
         </Box>

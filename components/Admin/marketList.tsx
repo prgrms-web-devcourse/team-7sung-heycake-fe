@@ -23,7 +23,7 @@ export default function MarketList({ category }: any) {
           <MarketItem
             category={category}
             enrollmentId={item.enrollmentId}
-            marketImage={item.marketImage}
+            imageUrl={item.imageUrl}
             marketName={item.marketName}
             businessNumber={item.businessNumber}
             status={item.status}
