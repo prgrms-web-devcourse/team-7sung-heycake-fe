@@ -29,7 +29,7 @@ export default function CakeList({ category, location }: any) {
             title={item.title}
             category={item.cakeInfo.cakeCategory}
             cakeSize={item.cakeInfo.cakeSize}
-            image={item.cakeImage}
+            image={item.cakeImage[0]}
             price={item.hopePrice}
             status={item.orderStatus}
             visitTime={item.visitTime}
