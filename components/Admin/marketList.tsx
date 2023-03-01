@@ -9,7 +9,7 @@ import MarketItem from './marketItem';
 export default function MarketList({ category }: any) {
   const [cursor, setCursur] = useState('');
   const { status, data } = useQuery(['승인 마켓 리스트', category], () =>
-    getMarketList({ cursor })
+    getMarketList({ cursor, category })
   );
 
   if (status === 'loading') {
@@ -21,7 +21,7 @@ export default function MarketList({ category }: any) {
       {data?.map((item: any) => (
         <Box key={item.enrollmentId}>
           <MarketItem
-            categort={category}
+            category={category}
             enrollmentId={item.enrollmentId}
             marketImage={item.marketImage}
             marketName={item.marketName}

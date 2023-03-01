@@ -8,9 +8,9 @@ export default async function getMarketList(
   response: NextApiResponse
 ) {
   try {
-    const { cursor } = request.body;
+    const { cursor, category } = request.body;
     const { data }: AxiosResponse = await publicApi.get(
-      `/enrollments/?pageSize=100&cursor=${cursor}`
+      `/enrollments/?pageSize=100&cursor=${cursor}&status=${category}`
     );
     return response.status(200).end(JSON.stringify(data.enrollmentResponses));
   } catch (err) {
