@@ -58,22 +58,25 @@ export default function MarketItem({
       </CardBody>
       {category !== 'DELETED' ? (
         <Box px={2}>
-          <Grid my={2} gap={10} justifyItems="flex-end">
-            <CloseButton
-              bgColor="red.500"
-              color="white"
-              onClick={onRejectClickHandler}
-            />
-            {status === 'WAITING' ? (
+          {status === 'WAITING' ? (
+            <Grid my={2} gap={10} justifyItems="flex-end">
+              <CloseButton
+                bgColor="red.500"
+                color="white"
+                onClick={onRejectClickHandler}
+              />
               <Button colorScheme="heys" onClick={onApproveClickHandler}>
                 승인
               </Button>
-            ) : (
+            </Grid>
+          ) : (
+            <Grid my={2} gap={10} justifyItems="flex-end">
+              <CloseButton isDisabled bgColor="red.500" color="white" />
               <Button colorScheme="heys" isDisabled>
                 승인됨
               </Button>
-            )}
-          </Grid>
+            </Grid>
+          )}
         </Box>
       ) : (
         <Box />
