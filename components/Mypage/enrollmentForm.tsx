@@ -12,6 +12,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import SEOUL_AREA from '@/constants/seoulArea';
 
+import { publicApi } from '../Api';
+
 const {
   CHECK_BUSINESS_NUMBER_LENGTH,
   CHECK_NUMBER_TYPE,
@@ -33,6 +35,7 @@ type InputProps = {
   description: string;
   businessLicenseImage: File;
   marketImage: File;
+  memberId: number;
 };
 
 export default function EnrollmentForm() {
@@ -41,10 +44,44 @@ export default function EnrollmentForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<InputProps>();
-  const onSubmit: SubmitHandler<InputProps> = (data) => console.log(data);
+
+  const onSubmit: SubmitHandler<InputProps> = async (data) => {
+    const businessLicenseImage: { [key: string]: any } = {
+      ...data.businessLicenseImage,
+    };
+    const marketImage: { [key: string]: any } = {
+      ...data.marketImage,
+    };
+    const formData = new FormData();
+
+    formData.append('businessNumber', data.businessNumber);
+    formData.append('ownerName', data.ownerName);
+    formData.append('openDate', data.openDate);
+    formData.append('marketName', data.marketName);
+    formData.append('phoneNumber', data.phoneNumber);
+    formData.append('city', data.city);
+    formData.append('district', data.district);
+    formData.append('detailAddress', data.detailAddress);
+    formData.append('openTime', data.openTime);
+    formData.append('endTime', data.endTime);
+    formData.append('description', data.description);
+    formData.append('businessLicenseImage', businessLicenseImage[0]);
+    formData.append('marketImage', marketImage[0]);
+    formData.append('memberId', '4');
+
+    try {
+      await publicApi.post('/enrollments', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} id="enrollmentForm">
       <FormControl height={100} width={350}>
         <FormLabel>사업자 등록 번호</FormLabel>
         <Input
