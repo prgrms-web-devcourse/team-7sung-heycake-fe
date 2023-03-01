@@ -15,10 +15,10 @@ export default function Admin() {
       </TabList>
       <TabPanels>
         <TabPanel>
-          <MarketList category={null} />
+          <MarketList category="" />
         </TabPanel>
         <TabPanel>
-          <MarketList category="deleted" />
+          <MarketList category="DELETED" />
         </TabPanel>
       </TabPanels>
     </Tabs>

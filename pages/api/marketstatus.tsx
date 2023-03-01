@@ -3,16 +3,17 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { publicApi } from '@/components/Api';
 
-export default async function getMarketList(
+export default async function patchMarketStatus(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
   try {
-    const { cursor, category } = request.body;
-    const { data }: AxiosResponse = await publicApi.get(
-      `/enrollments/?pageSize=100&cursor=${cursor}&status=${category}`
+    const { status, enrollmentId } = request.body;
+    const { data }: AxiosResponse = await publicApi.patch(
+      `/enrollments/${enrollmentId}`,
+      { status }
     );
-    return response.status(200).end(JSON.stringify(data.enrollments));
+    return response.status(200).end(JSON.stringify(data));
   } catch (err) {
     return response.status(500).end(JSON.stringify(err));
   }
