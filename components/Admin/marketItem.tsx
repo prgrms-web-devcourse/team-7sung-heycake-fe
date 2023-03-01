@@ -13,6 +13,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
+import patchMarketStatus from '../Api/patchMarketStatus';
+
 export default function MarketItem({
   category,
   enrollmentId,
@@ -26,15 +28,19 @@ export default function MarketItem({
 
   const onRejectClickHandler = () => {
     setIsDeleted(true);
+    patchMarketStatus({ status: 'DELETED', enrollmentId });
     console.log('거절', enrollmentId);
   };
 
   const onApproveClickHandler = () => {
     setCurrentStatus('APPROVED');
+    patchMarketStatus({ status: 'APPROVED', enrollmentId });
     console.log('승인', enrollmentId);
   };
 
-  if (isDeleted) {
+  // (category === '' && status === 'DELETED') 는 백엔드 전체리스트 수정후 변경.
+
+  if (isDeleted || (category === '' && status === 'DELETED')) {
     return null;
   }
 

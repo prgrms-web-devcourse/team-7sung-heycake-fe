@@ -1,4 +1,4 @@
-import { Box, Grid, Stack } from '@chakra-ui/react';
+import { Grid, Stack } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
