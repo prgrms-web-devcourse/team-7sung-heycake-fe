@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function MarketItem({
   category,
@@ -20,16 +21,26 @@ export default function MarketItem({
   businessNumber,
   status,
 }: any) {
+  const [isDeleted, setIsDeleted] = useState(false);
+  const [currentStatus, setCurrentStatus] = useState(status);
+
   const onRejectClickHandler = () => {
+    setIsDeleted(true);
     console.log('거절', enrollmentId);
   };
 
   const onApproveClickHandler = () => {
+    setCurrentStatus('APPROVED');
     console.log('승인', enrollmentId);
   };
 
+  if (isDeleted) {
+    return null;
+  }
+
   return (
     <Card
+      mt={4}
       borderColor="hey.sub"
       borderWidth="2px"
       bgColor="orange.50"
@@ -58,7 +69,7 @@ export default function MarketItem({
       </CardBody>
       {category !== 'DELETED' ? (
         <Box px={2}>
-          {status === 'WAITING' ? (
+          {currentStatus === 'WAITING' ? (
             <Grid my={2} gap={10} justifyItems="flex-end">
               <CloseButton
                 bgColor="red.500"

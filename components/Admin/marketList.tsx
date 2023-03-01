@@ -1,4 +1,4 @@
-import { Box, Grid } from '@chakra-ui/react';
+import { Box, Grid, Stack } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
@@ -17,9 +17,9 @@ export default function MarketList({ category }: any) {
   }
 
   return (
-    <Grid gap={4}>
+    <Grid gap={0}>
       {data?.map((item: any) => (
-        <Box key={item.enrollmentId}>
+        <Stack key={item.enrollmentId}>
           <MarketItem
             category={category}
             enrollmentId={item.enrollmentId}
@@ -28,7 +28,7 @@ export default function MarketList({ category }: any) {
             businessNumber={item.businessNumber}
             status={item.status}
           />
-        </Box>
+        </Stack>
       ))}
     </Grid>
   );
