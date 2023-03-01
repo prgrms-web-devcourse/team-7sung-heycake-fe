@@ -16,7 +16,7 @@ export default function CakeItem({
   image,
   price,
   status,
-  endDate,
+  visitTime,
 }: any) {
   return (
     <Card
@@ -63,7 +63,7 @@ export default function CakeItem({
           p={2}
         >
           <Badge bgColor="red.200" color="hey.red">
-            ~ {endDate}
+            ~ {visitTime}
           </Badge>
           <Badge bgColor="orange.100" colorScheme="red" color="hey.red">
             ~ ₩ {price}

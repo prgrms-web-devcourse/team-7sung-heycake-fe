@@ -29,10 +29,10 @@ export default function CakeList({ category, location }: any) {
             title={item.title}
             category={item.cakeInfo.cakeCategory}
             cakeSize={item.cakeInfo.cakeSize}
-            image={item.image}
+            image={item.cakeImage}
             price={item.hopePrice}
             status={item.orderStatus}
-            endDate={item.end_date}
+            visitTime={item.visitTime}
           />
         </Link>
       ))}

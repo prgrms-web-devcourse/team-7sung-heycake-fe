@@ -3,7 +3,7 @@ import { ICakeList } from './types';
 export const TAB_TABLE: ICakeList[] = [
   {
     label: '전체',
-    category: 'ALL',
+    category: '',
   },
   {
     label: '포토',
