@@ -39,7 +39,7 @@ export default function CakeItem({
         <CardBody px={2}>
           <Flex padding={0} gap={1} flexDirection="column">
             <Flex align="center" gap={4} justifyContent="space-between">
-              <Text>{title}</Text>
+              <Text whiteSpace="nowrap">{title}</Text>
             </Flex>
             <Divider borderColor="hey.main" />
             <Flex align="center" gap={4} justifyContent="space-between">
