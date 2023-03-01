@@ -18,7 +18,7 @@ export default function Admin() {
           <MarketList category="" />
         </TabPanel>
         <TabPanel>
-          <MarketList category="DELETE" />
+          <MarketList category="DELETED" />
         </TabPanel>
       </TabPanels>
     </Tabs>
