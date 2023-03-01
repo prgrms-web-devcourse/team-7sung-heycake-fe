@@ -1,10 +1,19 @@
+import { AxiosResponse } from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import marketList from '@/components/Api/mock/marketList.json';
+import { publicApi } from '@/components/Api';
 
 export default async function getMarketList(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  return response.status(200).end(JSON.stringify(marketList.data));
+  try {
+    const { cursor } = request.body;
+    const { data }: AxiosResponse = await publicApi.get(
+      `/enrollments/?pageSize=10&cursor=${cursor}`
+    );
+    return response.status(200).end(JSON.stringify(data.enrollmentResponses));
+  } catch (err) {
+    return response.status(500).end(JSON.stringify(err));
+  }
 }

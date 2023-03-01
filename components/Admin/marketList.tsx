@@ -1,13 +1,15 @@
 import { Box, Grid } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
 import getMarketList from '../Api/getMarketList';
 import CakeListSkeleton from '../Main/cakeListSkeleton';
 import MarketItem from './marketItem';
 
 export default function MarketList({ category }: any) {
+  const [cursor, setCursur] = useState('');
   const { status, data } = useQuery(['승인 마켓 리스트', category], () =>
-    getMarketList()
+    getMarketList({ cursor })
   );
 
   if (status === 'loading') {

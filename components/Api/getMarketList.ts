@@ -1,8 +1,10 @@
 import { internalApi } from '.';
 
-export default async function getMarketList() {
+export default async function getMarketList({ cursor }: any) {
   try {
-    const response = await internalApi.get(`/api/enrollments`, {});
+    const response = await internalApi.post(`/api/enrollments`, {
+      cursor,
+    });
     if (response.status === 200) {
       return response.data;
     }
