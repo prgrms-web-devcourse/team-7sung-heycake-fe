@@ -2,7 +2,7 @@ import { Grid } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 
-import getCakeList from '../Api/getCakeList';
+import getCakeList from '../Api/Main';
 import CakeItem from './cakeItem';
 import CakeListSkeleton from './cakeListSkeleton';
 

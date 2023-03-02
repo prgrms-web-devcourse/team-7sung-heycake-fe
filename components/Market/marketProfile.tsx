@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import getMarketDetail from '../Api/getMarketDetail';
+import getMarketDetail from '../Api/Market';
 import {
   MarketAddressIcon,
   MarketInfoIcon,

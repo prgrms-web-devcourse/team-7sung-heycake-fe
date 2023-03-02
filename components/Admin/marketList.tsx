@@ -2,7 +2,7 @@ import { Grid, Stack } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import getMarketList from '../Api/getMarketList';
+import { getMarketList } from '../Api/Market';
 import CakeListSkeleton from '../Main/cakeListSkeleton';
 import MarketItem from './marketItem';
 import { IMarketItem, IMarketList } from './types';

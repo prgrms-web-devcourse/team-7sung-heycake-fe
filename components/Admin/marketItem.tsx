@@ -13,7 +13,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import patchMarketStatus from '../Api/patchMarketStatus';
+import { patchMarketStatus } from '../Api/Market';
 import { IMarketItem } from './types';
 
 export default function MarketItem({

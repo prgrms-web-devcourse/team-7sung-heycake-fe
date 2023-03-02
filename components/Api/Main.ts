@@ -1,5 +1,4 @@
 import { internalApi } from '.';
-import ApiErrorAlert from './ApiErrorAlert';
 
 export default async function getCakeList({ location, category }: any) {
   try {
@@ -11,9 +10,7 @@ export default async function getCakeList({ location, category }: any) {
       return response.data;
     }
   } catch (error) {
-    return ApiErrorAlert({ error });
+    return console.error(error);
   }
-  return ApiErrorAlert({
-    error: '케이크 리스트를 받아오는데 에러가 발생했습니다',
-  });
+  return console.error('케이크 리스트를 받아오는데 에러가 발생했습니다');
 }
