@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 function loginWithKakao() {
   window.Kakao.Auth.authorize({
-    redirectUri: 'http://localhost:3000/',
+    redirectUri: 'http://localhost:3000/main',
   });
 }
 
