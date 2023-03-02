@@ -12,7 +12,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import SEOUL_AREA from '@/constants/seoulArea';
 
-const { CHECK_BUSINESS_NUMBER, CHECK_OWNER_NAME } = ERROR_MESSAGES;
+const {
+  CHECK_BUSINESS_NUMBER_LENGTH,
+  CHECK_NUMBER_TYPE,
+  CHECK_OWNER_NAME_LENGTH,
+  CHECK_OWNER_NAME_TYPE,
+} = ERROR_MESSAGES;
 
 type InputProps = {
   businessNumber: string;
@@ -44,14 +49,22 @@ export default function EnrollmentForm() {
         <FormLabel>사업자 등록 번호</FormLabel>
         <Input
           type="text"
+          placeholder="10자리 숫자만 입력해주세요."
           {...register('businessNumber', {
             required: true,
+            pattern: {
+              value: /^[0-9+]*$/,
+              message: CHECK_NUMBER_TYPE,
+            },
             minLength: 10,
-            maxLength: 10,
+            maxLength: {
+              value: 10,
+              message: CHECK_BUSINESS_NUMBER_LENGTH,
+            },
           })}
         />
         {errors.businessNumber && (
-          <ErrorSpan>{CHECK_BUSINESS_NUMBER}</ErrorSpan>
+          <ErrorSpan>{errors.businessNumber.message}</ErrorSpan>
         )}
       </FormControl>
       <FormControl height={100} width={350}>
@@ -61,10 +74,17 @@ export default function EnrollmentForm() {
           {...register('ownerName', {
             required: true,
             minLength: 2,
-            maxLength: 20,
+            maxLength: {
+              value: 20,
+              message: CHECK_OWNER_NAME_LENGTH,
+            },
+            pattern: {
+              value: /[ㄱ-ㅎ|가-힣|a-z|A-Z]/,
+              message: CHECK_OWNER_NAME_TYPE,
+            },
           })}
         />
-        {errors.ownerName && <ErrorSpan>{CHECK_OWNER_NAME}</ErrorSpan>}
+        {errors.ownerName && <ErrorSpan>{errors.ownerName.message}</ErrorSpan>}
       </FormControl>
       <FormControl height={100} width={350}>
         <FormLabel>개업 일자</FormLabel>
@@ -76,7 +96,20 @@ export default function EnrollmentForm() {
       </FormControl>
       <FormControl height={100} width={350}>
         <FormLabel>업체 전화번호</FormLabel>
-        <Input type="text" {...register('phoneNumber', { required: true })} />
+        <Input
+          type="text"
+          placeholder="숫자만 입력해주세요."
+          {...register('phoneNumber', {
+            required: true,
+            pattern: {
+              value: /^[0-9+]*$/,
+              message: CHECK_NUMBER_TYPE,
+            },
+          })}
+        />
+        {errors.phoneNumber && (
+          <ErrorSpan>{errors.phoneNumber.message}</ErrorSpan>
+        )}
       </FormControl>
       <FormControl height={150} width={350}>
         <FormLabel>주소</FormLabel>
