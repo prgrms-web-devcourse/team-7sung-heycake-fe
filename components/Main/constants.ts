@@ -54,3 +54,12 @@ export const SEOUL_AREA = [
   '중구',
   '중량',
 ];
+
+export const CAKE_CATEGORY = {
+  ALL: '전체',
+  PHOTO: '포토',
+  LETTERING: '레터링',
+  CHARACTER_IMAGE: '캐릭터 (사진)',
+  CHARACTER_MODEL: '캐릭터 (입체)',
+  ETC: '기타',
+};

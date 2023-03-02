@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import Image from 'next/image';
 
+import { CAKE_CATEGORY } from '../constants';
 import { ICakeItem } from '../types';
 
 export default function CakeItem({
@@ -20,6 +21,7 @@ export default function CakeItem({
   visitTime,
   title,
 }: ICakeItem) {
+  const koreanCategory = CAKE_CATEGORY[category];
   return (
     <Card
       bgImage={status !== 'NEW' ? '/images/completedCake.png' : ''}
@@ -50,7 +52,7 @@ export default function CakeItem({
                     항목
                   </Text>
                   <Text fontSize="sm" whiteSpace="nowrap">
-                    {category}
+                    {koreanCategory}
                   </Text>
                 </Flex>
                 <Divider borderColor="hey.main" />
