@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import getMarketDetail from '../Api/Market';
+import { getMarketDetail } from '../Api/Market';
 import {
   MarketAddressIcon,
   MarketInfoIcon,
@@ -16,7 +16,7 @@ import MarketTitle from './marketTitle';
 export default function MarketProfile() {
   const router = useRouter();
   const { status, data } = useQuery(['업체 상세 정보', router.query.id], () =>
-    getMarketDetail({ enrollmentId: router.query.id })
+    getMarketDetail({ enrollmentId: String(router.query.id) })
   );
 
   if (status === 'loading' || !router.isReady) {
