@@ -11,7 +11,7 @@ export default async function patchMarketStatus({ status, enrollmentId }: any) {
       return response.data;
     }
   } catch (error) {
-    ApiErrorAlert({ error });
+    return ApiErrorAlert({ error });
   }
   return ApiErrorAlert({
     error: '마켓 상태 변경에 문제가 발생했습니다',

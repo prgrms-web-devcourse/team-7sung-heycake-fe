@@ -11,7 +11,7 @@ export default async function getCakeList({ location, category }: any) {
       return response.data;
     }
   } catch (error) {
-    ApiErrorAlert({ error });
+    return ApiErrorAlert({ error });
   }
   return ApiErrorAlert({
     error: '케이크 리스트를 받아오는데 에러가 발생했습니다',
