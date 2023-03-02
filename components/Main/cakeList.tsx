@@ -27,12 +27,12 @@ export default function CakeList({ category, location }: any) {
           <CakeItem
             orderId={item.orderId}
             title={item.title}
-            category={item.cakeCategory}
-            cakeSize={item.cakeSize}
-            image={item.image}
-            price={item.price}
+            category={item.cakeInfo.cakeCategory}
+            cakeSize={item.cakeInfo.cakeSize}
+            image={item.images[0]}
+            price={item.hopePrice}
             status={item.orderStatus}
-            endDate={item.end_date}
+            visitTime={item.visitTime}
           />
         </Link>
       ))}

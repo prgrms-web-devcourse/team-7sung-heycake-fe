@@ -8,7 +8,9 @@ import { LoginIcon, LogoutIcon, UserIcon } from './icon';
 export default function Header() {
   return (
     <Container>
-      <Image src="/images/logo.png" alt="로고" width={40} height={40} />
+      <Link href="/main">
+        <Image src="/images/logo.png" alt="로고" width={40} height={40} />
+      </Link>
       <ButtonContainer>
         <Link href="/">
           <IconButton
@@ -17,7 +19,7 @@ export default function Header() {
             icon={<LogoutIcon w={8} h={8} />}
           />
         </Link>
-        <Link href="/market/prgs">
+        <Link href="/admin">
           <IconButton
             variant="ghost"
             aria-label="유저"
