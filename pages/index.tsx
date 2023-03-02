@@ -1,6 +1,7 @@
 import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 function loginWithKakao() {
   window.Kakao.Auth.authorize({
@@ -9,6 +10,8 @@ function loginWithKakao() {
 }
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <>
       <ImageContainer>
@@ -34,6 +37,7 @@ export default function Home() {
           height="46.5px"
           marginTop="1rem"
           fontSize="15px"
+          onClick={() => router.push('/main')}
         >
           비회원으로 둘러보기
         </Button>
