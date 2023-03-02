@@ -1,6 +1,10 @@
 import { internalApi } from '.';
+import { IgetCakeList } from './types';
 
-export default async function getCakeList({ location, category }: any) {
+export default async function getCakeList({
+  location,
+  category,
+}: IgetCakeList) {
   try {
     const response = await internalApi.post(`/api/orders/`, {
       location,

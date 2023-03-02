@@ -1,6 +1,7 @@
 import { internalApi } from '.';
+import { IgetMarketDetail, IgetMarketList, IPatchMarketStatus } from './types';
 
-export default async function getMarketDetail({ enrollmentId }: any) {
+export async function getMarketDetail({ enrollmentId }: IgetMarketDetail) {
   try {
     const response = await internalApi.get(
       `/api/enrollments/${enrollmentId}`,
@@ -15,7 +16,7 @@ export default async function getMarketDetail({ enrollmentId }: any) {
   return console.error('마켓 상세 정보를 받아오는데 에러가 발생했습니다');
 }
 
-export async function getMarketList({ cursor, category }: any) {
+export async function getMarketList({ cursor, category }: IgetMarketList) {
   try {
     const response = await internalApi.post(`/api/enrollments`, {
       cursor,
@@ -29,7 +30,11 @@ export async function getMarketList({ cursor, category }: any) {
   }
   return console.error('마켓 승인 리스트를 받아오는데 에러가 발생했습니다');
 }
-export async function patchMarketStatus({ status, enrollmentId }: any) {
+
+export async function patchMarketStatus({
+  status,
+  enrollmentId,
+}: IPatchMarketStatus) {
   try {
     const response = await internalApi.patch(`/api/marketstatus`, {
       status,
