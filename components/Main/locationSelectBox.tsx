@@ -13,8 +13,12 @@ import { BiCurrentLocation } from 'react-icons/bi';
 
 import { SEOUL_AREA } from './constants';
 import LocationListItem from './locationListItem';
+import { ILocationSelectBox } from './types';
 
-export default function LocationSelectBox({ location, setLocation }: any) {
+export default function LocationSelectBox({
+  location,
+  setLocation,
+}: ILocationSelectBox) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (

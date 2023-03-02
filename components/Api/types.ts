@@ -19,7 +19,8 @@ export interface IPatchMarketStatus {
   status: TStatus;
 }
 
-type TMainCategory =
+export type TMainCategory =
+  | ''
   | 'ALL'
   | 'PHOTO'
   | 'LETTERING'
@@ -27,7 +28,7 @@ type TMainCategory =
   | 'CHARACTER_MODEL'
   | 'ETC';
 
-type TSouelArea =
+export type TSouelArea =
   | '강남구'
   | '강동구'
   | '강북구'

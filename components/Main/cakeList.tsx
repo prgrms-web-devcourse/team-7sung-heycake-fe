@@ -5,6 +5,7 @@ import Link from 'next/link';
 import getCakeList from '../Api/Main';
 import CakeItem from './cakeItem';
 import CakeListSkeleton from './cakeListSkeleton';
+import { ICakeItemData } from './types';
 
 export default function CakeList({ category, location }: any) {
   const { status, data } = useQuery(
@@ -22,7 +23,7 @@ export default function CakeList({ category, location }: any) {
 
   return (
     <Grid padding={0} gap={4} flexDirection="column">
-      {data?.map((item: any) => (
+      {data?.map((item: ICakeItemData) => (
         <Link key={item.orderId} href={`/orders/${item.orderId}`}>
           <CakeItem
             title={item.title}
