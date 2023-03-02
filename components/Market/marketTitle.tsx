@@ -3,8 +3,9 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
 import { ArrowBackIcon } from './icon';
+import { IMarketTitle } from './types';
 
-export default function MarketTitle({ title }: any) {
+export default function MarketTitle({ title }: IMarketTitle) {
   const router = useRouter();
   return (
     <Container>

@@ -11,10 +11,14 @@ import {
 } from '@chakra-ui/react';
 import { BiCurrentLocation } from 'react-icons/bi';
 
-import { SEOUL_AREA } from './constants';
+import { SEOUL_AREA } from '../constants';
+import { ILocationSelectBox } from '../types';
 import LocationListItem from './locationListItem';
 
-export default function LocationSelectBox({ location, setLocation }: any) {
+export default function LocationSelectBox({
+  location,
+  setLocation,
+}: ILocationSelectBox) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -26,7 +30,7 @@ export default function LocationSelectBox({ location, setLocation }: any) {
         gap={1}
         alignItems="center"
       >
-        <BiCurrentLocation fontSize="xl" />
+        <BiCurrentLocation color="orange" fontSize="xl" />
         <Text pr={2}>서울시 {location}</Text>
       </Flex>
       <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>

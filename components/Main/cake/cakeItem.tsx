@@ -9,6 +9,8 @@ import {
 } from '@chakra-ui/react';
 import Image from 'next/image';
 
+import { ICakeItem } from '../types';
+
 export default function CakeItem({
   category,
   cakeSize,
@@ -17,7 +19,7 @@ export default function CakeItem({
   status,
   visitTime,
   title,
-}: any) {
+}: ICakeItem) {
   return (
     <Card
       bgImage={status !== 'NEW' ? '/images/completedCake.png' : ''}
