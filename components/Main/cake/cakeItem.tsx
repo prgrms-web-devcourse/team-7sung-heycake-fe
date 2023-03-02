@@ -10,7 +10,7 @@ import {
 import Image from 'next/image';
 
 import { CAKE_CATEGORY, CAKE_SIZE } from '../constants';
-import numberWithCommas from '../\bnumberWithCommas';
+import numberWithCommas from '../numberWithCommas';
 import { ICakeItem } from '../types';
 
 export default function CakeItem({
@@ -76,7 +76,7 @@ export default function CakeItem({
                 color="hey.red"
                 mt={20}
               >
-                ~ ₩ {numberWithCommas(Number(price)}
+                ~ ₩ {numberWithCommas(Number(price))}
               </Badge>
             </Flex>
           </Flex>

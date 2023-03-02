@@ -1,0 +1,11 @@
+export function numberWithHyphenPhone(phoneNumber: string) {
+  return phoneNumber
+    .replace(/[^0-9]/g, '')
+    .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+}
+
+export function numberWithHyphenMarket(marketNumber: string) {
+  return marketNumber
+    .replace(/[^0-9]/g, '')
+    .replace(/^(\d{3})(\d{2})(\d{5})$/, `$1-$2-$3`);
+}
