@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import Image from 'next/image';
 
-import { CAKE_CATEGORY } from '../constants';
+import { CAKE_CATEGORY, CAKE_SIZE } from '../constants';
 import { ICakeItem } from '../types';
 
 export default function CakeItem({
@@ -21,7 +21,6 @@ export default function CakeItem({
   visitTime,
   title,
 }: ICakeItem) {
-  const koreanCategory = CAKE_CATEGORY[category];
   return (
     <Card
       bgImage={status !== 'NEW' ? '/images/completedCake.png' : ''}
@@ -38,7 +37,7 @@ export default function CakeItem({
           <Flex m={1} justifyContent="space-between">
             <Text>{title}</Text>
             <Badge bgColor="red.200" color="hey.red">
-              ~ {visitTime}
+              ~ {visitTime.substring(0, 10)}
             </Badge>
           </Flex>
           <Flex>
@@ -52,7 +51,7 @@ export default function CakeItem({
                     항목
                   </Text>
                   <Text fontSize="sm" whiteSpace="nowrap">
-                    {koreanCategory}
+                    {CAKE_CATEGORY[category]}
                   </Text>
                 </Flex>
                 <Divider borderColor="hey.main" />
@@ -61,7 +60,7 @@ export default function CakeItem({
                     케익 크기
                   </Text>
                   <Text fontSize="sm" whiteSpace="nowrap">
-                    {cakeSize}
+                    {CAKE_SIZE[cakeSize]}
                   </Text>
                 </Flex>
                 <Divider borderColor="hey.main" />

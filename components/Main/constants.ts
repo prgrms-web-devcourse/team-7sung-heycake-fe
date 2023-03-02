@@ -63,3 +63,5 @@ export const CAKE_CATEGORY = {
   CHARACTER_MODEL: '캐릭터 (입체)',
   ETC: '기타',
 };
+
+export const CAKE_SIZE = { MINI: '미니', SIZE_ONE: '1호', SIZE_TWO: '2호' };
