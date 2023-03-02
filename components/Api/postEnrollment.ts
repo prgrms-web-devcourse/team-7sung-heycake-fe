@@ -2,10 +2,12 @@ import { publicApi } from '.';
 
 export default async function postEnrollment(data: object) {
   try {
-    const response = await publicApi.post('/enrollments', data);
-    console.log(response);
+    await publicApi.post('/enrollments', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
-  //   console.log('in postEnrollment func', data);
 }

@@ -12,7 +12,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import SEOUL_AREA from '@/constants/seoulArea';
 
-import { publicApi } from '../Api';
+import postEnrollment from '../Api/postEnrollment';
 
 const {
   CHECK_BUSINESS_NUMBER_LENGTH,
@@ -69,15 +69,7 @@ export default function EnrollmentForm() {
     formData.append('marketImage', marketImage[0]);
     formData.append('memberId', '4');
 
-    try {
-      await publicApi.post('/enrollments', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    postEnrollment(formData);
   };
 
   return (
