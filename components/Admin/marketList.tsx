@@ -5,8 +5,9 @@ import { useState } from 'react';
 import getMarketList from '../Api/getMarketList';
 import CakeListSkeleton from '../Main/cakeListSkeleton';
 import MarketItem from './marketItem';
+import { IMarketItem, IMarketList } from './types';
 
-export default function MarketList({ category }: any) {
+export default function MarketList({ category }: IMarketList) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cursor, setCursor] = useState('');
   const { status, data } = useQuery(['승인 마켓 리스트', category], () =>
@@ -19,7 +20,7 @@ export default function MarketList({ category }: any) {
 
   return (
     <Grid gap={0}>
-      {data?.map((item: any) => (
+      {data?.map((item: IMarketItem) => (
         <Stack key={item.enrollmentId}>
           <MarketItem
             category={category}

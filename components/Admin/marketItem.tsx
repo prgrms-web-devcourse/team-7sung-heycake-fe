@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import patchMarketStatus from '../Api/patchMarketStatus';
+import { IMarketItem } from './types';
 
 export default function MarketItem({
   category,
@@ -22,7 +23,7 @@ export default function MarketItem({
   marketName,
   businessNumber,
   status,
-}: any) {
+}: IMarketItem) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [currentStatus, setCurrentStatus] = useState(status);
 
