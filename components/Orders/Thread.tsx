@@ -1,22 +1,28 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 
-export default function Thread() {
+import { ThreadDto } from '@/types/orders';
+
+interface ThreadProps {
+  thread: ThreadDto;
+}
+
+export default function Thread({ thread }: ThreadProps) {
   return (
     <ThreadWrapper>
       <ThreadTopWrapper>
-        <ThreadTitle>강남케이크 2호점</ThreadTitle>
-        <div>비용: 100,000원</div>
+        <ThreadTitle>{thread.storeName}</ThreadTitle>
+        <div>비용: {thread.expectedPrice}원</div>
       </ThreadTopWrapper>
       <Image
-        src="/images/cake.png"
+        src={thread.imageUrl}
         width={150}
         height={150}
         alt="cake"
         loading="lazy"
       />
-      <div>저희가 예쁘게 만들어드릴게요~! 원하시면 쓰레드 답글 부탁드려요!</div>
-      <MoreComments>{`댓글 더 보기 >`}</MoreComments>
+      <div>{thread.content}</div>
+      <MoreComments>{`${thread.commentCount}개 댓글 더 보기 >`}</MoreComments>
     </ThreadWrapper>
   );
 }
