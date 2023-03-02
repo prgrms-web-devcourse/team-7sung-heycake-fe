@@ -56,7 +56,9 @@ export default function MarketItem({
     >
       <Box p={2} borderRadius="12px">
         <Link key={enrollmentId} href={`/market/${enrollmentId}`}>
-          <Image width={100} height={100} src={imageUrl} alt="Cake" />
+          <Card m={2} width="100px" height="100px">
+            <Image fill src={imageUrl} alt="Cake" />
+          </Card>
         </Link>
       </Box>
       <CardBody px={2}>
