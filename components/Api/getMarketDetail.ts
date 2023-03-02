@@ -1,4 +1,5 @@
 import { internalApi } from '.';
+import ApiErrorAlert from './ApiErrorAlert';
 
 export default async function getMarketDetail({ enrollmentId }: any) {
   try {
@@ -10,7 +11,9 @@ export default async function getMarketDetail({ enrollmentId }: any) {
       return response.data;
     }
   } catch (error) {
-    console.error(error);
+    ApiErrorAlert({ error });
   }
-  return console.error('마켓 상세 정보를 받아오는데 에러가 발생했습니다');
+  return ApiErrorAlert({
+    error: '마켓 상세 정보를 받아오는데 에러가 발생했습니다',
+  });
 }

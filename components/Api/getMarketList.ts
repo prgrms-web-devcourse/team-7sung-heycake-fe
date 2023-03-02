@@ -1,4 +1,5 @@
 import { internalApi } from '.';
+import ApiErrorAlert from './ApiErrorAlert';
 
 export default async function getMarketList({ cursor, category }: any) {
   try {
@@ -10,7 +11,9 @@ export default async function getMarketList({ cursor, category }: any) {
       return response.data;
     }
   } catch (error) {
-    console.error(error);
+    ApiErrorAlert({ error });
   }
-  return console.error('마켓 승인 리스트를 받아오는데 에러가 발생했습니다');
+  return ApiErrorAlert({
+    error: '마켓 승인 리스트를 받아오는데 에러가 발생했습니다',
+  });
 }
