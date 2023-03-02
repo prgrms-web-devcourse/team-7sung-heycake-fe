@@ -8,3 +8,13 @@ export interface ILocationListItem {
   onClose: () => void;
   setLocation: (name: string) => void;
 }
+
+export interface ICakeItem {
+  category: string;
+  cakeSize: string;
+  image: string;
+  price: string;
+  status: string;
+  visitTime: string;
+  title: string;
+}

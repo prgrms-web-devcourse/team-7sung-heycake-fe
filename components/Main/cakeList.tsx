@@ -25,7 +25,6 @@ export default function CakeList({ category, location }: any) {
       {data?.map((item: any) => (
         <Link key={item.orderId} href={`/orders/${item.orderId}`}>
           <CakeItem
-            orderId={item.orderId}
             title={item.title}
             category={item.cakeInfo.cakeCategory}
             cakeSize={item.cakeInfo.cakeSize}
