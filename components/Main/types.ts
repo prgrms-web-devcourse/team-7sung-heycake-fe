@@ -12,7 +12,7 @@ export interface ILocationListItem {
 }
 
 export interface ILocationSelectBox {
-  location: TSouelArea;
+  location: string;
   setLocation: TSetLocation;
 }
 

@@ -1,6 +1,7 @@
 import { Grid } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import getCakeList from '../../Api/Main';
 import { ICakeItemData } from '../types';
@@ -8,6 +9,7 @@ import CakeItem from './cakeItem';
 import CakeListSkeleton from './cakeListSkeleton';
 
 export default function CakeList({ category, location }: any) {
+  const router = useRouter();
   const { status, data } = useQuery(
     ['전체 케이크 리스트', category, location],
     () =>
@@ -17,7 +19,7 @@ export default function CakeList({ category, location }: any) {
       })
   );
 
-  if (status === 'loading') {
+  if (status === 'loading' || !router.isReady) {
     return <CakeListSkeleton />;
   }
 

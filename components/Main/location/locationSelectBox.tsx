@@ -30,7 +30,7 @@ export default function LocationSelectBox({
         gap={1}
         alignItems="center"
       >
-        <BiCurrentLocation fontSize="xl" />
+        <BiCurrentLocation color="orange" fontSize="xl" />
         <Text pr={2}>서울시 {location}</Text>
       </Flex>
       <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
