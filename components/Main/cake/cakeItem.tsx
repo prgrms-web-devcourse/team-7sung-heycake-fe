@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import Image from 'next/image';
 
-import { ICakeItem } from './types';
+import { ICakeItem } from '../types';
 
 export default function CakeItem({
   category,

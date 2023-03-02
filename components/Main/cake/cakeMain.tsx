@@ -1,9 +1,9 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { useState } from 'react';
 
+import { TAB_TABLE } from '../constants';
+import LocationSelectBox from '../location/locationSelectBox';
 import CakeList from './cakeList';
-import { TAB_TABLE } from './constants';
-import LocationSelectBox from './locationSelectBox';
 
 export default function CakeMain() {
   const [location, setLocation] = useState('강남구');

@@ -2,10 +2,10 @@ import { Grid } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 
-import getCakeList from '../Api/Main';
+import getCakeList from '../../Api/Main';
+import { ICakeItemData } from '../types';
 import CakeItem from './cakeItem';
 import CakeListSkeleton from './cakeListSkeleton';
-import { ICakeItemData } from './types';
 
 export default function CakeList({ category, location }: any) {
   const { status, data } = useQuery(
