@@ -25,3 +25,13 @@ export interface Order {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ThreadDto {
+  offerId: number;
+  storeId: number;
+  storeName: string;
+  expectedPrice: number;
+  imageUrl: string;
+  content: string;
+  commentCount: number;
+}
