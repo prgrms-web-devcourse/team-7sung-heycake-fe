@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Flex,
   Tab,
   TabList,
@@ -7,7 +8,9 @@ import {
   TabPanels,
   Tabs,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { MdPostAdd } from 'react-icons/md';
 
 import { TAB_TABLE } from '../constants';
 import LocationSelectBox from '../location/locationSelectBox';
@@ -50,6 +53,20 @@ export default function CakeMain() {
             </TabPanel>
           ))}
         </TabPanels>
+        <Link href="/orders/new">
+          <Button
+            position="fixed"
+            borderRadius={32}
+            bottom={8}
+            right={8}
+            w={16}
+            h={16}
+            colorScheme="heys"
+            fontSize="2xl"
+          >
+            <MdPostAdd />
+          </Button>
+        </Link>
       </Tabs>
     </Flex>
   );
