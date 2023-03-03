@@ -74,3 +74,19 @@ export function convertCakeCategory(
       return '';
   }
 }
+
+export const getOrderStatusText = (
+  status: Order['orderStatus'],
+  count: Order['offerCount']
+) => {
+  switch (status) {
+    case 'NEW':
+      return `+ ${count}`;
+    case 'RESERVED':
+      return '선택 완료';
+    case 'PAID':
+      return '거래 완료';
+    default:
+      return '알 수 없는 상태';
+  }
+};
