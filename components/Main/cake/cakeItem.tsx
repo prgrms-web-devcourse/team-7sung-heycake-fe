@@ -69,7 +69,7 @@ export default function CakeItem({
                 <Divider borderColor="hey.main" />
               </Flex>
             </CardBody>
-            <Flex flexDirection="column" h={30} p={2}>
+            <Flex flexDirection="column" p={2}>
               <Badge
                 bgColor="orange.100"
                 colorScheme="red"
