@@ -8,13 +8,13 @@ import {
   TabPanels,
   Tabs,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { MdPostAdd } from 'react-icons/md';
 
 import { TAB_TABLE } from '../constants';
 import LocationSelectBox from '../location/locationSelectBox';
 import CakeList from './cakeList';
-import { MdPostAdd } from 'react-icons/md';
-import Link from 'next/link';
 
 export default function CakeMain() {
   const [location, setLocation] = useState('강남구');
