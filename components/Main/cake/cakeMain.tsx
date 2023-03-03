@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Flex,
   Tab,
   TabList,
@@ -12,6 +13,8 @@ import { useEffect, useState } from 'react';
 import { TAB_TABLE } from '../constants';
 import LocationSelectBox from '../location/locationSelectBox';
 import CakeList from './cakeList';
+import { MdPostAdd } from 'react-icons/md';
+import Link from 'next/link';
 
 export default function CakeMain() {
   const [location, setLocation] = useState('강남구');
@@ -50,6 +53,20 @@ export default function CakeMain() {
             </TabPanel>
           ))}
         </TabPanels>
+        <Link href="/orders/new">
+          <Button
+            position="fixed"
+            borderRadius={32}
+            bottom={8}
+            right={8}
+            w={16}
+            h={16}
+            colorScheme="heys"
+            fontSize="2xl"
+          >
+            <MdPostAdd />
+          </Button>
+        </Link>
       </Tabs>
     </Flex>
   );

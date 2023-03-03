@@ -45,7 +45,7 @@ export default function CakeItem({
           </Flex>
           <Flex>
             <Card m={2} width="100px" height="100px">
-              <Image width={100} height={100} src={image} alt="Cake" />
+              <Image fill sizes="10vw" src={image} alt="Cake" />
             </Card>
             <CardBody px={0}>
               <Flex padding={0} gap={1} flexDirection="column">
