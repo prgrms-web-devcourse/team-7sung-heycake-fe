@@ -70,7 +70,7 @@ export default function MarketItem({
           </Link>
           <CardBody px={0}>
             <Link key={enrollmentId} href={`/market/${enrollmentId}`}>
-              <Flex padding={0} gap={3} flexDirection="column">
+              <Flex p={0} pr={2} gap={3} flexDirection="column">
                 <Text fontSize="sm" fontWeight="600">
                   {numberWithHyphenPhone(phoneNumber)}
                 </Text>
