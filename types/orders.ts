@@ -28,8 +28,8 @@ export interface Order {
 
 export interface ThreadDto {
   offerId: number;
-  storeId: number;
-  storeName: string;
+  marketId: number;
+  marketName: string;
   expectedPrice: number;
   imageUrl: string;
   content: string;
