@@ -1,5 +1,4 @@
 import {
-  Button,
   Flex,
   Tab,
   TabList,
@@ -31,7 +30,6 @@ export default function Admin() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Button> + </Button>
     </Flex>
   );
 }
