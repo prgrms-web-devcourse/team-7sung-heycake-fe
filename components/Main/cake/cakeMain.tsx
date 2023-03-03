@@ -7,7 +7,7 @@ import {
   TabPanels,
   Tabs,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { TAB_TABLE } from '../constants';
 import LocationSelectBox from '../location/locationSelectBox';
@@ -15,6 +15,13 @@ import CakeList from './cakeList';
 
 export default function CakeMain() {
   const [location, setLocation] = useState('강남구');
+
+  useEffect(() => {
+    const localLocation = window.localStorage.getItem('location');
+    if (localLocation) {
+      setLocation(localLocation);
+    }
+  }, []);
 
   return (
     <Flex justifyContent="center">
