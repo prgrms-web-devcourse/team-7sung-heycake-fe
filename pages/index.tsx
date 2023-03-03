@@ -1,6 +1,5 @@
 import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
@@ -36,7 +35,6 @@ export default function Home() {
       ).then((res) => res.json());
 
       if (response.ok) {
-        console.log('success!');
         router.push('/main');
       } else {
         router.push('/');
