@@ -3,8 +3,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Image from 'next/image';
 
 import { publicApi } from '@/components/Api';
-import DataTable from '@/components/Orders/DataTable';
-import Thread from '@/components/Orders/Thread';
+import { DataTable, ImageSlider, Thread } from '@/components/Orders';
 import { Order } from '@/types/orders';
 
 interface OrderProps {
@@ -13,32 +12,30 @@ interface OrderProps {
 
 export default function Orders({ order }: OrderProps) {
   return (
-    <>
-      <Image alt="cake" src={order.images[0]} width={1000} height={1000} />
-      <OrderWrapper>
-        <div>
-          <OrderRequestCount>+ {order.offerCount}</OrderRequestCount>
-          <OrderTitle>{order.title}</OrderTitle>
-          <PlaceOrderRequester>{order.region}</PlaceOrderRequester>
-        </div>
-        <DataTable title="케익 맛" value={order.cakeInfo.breadFlavor} />
-        <DataTable title="케익 카테고리" value={order.cakeInfo.cakeCategory} />
-        <DataTable title="케익 높이" value={order.cakeInfo.cakeHeight} />
-        <DataTable title="케익 사이즈" value={order.cakeInfo.cakeSize} />
-        <DataTable title="케익 크림 맛" value={order.cakeInfo.creamFlavor} />
-        <OrderContent>{order.cakeInfo.requirements}</OrderContent>
-        <OrderRequestCountCard>
-          <Image
-            alt="birthday-cake"
-            src="/images/birthday-cake.png"
-            width={40}
-            height={40}
-          />
-          신청한 케이크 업체 {order.offerCount}개
-        </OrderRequestCountCard>
-        <Thread />
-      </OrderWrapper>
-    </>
+    <OrderWrapper>
+      <ImageSlider images={order.images} />
+      <div>
+        <OrderRequestCount>+ {order.offerCount}</OrderRequestCount>
+        <OrderTitle>{order.title}</OrderTitle>
+        <PlaceOrderRequester>{order.region}</PlaceOrderRequester>
+      </div>
+      <DataTable title="케익 맛" value={order.cakeInfo.breadFlavor} />
+      <DataTable title="케익 카테고리" value={order.cakeInfo.cakeCategory} />
+      <DataTable title="케익 높이" value={order.cakeInfo.cakeHeight} />
+      <DataTable title="케익 사이즈" value={order.cakeInfo.cakeSize} />
+      <DataTable title="케익 크림 맛" value={order.cakeInfo.creamFlavor} />
+      <OrderContent>{order.cakeInfo.requirements}</OrderContent>
+      <OrderRequestCountCard>
+        <Image
+          alt="birthday-cake"
+          src="/images/birthday-cake.png"
+          width={40}
+          height={40}
+        />
+        신청한 케이크 업체 {order.offerCount}개
+      </OrderRequestCountCard>
+      <Thread />
+    </OrderWrapper>
   );
 }
 
