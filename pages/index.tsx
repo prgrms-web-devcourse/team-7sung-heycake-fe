@@ -2,12 +2,6 @@ import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
-
-interface ResponseType {
-  ok: boolean;
-  error?: any;
-}
 
 function loginWithKakao() {
   window.Kakao.Auth.authorize({
@@ -17,39 +11,7 @@ function loginWithKakao() {
 
 export default function Home() {
   const router = useRouter();
-  const { code: authCode, error: kakaoServerError } = router.query;
 
-  const loginHandler = useCallback(
-    async (code: string | string[]) => {
-      const response: ResponseType = await fetch(
-        'https://heycake.kro.kr/login/oauth2/code/kakao',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            authCode: code,
-          }),
-        }
-      ).then((res) => res.json());
-
-      if (response.ok) {
-        router.push('/main');
-      } else {
-        router.push('/');
-      }
-    },
-    [router]
-  );
-
-  useEffect(() => {
-    if (authCode) {
-      loginHandler(authCode);
-    } else if (kakaoServerError) {
-      router.push('/');
-    }
-  }, [loginHandler, authCode, kakaoServerError, router]);
   return (
     <>
       <ImageContainer>
