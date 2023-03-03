@@ -11,7 +11,7 @@ export default function Thread({ thread }: ThreadProps) {
   return (
     <ThreadWrapper>
       <ThreadTopWrapper>
-        <ThreadTitle>{thread.storeName}</ThreadTitle>
+        <ThreadTitle>{thread.marketName}</ThreadTitle>
         <div>비용: {thread.expectedPrice}원</div>
       </ThreadTopWrapper>
       <Image
