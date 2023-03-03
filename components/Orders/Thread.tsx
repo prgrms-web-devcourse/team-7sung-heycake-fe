@@ -23,7 +23,7 @@ export default function Thread({ thread }: ThreadProps) {
         loading="lazy"
       />
       <div>{thread.content}</div>
-      <Button>여기 업체 선택</Button>
+      <Button>해당 업체 선택</Button>
       <MoreComments>{`${thread.commentCount}개 댓글 더 보기 >`}</MoreComments>
     </ThreadWrapper>
   );
