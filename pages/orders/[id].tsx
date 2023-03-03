@@ -5,6 +5,13 @@ import Image from 'next/image';
 import { publicApi } from '@/components/Api';
 import { DataTable, ImageSlider, Thread } from '@/components/Orders';
 import { Order, ThreadDto } from '@/types/orders';
+import {
+  convertBreadFlavor,
+  convertCakeCategory,
+  convertCakeHeight,
+  convertCakeSize,
+  convertCreamFlavor,
+} from '@/utils/orders';
 
 interface OrderProps {
   order: Order;
@@ -20,11 +27,26 @@ export default function Orders({ order, threads }: OrderProps) {
         <OrderTitle>{order.title}</OrderTitle>
         <PlaceOrderRequester>{order.region}</PlaceOrderRequester>
       </div>
-      <DataTable title="케익 맛" value={order.cakeInfo.breadFlavor} />
-      <DataTable title="케익 카테고리" value={order.cakeInfo.cakeCategory} />
-      <DataTable title="케익 높이" value={order.cakeInfo.cakeHeight} />
-      <DataTable title="케익 사이즈" value={order.cakeInfo.cakeSize} />
-      <DataTable title="케익 크림 맛" value={order.cakeInfo.creamFlavor} />
+      <DataTable
+        title="케익 맛"
+        value={convertBreadFlavor(order.cakeInfo.breadFlavor)}
+      />
+      <DataTable
+        title="케익 카테고리"
+        value={convertCakeCategory(order.cakeInfo.cakeCategory)}
+      />
+      <DataTable
+        title="케익 높이"
+        value={convertCakeHeight(order.cakeInfo.cakeHeight)}
+      />
+      <DataTable
+        title="케익 사이즈"
+        value={convertCakeSize(order.cakeInfo.cakeSize)}
+      />
+      <DataTable
+        title="케익 크림 맛"
+        value={convertCreamFlavor(order.cakeInfo.creamFlavor)}
+      />
       <OrderContent>{order.cakeInfo.requirements}</OrderContent>
       <OrderRequestCountCard>
         <Image
