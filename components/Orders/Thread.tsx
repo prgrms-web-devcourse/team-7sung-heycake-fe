@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 
@@ -12,7 +13,7 @@ export default function Thread({ thread }: ThreadProps) {
     <ThreadWrapper>
       <ThreadTopWrapper>
         <ThreadTitle>{thread.marketName}</ThreadTitle>
-        <div>비용: {thread.expectedPrice}원</div>
+        <ExpectedPrice>{thread.expectedPrice}원</ExpectedPrice>
       </ThreadTopWrapper>
       <Image
         src={thread.imageUrl}
@@ -22,6 +23,7 @@ export default function Thread({ thread }: ThreadProps) {
         loading="lazy"
       />
       <div>{thread.content}</div>
+      <Button>여기 업체 선택</Button>
       <MoreComments>{`${thread.commentCount}개 댓글 더 보기 >`}</MoreComments>
     </ThreadWrapper>
   );
@@ -48,10 +50,14 @@ const ThreadTopWrapper = styled.div`
 `;
 
 const ThreadTitle = styled.h1`
-  font-size: 1.4rem;
+  font-size: 1rem;
 `;
 
 const MoreComments = styled.div`
   color: #444444;
   text-decoration: underline;
+`;
+
+const ExpectedPrice = styled.div`
+  font-size: 1.1rem;
 `;
