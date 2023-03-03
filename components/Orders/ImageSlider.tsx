@@ -30,12 +30,7 @@ export default function ImageSlider({ images }: ImageSliderProp) {
     setPage([page + newDirection, newDirection]);
   };
   return (
-    <div
-      style={{
-        height: '250px',
-        overflow: 'hidden',
-      }}
-    >
+    <Wrapper>
       <AnimatePresence initial={false} custom={direction}>
         <motion.img
           key={page}
@@ -77,9 +72,14 @@ export default function ImageSlider({ images }: ImageSliderProp) {
           </PrevButton>
         </>
       )}
-    </div>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.section`
+  height: '250px';
+  overflow: 'hidden';
+`;
 
 const NextButton = styled.button`
   right: 10px;
