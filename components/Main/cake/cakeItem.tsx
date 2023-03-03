@@ -9,6 +9,8 @@ import {
 } from '@chakra-ui/react';
 import Image from 'next/image';
 
+import { CAKE_CATEGORY, CAKE_SIZE } from '../constants';
+import numberWithCommas from '../numberWithCommas';
 import { ICakeItem } from '../types';
 
 export default function CakeItem({
@@ -34,9 +36,11 @@ export default function CakeItem({
       >
         <Grid>
           <Flex m={1} justifyContent="space-between">
-            <Text>{title}</Text>
-            <Badge bgColor="red.200" color="hey.red">
-              ~ {visitTime}
+            <Text ml={2} fontWeight="700">
+              {title}
+            </Text>
+            <Badge mt={1} bgColor="red.200" color="hey.red">
+              ~ {visitTime.substring(0, 10)}
             </Badge>
           </Flex>
           <Flex>
@@ -46,20 +50,20 @@ export default function CakeItem({
             <CardBody px={0}>
               <Flex padding={0} gap={1} flexDirection="column">
                 <Flex align="center" gap={4} justifyContent="space-between">
-                  <Text color="hey.main" whiteSpace="nowrap">
+                  <Text color="hey.main" whiteSpace="nowrap" fontWeight={700}>
                     항목
                   </Text>
                   <Text fontSize="sm" whiteSpace="nowrap">
-                    {category}
+                    {CAKE_CATEGORY[category]}
                   </Text>
                 </Flex>
                 <Divider borderColor="hey.main" />
                 <Flex align="center" gap={4} justifyContent="space-between">
-                  <Text color="hey.main" whiteSpace="nowrap">
+                  <Text color="hey.main" whiteSpace="nowrap" fontWeight={700}>
                     케익 크기
                   </Text>
                   <Text fontSize="sm" whiteSpace="nowrap">
-                    {cakeSize}
+                    {CAKE_SIZE[cakeSize]}
                   </Text>
                 </Flex>
                 <Divider borderColor="hey.main" />
@@ -72,7 +76,7 @@ export default function CakeItem({
                 color="hey.red"
                 mt={20}
               >
-                ~ ₩ {price}
+                ~ ₩ {numberWithCommas(Number(price))}
               </Badge>
             </Flex>
           </Flex>

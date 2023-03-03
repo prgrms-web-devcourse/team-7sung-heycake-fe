@@ -6,6 +6,7 @@ export interface IMarketList {
 }
 
 export interface IMarketItem extends IMarketList {
+  phoneNumber: string;
   enrollmentId: string;
   imageUrl: string;
   marketName: string;

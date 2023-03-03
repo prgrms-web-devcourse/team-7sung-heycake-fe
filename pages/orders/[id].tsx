@@ -4,13 +4,14 @@ import Image from 'next/image';
 
 import { publicApi } from '@/components/Api';
 import { DataTable, ImageSlider, Thread } from '@/components/Orders';
-import { Order } from '@/types/orders';
+import { Order, ThreadDto } from '@/types/orders';
 
 interface OrderProps {
   order: Order;
+  threads: ThreadDto[];
 }
 
-export default function Orders({ order }: OrderProps) {
+export default function Orders({ order, threads }: OrderProps) {
   return (
     <OrderWrapper>
       <ImageSlider images={order.images} />
@@ -34,7 +35,9 @@ export default function Orders({ order }: OrderProps) {
         />
         신청한 케이크 업체 {order.offerCount}개
       </OrderRequestCountCard>
-      <Thread />
+      {threads.map((thread) => (
+        <Thread thread={thread} />
+      ))}
     </OrderWrapper>
   );
 }
@@ -44,11 +47,15 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   const { id: orderId } = context.query;
 
-  const response = await publicApi.get<Order>(`/orders/${orderId}`);
+  const orderResponse = await publicApi.get<Order>(`/orders/${orderId}`);
+  const threadResponse = await publicApi.get<ThreadDto[]>(
+    `/orders/${orderId}/offers?memberId=1`
+  );
 
   return {
     props: {
-      order: response.data,
+      order: orderResponse.data,
+      threads: threadResponse.data,
     },
   };
 };

@@ -20,7 +20,6 @@ export interface IPatchMarketStatus {
 }
 
 export type TMainCategory =
-  | ''
   | 'ALL'
   | 'PHOTO'
   | 'LETTERING'

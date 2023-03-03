@@ -25,6 +25,7 @@ export default function MarketList({ category }: IMarketList) {
       {data?.map((item: IMarketItem) => (
         <Stack key={item.enrollmentId}>
           <MarketItem
+            phoneNumber={item.phoneNumber}
             category={category}
             enrollmentId={item.enrollmentId}
             imageUrl={item.imageUrl}
