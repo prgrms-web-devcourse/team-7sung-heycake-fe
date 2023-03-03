@@ -36,7 +36,7 @@ export default function Orders({ order, threads }: OrderProps) {
         신청한 케이크 업체 {order.offerCount}개
       </OrderRequestCountCard>
       {threads.map((thread) => (
-        <Thread thread={thread} />
+        <Thread key={thread.offerId} thread={thread} />
       ))}
     </OrderWrapper>
   );
@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
   const orderResponse = await publicApi.get<Order>(`/orders/${orderId}`);
   const threadResponse = await publicApi.get<ThreadDto[]>(
-    `/orders/${orderId}/offers?memberId=1`
+    `orders/${orderId}/offers`
   );
 
   return {
