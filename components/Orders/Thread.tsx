@@ -1,14 +1,43 @@
 import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
 
 import { ThreadDto } from '@/types/orders';
+
+import { publicApi } from '../Api';
 
 interface ThreadProps {
   thread: ThreadDto;
 }
 
+interface RequestBody {
+  marketId: number;
+  offerId: number;
+}
+
 export default function Thread({ thread }: ThreadProps) {
+  const { marketId, offerId } = thread;
+
+  const mutation = useMutation(
+    (body: RequestBody) => publicApi.post('/histories', body),
+    {
+      onSuccess: () => {
+        alert('해당 업체를 선택하셨어요');
+      },
+      onError: () => {
+        alert(
+          '해당 업체를 선택하는데에 예상치 못한 애러가 발생했어요. 다시 시도해 주세요.'
+        );
+      },
+    }
+  );
+
+  const selectOffer = () => {
+    const requestBody = { marketId, offerId };
+    mutation.mutate(requestBody);
+  };
+
   return (
     <ThreadWrapper>
       <ThreadTopWrapper>
@@ -23,7 +52,7 @@ export default function Thread({ thread }: ThreadProps) {
         loading="lazy"
       />
       <div>{thread.content}</div>
-      <Button>해당 업체 선택</Button>
+      <Button onClick={selectOffer}>해당 업체 선택</Button>
       <MoreComments>{`${thread.commentCount}개 댓글 더 보기 >`}</MoreComments>
     </ThreadWrapper>
   );
