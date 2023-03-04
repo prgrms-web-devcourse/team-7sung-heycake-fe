@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { publicApi } from '@/components/Api';
+import CakeListSkeleton from '@/components/Main/cake/cakeListSkeleton';
 import { DataTable, ImageSlider, Thread } from '@/components/Orders';
 import { Order, ThreadDto } from '@/types/orders';
 import {
@@ -28,7 +29,7 @@ export default function Orders() {
   );
 
   if (!order) {
-    return <div>Loading...</div>;
+    return <CakeListSkeleton />;
   }
 
   return (
