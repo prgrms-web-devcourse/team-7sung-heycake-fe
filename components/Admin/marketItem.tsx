@@ -36,12 +36,12 @@ export default function MarketItem({
 
   const onRejectClickHandler = () => {
     setIsDeleted(true);
+    queryClient.invalidateQueries(['승인 마켓 리스트', 'DELETED']);
     patchMarketStatus({ status: 'DELETED', enrollmentId });
   };
 
   const onApproveClickHandler = () => {
     setCurrentStatus('APPROVED');
-    queryClient.invalidateQueries(['승인 마켓 리스트', 'DELETED']);
     patchMarketStatus({ status: 'APPROVED', enrollmentId });
   };
 
@@ -75,7 +75,7 @@ export default function MarketItem({
         <Flex>
           <Link key={enrollmentId} href={`/market/${enrollmentId}`}>
             <Card m={2} width="100px" height="100px">
-              <Image fill src={imageUrl} alt="MARKET" />
+              <Image fill sizes="10vm" src={imageUrl} alt="MARKET" />
             </Card>
           </Link>
           <CardBody px={0}>
