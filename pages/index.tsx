@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 function loginWithKakao() {
   window.Kakao.Auth.authorize({
-    redirectUri: 'http://localhost:3000/main',
+    redirectUri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI,
   });
 }
 
