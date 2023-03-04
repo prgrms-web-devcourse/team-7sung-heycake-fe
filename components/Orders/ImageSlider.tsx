@@ -77,13 +77,14 @@ export default function ImageSlider({ images }: ImageSliderProp) {
 }
 
 const Wrapper = styled.section`
-  height: '250px';
-  overflow: 'hidden';
+  height: 250px;
+  overflow: hidden;
+  border-radius: 10px;
 `;
 
 const NextButton = styled.button`
-  right: 10px;
-  top: calc(12%);
+  right: 20px;
+  top: calc(8%);
   position: absolute;
   background: white;
   border-radius: 30px;
@@ -100,8 +101,8 @@ const NextButton = styled.button`
 `;
 
 const PrevButton = styled.button`
-  left: 10px;
-  top: calc(12%);
+  left: 20px;
+  top: calc(8%);
   position: absolute;
   background: white;
   border-radius: 30px;

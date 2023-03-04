@@ -1,30 +1,66 @@
 import styled from '@emotion/styled';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import { publicApi } from '@/components/Api';
 import { DataTable, ImageSlider, Thread } from '@/components/Orders';
 import { Order, ThreadDto } from '@/types/orders';
+import {
+  convertBreadFlavor,
+  convertCakeCategory,
+  convertCakeHeight,
+  convertCakeSize,
+  convertCreamFlavor,
+  getOrderStatusText,
+} from '@/utils/orders';
 
-interface OrderProps {
-  order: Order;
-  threads: ThreadDto[];
-}
+export default function Orders() {
+  const router = useRouter();
+  const { id: orderId } = router.query;
 
-export default function Orders({ order, threads }: OrderProps) {
+  const { data: order } = useQuery<Order>(['orders', orderId], () =>
+    publicApi.get(`/orders/${orderId}`).then((response) => response.data)
+  );
+
+  const { data: threads } = useQuery<ThreadDto[]>(['offers', orderId], () =>
+    publicApi.get(`/orders/${orderId}/offers`).then((response) => response.data)
+  );
+
+  if (!order) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <OrderWrapper>
       <ImageSlider images={order.images} />
       <div>
-        <OrderRequestCount>+ {order.offerCount}</OrderRequestCount>
+        <OrderRequestCount>
+          {getOrderStatusText(order.orderStatus, order.offerCount)}
+        </OrderRequestCount>
         <OrderTitle>{order.title}</OrderTitle>
         <PlaceOrderRequester>{order.region}</PlaceOrderRequester>
       </div>
-      <DataTable title="케익 맛" value={order.cakeInfo.breadFlavor} />
-      <DataTable title="케익 카테고리" value={order.cakeInfo.cakeCategory} />
-      <DataTable title="케익 높이" value={order.cakeInfo.cakeHeight} />
-      <DataTable title="케익 사이즈" value={order.cakeInfo.cakeSize} />
-      <DataTable title="케익 크림 맛" value={order.cakeInfo.creamFlavor} />
+      <DataTable
+        title="케익 맛"
+        value={convertBreadFlavor(order.cakeInfo.breadFlavor)}
+      />
+      <DataTable
+        title="케익 카테고리"
+        value={convertCakeCategory(order.cakeInfo.cakeCategory)}
+      />
+      <DataTable
+        title="케익 높이"
+        value={convertCakeHeight(order.cakeInfo.cakeHeight)}
+      />
+      <DataTable
+        title="케익 사이즈"
+        value={convertCakeSize(order.cakeInfo.cakeSize)}
+      />
+      <DataTable
+        title="케익 크림 맛"
+        value={convertCreamFlavor(order.cakeInfo.creamFlavor)}
+      />
       <OrderContent>{order.cakeInfo.requirements}</OrderContent>
       <OrderRequestCountCard>
         <Image
@@ -35,30 +71,12 @@ export default function Orders({ order, threads }: OrderProps) {
         />
         신청한 케이크 업체 {order.offerCount}개
       </OrderRequestCountCard>
-      {threads.map((thread) => (
+      {threads?.map((thread) => (
         <Thread key={thread.offerId} thread={thread} />
       ))}
     </OrderWrapper>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const { id: orderId } = context.query;
-
-  const orderResponse = await publicApi.get<Order>(`/orders/${orderId}`);
-  const threadResponse = await publicApi.get<ThreadDto[]>(
-    `orders/${orderId}/offers`
-  );
-
-  return {
-    props: {
-      order: orderResponse.data,
-      threads: threadResponse.data,
-    },
-  };
-};
 
 const OrderWrapper = styled.div`
   width: 100%;
