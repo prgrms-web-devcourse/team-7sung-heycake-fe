@@ -22,8 +22,7 @@ export default function CakeList({ category, location }: any) {
         cursor: pageParam,
       }),
     {
-      getNextPageParam: (lastPage) =>
-        lastPage.cursorId !== 0 ? lastPage.cursorId : undefined,
+      getNextPageParam: (lastPage) => lastPage.cursorId ?? undefined,
     }
   );
 
@@ -54,7 +53,7 @@ export default function CakeList({ category, location }: any) {
           ))
         )}
       </Grid>
-      {isFetchingNextPage ? <CakeListSkeleton /> : <div ref={ref} />}
+      {isFetchingNextPage ? <div>로딩중</div> : <div ref={ref} />}
     </>
   );
 }

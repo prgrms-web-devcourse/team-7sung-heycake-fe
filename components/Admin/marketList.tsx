@@ -48,7 +48,7 @@ export default function MarketList({ category }: IMarketList) {
           ))
         )}
       </Grid>
-      {isFetchingNextPage ? <AdminListSkeleton /> : <div ref={ref} />}
+      {isFetchingNextPage ? <div>로딩중</div> : <div ref={ref} />}
     </>
   );
 }
