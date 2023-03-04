@@ -9,6 +9,7 @@ import {
   Grid,
   Text,
 } from '@chakra-ui/react';
+import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -31,15 +32,24 @@ export default function MarketItem({
 }: IMarketItem) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [currentStatus, setCurrentStatus] = useState(status);
+  const queryClient = useQueryClient();
 
   const onRejectClickHandler = () => {
     setIsDeleted(true);
+    queryClient.invalidateQueries(['승인 마켓 리스트', 'DELETED']);
     patchMarketStatus({ status: 'DELETED', enrollmentId });
   };
 
   const onApproveClickHandler = () => {
     setCurrentStatus('APPROVED');
     patchMarketStatus({ status: 'APPROVED', enrollmentId });
+  };
+
+  const onWaitingClickHandler = () => {
+    setIsDeleted(true);
+    setCurrentStatus('WAITING');
+    queryClient.invalidateQueries(['승인 마켓 리스트', '']);
+    patchMarketStatus({ status: 'WAITING', enrollmentId });
   };
 
   // (category === '' && status === 'DELETED') 는 백엔드 전체리스트 수정후 변경.
@@ -65,7 +75,7 @@ export default function MarketItem({
         <Flex>
           <Link key={enrollmentId} href={`/market/${enrollmentId}`}>
             <Card m={2} width="100px" height="100px">
-              <Image fill src={imageUrl} alt="MARKET" />
+              <Image fill sizes="10vm" src={imageUrl} alt="MARKET" />
             </Card>
           </Link>
           <CardBody px={0}>
@@ -104,7 +114,16 @@ export default function MarketItem({
               )}
             </Box>
           ) : (
-            <Box />
+            <Box>
+              <Button
+                mt={16}
+                mr={2}
+                colorScheme="heys"
+                onClick={onWaitingClickHandler}
+              >
+                보류
+              </Button>
+            </Box>
           )}
         </Flex>
       </Grid>

@@ -3,6 +3,7 @@ import { TMarketCategory, TStatus } from '../Admin/types';
 export interface IgetCakeList {
   location: TSouelArea;
   category: TMainCategory;
+  cursor: string;
 }
 
 export interface IgetMarketDetail {
