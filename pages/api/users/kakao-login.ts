@@ -17,12 +17,6 @@ async function getTokenFromKakao(authCode: string | string[]) {
   return response;
 }
 
-async function saveToken(access_token: string) {
-  if (!localStorage.getItem(access_token)) {
-    localStorage.setItem('access_token', access_token);
-  }
-}
-
 const handler = async (authCode: string | string[]) => {
   const tokenResponse = await getTokenFromKakao(authCode);
   return tokenResponse;

@@ -41,7 +41,6 @@ export default function Home() {
         >
           비회원으로 둘러보기
         </Button>
-        <Button onClick={kakaoLogout}>로그인 해제하기</Button>
       </LoginButtonContainer>
     </>
   );
