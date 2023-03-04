@@ -3,6 +3,8 @@ import { useCallback, useEffect } from 'react';
 
 import CakeMain from '@/components/Main/cakeMain';
 
+import handler from './api/users/kakao-login';
+
 interface ResponseType {
   ok: boolean;
   error?: any;
@@ -37,7 +39,7 @@ export default function Main() {
 
   useEffect(() => {
     if (authCode) {
-      loginHandler(authCode);
+      handler(authCode);
     } else if (kakaoServerError) {
       router.push('/');
     }
