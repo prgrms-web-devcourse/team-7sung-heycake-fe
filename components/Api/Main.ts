@@ -4,11 +4,13 @@ import { IgetCakeList } from './types';
 export default async function getCakeList({
   location,
   category,
+  cursor,
 }: IgetCakeList) {
   try {
     const response = await internalApi.post(`/api/orders/`, {
       location,
       category,
+      cursor,
     });
     if (response.status === 200) {
       return response.data;

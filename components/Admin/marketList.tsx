@@ -32,7 +32,7 @@ export default function MarketList({ category }: IMarketList) {
   return (
     <>
       <Grid gap={0}>
-        {data.pages.map((page) =>
+        {data?.pages.map((page) =>
           page.enrollments.map((item: IMarketItem) => (
             <Stack key={item.enrollmentId}>
               <MarketItem
