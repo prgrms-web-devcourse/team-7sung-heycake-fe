@@ -7,6 +7,7 @@ import {
   Select,
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
@@ -39,6 +40,7 @@ type InputProps = {
 };
 
 export default function EnrollmentForm() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -70,6 +72,7 @@ export default function EnrollmentForm() {
     formData.append('memberId', '4');
 
     postEnrollment(formData);
+    router.push('/mypage/enrollment/success');
   };
 
   return (
