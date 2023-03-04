@@ -1,4 +1,4 @@
-import { Grid, Stack } from '@chakra-ui/react';
+import { CircularProgress, Grid, Stack } from '@chakra-ui/react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -48,7 +48,13 @@ export default function MarketList({ category }: IMarketList) {
           ))
         )}
       </Grid>
-      {isFetchingNextPage ? <div>로딩중</div> : <div ref={ref} />}
+      {isFetchingNextPage ? (
+        <Grid justifyContent="center" mt={12}>
+          <CircularProgress size="80px" isIndeterminate color="hey.main" />
+        </Grid>
+      ) : (
+        <div ref={ref} />
+      )}
     </>
   );
 }

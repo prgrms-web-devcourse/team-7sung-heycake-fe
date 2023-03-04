@@ -1,4 +1,4 @@
-import { Grid } from '@chakra-ui/react';
+import { CircularProgress, Grid } from '@chakra-ui/react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -53,7 +53,13 @@ export default function CakeList({ category, location }: any) {
           ))
         )}
       </Grid>
-      {isFetchingNextPage ? <div>로딩중</div> : <div ref={ref} />}
+      {isFetchingNextPage ? (
+        <Grid justifyContent="center" mt={12}>
+          <CircularProgress size="80px" isIndeterminate color="hey.main" />
+        </Grid>
+      ) : (
+        <div ref={ref} />
+      )}
     </>
   );
 }
