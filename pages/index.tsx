@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 function loginWithKakao() {
   window.Kakao.Auth.authorize({
-    redirectUri: 'http://localhost:3000/main',
+    redirectUri: 'http://15.165.95.193:8080/login',
   });
 }
 
@@ -41,6 +41,7 @@ export default function Home() {
         >
           비회원으로 둘러보기
         </Button>
+        <Button onClick={kakaoLogout}>로그인 해제하기</Button>
       </LoginButtonContainer>
     </>
   );
