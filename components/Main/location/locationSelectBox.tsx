@@ -33,12 +33,14 @@ export default function LocationSelectBox({
         w="200px"
       >
         <BiCurrentLocation color="orange" fontSize="xl" />
-        <Text pr={2}>서울시 {location}</Text>
+        <Text pr={2} cursor="pointer">
+          서울시 {location}
+        </Text>
       </Flex>
       <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent h="50%">
-          <DrawerHeader borderBottomWidth="1px">
+          <DrawerHeader borderBottomWidth="1px" cursor="default">
             지역을 선택해주세요
           </DrawerHeader>
           <DrawerBody>

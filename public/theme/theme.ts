@@ -23,6 +23,10 @@ const heyTheme = extendTheme({
       800: '#7B341E',
       900: '#652B19',
     },
+
+    blue: {
+      500: '#F96400',
+    },
   },
 });
 

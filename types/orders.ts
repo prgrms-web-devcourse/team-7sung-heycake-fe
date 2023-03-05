@@ -22,7 +22,6 @@ export interface Order {
 
 export interface CakeForm {
   title: string;
-  hopePrice: string;
   cakeCategory: CakeCategory;
   cakeSize: CakeSize;
   cakeHeight: CakeHeight;
