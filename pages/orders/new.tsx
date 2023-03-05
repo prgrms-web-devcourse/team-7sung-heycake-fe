@@ -199,14 +199,14 @@ export default function NewOrder() {
             onDateChange={setDate}
           />
           <Input
-            isInvalid={!timeRegex.test(visitTime)}
+            isInvalid={visitTime !== '' && !timeRegex.test(visitTime)}
             type="text"
             name="visitTime"
             value={visitTime}
             onChange={handleTimeChange}
             placeholder="방문시간을 입력하세요."
           />
-          {!timeRegex.test(visitTime) && (
+          {visitTime !== '' && !timeRegex.test(visitTime) && (
             <ValidityMessage>{ERROR_MESSAGES.CHECK_INPUT_TIME}</ValidityMessage>
           )}
         </FormControl>
