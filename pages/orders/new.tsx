@@ -70,6 +70,15 @@ export default function NewOrder() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (formData.title === '') {
+      return;
+    }
+    if (formData.hopePrice === '') {
+      return;
+    }
+    if (formData.requirements === '') {
+      return;
+    }
     if (!timeRegex.test(visitTime)) {
       return;
     }
@@ -177,6 +186,7 @@ export default function NewOrder() {
             name="title"
             value={title}
             onChange={handleChange}
+            placeholder="제목을 입력하세요."
           />
         </FormControl>
         <FormControl id="region">
@@ -190,6 +200,7 @@ export default function NewOrder() {
             name="hopePrice"
             value={hopePrice}
             onChange={handleChange}
+            placeholder="희망가격을 입력하세요."
           />
         </FormControl>
         <FormControl id="visitTime">
@@ -205,6 +216,7 @@ export default function NewOrder() {
             name="visitTime"
             value={visitTime}
             onChange={handleTimeChange}
+            placeholder="방문시간을 입력하세요."
           />
           {!timeRegex.test(visitTime) && (
             <ValidityMessage>{ERROR_MESSAGES.CHECK_INPUT_TIME}</ValidityMessage>
