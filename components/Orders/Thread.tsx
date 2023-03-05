@@ -5,35 +5,32 @@ import Image from 'next/image';
 import useSelectOffer from '@/hooks/useSelectOffer';
 import { ThreadDto } from '@/types/orders';
 
-export default function Thread({
-  commentCount,
-  content,
-  expectedPrice,
-  imageUrl,
-  marketId,
-  marketName,
-  offerId,
-}: ThreadDto) {
+interface ThreadProps {
+  thread: ThreadDto;
+  orderId: string;
+}
+
+export default function Thread({ thread, orderId }: ThreadProps) {
   const selectOffer = useSelectOffer();
 
   return (
     <ThreadWrapper>
       <ThreadTopWrapper>
-        <ThreadTitle>{marketName}</ThreadTitle>
-        <ExpectedPrice>{expectedPrice}원</ExpectedPrice>
+        <ThreadTitle>{thread.marketName}</ThreadTitle>
+        <ExpectedPrice>{thread.expectedPrice}원</ExpectedPrice>
       </ThreadTopWrapper>
       <Image
-        src={imageUrl}
+        src={thread.imageUrl}
         width={150}
         height={150}
         alt="cake"
         loading="lazy"
       />
-      <div>{content}</div>
-      <Button onClick={() => selectOffer(marketId, offerId)}>
+      <div>{thread.content}</div>
+      <Button onClick={() => selectOffer(orderId, thread.offerId)}>
         해당 업체 선택
       </Button>
-      <MoreComments>{`${commentCount}개 댓글 더 보기 >`}</MoreComments>
+      <MoreComments>{`${thread.commentCount}개 댓글 더 보기 >`}</MoreComments>
     </ThreadWrapper>
   );
 }

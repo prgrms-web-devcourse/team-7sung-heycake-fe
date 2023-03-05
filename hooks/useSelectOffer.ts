@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { publicApi } from '@/components/Api';
 
 interface RequestBody {
-  marketId: number;
+  orderId: string;
   offerId: number;
 }
 
@@ -24,8 +24,8 @@ const useSelectOffer = () => {
   );
 
   const selectOffer = useCallback(
-    (marketId: number, offerId: number) => {
-      const requestBody = { marketId, offerId };
+    (orderId: string, offerId: number) => {
+      const requestBody = { orderId, offerId };
       mutation.mutate(requestBody);
     },
     [mutation]
