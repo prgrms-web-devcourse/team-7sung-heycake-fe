@@ -15,7 +15,7 @@ export default function Header() {
     }
   }, []);
   return (
-    <Flex justifyContent="center">
+    <Flex>
       <Container>
         <Link href="/main">
           <Image src="/images/logo.png" alt="로고" width={40} height={40} />

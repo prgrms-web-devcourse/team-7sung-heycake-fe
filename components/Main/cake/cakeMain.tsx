@@ -27,7 +27,7 @@ export default function CakeMain() {
   }, []);
 
   return (
-    <Flex justifyContent="center">
+    <Flex>
       <Tabs colorScheme="heys" isLazy minW="350px" w="max-content" m={0}>
         <Box
           overflow="scroll"
