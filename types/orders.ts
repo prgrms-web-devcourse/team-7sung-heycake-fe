@@ -33,7 +33,6 @@ export interface CakeForm {
 export type OrderStatus = 'NEW' | 'RESERVED' | 'PAID';
 
 export type CakeCategory =
-  | 'ALL'
   | 'PHOTO'
   | 'LETTERING'
   | 'CHARACTER_IMAGE'
