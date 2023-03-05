@@ -13,7 +13,6 @@ const queryClient = new QueryClient();
 
 declare global {
   interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Kakao: any;
   }
 }
@@ -40,7 +39,6 @@ export default function App({ Component, pageProps }: AppProps) {
             src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
             onLoad={kakaoInit}
           />
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           <Component {...pageProps} />
           <ReactQueryDevtools />
         </ChakraProvider>
@@ -63,7 +61,6 @@ export default function App({ Component, pageProps }: AppProps) {
           onLoad={kakaoInit}
         />
         <Header />
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Component {...pageProps} />
         <ReactQueryDevtools />
       </ChakraProvider>
