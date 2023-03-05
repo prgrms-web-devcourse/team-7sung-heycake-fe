@@ -39,12 +39,13 @@ export default function CakeList({ category, location }: any) {
           render: () => (
             <Box
               m={3}
-              mb={64}
+              mb={80}
               color="white"
               p={3}
-              bg="blue.500"
+              bg="hey.darkGray"
               borderRadius={6}
               textAlign="center"
+              fontWeight="500"
             >
               해당 지역에 케이크가 없습니다
             </Box>
