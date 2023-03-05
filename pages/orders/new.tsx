@@ -1,4 +1,15 @@
-import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  FormLabel,
+  Input,
+  Slider,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderTrack,
+} from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import Image from 'next/image';
@@ -37,6 +48,8 @@ import {
 export default function NewOrder() {
   const [location, setLocation] = useState('강남구');
   const [visitTime, setVisitTime] = useState('');
+  const [hopePrice, setHopePrice] = useState(30000);
+  const [directInput, setDirectInput] = useState(false);
   const [formData, setFormData] = useState<CakeForm>(initialFormData);
   const {
     previewUrls,
@@ -57,11 +70,7 @@ export default function NewOrder() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (
-      formData.title === '' ||
-      formData.hopePrice === '' ||
-      formData.requirements === ''
-    ) {
+    if (formData.title === '' || formData.requirements === '') {
       alert('입력한 값을 확인해 주세요');
       return;
     }
@@ -73,7 +82,7 @@ export default function NewOrder() {
 
     const newFormData = new FormData();
     newFormData.append('title', formData.title);
-    newFormData.append('hopePrice', formData.hopePrice);
+    newFormData.append('hopePrice', hopePrice.toString());
     newFormData.append('region', location);
     newFormData.append(
       'visitTime',
@@ -124,7 +133,6 @@ export default function NewOrder() {
 
   const {
     title,
-    hopePrice,
     cakeCategory,
     cakeSize,
     cakeHeight,
@@ -182,13 +190,39 @@ export default function NewOrder() {
           <LocationSelectBox location={location} setLocation={setLocation} />
         </FormControl>
         <FormControl id="hopePrice">
-          <FormLabel>희망가격</FormLabel>
+          <PriceBox>
+            희망가격
+            <Checkbox
+              isChecked={directInput}
+              onChange={() => setDirectInput(!directInput)}
+            >
+              직접 입력
+            </Checkbox>
+          </PriceBox>
+          <Slider
+            defaultValue={30000}
+            min={10000}
+            max={100000}
+            step={5000}
+            value={hopePrice}
+            onChange={setHopePrice}
+          >
+            <SliderTrack bg="red.100">
+              <Box position="relative" right={10} />
+              <SliderFilledTrack bg="tomato" />
+            </SliderTrack>
+            <SliderThumb boxSize={6} />
+          </Slider>
           <Input
-            type="text"
+            disabled={!directInput}
+            type="number"
             name="hopePrice"
             value={hopePrice}
-            onChange={handleChange}
+            onChange={(e) => setHopePrice(+e.target.value)}
             placeholder="희망가격을 입력하세요."
+            min={10000}
+            max={100000}
+            step={5000}
           />
         </FormControl>
         <FormControl id="visitTime">
@@ -271,7 +305,6 @@ const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
 
 const initialFormData: CakeForm = {
   title: '',
-  hopePrice: '',
   cakeCategory: 'ALL',
   cakeSize: 'MINI',
   cakeHeight: 'ONE_LAYER',
@@ -315,4 +348,9 @@ const ImageBox = styled.div`
 
 const ValidityMessage = styled.span`
   color: red;
+`;
+
+const PriceBox = styled(FormLabel)`
+  display: flex;
+  justify-content: space-between;
 `;
