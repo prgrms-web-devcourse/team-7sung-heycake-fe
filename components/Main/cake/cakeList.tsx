@@ -1,7 +1,6 @@
-import { CircularProgress, Grid } from '@chakra-ui/react';
+import { Box, CircularProgress, Grid, useToast } from '@chakra-ui/react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -11,8 +10,8 @@ import CakeItem from './cakeItem';
 import CakeListSkeleton from './cakeListSkeleton';
 
 export default function CakeList({ category, location }: any) {
+  const toast = useToast();
   const { ref, inView } = useInView();
-  const router = useRouter();
   const { data, status, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
     ['전체 케이크 리스트', category, location],
     ({ pageParam = '' }) =>
@@ -22,15 +21,41 @@ export default function CakeList({ category, location }: any) {
         cursor: pageParam,
       }),
     {
-      getNextPageParam: (lastPage) => lastPage.cursorId ?? undefined,
+      getNextPageParam: (lastPage) =>
+        !lastPage.isLast ? lastPage.cursorId : undefined,
     }
   );
 
   useEffect(() => {
     if (inView) fetchNextPage();
-  }, [inView]);
+    if (status === 'success' && data?.pages[0].content.length === 0) {
+      const id = `cake empty`;
+      if (!toast.isActive(id)) {
+        toast({
+          id,
+          status: 'info',
+          position: 'bottom',
+          duration: 2000,
+          render: () => (
+            <Box
+              m={3}
+              mb={80}
+              color="white"
+              p={3}
+              bg="hey.darkGray"
+              borderRadius={6}
+              textAlign="center"
+              fontWeight="500"
+            >
+              해당 지역에 케이크가 없습니다
+            </Box>
+          ),
+        });
+      }
+    }
+  }, [data?.pages, inView, status, toast]);
 
-  if (status === 'loading' || !router.isReady) {
+  if (status === 'loading') {
     return <CakeListSkeleton />;
   }
 

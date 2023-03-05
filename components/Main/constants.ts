@@ -59,9 +59,9 @@ export const CAKE_CATEGORY = {
   ALL: '전체',
   PHOTO: '포토',
   LETTERING: '레터링',
-  CHARACTER_IMAGE: '캐릭터 (사진)',
-  CHARACTER_MODEL: '캐릭터 (입체)',
+  CHARACTER_IMAGE: '캐릭터-사진',
+  CHARACTER_MODEL: '캐릭터-입체',
   ETC: '기타',
 };
 
-export const CAKE_SIZE = { MINI: '미니', SIZE_ONE: '1호', SIZE_TWO: '2호' };
+export const CAKE_SIZE = { MINI: '미니', NO_1: '1호', NO_2: '2호' };

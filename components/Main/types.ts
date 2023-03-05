@@ -43,7 +43,7 @@ export interface ICakeItemData {
   visitTime: string;
 }
 
-type TCakeSize = 'MINI' | 'SIZE_ONE' | 'SIZE_TWO';
+type TCakeSize = 'MINI' | 'NO_1' | 'NO_2';
 type TBreadFlavor = 'VANILLA' | 'CHOCO' | 'GEEN_TEA' | 'CARROT' | 'ETC';
 type TCreamFlavor = 'WHIPPED_CREAM' | 'CREAM_CHEESE' | 'CHOCO' | 'OREO' | 'ETC';
 type TOrderStatus = 'NEW' | 'RESERVED' | 'PAID';

@@ -7,7 +7,7 @@ export default async function getCakeList({
   cursor,
 }: IgetCakeList) {
   try {
-    const response = await internalApi.post(`/api/orders/`, {
+    const response = await internalApi.post(`/api/orders`, {
       location,
       category,
       cursor,
