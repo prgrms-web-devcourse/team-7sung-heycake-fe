@@ -41,7 +41,14 @@ export default function CakeMain() {
           zIndex="10"
           bgColor="white"
         >
-          <TabList w="100%" alignItems="center" h="50px" p={2}>
+          <TabList
+            alignItems="center"
+            h="50px"
+            p={2}
+            overflowX="auto"
+            overflowY="hidden"
+            whiteSpace="nowrap"
+          >
             {TAB_TABLE.map((tab) => (
               <Tab key={tab.label} h="50px">
                 {tab.label}
