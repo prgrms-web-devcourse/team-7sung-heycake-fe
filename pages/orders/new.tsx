@@ -20,7 +20,7 @@ import useImageUpload from '@/hooks/useImageUpload';
 import {
   BreadFlavor,
   CakeCategory,
-  CakeFormData,
+  CakeForm,
   CakeHeight,
   CakeSize,
   CreamFlavor,
@@ -35,7 +35,7 @@ import {
 
 const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
 
-const initialFormData: CakeFormData = {
+const initialFormData: CakeForm = {
   title: '',
   hopePrice: '',
   cakeCategory: 'ALL',
@@ -49,7 +49,7 @@ const initialFormData: CakeFormData = {
 export default function NewOrder() {
   const [location, setLocation] = useState('강남구');
   const [visitTime, setVisitTime] = useState('');
-  const [formData, setFormData] = useState<CakeFormData>(initialFormData);
+  const [formData, setFormData] = useState<CakeForm>(initialFormData);
   const {
     previewUrls,
     files,
