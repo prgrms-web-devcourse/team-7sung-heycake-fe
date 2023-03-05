@@ -259,7 +259,9 @@ export default function NewOrder() {
             placeholder="요청사항을 입력하세요."
           />
         </FormControl>
-        <Button type="submit">전송하기</Button>
+        <Button background="hey.sub" type="submit">
+          전송하기
+        </Button>
       </OrderWrapper>
     </Form>
   );
