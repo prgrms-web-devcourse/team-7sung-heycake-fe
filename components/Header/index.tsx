@@ -30,7 +30,7 @@ export default function Header() {
                   icon={<UserIcon w={8} h={8} />}
                 />
               </Link>
-              <Link href="/">
+              <Link href="/logout">
                 <IconButton
                   variant="ghost"
                   aria-label="로그아웃"
