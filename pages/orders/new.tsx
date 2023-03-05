@@ -96,10 +96,10 @@ export default function NewOrder() {
     }));
   };
 
-  const handleRadioChange = (value: string) => {
+  const handleRadioChange = (value: string, name: string) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      cakeCategory: value,
+      [name]: value,
     }));
   };
 
@@ -180,7 +180,7 @@ export default function NewOrder() {
           <RadioGroup
             name="cakeCategory"
             value={cakeCategory}
-            onChange={handleRadioChange}
+            onChange={(value) => handleRadioChange(value, 'cakeCategory')}
           >
             <Stack direction="row">
               {cakeCategories.map((category) => (
@@ -196,7 +196,7 @@ export default function NewOrder() {
           <RadioGroup
             name="cakeSize"
             value={cakeSize}
-            onChange={handleRadioChange}
+            onChange={(value) => handleRadioChange(value, 'cakeSize')}
           >
             <Stack direction="row">
               {cakeSizes.map((size) => (
@@ -212,7 +212,7 @@ export default function NewOrder() {
           <RadioGroup
             name="cakeHeight"
             value={cakeHeight}
-            onChange={handleRadioChange}
+            onChange={(value) => handleRadioChange(value, 'cakeHeight')}
           >
             <Stack direction="row">
               {cakeHeights.map((height) => (
@@ -228,7 +228,7 @@ export default function NewOrder() {
           <RadioGroup
             name="breadFlavor"
             value={breadFlavor}
-            onChange={handleRadioChange}
+            onChange={(value) => handleRadioChange(value, 'breadFlavor')}
           >
             <Stack direction="row">
               {breadFlavors.map((flavor) => (
@@ -244,7 +244,7 @@ export default function NewOrder() {
           <RadioGroup
             name="creamFlavor"
             value={creamFlavor}
-            onChange={handleRadioChange}
+            onChange={(value) => handleRadioChange(value, 'creamFlavor')}
           >
             <Stack direction="row">
               {creamFlavors.map((flavor) => (
