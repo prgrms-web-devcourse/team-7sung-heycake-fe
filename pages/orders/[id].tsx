@@ -73,7 +73,11 @@ export default function Orders() {
         신청한 케이크 업체 {order.offerCount}개
       </OrderRequestCountCard>
       {threads?.map((thread) => (
-        <Thread key={thread.offerId} thread={thread} />
+        <Thread
+          key={thread.offerId}
+          thread={thread}
+          orderId={orderId as string}
+        />
       ))}
     </OrderWrapper>
   );
