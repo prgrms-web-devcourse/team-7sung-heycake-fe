@@ -1,6 +1,6 @@
 import { FormControl, FormLabel, Select } from '@chakra-ui/react';
 
-type Props<T> = {
+type CakeSelectProps<T> = {
   id: string;
   label: string;
   value: string;
@@ -16,7 +16,7 @@ function CakeSelect<T>({
   options,
   onChange,
   convertOption,
-}: Props<T>) {
+}: CakeSelectProps<T>) {
   return (
     <FormControl id={id}>
       <FormLabel>{label}</FormLabel>
