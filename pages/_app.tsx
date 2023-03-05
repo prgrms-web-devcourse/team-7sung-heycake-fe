@@ -1,3 +1,5 @@
+import '@/styles/font.css';
+
 import { ChakraProvider } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -25,28 +27,6 @@ function kakaoInit() {
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  if (router.pathname === '/') {
-    return (
-      <QueryClientProvider client={queryClient}>
-        <ChakraProvider theme={heyTheme}>
-          <Head>
-            <title>Hey, cake</title>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1, minimum-scale=1"
-            />
-          </Head>
-          <Script
-            src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
-            onLoad={kakaoInit}
-          />
-          <Component {...pageProps} />
-          <ReactQueryDevtools />
-        </ChakraProvider>
-      </QueryClientProvider>
-    );
-  }
-
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={heyTheme}>
@@ -61,8 +41,13 @@ export default function App({ Component, pageProps }: AppProps) {
           src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
           onLoad={kakaoInit}
         />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
+        />
         <Layout>
-          <Header />
+          {router.pathname !== '/' && <Header />}
           <Component {...pageProps} />
         </Layout>
         <ReactQueryDevtools />
