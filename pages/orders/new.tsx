@@ -14,15 +14,15 @@ import { GrPowerReset } from 'react-icons/gr';
 
 import { publicApi } from '@/components/Api';
 import LocationSelectBox from '@/components/Main/location/locationSelectBox';
+import {
+  breadFlavors,
+  cakeCategories,
+  cakeHeights,
+  cakeSizes,
+  creamFlavors,
+} from '@/constants/cakeFormat';
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import useImageUpload from '@/hooks/useImageUpload';
-import {
-  BreadFlavor,
-  CakeCategory,
-  CakeHeight,
-  CakeSize,
-  CreamFlavor,
-} from '@/types/orders';
 import {
   convertBreadFlavor,
   convertCakeCategory,
@@ -302,31 +302,6 @@ export default function NewOrder() {
     </Form>
   );
 }
-
-const cakeCategories: CakeCategory[] = [
-  'ALL',
-  'PHOTO',
-  'LETTERING',
-  'CHARACTER_IMAGE',
-  'CHARACTER_MODEL',
-  'ETC',
-];
-const cakeSizes: CakeSize[] = ['MINI', 'NO_1', 'NO_2', 'ETC'];
-const cakeHeights: CakeHeight[] = ['ONE_LAYER', 'TWO_LAYER', 'ETC'];
-const breadFlavors: BreadFlavor[] = [
-  'VANILLA',
-  'CHOCO',
-  'GREEN_TEA',
-  'CARROT',
-  'ETC',
-];
-const creamFlavors: CreamFlavor[] = [
-  'WHIPPED_CREAM',
-  'CREAM_CHEESE',
-  'CHOCO',
-  'OREO',
-  'ETC',
-];
 
 const OrderWrapper = styled.div`
   width: 100%;
