@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   FormLabel,
@@ -8,9 +9,11 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import Image from 'next/image';
+import { useRef, useState } from 'react';
 
 import { publicApi } from '@/components/Api';
+import useImageUpload from '@/hooks/useImageUpload';
 import {
   BreadFlavor,
   CakeCategory,
@@ -39,12 +42,19 @@ export default function NewOrder() {
     creamFlavor: 'WHIPPED_CREAM',
     requirements: '',
   });
-  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const {
+    previewUrls,
+    files,
+    handleDragOver,
+    handleDrop,
+    handleFileInputChange,
+    resetImages,
+  } = useImageUpload();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = event.target;
-    if (files) {
-      setImageFiles(Array.from(files));
+  const handleFileChoose = () => {
+    if (inputRef.current) {
+      inputRef.current.click();
     }
   };
 
@@ -63,7 +73,7 @@ export default function NewOrder() {
     newFormData.append('creamFlavor', formData.creamFlavor);
     newFormData.append('requirements', formData.requirements);
 
-    imageFiles.forEach((file) => {
+    files.forEach((file) => {
       newFormData.append(`cakeImages`, file);
     });
 
@@ -86,10 +96,10 @@ export default function NewOrder() {
     }));
   };
 
-  const handleRadioChange = (value: string) => {
+  const handleRadioChange = (value: string, name: string) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      cakeCategory: value,
+      [name]: value,
     }));
   };
 
@@ -108,7 +118,26 @@ export default function NewOrder() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="file" id="image" name="image" onChange={handleImageChange} />
+      <UploadContainer
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+        onClick={handleFileChoose}
+      >
+        드래그 앤 드랍 또는 클릭하여 파일을 추가하세요.
+        <input
+          hidden
+          ref={inputRef}
+          type="file"
+          multiple
+          onChange={handleFileInputChange}
+        />
+      </UploadContainer>
+      {previewUrls.map((url) => (
+        <Image key={url} src={url} alt="Preview" width={50} height={50} />
+      ))}
+      <button type="button" onClick={resetImages}>
+        초기화
+      </button>
       <OrderWrapper>
         <FormControl id="title">
           <FormLabel>title</FormLabel>
@@ -151,7 +180,7 @@ export default function NewOrder() {
           <RadioGroup
             name="cakeCategory"
             value={cakeCategory}
-            onChange={handleRadioChange}
+            onChange={(value) => handleRadioChange(value, 'cakeCategory')}
           >
             <Stack direction="row">
               {cakeCategories.map((category) => (
@@ -167,7 +196,7 @@ export default function NewOrder() {
           <RadioGroup
             name="cakeSize"
             value={cakeSize}
-            onChange={handleRadioChange}
+            onChange={(value) => handleRadioChange(value, 'cakeSize')}
           >
             <Stack direction="row">
               {cakeSizes.map((size) => (
@@ -183,7 +212,7 @@ export default function NewOrder() {
           <RadioGroup
             name="cakeHeight"
             value={cakeHeight}
-            onChange={handleRadioChange}
+            onChange={(value) => handleRadioChange(value, 'cakeHeight')}
           >
             <Stack direction="row">
               {cakeHeights.map((height) => (
@@ -199,7 +228,7 @@ export default function NewOrder() {
           <RadioGroup
             name="breadFlavor"
             value={breadFlavor}
-            onChange={handleRadioChange}
+            onChange={(value) => handleRadioChange(value, 'breadFlavor')}
           >
             <Stack direction="row">
               {breadFlavors.map((flavor) => (
@@ -215,7 +244,7 @@ export default function NewOrder() {
           <RadioGroup
             name="creamFlavor"
             value={creamFlavor}
-            onChange={handleRadioChange}
+            onChange={(value) => handleRadioChange(value, 'creamFlavor')}
           >
             <Stack direction="row">
               {creamFlavors.map((flavor) => (
@@ -272,4 +301,15 @@ const OrderWrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
+`;
+
+const UploadContainer = styled(Box)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  border: 1px dashed grey;
+  border-radius: 5px;
+  cursor: pointer;
 `;
