@@ -299,7 +299,6 @@ const UploadContainer = styled(Box)`
 `;
 
 const Form = styled.form`
-  max-width: 650px;
   margin: 0 auto;
   padding: 1rem;
 `;

@@ -11,7 +11,7 @@ import MarketList from './marketList';
 
 export default function Admin() {
   return (
-    <Flex justifyContent="center">
+    <Flex>
       <Tabs colorScheme="heys" isLazy minW="350px" w="650px">
         <TabList alignItems="center" h="60px" p={2}>
           <Tab w="50%" h="60px">

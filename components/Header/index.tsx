@@ -15,7 +15,7 @@ export default function Header() {
     }
   }, []);
   return (
-    <Flex justifyContent="center">
+    <Flex>
       <Container>
         <Link href="/main">
           <Image src="/images/logo.png" alt="로고" width={40} height={40} />
@@ -39,7 +39,7 @@ export default function Header() {
               </Link>
             </>
           ) : (
-            <Link href="/login">
+            <Link href="/">
               <IconButton
                 variant="ghost"
                 aria-label="로그인"
@@ -56,7 +56,7 @@ export default function Header() {
 const Container = styled.div`
   display: flex;
   align-items: center;
-  width: 550px;
+  width: 100%;
   height: 60px;
   background-color: white;
   display: flex;

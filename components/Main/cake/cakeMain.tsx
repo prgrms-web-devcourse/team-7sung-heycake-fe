@@ -27,8 +27,8 @@ export default function CakeMain() {
   }, []);
 
   return (
-    <Flex justifyContent="center">
-      <Tabs colorScheme="heys" isLazy minW="350px" w="max-content" m={0}>
+    <Flex>
+      <Tabs colorScheme="heys" isLazy minW="350px" w="100%" m={0}>
         <Box
           overflow="scroll"
           sx={{
@@ -41,7 +41,7 @@ export default function CakeMain() {
           zIndex="10"
           bgColor="white"
         >
-          <TabList w="max-content" alignItems="center" h="50px" p={2}>
+          <TabList w="100%" alignItems="center" h="50px" p={2}>
             {TAB_TABLE.map((tab) => (
               <Tab key={tab.label} h="50px">
                 {tab.label}
