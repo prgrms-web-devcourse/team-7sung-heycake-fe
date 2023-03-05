@@ -2,10 +2,18 @@ import { Flex, IconButton } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 import { LoginIcon, LogoutIcon, UserIcon } from './icon';
 
 export default function Header() {
+  const [isLogin, setIsLogin] = useState(false);
+  useEffect(() => {
+    const user = window.localStorage.getItem('ACCESS_TOKEN');
+    if (user) {
+      setIsLogin(true);
+    }
+  }, []);
   return (
     <Flex justifyContent="center">
       <Container>
@@ -13,27 +21,32 @@ export default function Header() {
           <Image src="/images/logo.png" alt="로고" width={40} height={40} />
         </Link>
         <ButtonContainer>
-          <Link href="/">
-            <IconButton
-              variant="ghost"
-              aria-label="로그아웃"
-              icon={<LogoutIcon w={8} h={8} />}
-            />
-          </Link>
-          <Link href="/admin">
-            <IconButton
-              variant="ghost"
-              aria-label="유저"
-              icon={<UserIcon w={8} h={8} />}
-            />
-          </Link>
-          <Link href="/login">
-            <IconButton
-              variant="ghost"
-              aria-label="로그인"
-              icon={<LoginIcon w={8} h={8} />}
-            />
-          </Link>
+          {isLogin ? (
+            <>
+              <Link href="/admin">
+                <IconButton
+                  variant="ghost"
+                  aria-label="유저"
+                  icon={<UserIcon w={8} h={8} />}
+                />
+              </Link>
+              <Link href="/">
+                <IconButton
+                  variant="ghost"
+                  aria-label="로그아웃"
+                  icon={<LogoutIcon w={8} h={8} />}
+                />
+              </Link>
+            </>
+          ) : (
+            <Link href="/login">
+              <IconButton
+                variant="ghost"
+                aria-label="로그인"
+                icon={<LoginIcon w={8} h={8} />}
+              />
+            </Link>
+          )}
         </ButtonContainer>
       </Container>
     </Flex>

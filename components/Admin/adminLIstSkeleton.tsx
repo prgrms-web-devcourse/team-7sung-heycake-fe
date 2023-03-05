@@ -1,4 +1,4 @@
-import { Grid, Skeleton } from '@chakra-ui/react';
+import { Skeleton } from '@chakra-ui/react';
 
 export default function AdminListSkeleton() {
   return (
