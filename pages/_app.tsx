@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 
 import Header from '@/components/Header';
+import Layout from '@/components/Layout/layout';
 import heyTheme from '@/public/theme/theme';
 
 const queryClient = new QueryClient();
@@ -60,8 +61,10 @@ export default function App({ Component, pageProps }: AppProps) {
           src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
           onLoad={kakaoInit}
         />
-        <Header />
-        <Component {...pageProps} />
+        <Layout>
+          <Header />
+          <Component {...pageProps} />
+        </Layout>
         <ReactQueryDevtools />
       </ChakraProvider>
     </QueryClientProvider>
