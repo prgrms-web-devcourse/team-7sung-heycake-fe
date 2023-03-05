@@ -39,7 +39,7 @@ export default function Header() {
               </Link>
             </>
           ) : (
-            <Link href="/login">
+            <Link href="/">
               <IconButton
                 variant="ghost"
                 aria-label="로그인"
