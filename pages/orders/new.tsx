@@ -48,6 +48,7 @@ export default function NewOrder() {
     handleDragOver,
     handleDrop,
     handleFileInputChange,
+    resetImages,
   } = useImageUpload();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -134,6 +135,9 @@ export default function NewOrder() {
       {previewUrls.map((url) => (
         <Image key={url} src={url} alt="Preview" width={50} height={50} />
       ))}
+      <button type="button" onClick={resetImages}>
+        초기화
+      </button>
       <OrderWrapper>
         <FormControl id="title">
           <FormLabel>title</FormLabel>

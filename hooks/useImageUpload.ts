@@ -10,6 +10,7 @@ type ImageUploadReturn = {
   handleDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
   handleDrop: (event: React.DragEvent<HTMLDivElement>) => void;
   handleFileInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  resetImages: () => void;
 };
 
 const useImageUpload = (): ImageUploadReturn => {
@@ -56,12 +57,18 @@ const useImageUpload = (): ImageUploadReturn => {
     ]);
   };
 
+  const resetImages = () => {
+    setPreviewUrls([]);
+    setFiles([]);
+  };
+
   return {
     previewUrls,
     files,
     handleDragOver,
     handleDrop,
     handleFileInputChange,
+    resetImages,
   };
 };
 
