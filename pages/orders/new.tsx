@@ -13,6 +13,7 @@ import {
 import styled from '@emotion/styled';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { GrPowerReset } from 'react-icons/gr';
 
@@ -61,6 +62,7 @@ export default function NewOrder() {
   } = useImageUpload();
   const [inputRef, handleFileChoose] = useClickInput();
   const [date, setDate] = useState(new Date());
+  const router = useRouter();
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputTime = event.target.value;
@@ -114,7 +116,10 @@ export default function NewOrder() {
           access_token: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
         },
       });
+      alert('주문이 성공적으로 등록되었어요.');
+      router.push('/main');
     } catch (error) {
+      alert('주문 등록을 실패했어요. 다시 한번 확인해 주세요.');
       console.error(error);
     }
   };
