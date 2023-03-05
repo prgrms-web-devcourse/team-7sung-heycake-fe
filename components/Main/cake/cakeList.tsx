@@ -22,13 +22,13 @@ export default function CakeList({ category, location }: any) {
       }),
     {
       getNextPageParam: (lastPage) =>
-        !lastPage.isLast ? lastPage.cursorId : undefined,
+        !lastPage?.isLast ? lastPage?.cursorId : undefined,
     }
   );
 
   useEffect(() => {
     if (inView) fetchNextPage();
-    if (status === 'success' && data?.pages[0].content.length === 0) {
+    if (status === 'success' && data?.pages[0]?.content.length === 0) {
       const id = `cake empty`;
       if (!toast.isActive(id)) {
         toast({
@@ -64,7 +64,7 @@ export default function CakeList({ category, location }: any) {
     <>
       <Grid padding={0} gap={4} flexDirection="column">
         {data?.pages.map((page) =>
-          page.content.map((item: ICakeItemData) => (
+          page?.content.map((item: ICakeItemData) => (
             <Link key={item.orderId} href={`/orders/${item.orderId}`}>
               <CakeItem
                 title={item.title}
