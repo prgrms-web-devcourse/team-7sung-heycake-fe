@@ -7,6 +7,7 @@ import { useInView } from 'react-intersection-observer';
 import getCakeList from '../../Api/Main';
 import { ICakeItemData } from '../types';
 import CakeItem from './cakeItem';
+import CakeListEmpty from './cakeListEmpty';
 import CakeListSkeleton from './cakeListSkeleton';
 
 export default function CakeList({ category, location }: any) {
@@ -30,7 +31,7 @@ export default function CakeList({ category, location }: any) {
   }, [inView]);
 
   if (status === 'success' && data?.pages[0].content.length === 0) {
-    return <div>케이크가 없습니다</div>;
+    return <CakeListEmpty />;
   }
 
   if (status === 'loading') {
