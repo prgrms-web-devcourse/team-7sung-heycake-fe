@@ -34,19 +34,6 @@ import {
   convertCreamFlavor,
 } from '@/utils/orders';
 
-const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
-
-const initialFormData: CakeForm = {
-  title: '',
-  hopePrice: '',
-  cakeCategory: 'ALL',
-  cakeSize: 'MINI',
-  cakeHeight: 'ONE_LAYER',
-  breadFlavor: 'VANILLA',
-  creamFlavor: 'WHIPPED_CREAM',
-  requirements: '',
-};
-
 export default function NewOrder() {
   const [location, setLocation] = useState('강남구');
   const [visitTime, setVisitTime] = useState('');
@@ -70,16 +57,17 @@ export default function NewOrder() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (formData.title === '') {
+    if (
+      formData.title === '' ||
+      formData.hopePrice === '' ||
+      formData.requirements === ''
+    ) {
+      alert('입력한 값을 확인해 주세요');
       return;
     }
-    if (formData.hopePrice === '') {
-      return;
-    }
-    if (formData.requirements === '') {
-      return;
-    }
+
     if (!timeRegex.test(visitTime)) {
+      alert('시간을 예시에 맞춰서 입력해 주세요');
       return;
     }
 
@@ -276,6 +264,19 @@ export default function NewOrder() {
     </Form>
   );
 }
+
+const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+
+const initialFormData: CakeForm = {
+  title: '',
+  hopePrice: '',
+  cakeCategory: 'ALL',
+  cakeSize: 'MINI',
+  cakeHeight: 'ONE_LAYER',
+  breadFlavor: 'VANILLA',
+  creamFlavor: 'WHIPPED_CREAM',
+  requirements: '',
+};
 
 const OrderWrapper = styled.div`
   width: 100%;
