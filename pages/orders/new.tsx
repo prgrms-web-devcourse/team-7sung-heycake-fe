@@ -339,10 +339,9 @@ const Form = styled.form`
 const ImageBox = styled.div`
   display: flex;
   align-items: center;
-  width: 90%;
+  width: 95%;
   height: 70px;
   margin: 0 auto;
-  padding: 0 1rem;
   gap: 1rem;
 `;
 
