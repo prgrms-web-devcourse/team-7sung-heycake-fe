@@ -29,17 +29,17 @@ export default function CakeList({ category, location }: any) {
   useEffect(() => {
     if (inView) fetchNextPage();
     if (status === 'success' && data?.pages[0].content.length === 0) {
-      const id = 'not cake';
+      const id = `cake empty`;
       if (!toast.isActive(id)) {
         toast({
           id,
           status: 'info',
-          position: 'top',
+          position: 'bottom',
           duration: 2000,
           render: () => (
             <Box
               m={3}
-              mt={72}
+              mb={64}
               color="white"
               p={3}
               bg="blue.500"
