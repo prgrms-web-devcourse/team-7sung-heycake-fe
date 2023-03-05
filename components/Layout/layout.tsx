@@ -11,7 +11,7 @@ function Layout({ children }: Props) {
       justify="stretch"
       maxW="560px"
       m="auto"
-      h="100%"
+      minH="100vh"
       spacing={0}
     >
       {children}

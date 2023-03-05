@@ -56,7 +56,7 @@ export default function Header() {
 const Container = styled.div`
   display: flex;
   align-items: center;
-  width: 550px;
+  width: 100%;
   height: 60px;
   background-color: white;
   display: flex;

@@ -51,7 +51,8 @@ const ImageContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 7rem;
+  padding-top: 10rem;
+  padding-bottom: 2rem;
 `;
 
 const ServiceDescription = styled.div`
@@ -62,5 +63,4 @@ const LoginButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5rem;
 `;
