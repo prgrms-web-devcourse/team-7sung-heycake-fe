@@ -7,7 +7,8 @@ import {
   Select,
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
@@ -40,7 +41,10 @@ type InputProps = {
 };
 
 export default function EnrollmentForm() {
-  const router = useRouter();
+  const [marketName, setMarketName] = useState('');
+  const [ownerName, setOwnerName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -72,7 +76,6 @@ export default function EnrollmentForm() {
     formData.append('memberId', '4');
 
     postEnrollment(formData);
-    router.push('/mypage/enrollment/success');
   };
 
   return (
@@ -115,6 +118,9 @@ export default function EnrollmentForm() {
               message: CHECK_OWNER_NAME_TYPE,
             },
           })}
+          onChange={(e) => {
+            setOwnerName(e.target.value);
+          }}
         />
         {errors.ownerName && <ErrorSpan>{errors.ownerName.message}</ErrorSpan>}
       </FormControl>
@@ -124,7 +130,13 @@ export default function EnrollmentForm() {
       </FormControl>
       <FormControl height={100} width={350}>
         <FormLabel>상호명</FormLabel>
-        <Input type="text" {...register('marketName', { required: true })} />
+        <Input
+          type="text"
+          {...register('marketName', { required: true })}
+          onChange={(e) => {
+            setMarketName(e.target.value);
+          }}
+        />
       </FormControl>
       <FormControl height={100} width={350}>
         <FormLabel>업체 전화번호</FormLabel>
@@ -138,6 +150,9 @@ export default function EnrollmentForm() {
               message: CHECK_NUMBER_TYPE,
             },
           })}
+          onChange={(e) => {
+            setPhoneNumber(e.target.value);
+          }}
         />
         {errors.phoneNumber && (
           <ErrorSpan>{errors.phoneNumber.message}</ErrorSpan>
@@ -211,17 +226,28 @@ export default function EnrollmentForm() {
           padding={1}
         />
       </FormControl>
-      <Button
-        type="submit"
-        width={350}
-        padding={1}
-        bg="hey.lightOrange"
-        fontSize="1.3rem"
-        marginBottom={10}
-        _hover={{ bg: 'hey.sub' }}
+      <Link
+        href={{
+          pathname: '/mypage/enrollment/success',
+          query: {
+            marketName,
+            ownerName,
+            phoneNumber,
+          },
+        }}
       >
-        등록하기
-      </Button>
+        <Button
+          type="submit"
+          width={350}
+          padding={1}
+          bg="hey.lightOrange"
+          fontSize="1.3rem"
+          marginBottom={10}
+          _hover={{ bg: 'hey.sub' }}
+        >
+          등록하기
+        </Button>
+      </Link>
     </Form>
   );
 }

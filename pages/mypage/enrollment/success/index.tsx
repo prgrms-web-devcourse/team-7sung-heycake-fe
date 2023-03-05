@@ -6,7 +6,7 @@ import MypageTitle from '@/components/Mypage/mypageTitle';
 
 export default function Success() {
   const router = useRouter();
-
+  const { marketName, ownerName, phoneNumber } = router.query;
   return (
     <>
       <MypageTitle title="업체 정보 등록" isSuccess="false" />
@@ -26,7 +26,11 @@ export default function Success() {
           borderColor="hey.sub"
           borderWidth="2px"
         >
-          <EnrollmentInfo />
+          <EnrollmentInfo
+            marketName={marketName}
+            ownerName={ownerName}
+            phoneNumber={phoneNumber}
+          />
         </Container>
         <Button
           width={350}
