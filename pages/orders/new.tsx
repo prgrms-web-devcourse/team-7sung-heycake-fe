@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   FormLabel,
@@ -8,9 +9,11 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import Image from 'next/image';
+import { useRef, useState } from 'react';
 
 import { publicApi } from '@/components/Api';
+import useImageUpload from '@/hooks/useImageUpload';
 import {
   BreadFlavor,
   CakeCategory,
@@ -39,12 +42,18 @@ export default function NewOrder() {
     creamFlavor: 'WHIPPED_CREAM',
     requirements: '',
   });
-  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const {
+    previewUrls,
+    files,
+    handleDragOver,
+    handleDrop,
+    handleFileInputChange,
+  } = useImageUpload();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = event.target;
-    if (files) {
-      setImageFiles(Array.from(files));
+  const handleFileChoose = () => {
+    if (inputRef.current) {
+      inputRef.current.click();
     }
   };
 
@@ -63,7 +72,7 @@ export default function NewOrder() {
     newFormData.append('creamFlavor', formData.creamFlavor);
     newFormData.append('requirements', formData.requirements);
 
-    imageFiles.forEach((file) => {
+    files.forEach((file) => {
       newFormData.append(`cakeImages`, file);
     });
 
@@ -108,7 +117,23 @@ export default function NewOrder() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="file" id="image" name="image" onChange={handleImageChange} />
+      <UploadContainer
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+        onClick={handleFileChoose}
+      >
+        드래그 앤 드랍 또는 클릭하여 파일을 추가하세요.
+        <input
+          hidden
+          ref={inputRef}
+          type="file"
+          multiple
+          onChange={handleFileInputChange}
+        />
+      </UploadContainer>
+      {previewUrls.map((url) => (
+        <Image key={url} src={url} alt="Preview" width={50} height={50} />
+      ))}
       <OrderWrapper>
         <FormControl id="title">
           <FormLabel>title</FormLabel>
@@ -272,4 +297,15 @@ const OrderWrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
+`;
+
+const UploadContainer = styled(Box)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  border: 1px dashed grey;
+  border-radius: 5px;
+  cursor: pointer;
 `;
