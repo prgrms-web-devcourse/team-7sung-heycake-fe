@@ -2,7 +2,7 @@ import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GrPowerReset } from 'react-icons/gr';
 
 import { publicApi } from '@/components/Api';
@@ -16,6 +16,7 @@ import {
   creamFlavors,
 } from '@/constants/cakeFormat';
 import ERROR_MESSAGES from '@/constants/errorMessages';
+import useClickInput from '@/hooks/useClickInput';
 import useImageUpload from '@/hooks/useImageUpload';
 import {
   BreadFlavor,
@@ -58,14 +59,8 @@ export default function NewOrder() {
     handleFileInputChange,
     resetImages,
   } = useImageUpload();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [inputRef, handleFileChoose] = useClickInput();
   const [date, setDate] = useState(new Date());
-
-  const handleFileChoose = () => {
-    if (inputRef.current) {
-      inputRef.current.click();
-    }
-  };
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputTime = event.target.value;
