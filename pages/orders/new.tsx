@@ -1,22 +1,27 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Radio,
-  RadioGroup,
-  Stack,
-} from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { GrPowerReset } from 'react-icons/gr';
 
 import { publicApi } from '@/components/Api';
+import LocationSelectBox from '@/components/Main/location/locationSelectBox';
+import CakeSelect from '@/components/Orders/CakeSelect';
+import {
+  breadFlavors,
+  cakeCategories,
+  cakeHeights,
+  cakeSizes,
+  creamFlavors,
+} from '@/constants/cakeFormat';
+import ERROR_MESSAGES from '@/constants/errorMessages';
+import useClickInput from '@/hooks/useClickInput';
 import useImageUpload from '@/hooks/useImageUpload';
 import {
   BreadFlavor,
   CakeCategory,
+  CakeForm,
   CakeHeight,
   CakeSize,
   CreamFlavor,
@@ -30,18 +35,9 @@ import {
 } from '@/utils/orders';
 
 export default function NewOrder() {
-  const [formData, setFormData] = useState({
-    title: '',
-    hopePrice: '',
-    region: '',
-    visitTime: '',
-    cakeCategory: 'ALL',
-    cakeSize: 'MINI',
-    cakeHeight: 'ONE_LAYER',
-    breadFlavor: 'VANILLA',
-    creamFlavor: 'WHIPPED_CREAM',
-    requirements: '',
-  });
+  const [location, setLocation] = useState('강남구');
+  const [visitTime, setVisitTime] = useState('');
+  const [formData, setFormData] = useState<CakeForm>(initialFormData);
   const {
     previewUrls,
     files,
@@ -50,22 +46,41 @@ export default function NewOrder() {
     handleFileInputChange,
     resetImages,
   } = useImageUpload();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [inputRef, handleFileChoose] = useClickInput();
+  const [date, setDate] = useState(new Date());
 
-  const handleFileChoose = () => {
-    if (inputRef.current) {
-      inputRef.current.click();
-    }
+  const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputTime = event.target.value;
+    setVisitTime(inputTime);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (
+      formData.title === '' ||
+      formData.hopePrice === '' ||
+      formData.requirements === ''
+    ) {
+      alert('입력한 값을 확인해 주세요');
+      return;
+    }
+
+    if (!timeRegex.test(visitTime)) {
+      alert('시간을 예시에 맞춰서 입력해 주세요');
+      return;
+    }
+
     const newFormData = new FormData();
     newFormData.append('title', formData.title);
     newFormData.append('hopePrice', formData.hopePrice);
-    newFormData.append('region', formData.region);
-    newFormData.append('visitTime', formData.visitTime);
+    newFormData.append('region', location);
+    newFormData.append(
+      'visitTime',
+      `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()} ${visitTime}:00`
+    );
     newFormData.append('cakeCategory', formData.cakeCategory);
     newFormData.append('cakeSize', formData.cakeSize);
     newFormData.append('cakeHeight', formData.cakeHeight);
@@ -81,6 +96,8 @@ export default function NewOrder() {
       await publicApi.post('/orders', newFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          access_token:
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaXNzIjoiaGV5LWNha2UiLCJleHAiOjM2NzgwMjc4MzMsImlhdCI6MTY3ODAyNzgzMywibWVtYmVySWQiOjJ9.YRCRVDbszmdco_1AFVY_drpwcQ9f30zZKirDxoX-JCSFCEI7Lx-T-hQG98Ipyquu-VOM2CXaSY5V6urtwqMnHw',
         },
       });
     } catch (error) {
@@ -88,7 +105,9 @@ export default function NewOrder() {
     }
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -96,18 +115,16 @@ export default function NewOrder() {
     }));
   };
 
-  const handleRadioChange = (value: string, name: string) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
+  useEffect(() => {
+    const localLocation = window.localStorage.getItem('location');
+    if (localLocation) {
+      setLocation(localLocation);
+    }
+  }, []);
 
   const {
     title,
     hopePrice,
-    region,
-    visitTime,
     cakeCategory,
     cakeSize,
     cakeHeight,
@@ -117,7 +134,7 @@ export default function NewOrder() {
   } = formData;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <UploadContainer
         onDragOver={handleDragOver}
         onDrop={handleDrop}
@@ -132,129 +149,107 @@ export default function NewOrder() {
           onChange={handleFileInputChange}
         />
       </UploadContainer>
-      {previewUrls.map((url) => (
-        <Image key={url} src={url} alt="Preview" width={50} height={50} />
-      ))}
-      <button type="button" onClick={resetImages}>
-        초기화
-      </button>
+      <ImageBox>
+        {previewUrls.map((url) => (
+          <Image
+            key={url}
+            src={url}
+            alt="Preview"
+            width={50}
+            height={50}
+            style={{ borderRadius: '10px' }}
+          />
+        ))}
+        {files.length !== 0 && (
+          <Button type="button" onClick={resetImages}>
+            <GrPowerReset />
+          </Button>
+        )}
+      </ImageBox>
       <OrderWrapper>
         <FormControl id="title">
-          <FormLabel>title</FormLabel>
+          <FormLabel>제목</FormLabel>
           <Input
             type="text"
             name="title"
             value={title}
             onChange={handleChange}
+            placeholder="제목을 입력하세요."
           />
         </FormControl>
         <FormControl id="region">
-          <FormLabel>region</FormLabel>
-          <Input
-            type="text"
-            name="region"
-            value={region}
-            onChange={handleChange}
-          />
+          <FormLabel>지역</FormLabel>
+          <LocationSelectBox location={location} setLocation={setLocation} />
         </FormControl>
         <FormControl id="hopePrice">
-          <FormLabel>hopePrice</FormLabel>
+          <FormLabel>희망가격</FormLabel>
           <Input
             type="text"
             name="hopePrice"
             value={hopePrice}
             onChange={handleChange}
+            placeholder="희망가격을 입력하세요."
           />
         </FormControl>
         <FormControl id="visitTime">
-          <FormLabel>visitTime</FormLabel>
+          <FormLabel>방문시간</FormLabel>
+          <SingleDatepicker
+            name="date-input"
+            date={date}
+            onDateChange={setDate}
+          />
           <Input
+            isInvalid={visitTime !== '' && !timeRegex.test(visitTime)}
             type="text"
             name="visitTime"
             value={visitTime}
-            onChange={handleChange}
+            onChange={handleTimeChange}
+            placeholder="방문시간을 입력하세요."
           />
+          {visitTime !== '' && !timeRegex.test(visitTime) && (
+            <ValidityMessage>{ERROR_MESSAGES.CHECK_INPUT_TIME}</ValidityMessage>
+          )}
         </FormControl>
-        <FormControl id="cakeCategory">
-          <FormLabel>케익 종류</FormLabel>
-          <RadioGroup
-            name="cakeCategory"
-            value={cakeCategory}
-            onChange={(value) => handleRadioChange(value, 'cakeCategory')}
-          >
-            <Stack direction="row">
-              {cakeCategories.map((category) => (
-                <Radio key={category} value={category}>
-                  {convertCakeCategory(category)}
-                </Radio>
-              ))}
-            </Stack>
-          </RadioGroup>
-        </FormControl>
-        <FormControl id="cakeSize">
-          <FormLabel>케익 크기</FormLabel>
-          <RadioGroup
-            name="cakeSize"
-            value={cakeSize}
-            onChange={(value) => handleRadioChange(value, 'cakeSize')}
-          >
-            <Stack direction="row">
-              {cakeSizes.map((size) => (
-                <Radio key={size} value={size}>
-                  {convertCakeSize(size)}
-                </Radio>
-              ))}
-            </Stack>
-          </RadioGroup>
-        </FormControl>
-        <FormControl id="cakeHeight">
-          <FormLabel>케익 높이</FormLabel>
-          <RadioGroup
-            name="cakeHeight"
-            value={cakeHeight}
-            onChange={(value) => handleRadioChange(value, 'cakeHeight')}
-          >
-            <Stack direction="row">
-              {cakeHeights.map((height) => (
-                <Radio key={height} value={height}>
-                  {convertCakeHeight(height)}
-                </Radio>
-              ))}
-            </Stack>
-          </RadioGroup>
-        </FormControl>
-        <FormControl id="breadFlavor">
-          <FormLabel>빵 맛</FormLabel>
-          <RadioGroup
-            name="breadFlavor"
-            value={breadFlavor}
-            onChange={(value) => handleRadioChange(value, 'breadFlavor')}
-          >
-            <Stack direction="row">
-              {breadFlavors.map((flavor) => (
-                <Radio key={flavor} value={flavor}>
-                  {convertBreadFlavor(flavor)}
-                </Radio>
-              ))}
-            </Stack>
-          </RadioGroup>
-        </FormControl>
-        <FormControl id="creamFlavor">
-          <FormLabel>크림 맛</FormLabel>
-          <RadioGroup
-            name="creamFlavor"
-            value={creamFlavor}
-            onChange={(value) => handleRadioChange(value, 'creamFlavor')}
-          >
-            <Stack direction="row">
-              {creamFlavors.map((flavor) => (
-                <Radio key={flavor} value={flavor}>
-                  {convertCreamFlavor(flavor)}
-                </Radio>
-              ))}
-            </Stack>
-          </RadioGroup>
-        </FormControl>
+        <CakeSelect<CakeCategory>
+          id="cakeCategory"
+          label="케익 종류"
+          value={cakeCategory}
+          options={cakeCategories}
+          onChange={handleChange}
+          convertOption={convertCakeCategory}
+        />
+        <CakeSelect<CakeSize>
+          id="cakeSize"
+          label="케익 크기"
+          value={cakeSize}
+          options={cakeSizes}
+          onChange={handleChange}
+          convertOption={convertCakeSize}
+        />
+        <CakeSelect<CakeHeight>
+          id="cakeHeight"
+          label="케익 높이"
+          value={cakeHeight}
+          options={cakeHeights}
+          onChange={handleChange}
+          convertOption={convertCakeHeight}
+        />
+        <CakeSelect<BreadFlavor>
+          id="breadFlavor"
+          label="빵 종류"
+          value={breadFlavor}
+          options={breadFlavors}
+          onChange={handleChange}
+          convertOption={convertBreadFlavor}
+        />
+        <CakeSelect<CreamFlavor>
+          id="creamFlavor"
+          label="크림 맛"
+          value={creamFlavor}
+          options={creamFlavors}
+          onChange={handleChange}
+          convertOption={convertCreamFlavor}
+        />
         <FormControl id="requirements">
           <FormLabel>요청사항</FormLabel>
           <Input
@@ -264,52 +259,61 @@ export default function NewOrder() {
             placeholder="요청사항을 입력하세요."
           />
         </FormControl>
-        <Button type="submit">전송하기</Button>
+        <Button background="hey.sub" type="submit">
+          전송하기
+        </Button>
       </OrderWrapper>
-    </form>
+    </Form>
   );
 }
 
-const cakeCategories: CakeCategory[] = [
-  'ALL',
-  'PHOTO',
-  'LETTERING',
-  'CHARACTER_IMAGE',
-  'CHARACTER_MODEL',
-  'ETC',
-];
-const cakeSizes: CakeSize[] = ['MINI', 'NO_1', 'NO_2', 'ETC'];
-const cakeHeights: CakeHeight[] = ['ONE_LAYER', 'TWO_LAYER', 'ETC'];
-const breadFlavors: BreadFlavor[] = [
-  'VANILLA',
-  'CHOCO',
-  'GREEN_TEA',
-  'CARROT',
-  'ETC',
-];
-const creamFlavors: CreamFlavor[] = [
-  'WHIPPED_CREAM',
-  'CREAM_CHEESE',
-  'CHOCO',
-  'OREO',
-  'ETC',
-];
+const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+
+const initialFormData: CakeForm = {
+  title: '',
+  hopePrice: '',
+  cakeCategory: 'ALL',
+  cakeSize: 'MINI',
+  cakeHeight: 'ONE_LAYER',
+  breadFlavor: 'VANILLA',
+  creamFlavor: 'WHIPPED_CREAM',
+  requirements: '',
+};
 
 const OrderWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1rem;
 `;
 
 const UploadContainer = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 300px;
+  height: 150px;
   border: 1px dashed grey;
   border-radius: 5px;
   cursor: pointer;
+  margin: 0 auto;
+`;
+
+const Form = styled.form`
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 1rem;
+`;
+
+const ImageBox = styled.div`
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 70px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  gap: 1rem;
+`;
+
+const ValidityMessage = styled.span`
+  color: red;
 `;

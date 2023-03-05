@@ -3,6 +3,7 @@ const ERROR_MESSAGES = {
   CHECK_NUMBER_TYPE: '* 숫자만 작성해해주세요',
   CHECK_OWNER_NAME_LENGTH: '* 올바른 이름을 작성해주세요.',
   CHECK_OWNER_NAME_TYPE: '* 한글 또는 영어로 작성해주세요',
+  CHECK_INPUT_TIME: '* 유효하지 않은 시간입니다. (예: 11:00)',
 };
 
 export default ERROR_MESSAGES;

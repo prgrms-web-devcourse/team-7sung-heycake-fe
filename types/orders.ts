@@ -20,6 +20,17 @@ export interface Order {
   updatedAt: string;
 }
 
+export interface CakeForm {
+  title: string;
+  hopePrice: string;
+  cakeCategory: CakeCategory;
+  cakeSize: CakeSize;
+  cakeHeight: CakeHeight;
+  breadFlavor: BreadFlavor;
+  creamFlavor: CreamFlavor;
+  requirements: string;
+}
+
 export type OrderStatus = 'NEW' | 'RESERVED' | 'PAID';
 
 export type CakeCategory =
