@@ -13,6 +13,8 @@ type ImageUploadReturn = {
   resetImages: () => void;
 };
 
+export const MAX_FILES = 3;
+
 const useImageUpload = (): ImageUploadReturn => {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [files, setFiles] = useState<File[]>([]);
@@ -33,11 +35,24 @@ const useImageUpload = (): ImageUploadReturn => {
         preview: URL.createObjectURL(file),
       })
     );
-    setFiles((prevState) => [...prevState, ...newFiles]);
-    setPreviewUrls((prevState) => [
-      ...prevState,
-      ...newFiles.map((file) => file.preview),
-    ]);
+
+    if (files.length + newFiles.length > MAX_FILES) {
+      const numFilesToKeep = MAX_FILES - files.length;
+      setFiles((prevState) => [
+        ...prevState,
+        ...newFiles.slice(0, numFilesToKeep),
+      ]);
+      setPreviewUrls((prevState) => [
+        ...prevState,
+        ...newFiles.slice(0, numFilesToKeep).map((file) => file.preview),
+      ]);
+    } else {
+      setFiles((prevState) => [...prevState, ...newFiles]);
+      setPreviewUrls((prevState) => [
+        ...prevState,
+        ...newFiles.map((file) => file.preview),
+      ]);
+    }
   };
 
   const handleFileInputChange = (
@@ -50,11 +65,24 @@ const useImageUpload = (): ImageUploadReturn => {
         preview: URL.createObjectURL(file),
       })
     );
-    setFiles((prevState) => [...prevState, ...newFiles]);
-    setPreviewUrls((prevState) => [
-      ...prevState,
-      ...newFiles.map((file) => file.preview),
-    ]);
+
+    if (files.length + newFiles.length > MAX_FILES) {
+      const numFilesToKeep = MAX_FILES - files.length;
+      setFiles((prevState) => [
+        ...prevState,
+        ...newFiles.slice(0, numFilesToKeep),
+      ]);
+      setPreviewUrls((prevState) => [
+        ...prevState,
+        ...newFiles.slice(0, numFilesToKeep).map((file) => file.preview),
+      ]);
+    } else {
+      setFiles((prevState) => [...prevState, ...newFiles]);
+      setPreviewUrls((prevState) => [
+        ...prevState,
+        ...newFiles.map((file) => file.preview),
+      ]);
+    }
   };
 
   const resetImages = () => {
