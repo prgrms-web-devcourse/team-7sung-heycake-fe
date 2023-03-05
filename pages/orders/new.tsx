@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Select,
-} from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import Image from 'next/image';
@@ -14,6 +7,7 @@ import { GrPowerReset } from 'react-icons/gr';
 
 import { publicApi } from '@/components/Api';
 import LocationSelectBox from '@/components/Main/location/locationSelectBox';
+import CakeSelect from '@/components/Orders/CakeSelect';
 import {
   breadFlavors,
   cakeCategories,
@@ -24,6 +18,14 @@ import {
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import useImageUpload from '@/hooks/useImageUpload';
 import {
+  BreadFlavor,
+  CakeCategory,
+  CakeFormData,
+  CakeHeight,
+  CakeSize,
+  CreamFlavor,
+} from '@/types/orders';
+import {
   convertBreadFlavor,
   convertCakeCategory,
   convertCakeHeight,
@@ -33,19 +35,21 @@ import {
 
 const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
 
+const initialFormData: CakeFormData = {
+  title: '',
+  hopePrice: '',
+  cakeCategory: 'ALL',
+  cakeSize: 'MINI',
+  cakeHeight: 'ONE_LAYER',
+  breadFlavor: 'VANILLA',
+  creamFlavor: 'WHIPPED_CREAM',
+  requirements: '',
+};
+
 export default function NewOrder() {
   const [location, setLocation] = useState('강남구');
   const [visitTime, setVisitTime] = useState('');
-  const [formData, setFormData] = useState({
-    title: '',
-    hopePrice: '',
-    cakeCategory: 'ALL',
-    cakeSize: 'MINI',
-    cakeHeight: 'ONE_LAYER',
-    breadFlavor: 'VANILLA',
-    creamFlavor: 'WHIPPED_CREAM',
-    requirements: '',
-  });
+  const [formData, setFormData] = useState<CakeFormData>(initialFormData);
   const {
     previewUrls,
     files,
@@ -109,15 +113,9 @@ export default function NewOrder() {
     }
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -218,76 +216,46 @@ export default function NewOrder() {
             <ValidityMessage>{ERROR_MESSAGES.CHECK_INPUT_TIME}</ValidityMessage>
           )}
         </FormControl>
-        <FormControl id="cakeCategory">
-          <FormLabel>케익 종류</FormLabel>
-          <Select
-            name="cakeCategory"
-            value={cakeCategory}
-            onChange={handleSelectChange}
-          >
-            {cakeCategories.map((category) => (
-              <option key={category} value={category}>
-                {convertCakeCategory(category)}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl id="cakeSize">
-          <FormLabel>케익 크기</FormLabel>
-          <Select
-            name="cakeSize"
-            value={cakeSize}
-            onChange={handleSelectChange}
-          >
-            {cakeSizes.map((size) => (
-              <option key={size} value={size}>
-                {convertCakeSize(size)}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl id="cakeHeight">
-          <FormLabel>케익 높이</FormLabel>
-          <Select
-            name="cakeHeight"
-            value={cakeHeight}
-            onChange={handleSelectChange}
-          >
-            {cakeHeights.map((height) => (
-              <option key={height} value={height}>
-                {convertCakeHeight(height)}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl id="breadFlavor">
-          <FormLabel>빵 맛</FormLabel>
-          <Select
-            name="breadFlavor"
-            value={breadFlavor}
-            onChange={handleSelectChange}
-          >
-            {breadFlavors.map((flavor) => (
-              <option key={flavor} value={flavor}>
-                {convertBreadFlavor(flavor)}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl id="creamFlavor">
-          <FormLabel>크림 맛</FormLabel>
-          <Select
-            name="creamFlavor"
-            value={creamFlavor}
-            onChange={handleSelectChange}
-          >
-            {creamFlavors.map((flavor) => (
-              <option key={flavor} value={flavor}>
-                {convertCreamFlavor(flavor)}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
+        <CakeSelect<CakeCategory>
+          id="cakeCategory"
+          label="케익 종류"
+          value={cakeCategory}
+          options={cakeCategories}
+          onChange={handleChange}
+          convertOption={convertCakeCategory}
+        />
+        <CakeSelect<CakeSize>
+          id="cakeSize"
+          label="케익 크기"
+          value={cakeSize}
+          options={cakeSizes}
+          onChange={handleChange}
+          convertOption={convertCakeSize}
+        />
+        <CakeSelect<CakeHeight>
+          id="cakeHeight"
+          label="케익 높이"
+          value={cakeHeight}
+          options={cakeHeights}
+          onChange={handleChange}
+          convertOption={convertCakeHeight}
+        />
+        <CakeSelect<BreadFlavor>
+          id="breadFlavor"
+          label="빵 종류"
+          value={breadFlavor}
+          options={breadFlavors}
+          onChange={handleChange}
+          convertOption={convertBreadFlavor}
+        />
+        <CakeSelect<CreamFlavor>
+          id="creamFlavor"
+          label="크림 맛"
+          value={creamFlavor}
+          options={creamFlavors}
+          onChange={handleChange}
+          convertOption={convertCreamFlavor}
+        />
         <FormControl id="requirements">
           <FormLabel>요청사항</FormLabel>
           <Input
