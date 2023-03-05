@@ -1,8 +1,30 @@
-import { Button, Input } from '@chakra-ui/react';
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Radio,
+  RadioGroup,
+  Stack,
+} from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { useState } from 'react';
 
 import { publicApi } from '@/components/Api';
+import {
+  BreadFlavor,
+  CakeCategory,
+  CakeHeight,
+  CakeSize,
+  CreamFlavor,
+} from '@/types/orders';
+import {
+  convertBreadFlavor,
+  convertCakeCategory,
+  convertCakeHeight,
+  convertCakeSize,
+  convertCreamFlavor,
+} from '@/utils/orders';
 
 export default function NewOrder() {
   const [formData, setFormData] = useState({
@@ -10,11 +32,11 @@ export default function NewOrder() {
     hopePrice: '',
     region: '',
     visitTime: '',
-    cakeCategory: '',
-    cakeSize: '',
-    cakeHeight: '',
-    breadFlavor: '',
-    creamFlavor: '',
+    cakeCategory: 'ALL',
+    cakeSize: 'MINI',
+    cakeHeight: 'ONE_LAYER',
+    breadFlavor: 'VANILLA',
+    creamFlavor: 'WHIPPED_CREAM',
     requirements: '',
   });
   const [imageFiles, setImageFiles] = useState<File[]>([]);
@@ -64,6 +86,13 @@ export default function NewOrder() {
     }));
   };
 
+  const handleRadioChange = (value: string) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      cakeCategory: value,
+    }));
+  };
+
   const {
     title,
     hopePrice,
@@ -81,93 +110,161 @@ export default function NewOrder() {
     <form onSubmit={handleSubmit}>
       <input type="file" id="image" name="image" onChange={handleImageChange} />
       <OrderWrapper>
-        <div>
+        <FormControl id="title">
+          <FormLabel>title</FormLabel>
           <Input
             type="text"
-            id="title"
             name="title"
             value={title}
-            placeholder="title"
             onChange={handleChange}
           />
+        </FormControl>
+        <FormControl id="region">
+          <FormLabel>region</FormLabel>
           <Input
             type="text"
-            id="region"
             name="region"
             value={region}
-            placeholder="region"
             onChange={handleChange}
           />
-        </div>
-        <Input
-          type="text"
-          id="hopePrice"
-          name="hopePrice"
-          value={hopePrice}
-          placeholder="hopePrice"
-          onChange={handleChange}
-        />
-        <Input
-          type="text"
-          id="visitTime"
-          name="visitTime"
-          value={visitTime}
-          placeholder="visitTime"
-          onChange={handleChange}
-        />
-        <Input
-          type="text"
-          id="breadFlavor"
-          name="breadFlavor"
-          value={breadFlavor}
-          placeholder="케익 맛"
-          onChange={handleChange}
-        />
-        <Input
-          type="text"
-          id="cakeCategory"
-          name="cakeCategory"
-          value={cakeCategory}
-          placeholder="cakeCategory"
-          onChange={handleChange}
-        />
-        <Input
-          type="text"
-          id="cakeHeight"
-          name="cakeHeight"
-          value={cakeHeight}
-          placeholder="cakeHeight"
-          onChange={handleChange}
-        />
-        <Input
-          type="text"
-          id="cakeSize"
-          name="cakeSize"
-          value={cakeSize}
-          placeholder="cakeSize"
-          onChange={handleChange}
-        />
-        <Input
-          type="text"
-          id="creamFlavor"
-          name="creamFlavor"
-          value={creamFlavor}
-          placeholder="creamFlavor"
-          onChange={handleChange}
-        />
-        <Input
-          type="text"
-          id="requirements"
-          name="requirements"
-          value={requirements}
-          placeholder="requirements"
-          onChange={handleChange}
-        />
+        </FormControl>
+        <FormControl id="hopePrice">
+          <FormLabel>hopePrice</FormLabel>
+          <Input
+            type="text"
+            name="hopePrice"
+            value={hopePrice}
+            onChange={handleChange}
+          />
+        </FormControl>
+        <FormControl id="visitTime">
+          <FormLabel>visitTime</FormLabel>
+          <Input
+            type="text"
+            name="visitTime"
+            value={visitTime}
+            onChange={handleChange}
+          />
+        </FormControl>
+        <FormControl id="cakeCategory">
+          <FormLabel>케익 종류</FormLabel>
+          <RadioGroup
+            name="cakeCategory"
+            value={cakeCategory}
+            onChange={handleRadioChange}
+          >
+            <Stack direction="row">
+              {cakeCategories.map((category) => (
+                <Radio key={category} value={category}>
+                  {convertCakeCategory(category)}
+                </Radio>
+              ))}
+            </Stack>
+          </RadioGroup>
+        </FormControl>
+        <FormControl id="cakeSize">
+          <FormLabel>케익 크기</FormLabel>
+          <RadioGroup
+            name="cakeSize"
+            value={cakeSize}
+            onChange={handleRadioChange}
+          >
+            <Stack direction="row">
+              {cakeSizes.map((size) => (
+                <Radio key={size} value={size}>
+                  {convertCakeSize(size)}
+                </Radio>
+              ))}
+            </Stack>
+          </RadioGroup>
+        </FormControl>
+        <FormControl id="cakeHeight">
+          <FormLabel>케익 높이</FormLabel>
+          <RadioGroup
+            name="cakeHeight"
+            value={cakeHeight}
+            onChange={handleRadioChange}
+          >
+            <Stack direction="row">
+              {cakeHeights.map((height) => (
+                <Radio key={height} value={height}>
+                  {convertCakeHeight(height)}
+                </Radio>
+              ))}
+            </Stack>
+          </RadioGroup>
+        </FormControl>
+        <FormControl id="breadFlavor">
+          <FormLabel>빵 맛</FormLabel>
+          <RadioGroup
+            name="breadFlavor"
+            value={breadFlavor}
+            onChange={handleRadioChange}
+          >
+            <Stack direction="row">
+              {breadFlavors.map((flavor) => (
+                <Radio key={flavor} value={flavor}>
+                  {convertBreadFlavor(flavor)}
+                </Radio>
+              ))}
+            </Stack>
+          </RadioGroup>
+        </FormControl>
+        <FormControl id="creamFlavor">
+          <FormLabel>크림 맛</FormLabel>
+          <RadioGroup
+            name="creamFlavor"
+            value={creamFlavor}
+            onChange={handleRadioChange}
+          >
+            <Stack direction="row">
+              {creamFlavors.map((flavor) => (
+                <Radio key={flavor} value={flavor}>
+                  {convertCreamFlavor(flavor)}
+                </Radio>
+              ))}
+            </Stack>
+          </RadioGroup>
+        </FormControl>
+        <FormControl id="requirements">
+          <FormLabel>요청사항</FormLabel>
+          <Input
+            name="requirements"
+            value={requirements}
+            onChange={handleChange}
+            placeholder="요청사항을 입력하세요."
+          />
+        </FormControl>
         <Button type="submit">전송하기</Button>
       </OrderWrapper>
     </form>
   );
 }
+
+const cakeCategories: CakeCategory[] = [
+  'ALL',
+  'PHOTO',
+  'LETTERING',
+  'CHARACTER_IMAGE',
+  'CHARACTER_MODEL',
+  'ETC',
+];
+const cakeSizes: CakeSize[] = ['MINI', 'NO_1', 'NO_2', 'ETC'];
+const cakeHeights: CakeHeight[] = ['ONE_LAYER', 'TWO_LAYER', 'ETC'];
+const breadFlavors: BreadFlavor[] = [
+  'VANILLA',
+  'CHOCO',
+  'GREEN_TEA',
+  'CARROT',
+  'ETC',
+];
+const creamFlavors: CreamFlavor[] = [
+  'WHIPPED_CREAM',
+  'CREAM_CHEESE',
+  'CHOCO',
+  'OREO',
+  'ETC',
+];
 
 const OrderWrapper = styled.div`
   width: 100%;

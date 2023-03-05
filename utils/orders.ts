@@ -1,6 +1,14 @@
-import { Order } from '@/types/orders';
+import {
+  BreadFlavor,
+  CakeCategory,
+  CakeHeight,
+  CakeSize,
+  CreamFlavor,
+  Order,
+  OrderStatus,
+} from '@/types/orders';
 
-export function convertCakeSize(size: Order['cakeInfo']['cakeSize']) {
+export function convertCakeSize(size: CakeSize) {
   switch (size) {
     case 'MINI':
       return '미니';
@@ -13,7 +21,7 @@ export function convertCakeSize(size: Order['cakeInfo']['cakeSize']) {
   }
 }
 
-export function convertCakeHeight(height: Order['cakeInfo']['cakeHeight']) {
+export function convertCakeHeight(height: CakeHeight) {
   switch (height) {
     case 'ONE_LAYER':
       return '1단';
@@ -24,7 +32,7 @@ export function convertCakeHeight(height: Order['cakeInfo']['cakeHeight']) {
   }
 }
 
-export function convertBreadFlavor(flavor: Order['cakeInfo']['breadFlavor']) {
+export function convertBreadFlavor(flavor: BreadFlavor) {
   switch (flavor) {
     case 'VANILLA':
       return '바닐라';
@@ -39,7 +47,7 @@ export function convertBreadFlavor(flavor: Order['cakeInfo']['breadFlavor']) {
   }
 }
 
-export function convertCreamFlavor(flavor: Order['cakeInfo']['creamFlavor']) {
+export function convertCreamFlavor(flavor: CreamFlavor) {
   switch (flavor) {
     case 'WHIPPED_CREAM':
       return '생크림';
@@ -54,9 +62,7 @@ export function convertCreamFlavor(flavor: Order['cakeInfo']['creamFlavor']) {
   }
 }
 
-export function convertCakeCategory(
-  cakeCategory: Order['cakeInfo']['cakeCategory']
-): string {
+export function convertCakeCategory(cakeCategory: CakeCategory) {
   switch (cakeCategory) {
     case 'ALL':
       return '전체';
@@ -76,7 +82,7 @@ export function convertCakeCategory(
 }
 
 export const getOrderStatusText = (
-  status: Order['orderStatus'],
+  status: OrderStatus,
   count: Order['offerCount']
 ) => {
   switch (status) {

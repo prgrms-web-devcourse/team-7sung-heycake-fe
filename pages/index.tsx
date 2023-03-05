@@ -24,13 +24,14 @@ export default function Home() {
         <ServiceDescription>커스텀 케이크 제작 의뢰 플랫폼</ServiceDescription>
       </ImageContainer>
       <LoginButtonContainer>
-        <Image
-          src="/images/kakao_login_medium_wide.png"
-          width={300}
-          height={300}
-          alt="카카오 로그인 이미지"
-          onClick={loginWithKakao}
-        />
+        <button onClick={loginWithKakao} type="button">
+          <Image
+            src="/images/kakao_login_medium_wide.png"
+            width={300}
+            height={45}
+            alt="카카오 로그인 이미지"
+          />
+        </button>
         <Button
           bg="hey.lightOrange"
           width="300px"
