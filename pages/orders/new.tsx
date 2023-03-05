@@ -9,10 +9,12 @@ import {
 import styled from '@emotion/styled';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { GrPowerReset } from 'react-icons/gr';
 
 import { publicApi } from '@/components/Api';
+import LocationSelectBox from '@/components/Main/location/locationSelectBox';
+import ERROR_MESSAGES from '@/constants/errorMessages';
 import useImageUpload from '@/hooks/useImageUpload';
 import {
   BreadFlavor,
@@ -29,12 +31,14 @@ import {
   convertCreamFlavor,
 } from '@/utils/orders';
 
+const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+
 export default function NewOrder() {
+  const [location, setLocation] = useState('강남구');
+  const [visitTime, setVisitTime] = useState('');
   const [formData, setFormData] = useState({
     title: '',
     hopePrice: '',
-    region: '',
-    visitTime: '',
     cakeCategory: 'ALL',
     cakeSize: 'MINI',
     cakeHeight: 'ONE_LAYER',
@@ -59,16 +63,28 @@ export default function NewOrder() {
     }
   };
 
-  console.log(date.toISOString());
+  const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputTime = event.target.value;
+    setVisitTime(inputTime);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (!timeRegex.test(visitTime)) {
+      return;
+    }
+
     const newFormData = new FormData();
     newFormData.append('title', formData.title);
     newFormData.append('hopePrice', formData.hopePrice);
-    newFormData.append('region', formData.region);
-    newFormData.append('visitTime', formData.visitTime);
+    newFormData.append('region', location);
+    newFormData.append(
+      'visitTime',
+      `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()} ${visitTime}:00`
+    );
     newFormData.append('cakeCategory', formData.cakeCategory);
     newFormData.append('cakeSize', formData.cakeSize);
     newFormData.append('cakeHeight', formData.cakeHeight);
@@ -84,6 +100,8 @@ export default function NewOrder() {
       await publicApi.post('/orders', newFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          access_token:
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaXNzIjoiaGV5LWNha2UiLCJleHAiOjM2NzgwMjc4MzMsImlhdCI6MTY3ODAyNzgzMywibWVtYmVySWQiOjJ9.YRCRVDbszmdco_1AFVY_drpwcQ9f30zZKirDxoX-JCSFCEI7Lx-T-hQG98Ipyquu-VOM2CXaSY5V6urtwqMnHw',
         },
       });
     } catch (error) {
@@ -107,11 +125,16 @@ export default function NewOrder() {
     }));
   };
 
+  useEffect(() => {
+    const localLocation = window.localStorage.getItem('location');
+    if (localLocation) {
+      setLocation(localLocation);
+    }
+  }, []);
+
   const {
     title,
     hopePrice,
-    region,
-    visitTime,
     cakeCategory,
     cakeSize,
     cakeHeight,
@@ -166,12 +189,7 @@ export default function NewOrder() {
         </FormControl>
         <FormControl id="region">
           <FormLabel>지역</FormLabel>
-          <Input
-            type="text"
-            name="region"
-            value={region}
-            onChange={handleChange}
-          />
+          <LocationSelectBox location={location} setLocation={setLocation} />
         </FormControl>
         <FormControl id="hopePrice">
           <FormLabel>희망가격</FormLabel>
@@ -190,11 +208,15 @@ export default function NewOrder() {
             onDateChange={setDate}
           />
           <Input
+            isInvalid={!timeRegex.test(visitTime)}
             type="text"
             name="visitTime"
             value={visitTime}
-            onChange={handleChange}
+            onChange={handleTimeChange}
           />
+          {!timeRegex.test(visitTime) && (
+            <ValidityMessage>{ERROR_MESSAGES.CHECK_INPUT_TIME}</ValidityMessage>
+          )}
         </FormControl>
         <FormControl id="cakeCategory">
           <FormLabel>케익 종류</FormLabel>
@@ -338,4 +360,8 @@ const ImageBox = styled.div`
   margin: 0 auto;
   padding: 0 1rem;
   gap: 1rem;
+`;
+
+const ValidityMessage = styled.span`
+  color: red;
 `;
