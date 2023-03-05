@@ -1,18 +1,18 @@
-import { Grid, Skeleton } from '@chakra-ui/react';
+import { Skeleton } from '@chakra-ui/react';
 
 export default function CakeListSkeleton() {
   return (
-    <Grid justifyItems="center" padding={0} gap={4} flexDirection="column">
-      <Skeleton height="140px" />
-      <Skeleton height="140px" />
-      <Skeleton height="140px" />
-      <Skeleton height="140px" />
-      <Skeleton height="140px" />
-      <Skeleton height="140px" />
-      <Skeleton height="140px" />
-      <Skeleton height="140px" />
-      <Skeleton height="140px" />
-      <Skeleton height="140px" />
-    </Grid>
+    <>
+      <Skeleton height="140px" mb={2} />
+      <Skeleton height="140px" mb={2} />
+      <Skeleton height="140px" mb={2} />
+      <Skeleton height="140px" mb={2} />
+      <Skeleton height="140px" mb={2} />
+      <Skeleton height="140px" mb={2} />
+      <Skeleton height="140px" mb={2} />
+      <Skeleton height="140px" mb={2} />
+      <Skeleton height="140px" mb={2} />
+      <Skeleton height="140px" mb={2} />
+    </>
   );
 }
