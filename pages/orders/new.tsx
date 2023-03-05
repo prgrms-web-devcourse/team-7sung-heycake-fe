@@ -169,7 +169,6 @@ export default function NewOrder() {
           </Button>
         )}
       </ImageBox>
-
       <OrderWrapper>
         <FormControl id="title">
           <FormLabel>제목</FormLabel>
