@@ -22,7 +22,8 @@ export default function CakeList({ category, location }: any) {
         cursor: pageParam,
       }),
     {
-      getNextPageParam: (lastPage) => lastPage.cursorId ?? undefined,
+      getNextPageParam: (lastPage) =>
+        !lastPage.isLast ? lastPage.cursorId : undefined,
     }
   );
 
