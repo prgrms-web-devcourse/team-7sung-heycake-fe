@@ -27,6 +27,7 @@
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "no-alert": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "no-console": "off"
   }
 }
