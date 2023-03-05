@@ -27,8 +27,10 @@ export default function LocationSelectBox({
         onClick={onOpen}
         fontSize="xl"
         fontWeight="700"
-        gap={1}
+        gap={2}
+        m={3}
         alignItems="center"
+        w="200px"
       >
         <BiCurrentLocation color="orange" fontSize="xl" />
         <Text pr={2}>서울시 {location}</Text>

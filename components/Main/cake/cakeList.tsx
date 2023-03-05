@@ -39,7 +39,7 @@ export default function CakeList({ category, location }: any) {
           render: () => (
             <Box
               m={3}
-              mt={32}
+              mt={72}
               color="white"
               p={3}
               bg="blue.500"

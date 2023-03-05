@@ -28,7 +28,24 @@ export default function CakeMain() {
 
   return (
     <Flex justifyContent="center">
-      <Tabs colorScheme="heys" isLazy minW="350px" w="max-content">
+      <Tabs colorScheme="heys" isLazy minW="350px" w="max-content" m={0}>
+        <Flex gap={4} justifyContent="space-between">
+          <LocationSelectBox location={location} setLocation={setLocation} />
+          <Link href="/orders/new">
+            <Button
+              position="fixed"
+              w={24}
+              h={10}
+              mt={2}
+              ml={-28}
+              colorScheme="heys"
+              fontSize="3xl"
+              zIndex="20"
+            >
+              <MdPostAdd />
+            </Button>
+          </Link>
+        </Flex>
         <Box
           overflow="scroll"
           sx={{
@@ -36,11 +53,15 @@ export default function CakeMain() {
               display: 'none',
             },
           }}
+          position="sticky"
+          top={0}
+          zIndex="10"
+          h="50px"
+          bgColor="white"
         >
-          <TabList w="max-content" alignItems="center" h="60px" p={2}>
-            <LocationSelectBox location={location} setLocation={setLocation} />
+          <TabList w="max-content" alignItems="center" h="50px" p={2}>
             {TAB_TABLE.map((tab) => (
-              <Tab key={tab.label} h="60px">
+              <Tab key={tab.label} h="50px">
                 {tab.label}
               </Tab>
             ))}
@@ -53,20 +74,6 @@ export default function CakeMain() {
             </TabPanel>
           ))}
         </TabPanels>
-        <Link href="/orders/new">
-          <Button
-            position="fixed"
-            borderRadius={32}
-            bottom={8}
-            right={8}
-            w={16}
-            h={16}
-            colorScheme="heys"
-            fontSize="2xl"
-          >
-            <MdPostAdd />
-          </Button>
-        </Link>
       </Tabs>
     </Flex>
   );
