@@ -53,6 +53,7 @@ export default function CakeList({ category, location }: any) {
         });
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.pages, inView, status, toast]);
 
   if (status === 'loading') {
