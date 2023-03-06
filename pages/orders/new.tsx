@@ -9,12 +9,13 @@ import {
   SliderFilledTrack,
   SliderThumb,
   SliderTrack,
+  Textarea,
 } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { GrPowerReset } from 'react-icons/gr';
 
 import { publicApi } from '@/components/Api';
@@ -63,6 +64,7 @@ export default function NewOrder() {
   const [inputRef, handleFileChoose] = useClickInput();
   const [date, setDate] = useState(new Date());
   const router = useRouter();
+  const requirementRef = useRef<HTMLTextAreaElement>(null);
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputTime = event.target.value;
@@ -72,7 +74,7 @@ export default function NewOrder() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (formData.title === '' || formData.requirements === '') {
+    if (formData.title === '' || requirementRef.current === null) {
       alert('입력한 값을 확인해 주세요');
       return;
     }
@@ -103,7 +105,7 @@ export default function NewOrder() {
     newFormData.append('cakeHeight', formData.cakeHeight);
     newFormData.append('breadFlavor', formData.breadFlavor);
     newFormData.append('creamFlavor', formData.creamFlavor);
-    newFormData.append('requirements', formData.requirements);
+    newFormData.append('requirements', requirementRef.current.value);
 
     files.forEach((file) => {
       newFormData.append(`cakeImages`, file);
@@ -148,7 +150,6 @@ export default function NewOrder() {
     cakeHeight,
     breadFlavor,
     creamFlavor,
-    requirements,
   } = formData;
 
   return (
@@ -297,10 +298,10 @@ export default function NewOrder() {
         />
         <FormControl id="requirements">
           <FormLabel>요청사항</FormLabel>
-          <Input
+          <Textarea
+            minH="100px"
             name="requirements"
-            value={requirements}
-            onChange={handleChange}
+            ref={requirementRef}
             placeholder="요청사항을 입력하세요."
           />
         </FormControl>
@@ -321,7 +322,6 @@ const initialFormData: CakeForm = {
   cakeHeight: 'ONE_LAYER',
   breadFlavor: 'VANILLA',
   creamFlavor: 'WHIPPED_CREAM',
-  requirements: '',
 };
 
 const OrderWrapper = styled.div`

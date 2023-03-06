@@ -1,11 +1,10 @@
+import { Flex, Heading, Tag } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import { useQuery } from '@tanstack/react-query';
+import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 import { publicApi } from '@/components/Api';
-import CakeListSkeleton from '@/components/Main/cake/cakeListSkeleton';
 import { DataTable, ImageSlider, Thread } from '@/components/Orders';
 import { Order, ThreadDto } from '@/types/orders';
 import {
@@ -17,30 +16,34 @@ import {
   getOrderStatusText,
 } from '@/utils/orders';
 
-export default function Orders() {
-  const router = useRouter();
-  const { id: orderId } = router.query;
+interface OrdersProps {
+  order: Order;
+  threads: ThreadDto[];
+  orderId: string;
+}
 
-  const { data: order } = useQuery<Order>(['orders', orderId], () =>
-    publicApi.get(`/orders/${orderId}`).then((response) => response.data)
-  );
-
-  const { data: threads } = useQuery<ThreadDto[]>(['offers', orderId], () =>
-    publicApi.get(`/orders/${orderId}/offers`).then((response) => response.data)
-  );
-
-  if (!order) {
-    return <CakeListSkeleton />;
-  }
-
+export default function Orders({ order, threads, orderId }: OrdersProps) {
   return (
-    <OrderWrapper>
+    <Flex
+      flexDirection="column"
+      style={{ width: '100%', gap: '1rem', padding: '1rem' }}
+    >
       <ImageSlider images={order.images} />
       <div>
-        <OrderRequestCount>
+        <Tag
+          style={{
+            color: 'white',
+            backgroundColor: '#e53e3e',
+            padding: '0 1rem',
+            paddingBottom: '2px',
+            borderRadius: '1rem',
+          }}
+        >
           {getOrderStatusText(order.orderStatus, order.offerCount)}
-        </OrderRequestCount>
-        <OrderTitle>{order.title}</OrderTitle>
+        </Tag>
+        <Heading as="h1" size="xl">
+          {order.title}
+        </Heading>
         <PlaceOrderRequester>{order.region}</PlaceOrderRequester>
       </div>
       <DataTable
@@ -80,36 +83,28 @@ export default function Orders() {
         </ApplyButton>
       </OrderRequestCountCard>
       {threads?.map((thread) => (
-        <Thread
-          key={thread.offerId}
-          thread={thread}
-          orderId={orderId as string}
-        />
+        <Thread key={thread.offerId} thread={thread} orderId={orderId} />
       ))}
-    </OrderWrapper>
+    </Flex>
   );
 }
 
-const OrderWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-`;
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const orderId = query.id as string;
 
-const OrderTitle = styled.h1`
-  font-size: 1.4rem;
-  font-weight: bold;
-`;
+  const orderResponse = await publicApi.get<Order>(`/orders/${orderId}`);
+  const threadsResponse = await publicApi.get<ThreadDto[]>(
+    `/orders/${orderId}/offers`
+  );
 
-const OrderRequestCount = styled.span`
-  color: white;
-  background-color: #e53e3e;
-  padding: 0 1rem;
-  padding-bottom: 2px;
-  border-radius: 1rem;
-`;
+  return {
+    props: {
+      orderId,
+      order: orderResponse.data,
+      threads: threadsResponse.data,
+    },
+  };
+};
 
 const PlaceOrderRequester = styled.p`
   font-size: 0.9rem;
