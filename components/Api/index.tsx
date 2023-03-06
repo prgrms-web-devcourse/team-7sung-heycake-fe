@@ -24,7 +24,8 @@ const options = {
 
 export const internalApi = setInterceptor(
   axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL:
+      'https://team-7sung-heycake-fe-git-feat-121fix-main-page-hey-cake.vercel.app/',
     ...options,
   })
 );
