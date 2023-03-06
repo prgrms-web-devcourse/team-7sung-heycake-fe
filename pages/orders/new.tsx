@@ -13,6 +13,7 @@ import {
 import styled from '@emotion/styled';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { GrPowerReset } from 'react-icons/gr';
 
@@ -61,6 +62,7 @@ export default function NewOrder() {
   } = useImageUpload();
   const [inputRef, handleFileChoose] = useClickInput();
   const [date, setDate] = useState(new Date());
+  const router = useRouter();
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputTime = event.target.value;
@@ -75,21 +77,27 @@ export default function NewOrder() {
       return;
     }
 
+    if (hopePrice < 10000) {
+      alert('최소 금액은 10,000원 이상이에요');
+      return;
+    }
+
     if (!timeRegex.test(visitTime)) {
       alert('시간을 예시에 맞춰서 입력해 주세요');
       return;
     }
 
+    const formDate = `${date.getFullYear()}-${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${date
+      .getDate()
+      .toString()
+      .padStart(2, '0')} ${visitTime}:00`;
     const newFormData = new FormData();
     newFormData.append('title', formData.title);
     newFormData.append('hopePrice', hopePrice.toString());
     newFormData.append('region', location);
-    newFormData.append(
-      'visitTime',
-      `${date.getFullYear()}-${
-        date.getMonth() + 1
-      }-${date.getDate()} ${visitTime}:00`
-    );
+    newFormData.append('visitTime', formDate);
     newFormData.append('cakeCategory', formData.cakeCategory);
     newFormData.append('cakeSize', formData.cakeSize);
     newFormData.append('cakeHeight', formData.cakeHeight);
@@ -105,11 +113,13 @@ export default function NewOrder() {
       await publicApi.post('/orders', newFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          access_token:
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaXNzIjoiaGV5LWNha2UiLCJleHAiOjM2NzgwMjc4MzMsImlhdCI6MTY3ODAyNzgzMywibWVtYmVySWQiOjJ9.YRCRVDbszmdco_1AFVY_drpwcQ9f30zZKirDxoX-JCSFCEI7Lx-T-hQG98Ipyquu-VOM2CXaSY5V6urtwqMnHw',
+          access_token: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
         },
       });
+      alert('주문이 성공적으로 등록되었어요.');
+      router.push('/main');
     } catch (error) {
+      alert('주문 등록을 실패했어요. 다시 한번 확인해 주세요.');
       console.error(error);
     }
   };
@@ -218,7 +228,7 @@ export default function NewOrder() {
             disabled={!directInput}
             type="number"
             name="hopePrice"
-            value={hopePrice}
+            value={hopePrice !== 0 ? hopePrice : ''}
             onChange={(e) => setHopePrice(+e.target.value)}
             placeholder="희망가격을 입력하세요."
             min={10000}
@@ -306,7 +316,7 @@ const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
 
 const initialFormData: CakeForm = {
   title: '',
-  cakeCategory: 'ALL',
+  cakeCategory: 'PHOTO',
   cakeSize: 'MINI',
   cakeHeight: 'ONE_LAYER',
   breadFlavor: 'VANILLA',

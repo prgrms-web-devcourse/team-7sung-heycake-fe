@@ -64,8 +64,6 @@ export function convertCreamFlavor(flavor: CreamFlavor) {
 
 export function convertCakeCategory(cakeCategory: CakeCategory) {
   switch (cakeCategory) {
-    case 'ALL':
-      return '전체';
     case 'PHOTO':
       return '사진케이크';
     case 'LETTERING':
