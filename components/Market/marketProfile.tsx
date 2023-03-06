@@ -23,6 +23,11 @@ export default function MarketProfile() {
     return <MarketProfileSkeleton />;
   }
 
+  if (status === 'error') {
+    alert('업주 정보 조회에 실패했습니다');
+    return router.back();
+  }
+
   const address = `${data.marketAddress.city} ${data.marketAddress.district} ${data.marketAddress.detailAddress}`;
   const openingHours = `${data.openTime} ~ ${data.endTime}`;
 
