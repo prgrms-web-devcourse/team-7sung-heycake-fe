@@ -47,7 +47,7 @@ export default function CakeItem({
             <Card m={2} width="100px" height="100px">
               <Image
                 fill
-                sizes="40vw"
+                sizes="20vw"
                 src={image || '/images/sampleCake.jpg'}
                 alt="Cake"
               />

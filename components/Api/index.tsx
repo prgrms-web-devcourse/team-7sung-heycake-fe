@@ -24,6 +24,7 @@ const options = {
 
 export const internalApi = setInterceptor(
   axios.create({
+    baseURL: process.env.NEXT_PUBLIC_INTERNAL_API_URL,
     ...options,
   })
 );

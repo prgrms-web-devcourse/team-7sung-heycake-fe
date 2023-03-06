@@ -1,7 +1,11 @@
 import '@/styles/style.css';
 
 import { ChakraProvider } from '@chakra-ui/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -30,26 +34,28 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={heyTheme}>
-        <Head>
-          <title>Hey, cake</title>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+        <Hydrate state={pageProps.dehydratedState}>
+          <Head>
+            <title>Hey, cake</title>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+            />
+          </Head>
+          <Script
+            src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+            onLoad={kakaoInit}
           />
-        </Head>
-        <Script
-          src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
-          onLoad={kakaoInit}
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
-        />
-        <Layout>
-          {router.pathname !== '/' && <Header />}
-          <Component {...pageProps} />
-        </Layout>
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
+          />
+          <Layout>
+            {router.pathname !== '/' && <Header />}
+            <Component {...pageProps} />
+          </Layout>
+        </Hydrate>
         <ReactQueryDevtools />
       </ChakraProvider>
     </QueryClientProvider>

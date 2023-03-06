@@ -9,7 +9,7 @@ import {
   Tabs,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MdPostAdd } from 'react-icons/md';
 
 import { TAB_TABLE } from '../constants';
@@ -18,13 +18,6 @@ import CakeList from './cakeList';
 
 export default function CakeMain() {
   const [location, setLocation] = useState('강남구');
-
-  useEffect(() => {
-    const localLocation = window.localStorage.getItem('location');
-    if (localLocation) {
-      setLocation(localLocation);
-    }
-  }, []);
 
   return (
     <Flex>

@@ -10,7 +10,9 @@ export default async function getCakeList(
   try {
     const { location, category, cursor } = request.body;
     const { data }: AxiosResponse = await publicApi.get(
-      `/orders?region=${location}&cakeCategory=${category}&pageSize=10&cursorId=${cursor}`
+      `/orders?region=${location}&cakeCategory=${category}&pageSize=10&cursorId=${
+        typeof cursor === 'number' ? cursor : ''
+      }`
     );
     return response.status(200).end(JSON.stringify(data));
   } catch (err) {
