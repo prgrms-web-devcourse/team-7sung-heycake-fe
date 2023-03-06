@@ -30,6 +30,13 @@ export default function MarketList({ category }: IMarketList) {
     return <AdminListSkeleton />;
   }
 
+  if (status === 'error') {
+    alert(
+      '마켓신청 리스트 조회에 실패했습니다. (새로고침 or 메인페이지 이동버튼)'
+    );
+    return router.back();
+  }
+
   return (
     <>
       <Grid gap={0}>
