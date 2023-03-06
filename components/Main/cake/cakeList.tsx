@@ -1,6 +1,7 @@
 import { Box, CircularProgress, Grid, useToast } from '@chakra-ui/react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -12,6 +13,7 @@ import CakeListSkeleton from './cakeListSkeleton';
 export default function CakeList({ category, location }: any) {
   const toast = useToast();
   const { ref, inView } = useInView();
+  const router = useRouter();
   const { data, status, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
     ['전체 케이크 리스트', category, location],
     ({ pageParam = '' }) =>
@@ -58,6 +60,11 @@ export default function CakeList({ category, location }: any) {
 
   if (status === 'loading') {
     return <CakeListSkeleton />;
+  }
+
+  if (status === 'error') {
+    alert('메인페이지 조회에 실패했습니다. (새로고침)');
+    return router.back();
   }
 
   return (
