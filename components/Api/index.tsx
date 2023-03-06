@@ -24,6 +24,7 @@ const options = {
 
 export const internalApi = setInterceptor(
   axios.create({
+    baseURL: 'http://localhost:3000',
     ...options,
   })
 );

@@ -26,7 +26,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
+      dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
     },
   };
 }
