@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import ApiErrorAlert from '@/components/Shared/apiErrorAlert';
+
 import getCakeList from '../../Api/Main';
 import { ICakeItemData } from '../types';
 import CakeItem from './cakeItem';
@@ -58,6 +60,10 @@ export default function CakeList({ category, location }: any) {
 
   if (status === 'loading') {
     return <CakeListSkeleton />;
+  }
+
+  if (status === 'error') {
+    return <ApiErrorAlert />;
   }
 
   return (

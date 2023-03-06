@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { getMarketDetail } from '../Api/Market';
+import ApiErrorAlert from '../Shared/apiErrorAlert';
 import {
   MarketAddressIcon,
   MarketInfoIcon,
@@ -21,6 +22,10 @@ export default function MarketProfile() {
 
   if (status === 'loading' || !router.isReady) {
     return <MarketProfileSkeleton />;
+  }
+
+  if (status === 'error') {
+    return <ApiErrorAlert />;
   }
 
   const address = `${data.marketAddress.city} ${data.marketAddress.district} ${data.marketAddress.detailAddress}`;
