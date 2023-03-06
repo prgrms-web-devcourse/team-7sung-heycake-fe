@@ -27,7 +27,6 @@ export interface CakeForm {
   cakeHeight: CakeHeight;
   breadFlavor: BreadFlavor;
   creamFlavor: CreamFlavor;
-  requirements: string;
 }
 
 export type OrderStatus = 'NEW' | 'RESERVED' | 'PAID';
