@@ -1,6 +1,7 @@
 import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import useSelectOffer from '@/hooks/useSelectOffer';
 import { ThreadDto } from '@/types/orders';
@@ -16,7 +17,12 @@ export default function Thread({ thread, orderId }: ThreadProps) {
   return (
     <ThreadWrapper>
       <ThreadTopWrapper>
-        <ThreadTitle>{thread.marketName}</ThreadTitle>
+        <ThreadTitle
+          href="/market/[marketId]"
+          as={`/market/${thread.marketId}`}
+        >
+          {thread.marketName}
+        </ThreadTitle>
         <ExpectedPrice>{thread.expectedPrice}원</ExpectedPrice>
       </ThreadTopWrapper>
       <Image
@@ -55,8 +61,9 @@ const ThreadTopWrapper = styled.div`
   font-weight: bold;
 `;
 
-const ThreadTitle = styled.h1`
+const ThreadTitle = styled(Link)`
   font-size: 1rem;
+  text-decoration: underline;
 `;
 
 const MoreComments = styled.div`
