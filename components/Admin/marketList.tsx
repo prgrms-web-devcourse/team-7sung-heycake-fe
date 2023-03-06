@@ -20,7 +20,6 @@ export default function MarketList({ category }: IMarketList) {
     }
   );
 
-
   useEffect(() => {
     if (inView) fetchNextPage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
