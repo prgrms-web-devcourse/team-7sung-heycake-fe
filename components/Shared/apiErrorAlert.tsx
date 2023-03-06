@@ -16,7 +16,7 @@ export default function ApiErrorAlert() {
   const cancelRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
 
-  useEffect(onOpen, []);
+  useEffect(onOpen, [onOpen]);
 
   return (
     <AlertDialog
