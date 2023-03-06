@@ -10,10 +10,10 @@ export async function getMarketDetail({ enrollmentId }: IgetMarketDetail) {
     if (response.status === 200) {
       return response.data;
     }
-  } catch (error) {
-    return console.error(error);
+  } catch (error: any) {
+    throw new Error(error);
   }
-  return console.error('마켓 상세 정보를 받아오는데 에러가 발생했습니다');
+  throw new Error('마켓 상세 정보를 받아오는데 에러가 발생했습니다');
 }
 
 export async function getMarketList({ cursor, category }: IgetMarketList) {
@@ -25,10 +25,10 @@ export async function getMarketList({ cursor, category }: IgetMarketList) {
     if (response.status === 200) {
       return response.data;
     }
-  } catch (error) {
-    return console.error(error);
+  } catch (error: any) {
+    throw new Error(error);
   }
-  return console.error('마켓 승인 리스트를 받아오는데 에러가 발생했습니다');
+  throw new Error('마켓 승인 리스트를 받아오는데 에러가 발생했습니다');
 }
 
 export async function patchMarketStatus({
@@ -43,8 +43,8 @@ export async function patchMarketStatus({
     if (response.status === 200) {
       return response.data;
     }
-  } catch (error) {
-    return console.error(error);
+  } catch (error: any) {
+    throw new Error(error);
   }
-  return console.error('마켓 상태 변경에 문제가 발생했습니다');
+  throw new Error('마켓 상태 변경에 문제가 발생했습니다');
 }

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { getMarketDetail } from '../Api/Market';
+import ApiErrorAlert from '../Shared/apiErrorAlert';
 import {
   MarketAddressIcon,
   MarketInfoIcon,
@@ -24,8 +25,7 @@ export default function MarketProfile() {
   }
 
   if (status === 'error') {
-    alert('업주 정보 조회에 실패했습니다');
-    return router.back();
+    return <ApiErrorAlert />;
   }
 
   const address = `${data.marketAddress.city} ${data.marketAddress.district} ${data.marketAddress.detailAddress}`;
