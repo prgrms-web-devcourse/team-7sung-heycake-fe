@@ -20,7 +20,6 @@ export default function MarketList({ category }: IMarketList) {
     }
   );
 
-  console.log(status);
 
   useEffect(() => {
     if (inView) fetchNextPage();
