@@ -7,7 +7,6 @@ import {
 } from '@/types/orders';
 
 export const cakeCategories: CakeCategory[] = [
-  'ALL',
   'PHOTO',
   'LETTERING',
   'CHARACTER_IMAGE',
