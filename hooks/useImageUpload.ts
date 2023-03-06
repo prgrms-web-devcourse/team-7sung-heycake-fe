@@ -13,9 +13,7 @@ type ImageUploadReturn = {
   resetImages: () => void;
 };
 
-export const MAX_FILES = 3;
-
-const useImageUpload = (): ImageUploadReturn => {
+const useImageUpload = (maxFileLength = 3): ImageUploadReturn => {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [files, setFiles] = useState<File[]>([]);
 
@@ -36,8 +34,8 @@ const useImageUpload = (): ImageUploadReturn => {
       })
     );
 
-    if (files.length + newFiles.length > MAX_FILES) {
-      const numFilesToKeep = MAX_FILES - files.length;
+    if (files.length + newFiles.length > maxFileLength) {
+      const numFilesToKeep = maxFileLength - files.length;
       setFiles((prevState) => [
         ...prevState,
         ...newFiles.slice(0, numFilesToKeep),
@@ -66,8 +64,8 @@ const useImageUpload = (): ImageUploadReturn => {
       })
     );
 
-    if (files.length + newFiles.length > MAX_FILES) {
-      const numFilesToKeep = MAX_FILES - files.length;
+    if (files.length + newFiles.length > maxFileLength) {
+      const numFilesToKeep = maxFileLength - files.length;
       setFiles((prevState) => [
         ...prevState,
         ...newFiles.slice(0, numFilesToKeep),
