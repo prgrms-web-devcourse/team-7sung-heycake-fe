@@ -2,6 +2,7 @@ import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 function loginWithKakao() {
   window.Kakao.Auth.authorize({
@@ -11,6 +12,16 @@ function loginWithKakao() {
 
 export default function Home() {
   const router = useRouter();
+
+  function isLoggedIn() {
+    if (localStorage.getItem('access_token')) {
+      router.push('/main');
+    } else {
+      router.push('/');
+    }
+  }
+
+  useEffect(() => isLoggedIn(), []);
 
   return (
     <>

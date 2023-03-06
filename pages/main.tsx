@@ -3,12 +3,11 @@ import { useCallback, useEffect } from 'react';
 
 import CakeMain from '@/components/Main/cake/cakeMain';
 
-import handler from './api/users/kakao-login';
-
 interface ResponseType {
-  ok: boolean;
-  error?: any;
+  accessToken: string;
+  refreshToken: string;
 }
+
 export default function Main() {
   const router = useRouter();
   const { code: authCode, error: kakaoServerError } = router.query;
@@ -16,7 +15,7 @@ export default function Main() {
   const loginHandler = useCallback(
     async (currCode: string | string[]) => {
       const response: ResponseType = await fetch(
-        'https://heycake.kro.kr/login/oauth2/code/kakao',
+        'https://heycake.kro.kr/login',
         {
           method: 'POST',
           headers: {
@@ -28,7 +27,11 @@ export default function Main() {
         }
       ).then((res) => res.json());
 
-      if (response.ok) {
+      if (response) {
+        if (!localStorage.getItem('access_token')) {
+          localStorage.setItem('access_token', response.accessToken);
+          localStorage.setItem('refresh_token', response.refreshToken);
+        }
         router.push('/main');
       } else {
         router.push('/');
@@ -39,7 +42,7 @@ export default function Main() {
 
   useEffect(() => {
     if (authCode) {
-      handler(authCode);
+      loginHandler(authCode);
     } else if (kakaoServerError) {
       router.push('/');
     }
