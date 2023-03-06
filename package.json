@@ -20,6 +20,7 @@
     "date-fns": "^2.29.3",
     "dayzed": "^3.2.3",
     "framer-motion": "^9.0.2",
+    "jsonwebtoken": "^9.0.0",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -28,6 +29,7 @@
     "react-intersection-observer": "^9.4.3"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "18.13.0",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
