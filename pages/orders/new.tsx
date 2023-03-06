@@ -29,7 +29,7 @@ import {
 } from '@/constants/cakeFormat';
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import useClickInput from '@/hooks/useClickInput';
-import useImageUpload, { MAX_FILES } from '@/hooks/useImageUpload';
+import useImageUpload from '@/hooks/useImageUpload';
 import {
   BreadFlavor,
   CakeCategory,
@@ -159,7 +159,7 @@ export default function NewOrder() {
         onClick={handleFileChoose}
       >
         드래그 앤 드랍 또는 클릭하여 파일을 추가하세요.
-        <br />({files.length}/{MAX_FILES})
+        <br />({files.length}/3)
         <input
           hidden
           ref={inputRef}

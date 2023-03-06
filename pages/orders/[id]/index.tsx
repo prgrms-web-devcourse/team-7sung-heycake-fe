@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { publicApi } from '@/components/Api';
@@ -71,6 +72,12 @@ export default function Orders() {
           height={40}
         />
         신청한 케이크 업체 {order.offerCount}개
+        <ApplyButton
+          href="/orders/[orderId]/new-offer"
+          as={`/orders/${orderId}/new-offer`}
+        >
+          신청하기
+        </ApplyButton>
       </OrderRequestCountCard>
       {threads?.map((thread) => (
         <Thread
@@ -122,4 +129,11 @@ const OrderRequestCountCard = styled.div`
   align-items: center;
   font-weight: bold;
   border-radius: 6px;
+`;
+
+const ApplyButton = styled(Link)`
+  background-color: #f96400;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
 `;
