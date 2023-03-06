@@ -90,7 +90,7 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const orderId = query.id;
+  const orderId = query.id as string;
 
   const orderResponse = await publicApi.get<Order>(`/orders/${orderId}`);
   const threadsResponse = await publicApi.get<ThreadDto[]>(
