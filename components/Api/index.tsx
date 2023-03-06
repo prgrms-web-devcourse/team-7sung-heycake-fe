@@ -24,7 +24,7 @@ const options = {
 
 export const internalApi = setInterceptor(
   axios.create({
-    baseURL: process.env.VERCEL_URL || 'http://localhost:3000',
+    baseURL: process.env.NEXT_PUBLIC_INTERNAL_API_URL,
     ...options,
   })
 );

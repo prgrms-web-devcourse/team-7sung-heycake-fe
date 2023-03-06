@@ -11,7 +11,6 @@ function loginWithKakao() {
 
 export default function Home() {
   const router = useRouter();
-  console.log(process.env.VERCEL_URL);
 
   return (
     <>
