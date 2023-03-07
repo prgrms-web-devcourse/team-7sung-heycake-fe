@@ -19,6 +19,7 @@ import { GrPowerReset } from 'react-icons/gr';
 import { publicApi } from '@/components/Api';
 import useClickInput from '@/hooks/useClickInput';
 import useImageUpload from '@/hooks/useImageUpload';
+import { getAccessToken } from '@/utils/getAccessToken';
 
 export default function NewOffer() {
   const router = useRouter();
@@ -27,6 +28,7 @@ export default function NewOffer() {
   const [directInput, setDirectInput] = useState(false);
   const [inputRef, handleFileChoose] = useClickInput();
   const contentRef = useRef<HTMLTextAreaElement>(null);
+  const accessToken = getAccessToken();
 
   const {
     previewUrls,
@@ -39,6 +41,11 @@ export default function NewOffer() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (accessToken === null) {
+      alert('로그인을 해주세요');
+      return;
+    }
 
     if (contentRef.current === null) {
       alert('오퍼 내용을 입력해 주세요');
@@ -63,7 +70,7 @@ export default function NewOffer() {
       await publicApi.post('/offers', newFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          access_token: process.env.NEXT_PUBLIC_MERKET_ACCESS_TOKEN,
+          access_token: accessToken,
         },
       });
       alert('오퍼가 성공적으로 등록되었어요.');

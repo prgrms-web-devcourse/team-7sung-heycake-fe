@@ -39,6 +39,7 @@ import {
   CakeSize,
   CreamFlavor,
 } from '@/types/orders';
+import { getAccessToken } from '@/utils/getAccessToken';
 import {
   convertBreadFlavor,
   convertCakeCategory,
@@ -65,6 +66,7 @@ export default function NewOrder() {
   const [date, setDate] = useState(new Date());
   const router = useRouter();
   const requirementRef = useRef<HTMLTextAreaElement>(null);
+  const accessToken = getAccessToken();
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputTime = event.target.value;
@@ -73,6 +75,11 @@ export default function NewOrder() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (accessToken === null) {
+      alert('로그인을 해주세요');
+      return;
+    }
 
     if (formData.title === '' || requirementRef.current === null) {
       alert('입력한 값을 확인해 주세요');
@@ -115,7 +122,7 @@ export default function NewOrder() {
       await publicApi.post('/orders', newFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          access_token: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
+          access_token: accessToken,
         },
       });
       alert('주문이 성공적으로 등록되었어요.');
