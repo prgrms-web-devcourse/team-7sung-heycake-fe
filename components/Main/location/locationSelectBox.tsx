@@ -13,7 +13,7 @@ import { BiCurrentLocation } from 'react-icons/bi';
 
 import { ILocationSelectBox } from '@/types/Main';
 
-import { SEOUL_AREA } from '../constants';
+import { SEOUL_AREA } from '../../../constants/Main';
 import LocationListItem from './locationListItem';
 
 export default function LocationSelectBox({

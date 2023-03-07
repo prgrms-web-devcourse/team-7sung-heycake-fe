@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { MdPostAdd } from 'react-icons/md';
 
-import { TAB_TABLE } from '../constants';
+import { TAB_TABLE } from '../../../constants/Main';
 import LocationSelectBox from '../location/locationSelectBox';
 import CakeList from './cakeList';
 

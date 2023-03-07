@@ -11,7 +11,7 @@ import Image from 'next/image';
 
 import { ICakeItem } from '@/types/Main';
 
-import { CAKE_CATEGORY, CAKE_SIZE } from '../constants';
+import { CAKE_CATEGORY, CAKE_SIZE } from '../../../constants/Main';
 import numberWithCommas from '../numberWithCommas';
 
 export default function CakeItem({
