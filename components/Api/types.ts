@@ -56,8 +56,10 @@ export type TSouelArea =
   | '중구'
   | '중량';
 
+type Nullable<T> = T | null;
+
 export interface IgetOrderList {
-  cursorId: number | null;
-  pageSize: number | null;
-  orderStatus: string | null;
+  cursorId: Nullable<number>;
+  pageSize: Nullable<number>;
+  orderStatus: Nullable<string>;
 }
