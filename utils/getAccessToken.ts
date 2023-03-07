@@ -1,4 +1,8 @@
-const storage = window.localStorage;
-
 // eslint-disable-next-line import/prefer-default-export
-export const getAccessToken = () => storage.getItem('access_token');
+export const getAccessToken = () => {
+  if (typeof window !== 'undefined') {
+    return window.localStorage.getItem('access_token');
+  }
+
+  return null;
+};
