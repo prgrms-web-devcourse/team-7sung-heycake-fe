@@ -51,6 +51,7 @@ export type CreamFlavor =
 export interface ThreadDto {
   offerId: number;
   marketId: number;
+  enrollmentId: number;
   marketName: string;
   expectedPrice: number;
   imageUrl: string;
