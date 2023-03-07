@@ -10,7 +10,7 @@ export interface IgetMarketDetail {
   enrollmentId: string;
 }
 
-export interface IgetMarketList {
+export interface IpostMarketList {
   cursor: string;
   category: TMarketCategory;
 }
