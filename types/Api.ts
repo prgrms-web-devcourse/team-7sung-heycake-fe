@@ -1,4 +1,4 @@
-import { TMarketCategory, TStatus } from '../../types/Admin';
+import { TMarketCategory, TStatus } from './Admin';
 
 export interface IgetCakeList {
   location: TSouelArea;

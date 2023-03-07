@@ -1,7 +1,11 @@
 import API_ERROR_MESSAGES from '@/constants/Api';
+import {
+  IgetMarketDetail,
+  IPatchMarketStatus,
+  IpostMarketList,
+} from '@/types/Api';
 
 import { internalApi } from '.';
-import { IgetMarketDetail, IPatchMarketStatus, IpostMarketList } from './types';
 
 export async function getMarketDetail({ enrollmentId }: IgetMarketDetail) {
   try {

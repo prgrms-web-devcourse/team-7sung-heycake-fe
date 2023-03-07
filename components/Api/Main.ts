@@ -1,7 +1,7 @@
 import API_ERROR_MESSAGES from '@/constants/Api';
+import { IgetCakeList } from '@/types/Api';
 
 import { internalApi } from '.';
-import { IgetCakeList } from './types';
 
 export default async function getCakeList({
   location,
