@@ -120,7 +120,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
               width="95%"
               height="70px"
               margin="0 auto"
-              gap="1"
+              gap="1rem"
             >
               {previewUrls.map((url) => (
                 <Image
