@@ -31,7 +31,7 @@ export async function getOrderList({
   return console.error('주문 리스트 조회에 실패하였습니다');
 }
 
-export async function deleteOrder(orderId: number) {
+export async function deleteOrder(orderId: string) {
   try {
     await publicApi.delete(`/orders/${orderId}`, {
       headers: {

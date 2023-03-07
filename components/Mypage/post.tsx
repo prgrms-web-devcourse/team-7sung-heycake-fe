@@ -2,6 +2,7 @@ import { Box, Button, Card, Container, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import { deleteOrder } from '../Api/Order';
 import { IMypagePost } from './types';
 
 export default function Post({
@@ -47,7 +48,15 @@ export default function Post({
           <Text color="gray">{visitTime.slice(0, -3)}</Text>
         </Container>
       </Container>
-      <Button backgroundColor="hey.lightOrange">X</Button>
+      <Button
+        backgroundColor="hey.lightOrange"
+        onClick={(e) => {
+          e.stopPropagation();
+          deleteOrder(id);
+        }}
+      >
+        X
+      </Button>
     </Container>
   );
 }
