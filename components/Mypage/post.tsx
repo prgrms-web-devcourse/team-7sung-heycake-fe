@@ -1,4 +1,4 @@
-import { Box, Card, Container, Text } from '@chakra-ui/react';
+import { Box, Button, Card, Container, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
@@ -28,25 +28,26 @@ export default function Post({
       <Card width={74} height={74} shadow="none" marginTop={3}>
         <Image src={imageUrl} alt="케이크 이미지" fill />
       </Card>
-      <Container>
+      <Container marginTop={3}>
         <Box
           color="white"
           borderRadius="1rem"
           backgroundColor="hey.main"
           padding="0 1rem"
           width="fit-content"
-          position="absolute"
-          left="18rem"
+          height={4}
+          fontSize={4}
         >
           {orderStatus}
         </Box>
-        <Container padding="0" marginTop={6}>
+        <Container padding="0" marginTop={2}>
           <Text fontSize="1rem" fontWeight="bold" marginBottom={1}>
             {title}
           </Text>
           <Text color="gray">{visitTime.slice(0, -3)}</Text>
         </Container>
       </Container>
+      <Button backgroundColor="hey.lightOrange">X</Button>
     </Container>
   );
 }
