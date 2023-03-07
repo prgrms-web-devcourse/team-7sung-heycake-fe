@@ -55,3 +55,9 @@ export type TSeoulArea =
   | '종로구'
   | '중구'
   | '중량';
+
+export interface IgetOrderList {
+  cursorId: number | null;
+  pageSize: number | null;
+  orderStatus: string | null;
+}
