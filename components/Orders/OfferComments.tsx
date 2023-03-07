@@ -31,7 +31,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
   );
 
   const handleClick = (commentId: number) => {
-    axios.delete(`/api/v1/comments/${commentId}`);
+    axios.delete(`/comments/${commentId}`);
   };
 
   if (isLoading) {
