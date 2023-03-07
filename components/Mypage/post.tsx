@@ -20,6 +20,7 @@ export default function Post({
       width="100"
       borderRadius="10"
       boxShadow="5px 2px 2px grey"
+      key={id}
     >
       <Box w="70px" h="70px" id={id}>
         <Image src={imageUrl} width={70} height={70} alt="케이크 이미지" />
