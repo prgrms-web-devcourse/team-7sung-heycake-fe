@@ -1,10 +1,20 @@
-import { Button } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Button,
+  Flex,
+} from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import useSelectOffer from '@/hooks/useSelectOffer';
 import { ThreadDto } from '@/types/orders';
+
+import OfferComments from './OfferComments';
 
 interface ThreadProps {
   thread: ThreadDto;
@@ -15,16 +25,31 @@ export default function Thread({ thread, orderId }: ThreadProps) {
   const selectOffer = useSelectOffer();
 
   return (
-    <ThreadWrapper>
-      <ThreadTopWrapper>
-        <ThreadTitle
+    <Flex
+      w="100%"
+      bg="rgb(239, 239, 240)"
+      flexDirection="column"
+      justifyContent="space-between"
+      minH="350px"
+      gap="2rem"
+      borderRadius="1rem"
+      fontSize="0.8rem"
+      padding="2rem 1.4rem"
+    >
+      <Flex
+        justifyContent="space-between"
+        fontWeight="bold"
+        alignItems="flex-end"
+      >
+        <Link
+          style={{ fontSize: '1rem', textDecoration: 'underline' }}
           href="/market/[marketId]"
           as={`/market/${thread.marketId}`}
         >
           {thread.marketName}
-        </ThreadTitle>
-        <ExpectedPrice>{thread.expectedPrice}원</ExpectedPrice>
-      </ThreadTopWrapper>
+        </Link>
+        <Box fontSize="1.1rem">{thread.expectedPrice}원</Box>
+      </Flex>
       <Image
         src={thread.imageUrl}
         width={150}
@@ -36,41 +61,19 @@ export default function Thread({ thread, orderId }: ThreadProps) {
       <Button onClick={() => selectOffer(orderId, thread.offerId)}>
         해당 업체 선택
       </Button>
-      <MoreComments>{`${thread.commentCount}개 댓글 더 보기 >`}</MoreComments>
-    </ThreadWrapper>
+      <Accordion allowToggle>
+        <AccordionItem border="none">
+          <AccordionButton>
+            <Box as="span" flex="1" textAlign="left">
+              {thread.commentCount}개 댓글 더 보기
+            </Box>
+            <AccordionIcon />
+          </AccordionButton>
+          <AccordionPanel pb={4}>
+            <OfferComments offerId={thread.offerId} />
+          </AccordionPanel>
+        </AccordionItem>
+      </Accordion>
+    </Flex>
   );
 }
-
-const ThreadWrapper = styled.div`
-  width: 100%;
-  min-height: 350px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 2rem 1.4rem;
-  background-color: rgb(239, 239, 240);
-  font-size: 0.8rem;
-  border-radius: 1rem;
-  gap: 2rem;
-`;
-
-const ThreadTopWrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  font-weight: bold;
-`;
-
-const ThreadTitle = styled(Link)`
-  font-size: 1rem;
-  text-decoration: underline;
-`;
-
-const MoreComments = styled.div`
-  color: #444444;
-  text-decoration: underline;
-`;
-
-const ExpectedPrice = styled.div`
-  font-size: 1.1rem;
-`;
