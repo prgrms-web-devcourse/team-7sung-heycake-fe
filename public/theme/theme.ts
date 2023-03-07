@@ -10,6 +10,7 @@ const heyTheme = extendTheme({
       lightGray: '#D9D9D9',
       red: '#E53E3E',
       lightOrange: '#FEEBCB',
+      kakaoOrange: '#FBE34D',
     },
 
     heys: {
