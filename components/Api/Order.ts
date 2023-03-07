@@ -1,10 +1,9 @@
-import { IgetOrderList } from 'types/Api';
+import { IgetOrderList } from '@/types/Api';
+import { getAccessToken } from '@/utils/getAccessToken';
 
 import { publicApi } from '.';
 
-// localStorage access_token 사용 예정
-const ACCESS_TOKEN =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaXNzIjoiaGV5LWNha2UiLCJleHAiOjM2NzgwOTQyNTMsImlhdCI6MTY3ODA5NDI1MywibWVtYmVySWQiOjJ9.efMIPCAP9jf6-HklFpQ832Ur50LSLq-H6_7Tcwemh7wPc7NrVJIherhvdoxIXA7NWl9xm1mQsKgzbnRD6MuB1g';
+const ACCESS_TOKEN = getAccessToken();
 
 export default async function getOrderList({
   cursorId = null,
