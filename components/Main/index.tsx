@@ -14,8 +14,8 @@ import { MdPostAdd } from 'react-icons/md';
 
 import { TAB_TABLE } from '@/constants/Main';
 
-import LocationSelectBox from '../location/locationSelectBox';
-import CakeList from './cakeList';
+import CakeList from './cake/cakeList';
+import LocationSelectBox from './location/locationSelectBox';
 
 export default function CakeMain() {
   const [location, setLocation] = useState('강남구');

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 
 import getCakeList from '@/components/Api/Main';
-import CakeMain from '@/components/Main/cake/cakeMain';
+import CakeMain from '@/components/Main';
 
 interface ResponseType {
   accessToken: string;

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import { LoginIcon, LogoutIcon, UserIcon } from './icon';
+import { LoginIcon, LogoutIcon, UserIcon } from '@/public/icon';
 
 export default function Header() {
   const [isLogin, setIsLogin] = useState(false);
