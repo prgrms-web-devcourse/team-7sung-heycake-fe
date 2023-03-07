@@ -14,7 +14,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import SEOUL_AREA from '@/constants/seoulArea';
 
-import postEnrollment from '../Api/postEnrollment';
+import postEnrollment from '../Api/Enrollment';
 
 const {
   CHECK_BUSINESS_NUMBER_LENGTH,
