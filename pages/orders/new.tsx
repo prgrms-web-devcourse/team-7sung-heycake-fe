@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Checkbox,
+  Flex,
   FormControl,
   FormLabel,
   Input,
@@ -11,7 +12,6 @@ import {
   SliderTrack,
   Textarea,
 } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -153,8 +153,16 @@ export default function NewOrder() {
   } = formData;
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <UploadContainer
+    <form style={{ margin: '0 auto', padding: '1rem' }} onSubmit={handleSubmit}>
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        height="150px"
+        border="1px dashed grey"
+        borderRadius="5px"
+        cursor="poiner"
+        margin="0 auto"
+        textAlign="center"
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         onClick={handleFileChoose}
@@ -168,8 +176,14 @@ export default function NewOrder() {
           multiple
           onChange={handleFileInputChange}
         />
-      </UploadContainer>
-      <ImageBox>
+      </Flex>
+      <Flex
+        alignItems="center"
+        width="95%"
+        height="70px"
+        margin="0 auto"
+        gap="1rem"
+      >
         {previewUrls.map((url) => (
           <Image
             key={url}
@@ -185,8 +199,8 @@ export default function NewOrder() {
             <GrPowerReset />
           </Button>
         )}
-      </ImageBox>
-      <OrderWrapper>
+      </Flex>
+      <Flex flexDirection="column" width="100%" gap="1rem">
         <FormControl id="title">
           <FormLabel>제목</FormLabel>
           <Input
@@ -202,7 +216,7 @@ export default function NewOrder() {
           <LocationSelectBox location={location} setLocation={setLocation} />
         </FormControl>
         <FormControl id="hopePrice">
-          <PriceBox>
+          <FormLabel display="flex" justifyContent="space-between">
             희망가격
             <Checkbox
               isChecked={directInput}
@@ -210,7 +224,7 @@ export default function NewOrder() {
             >
               직접 입력
             </Checkbox>
-          </PriceBox>
+          </FormLabel>
           <Slider
             defaultValue={30000}
             min={10000}
@@ -253,7 +267,7 @@ export default function NewOrder() {
             placeholder="방문시간을 입력하세요."
           />
           {visitTime !== '' && !timeRegex.test(visitTime) && (
-            <ValidityMessage>{ERROR_MESSAGES.CHECK_INPUT_TIME}</ValidityMessage>
+            <Box color="red">{ERROR_MESSAGES.CHECK_INPUT_TIME}</Box>
           )}
         </FormControl>
         <CakeSelect<CakeCategory>
@@ -308,8 +322,8 @@ export default function NewOrder() {
         <Button background="hey.sub" type="submit">
           전송하기
         </Button>
-      </OrderWrapper>
-    </Form>
+      </Flex>
+    </form>
   );
 }
 
@@ -323,45 +337,3 @@ const initialFormData: CakeForm = {
   breadFlavor: 'VANILLA',
   creamFlavor: 'WHIPPED_CREAM',
 };
-
-const OrderWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const UploadContainer = styled(Box)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 150px;
-  border: 1px dashed grey;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 0 auto;
-  text-align: center;
-`;
-
-const Form = styled.form`
-  margin: 0 auto;
-  padding: 1rem;
-`;
-
-const ImageBox = styled.div`
-  display: flex;
-  align-items: center;
-  width: 95%;
-  height: 70px;
-  margin: 0 auto;
-  gap: 1rem;
-`;
-
-const ValidityMessage = styled.span`
-  color: red;
-`;
-
-const PriceBox = styled(FormLabel)`
-  display: flex;
-  justify-content: space-between;
-`;
