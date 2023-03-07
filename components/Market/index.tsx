@@ -3,14 +3,15 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { getMarketDetail } from '../Api/Market';
-import ApiErrorAlert from '../Shared/apiErrorAlert';
 import {
   MarketAddressIcon,
   MarketInfoIcon,
   MarketOpeningIcon,
   MarketTelIcon,
-} from './icon';
+} from '@/public/icon';
+
+import { getMarketDetail } from '../Api/Market';
+import ApiErrorAlert from '../Shared/apiErrorAlert';
 import MarketProfileSkeleton from './marketProfileSkeleton';
 import MarketTitle from './marketTitle';
 

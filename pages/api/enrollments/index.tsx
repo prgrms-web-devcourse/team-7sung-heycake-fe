@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { publicApi } from '@/components/Api';
 
-export default async function getMarketList(
+export default async function postMarketList(
   request: NextApiRequest,
   response: NextApiResponse
 ) {

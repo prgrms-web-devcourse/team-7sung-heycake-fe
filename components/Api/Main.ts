@@ -1,5 +1,7 @@
+import API_ERROR_MESSAGES from '@/constants/Api';
+import { IgetCakeList } from '@/types/Api';
+
 import { internalApi } from '.';
-import { IgetCakeList } from './types';
 
 export default async function getCakeList({
   location,
@@ -15,8 +17,8 @@ export default async function getCakeList({
     if (response.status === 200) {
       return response.data;
     }
-  } catch (error: any) {
-    throw new Error(error);
+  } catch (error) {
+    throw new Error((error as Error).message);
   }
-  throw new Error('케이크 리스트를 받아오는데 에러가 발생했습니다');
+  throw new Error(API_ERROR_MESSAGES.FAIL_GET_CAKE_LIST);
 }

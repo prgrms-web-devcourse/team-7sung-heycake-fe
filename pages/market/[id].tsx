@@ -1,4 +1,4 @@
-import MarketProfile from '@/components/Market/marketProfile';
+import MarketProfile from '@/components/Market';
 
 export default function Market() {
   return <MarketProfile />;

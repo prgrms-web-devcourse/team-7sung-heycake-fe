@@ -1,5 +1,11 @@
+import API_ERROR_MESSAGES from '@/constants/Api';
+import {
+  IgetMarketDetail,
+  IPatchMarketStatus,
+  IpostMarketList,
+} from '@/types/Api';
+
 import { internalApi } from '.';
-import { IgetMarketDetail, IgetMarketList, IPatchMarketStatus } from './types';
 
 export async function getMarketDetail({ enrollmentId }: IgetMarketDetail) {
   try {
@@ -10,13 +16,13 @@ export async function getMarketDetail({ enrollmentId }: IgetMarketDetail) {
     if (response.status === 200) {
       return response.data;
     }
-  } catch (error: any) {
-    throw new Error(error);
+  } catch (error) {
+    throw new Error((error as Error).message);
   }
-  throw new Error('마켓 상세 정보를 받아오는데 에러가 발생했습니다');
+  throw new Error(API_ERROR_MESSAGES.FAIL_GET_MARKET_DETAIL);
 }
 
-export async function getMarketList({ cursor, category }: IgetMarketList) {
+export async function postMarketList({ cursor, category }: IpostMarketList) {
   try {
     const response = await internalApi.post(`/api/enrollments`, {
       cursor,
@@ -25,10 +31,10 @@ export async function getMarketList({ cursor, category }: IgetMarketList) {
     if (response.status === 200) {
       return response.data;
     }
-  } catch (error: any) {
-    throw new Error(error);
+  } catch (error) {
+    throw new Error((error as Error).message);
   }
-  throw new Error('마켓 승인 리스트를 받아오는데 에러가 발생했습니다');
+  throw new Error(API_ERROR_MESSAGES.FAIL_POST_MARKET_LIST);
 }
 
 export async function patchMarketStatus({
@@ -43,8 +49,8 @@ export async function patchMarketStatus({
     if (response.status === 200) {
       return response.data;
     }
-  } catch (error: any) {
-    throw new Error(error);
+  } catch (error) {
+    throw new Error((error as Error).message);
   }
-  throw new Error('마켓 상태 변경에 문제가 발생했습니다');
+  throw new Error(API_ERROR_MESSAGES.FAIL_PATCH_MARKET_STATUS);
 }

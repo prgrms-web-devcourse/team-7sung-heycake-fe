@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import getCakeList from '@/components/Api/Main';
 import ApiErrorAlert from '@/components/Shared/apiErrorAlert';
+import { ICakeItemData } from '@/types/Main';
 
-import getCakeList from '../../Api/Main';
-import { ICakeItemData } from '../types';
 import CakeItem from './cakeItem';
 import CakeListSkeleton from './cakeListSkeleton';
 

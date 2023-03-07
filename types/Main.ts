@@ -1,4 +1,4 @@
-import { TMainCategory, TSouelArea } from '../Api/types';
+import { TMainCategory, TSeoulArea } from './Api';
 
 export interface ICakeList {
   label: string;
@@ -29,7 +29,7 @@ export interface ICakeItem {
 export interface ICakeItemData {
   orderId: string;
   title: string;
-  region: TSouelArea;
+  region: TSeoulArea;
   cakeInfo: {
     cakeCategory: TMainCategory;
     cakeSize: TCakeSize;

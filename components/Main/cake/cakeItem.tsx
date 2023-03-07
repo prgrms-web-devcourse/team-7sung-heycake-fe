@@ -9,9 +9,9 @@ import {
 } from '@chakra-ui/react';
 import Image from 'next/image';
 
-import { CAKE_CATEGORY, CAKE_SIZE } from '../constants';
-import numberWithCommas from '../numberWithCommas';
-import { ICakeItem } from '../types';
+import { CAKE_CATEGORY, CAKE_SIZE } from '@/constants/Main';
+import { ICakeItem } from '@/types/Main';
+import numberWithCommas from '@/utils/numberWithCommas';
 
 export default function CakeItem({
   category,
