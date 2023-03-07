@@ -1,7 +1,7 @@
 import { TMarketCategory, TStatus } from './Admin';
 
 export interface IgetCakeList {
-  location: TSouelArea;
+  location: TSeoulArea;
   category: TMainCategory;
   cursor: string;
 }
@@ -29,7 +29,7 @@ export type TMainCategory =
   | 'CHARACTER_MODEL'
   | 'ETC';
 
-export type TSouelArea =
+export type TSeoulArea =
   | '강남구'
   | '강동구'
   | '강북구'
