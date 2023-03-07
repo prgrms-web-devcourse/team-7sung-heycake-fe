@@ -9,7 +9,7 @@ export default function Success() {
   const { marketName, ownerName, phoneNumber } = router.query;
   return (
     <>
-      <MypageTitle title="업체 정보 등록" isSuccess="false" />
+      <MypageTitle title="업체 정보 등록" isSuccess />
       <Container display="flex" flexDir="column" alignItems="center">
         <Text fontWeight={800} fontSize="1.3rem" margin="3rem 0 3rem 0">
           등록 신청이 완료되었습니다!
