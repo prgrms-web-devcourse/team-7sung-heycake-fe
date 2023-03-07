@@ -1,4 +1,4 @@
-import { ICakeList } from './types';
+import { ICakeList } from '../../types/Main';
 
 export const TAB_TABLE: ICakeList[] = [
   {

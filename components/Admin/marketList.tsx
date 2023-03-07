@@ -3,11 +3,12 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import { IMarketItem, IMarketList } from '@/types/Admin';
+
 import { getMarketList } from '../Api/Market';
 import ApiErrorAlert from '../Shared/apiErrorAlert';
 import AdminListSkeleton from './adminLIstSkeleton';
 import MarketItem from './marketItem';
-import { IMarketItem, IMarketList } from './types';
 
 export default function MarketList({ category }: IMarketList) {
   const { ref, inView } = useInView();

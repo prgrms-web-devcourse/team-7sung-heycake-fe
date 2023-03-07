@@ -1,4 +1,4 @@
-import { TMainCategory, TSouelArea } from '../Api/types';
+import { TMainCategory, TSouelArea } from '../components/Api/types';
 
 export interface ICakeList {
   label: string;

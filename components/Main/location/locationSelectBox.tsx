@@ -11,8 +11,9 @@ import {
 } from '@chakra-ui/react';
 import { BiCurrentLocation } from 'react-icons/bi';
 
+import { ILocationSelectBox } from '@/types/Main';
+
 import { SEOUL_AREA } from '../constants';
-import { ILocationSelectBox } from '../types';
 import LocationListItem from './locationListItem';
 
 export default function LocationSelectBox({

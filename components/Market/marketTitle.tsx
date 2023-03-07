@@ -2,8 +2,9 @@ import { Box, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
+import { IMarketTitle } from '@/types/Market';
+
 import { ArrowBackIcon } from './icon';
-import { IMarketTitle } from './types';
 
 export default function MarketTitle({ title }: IMarketTitle) {
   const router = useRouter();

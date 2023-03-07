@@ -14,12 +14,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { patchMarketStatus } from '../Api/Market';
+import { patchMarketStatus } from '@/components/Api/Market';
+import { IMarketItem } from '@/types/Admin';
+
 import {
   numberWithHyphenMarket,
   numberWithHyphenPhone,
 } from './numberWithHyphen';
-import { IMarketItem } from './types';
 
 export default function MarketItem({
   category,
