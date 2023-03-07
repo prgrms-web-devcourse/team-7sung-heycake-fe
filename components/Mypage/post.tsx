@@ -1,4 +1,4 @@
-import { Box, Container, Text } from '@chakra-ui/react';
+import { Box, Card, Container, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import { IMypagePost } from './types';
@@ -13,35 +13,36 @@ export default function Post({
 }: IMypagePost) {
   return (
     <Container
-      bgColor="hey.lightOrange"
-      display="flex"
-      marginBottom="1rem"
-      padding="1rem"
       width="100"
+      height="8rem"
+      bgColor="hey.lightOrange"
+      padding="1rem"
+      marginBottom="1rem"
       borderRadius="10"
-      boxShadow="5px 2px 2px grey"
+      boxShadow="4px 2px 2px lightGrey"
+      display="flex"
       key={id}
     >
-      <Box w="70px" h="70px" id={id}>
-        <Image src={imageUrl} width={70} height={70} alt="케이크 이미지" />
-      </Box>
-      <Container margin="0 0 0 5px" border="0" padding="0">
-        <Container
+      <Card width={74} height={74} shadow="none" marginTop={3}>
+        <Image src={imageUrl} alt="케이크 이미지" fill />
+      </Card>
+      <Container>
+        <Box
           color="white"
           borderRadius="1rem"
           backgroundColor="hey.main"
           padding="0 1rem"
           width="fit-content"
-          display="flex"
+          position="absolute"
+          left="18rem"
         >
           {orderStatus}
-        </Container>
-        <Container padding="0">
-          <Text fontSize="1rem" fontWeight="bold">
+        </Box>
+        <Container padding="0" marginTop={6}>
+          <Text fontSize="1rem" fontWeight="bold" marginBottom={1}>
             {title}
           </Text>
-          <Text color="gray">{region}</Text>
-          <Text color="gray">{visitTime}</Text>
+          <Text color="gray">{visitTime.slice(0, -3)}</Text>
         </Container>
       </Container>
     </Container>

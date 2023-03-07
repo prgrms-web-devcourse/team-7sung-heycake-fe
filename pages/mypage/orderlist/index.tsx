@@ -25,7 +25,7 @@ export default function Orderlist() {
   return (
     <>
       <MypageTitle title="내 주문 리스트" isSuccess={false} />
-      <Container marginTop={10}>
+      <Container paddingTop={10} overflow="scroll">
         {orderList?.map((order) => (
           <Post {...order} />
         ))}
