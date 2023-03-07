@@ -11,7 +11,7 @@ export default function MypageTitle({ isSuccess, title }: IMypageTitle) {
 
   return (
     <TitleContainer>
-      {!isSuccess ? (
+      {isSuccess ? (
         <Text marginLeft="1.5rem" />
       ) : (
         <AiOutlineLeft fontSize={30} onClick={router.back} />
