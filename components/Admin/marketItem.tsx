@@ -16,11 +16,10 @@ import { useState } from 'react';
 
 import { patchMarketStatus } from '@/components/Api/Market';
 import { IMarketItem } from '@/types/Admin';
-
 import {
   numberWithHyphenMarket,
   numberWithHyphenPhone,
-} from './numberWithHyphen';
+} from '@/utils/numberWithHyphen';
 
 export default function MarketItem({
   category,
@@ -83,11 +82,11 @@ export default function MarketItem({
             <Link key={enrollmentId} href={`/market/${enrollmentId}`}>
               <Flex p={0} pr={2} gap={3} flexDirection="column">
                 <Text fontSize="sm" fontWeight="600">
-                  {numberWithHyphenPhone(phoneNumber)}
+                  {numberWithHyphenPhone(Number(phoneNumber))}
                 </Text>
                 <Divider borderColor="hey.main" />
                 <Text fontSize="sm" fontWeight="600">
-                  {numberWithHyphenMarket(businessNumber)}
+                  {numberWithHyphenMarket(Number(businessNumber))}
                 </Text>
               </Flex>
             </Link>

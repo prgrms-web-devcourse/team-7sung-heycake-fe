@@ -3,10 +3,10 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import { getMarketList } from '@/components/Api/Market';
+import ApiErrorAlert from '@/components/Shared/apiErrorAlert';
 import { IMarketItem, IMarketList } from '@/types/Admin';
 
-import { getMarketList } from '../Api/Market';
-import ApiErrorAlert from '../Shared/apiErrorAlert';
 import AdminListSkeleton from './adminLIstSkeleton';
 import MarketItem from './marketItem';
 
