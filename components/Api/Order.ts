@@ -5,7 +5,7 @@ import { publicApi } from '.';
 
 const ACCESS_TOKEN = getAccessToken();
 
-export default async function getOrderList({
+export async function getOrderList({
   cursorId = null,
   pageSize = null,
   orderStatus = null,
@@ -29,4 +29,18 @@ export default async function getOrderList({
     console.error(error);
   }
   return console.error('주문 리스트 조회에 실패하였습니다');
+}
+
+export async function deleteOrder(orderId: number) {
+  try {
+    await publicApi.delete(`/orders/${orderId}`, {
+      headers: {
+        access_token: ACCESS_TOKEN,
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    console.error(error);
+  }
+  return console.error('주문을 삭제하는 데 실패하였습니다');
 }

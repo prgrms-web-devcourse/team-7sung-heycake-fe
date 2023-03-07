@@ -3,7 +3,7 @@ import { Button, Container, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import getOrderList from '@/components/Api/Order';
+import { getOrderList } from '@/components/Api/Order';
 import MypageTitle from '@/components/Mypage/mypageTitle';
 import Post from '@/components/Mypage/post';
 
