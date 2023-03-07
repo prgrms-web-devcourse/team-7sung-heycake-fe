@@ -30,8 +30,8 @@ export default function OfferComments({ offerId }: { offerId: number }) {
     () => publicApi.get(`/comments?offerId=${offerId}`).then((res) => res.data)
   );
 
-  const handleClick = (commentId: number) => {
-    axios.delete(`/comments/${commentId}`);
+  const handleClick = async (commentId: number) => {
+    await axios.delete(`/comments/${commentId}`);
   };
 
   if (isLoading) {
@@ -86,7 +86,9 @@ export default function OfferComments({ offerId }: { offerId: number }) {
               삭제
             </Button>
           </Box>
-          <Image src={comment.image} alt="profile" width={50} height={50} />
+          {comment.image && (
+            <Image src={comment.image} alt="profile" width={50} height={50} />
+          )}
         </Flex>
       ))}
       <form onSubmit={handleSubmit}>
