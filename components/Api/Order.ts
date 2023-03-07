@@ -1,5 +1,6 @@
+import { IgetOrderList } from 'types/Api';
+
 import { publicApi } from '.';
-import { IgetOrderList } from './types';
 
 // localStorage access_token 사용 예정
 const ACCESS_TOKEN =
