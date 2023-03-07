@@ -1,5 +1,6 @@
 import { Box, Card, Container, Text } from '@chakra-ui/react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import { IMypagePost } from './types';
 
@@ -10,6 +11,7 @@ export default function Post({
   title,
   visitTime,
 }: IMypagePost) {
+  const router = useRouter();
   return (
     <Container
       width="100"
@@ -21,6 +23,7 @@ export default function Post({
       boxShadow="4px 2px 2px lightGrey"
       display="flex"
       key={id}
+      onClick={() => router.push(`/orders/${id}`)}
     >
       <Card width={74} height={74} shadow="none" marginTop={3}>
         <Image src={imageUrl} alt="케이크 이미지" fill />
