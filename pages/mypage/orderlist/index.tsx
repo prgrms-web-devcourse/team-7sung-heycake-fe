@@ -45,7 +45,7 @@ export default function Orderlist() {
               _hover={{ bg: 'hey.sub' }}
               onClick={() => router.push('/orders/new')}
             >
-              게시글 등록하러 가기
+              주문 등록하러 가기
             </Button>
           </Container>
         )}
