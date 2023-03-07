@@ -7,7 +7,6 @@ export default function Post({
   id,
   imageUrl,
   orderStatus,
-  region,
   title,
   visitTime,
 }: IMypagePost) {
