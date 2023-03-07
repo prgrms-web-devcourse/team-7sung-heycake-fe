@@ -5,6 +5,7 @@ const heyTheme = extendTheme({
     hey: {
       main: '#F96400',
       sub: '#F7B500',
+      normalGray: '#999999',
       darkGray: '#777777',
       lightGray: '#D9D9D9',
       red: '#E53E3E',
