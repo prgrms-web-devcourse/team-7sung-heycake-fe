@@ -29,8 +29,8 @@ export default function Orderlist() {
     <>
       <MypageTitle title="내 주문 리스트" isSuccess={false} />
       <Container paddingTop={10} overflow="scroll">
-        {orderList.length !== 0 ? (
-          orderList?.map((order) => <Post {...order} />)
+        {orderList?.length !== 0 ? (
+          orderList?.map((order) => <Post key={order.id} {...order} />)
         ) : (
           <Container display="flex" flexDir="column" alignItems="center">
             <Text fontSize="1.2rem" fontWeight="bold" margin="12rem 0 2rem 0">
