@@ -1,5 +1,4 @@
-import { Flex, Heading, Tag } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { Box, Flex, Heading, Tag } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -44,7 +43,9 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
         <Heading as="h1" size="xl">
           {order.title}
         </Heading>
-        <PlaceOrderRequester>{order.region}</PlaceOrderRequester>
+        <Box fontSize="0.9rem" color="#777777">
+          {order.region}
+        </Box>
       </div>
       <DataTable
         title="케익 맛"
@@ -66,8 +67,17 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
         title="케익 크림 맛"
         value={convertCreamFlavor(order.cakeInfo.creamFlavor)}
       />
-      <OrderContent>{order.cakeInfo.requirements}</OrderContent>
-      <OrderRequestCountCard>
+      <Box padding="2rem 0" fontSize="0.8rem">
+        {order.cakeInfo.requirements}
+      </Box>
+      <Flex
+        justifyContent="space-between"
+        bg="#feebcb"
+        padding="1.4rem"
+        alignItems="center"
+        fontWeight="bold"
+        borderRadius="6px"
+      >
         <Image
           alt="birthday-cake"
           src="/images/birthday-cake.png"
@@ -75,13 +85,19 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
           height={40}
         />
         신청한 케이크 업체 {order.offerCount}개
-        <ApplyButton
+        <Link
+          style={{
+            backgroundColor: '#f96400',
+            color: 'white',
+            padding: '10px',
+            borderRadius: '5px',
+          }}
           href="/orders/[orderId]/new-offer"
           as={`/orders/${orderId}/new-offer`}
         >
           신청하기
-        </ApplyButton>
-      </OrderRequestCountCard>
+        </Link>
+      </Flex>
       {threads?.map((thread) => (
         <Thread key={thread.offerId} thread={thread} orderId={orderId} />
       ))}
@@ -105,30 +121,3 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     },
   };
 };
-
-const PlaceOrderRequester = styled.p`
-  font-size: 0.9rem;
-  color: #777777;
-`;
-
-const OrderContent = styled.div`
-  padding: 2rem 0;
-  font-size: 0.8rem;
-`;
-
-const OrderRequestCountCard = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background-color: #feebcb;
-  padding: 1.4rem;
-  align-items: center;
-  font-weight: bold;
-  border-radius: 6px;
-`;
-
-const ApplyButton = styled(Link)`
-  background-color: #f96400;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-`;

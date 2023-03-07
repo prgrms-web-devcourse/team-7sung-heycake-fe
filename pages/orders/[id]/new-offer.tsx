@@ -2,7 +2,7 @@ import {
   Box,
   Button,
   Checkbox,
-  FormControl,
+  Flex,
   FormLabel,
   Input,
   Slider,
@@ -11,7 +11,6 @@ import {
   SliderTrack,
   Textarea,
 } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
@@ -76,8 +75,16 @@ export default function NewOffer() {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <UploadContainer
+    <form style={{ margin: '0 auto', padding: '1rem' }} onSubmit={handleSubmit}>
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        height="150px"
+        border="1px dashed grey"
+        borderRadius="5px"
+        cursor="poiner"
+        margin="0 auto"
+        textAlign="center"
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         onClick={handleFileChoose}
@@ -91,8 +98,14 @@ export default function NewOffer() {
           multiple
           onChange={handleFileInputChange}
         />
-      </UploadContainer>
-      <ImageBox>
+      </Flex>
+      <Flex
+        alignItems="center"
+        width="95%"
+        height="70px"
+        margin="0 auto"
+        gap="1rem"
+      >
         {previewUrls.map((url) => (
           <Image
             key={url}
@@ -108,9 +121,14 @@ export default function NewOffer() {
             <GrPowerReset />
           </Button>
         )}
-      </ImageBox>
-      <GapFormControl id="expectedPrice">
-        <PriceBox>
+      </Flex>
+      <Flex
+        flexDirection="column"
+        paddingTop="2rem"
+        gap="1rem"
+        id="expectedPrice"
+      >
+        <FormLabel display="flex" justifyContent="space-between">
           예상가격
           <Checkbox
             isChecked={directInput}
@@ -118,7 +136,7 @@ export default function NewOffer() {
           >
             직접 입력
           </Checkbox>
-        </PriceBox>
+        </FormLabel>
         <Slider
           defaultValue={30000}
           min={10000}
@@ -152,45 +170,7 @@ export default function NewOffer() {
         <Button background="hey.sub" type="submit">
           전송하기
         </Button>
-      </GapFormControl>
-    </Form>
+      </Flex>
+    </form>
   );
 }
-
-const PriceBox = styled(FormLabel)`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const UploadContainer = styled(Box)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 150px;
-  border: 1px dashed grey;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 0 auto;
-  text-align: center;
-`;
-
-const ImageBox = styled.div`
-  display: flex;
-  align-items: center;
-  width: 95%;
-  height: 70px;
-  margin: 0 auto;
-  gap: 1rem;
-`;
-
-const Form = styled.form`
-  margin: 0 auto;
-  padding: 1rem;
-`;
-
-const GapFormControl = styled(FormControl)`
-  display: flex;
-  flex-direction: column;
-  padding-top: 2rem;
-  gap: 1rem;
-`;
