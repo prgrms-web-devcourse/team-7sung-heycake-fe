@@ -4,12 +4,14 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { AiOutlineLeft } from 'react-icons/ai';
 
-export default function MypageTitle({ ...props }) {
+import { IMypageTitle } from './types';
+
+export default function MypageTitle({ isSuccess, title }: IMypageTitle) {
   const router = useRouter();
 
   return (
     <TitleContainer>
-      {props.isSuccess === 'false' ? (
+      {!isSuccess ? (
         <Text marginLeft="1.5rem" />
       ) : (
         <AiOutlineLeft fontSize={30} onClick={router.back} />
@@ -22,7 +24,7 @@ export default function MypageTitle({ ...props }) {
         paddingBottom="1rem"
         alignItems="center"
       >
-        {props.title}
+        {title}
       </Text>
     </TitleContainer>
   );
