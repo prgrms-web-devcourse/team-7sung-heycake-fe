@@ -52,7 +52,7 @@ export default function Main() {
   return <CakeMain />;
 }
 
-export async function getServerSideProps() {
+export const getStaticProps = async () => {
   const queryClient = new QueryClient();
   const location = '강남구';
 
@@ -74,4 +74,4 @@ export async function getServerSideProps() {
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
     },
   };
-}
+};
