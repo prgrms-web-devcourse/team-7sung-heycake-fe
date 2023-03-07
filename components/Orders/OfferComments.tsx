@@ -17,6 +17,7 @@ import { GrPowerReset } from 'react-icons/gr';
 import useClickInput from '@/hooks/useClickInput';
 import useImageUpload from '@/hooks/useImageUpload';
 import { OfferComment } from '@/types/offer';
+import { getAccessToken } from '@/utils/getAccessToken';
 
 import { publicApi } from '../Api';
 
@@ -29,6 +30,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
     ['comments', offerId],
     () => publicApi.get(`/comments?offerId=${offerId}`).then((res) => res.data)
   );
+  const accessToken = getAccessToken();
 
   const handleClick = async (commentId: number) => {
     await axios.delete(`/comments/${commentId}`);
@@ -44,6 +46,11 @@ export default function OfferComments({ offerId }: { offerId: number }) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (accessToken === null) {
+      alert('로그인을 해주세요');
+      return;
+    }
 
     if (commentRef.current === null || commentRef.current === undefined) {
       alert('댓글 내용을 입력해 주세요');
@@ -62,7 +69,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       await publicApi.post('/comments', newFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          access_token: process.env.NEXT_PUBLIC_MERKET_ACCESS_TOKEN,
+          access_token: accessToken,
         },
       });
     } catch (error) {
