@@ -37,6 +37,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Hydrate state={pageProps.dehydratedState}>
           <Head>
             <title>Hey, cake</title>
+            <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
             <meta
               name="viewport"
               content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
