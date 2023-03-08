@@ -55,3 +55,11 @@ export type TSeoulArea =
   | '종로구'
   | '중구'
   | '중량';
+
+type Nullable<T> = T | null;
+
+export interface IgetOrderList {
+  cursorId: Nullable<number>;
+  pageSize: Nullable<number>;
+  orderStatus: Nullable<string>;
+}
