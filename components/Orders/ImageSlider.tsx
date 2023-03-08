@@ -84,13 +84,11 @@ const Wrapper = styled.section`
 `;
 
 const ButtonGroup = styled(Box)`
-  top: calc(8%);
-  position: fixed;
+  top: calc(7%);
+  position: absolute;
   display: flex;
-  z-index: 1;
   width: 100%;
   max-width: 560px;
-  height: 210px;
   margin: 0 auto;
   justify-content: space-between;
   align-items: center;
