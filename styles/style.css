@@ -1,0 +1,7 @@
+body {
+  font-family: 'Pretendard', sans-serif !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
