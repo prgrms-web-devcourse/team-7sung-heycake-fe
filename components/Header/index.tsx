@@ -22,7 +22,7 @@ export default function Header() {
 
   const onLogoutHandler = () => {
     deleteAccessToken();
-    router.replace('/login');
+    router.replace('/');
   };
   return (
     <Flex>

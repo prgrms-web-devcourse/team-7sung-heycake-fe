@@ -53,7 +53,7 @@ export default function App({ Component, pageProps }: AppProps) {
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
           />
           <Layout>
-            {router.pathname !== '/login' && <Header />}
+            {router.pathname !== '/' && <Header />}
             <Component {...pageProps} />
           </Layout>
         </Hydrate>
