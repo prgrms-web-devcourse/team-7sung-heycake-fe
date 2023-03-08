@@ -1,12 +1,12 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import {
   Button,
+  Container,
   FormControl,
   FormLabel,
   Input,
   Select,
+  Text,
 } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -91,7 +91,7 @@ export default function EnrollmentForm() {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} id="enrollmentForm">
+    <form onSubmit={handleSubmit(onSubmit)} id="enrollmentForm">
       <FormControl height={100} width={350}>
         <FormLabel>사업자 등록 번호</FormLabel>
         <Input
@@ -111,7 +111,9 @@ export default function EnrollmentForm() {
           })}
         />
         {errors.businessNumber && (
-          <ErrorSpan>{errors.businessNumber.message}</ErrorSpan>
+          <Text fontSize="8px" color="red">
+            {errors.businessNumber.message}
+          </Text>
         )}
       </FormControl>
       <FormControl height={100} width={350}>
@@ -131,7 +133,11 @@ export default function EnrollmentForm() {
             },
           })}
         />
-        {errors.ownerName && <ErrorSpan>{errors.ownerName.message}</ErrorSpan>}
+        {errors.ownerName && (
+          <Text fontSize="8px" color="red">
+            {errors.ownerName.message}
+          </Text>
+        )}
       </FormControl>
       <FormControl height={100} width={350}>
         <FormLabel>개업 일자</FormLabel>
@@ -155,12 +161,14 @@ export default function EnrollmentForm() {
           })}
         />
         {errors.phoneNumber && (
-          <ErrorSpan>{errors.phoneNumber.message}</ErrorSpan>
+          <Text fontSize="8px" color="red">
+            {errors.phoneNumber.message}
+          </Text>
         )}
       </FormControl>
       <FormControl height={150} width={350}>
         <FormLabel>주소</FormLabel>
-        <AddressDiv>
+        <Container display="flex" padding={0}>
           <Select
             {...register('city', { required: true })}
             width={170}
@@ -183,13 +191,14 @@ export default function EnrollmentForm() {
               </option>
             ))}
           </Select>
-        </AddressDiv>
-
-        <Input
-          type="text"
-          placeholder="상세 주소를 입력해주세요"
-          {...register('detailAddress', { required: true })}
-        />
+        </Container>
+        <Container padding={0}>
+          <Input
+            type="text"
+            placeholder="상세 주소를 입력해주세요"
+            {...register('detailAddress', { required: true })}
+          />
+        </Container>
       </FormControl>
       <FormControl width={350} height={100}>
         <FormLabel>영업 시간</FormLabel>
@@ -237,19 +246,6 @@ export default function EnrollmentForm() {
       >
         등록하기
       </Button>
-    </Form>
+    </form>
   );
 }
-
-const Form = styled.form`
-  overflow: scroll;
-`;
-
-const AddressDiv = styled.div`
-  display: flex;
-`;
-
-const ErrorSpan = styled.span`
-  color: red;
-  font-size: 8px;
-`;

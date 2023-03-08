@@ -7,7 +7,7 @@ export default function Enrollment() {
   return (
     <>
       <MypageTitle title="업체 정보 등록" isSuccess={false} />
-      <Container marginTop={10}>
+      <Container overflow="scroll" paddingTop={8}>
         <EnrollmentForm />
       </Container>
     </>
