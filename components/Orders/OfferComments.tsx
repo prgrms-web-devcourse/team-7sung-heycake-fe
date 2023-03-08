@@ -63,10 +63,10 @@ export default function OfferComments({ offerId }: { offerId: number }) {
 
     const newFormData = new FormData();
     newFormData.append('offerId', offerId.toString());
-    newFormData.append('comment', commentRef.current.value);
+    newFormData.append('content', commentRef.current.value);
 
     files.forEach((file) => {
-      newFormData.append('offerImage', file);
+      newFormData.append('image', file);
     });
 
     try {
