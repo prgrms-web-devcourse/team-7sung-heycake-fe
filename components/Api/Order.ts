@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { IgetOrderList } from '@/types/Api';
 import { getAccessToken } from '@/utils/getAccessToken';
 
@@ -10,10 +11,10 @@ export async function getOrderList({
   pageSize = null,
   orderStatus = null,
 }: IgetOrderList) {
-    if (ACCESS_TOKEN=== null) {
-      alert('로그인을 해주세요');
-      return;
-    }
+  if (ACCESS_TOKEN === null) {
+    alert('로그인을 해주세요');
+    return;
+  }
   try {
     const response = await publicApi.get(`/orders/my`, {
       headers: {
@@ -36,10 +37,10 @@ export async function getOrderList({
 }
 
 export async function deleteOrder(orderId: string) {
-    if (ACCESS_TOKEN=== null) {
-      alert('로그인을 해주세요');
-      return;
-    }
+  if (ACCESS_TOKEN === null) {
+    alert('로그인을 해주세요');
+    return;
+  }
   try {
     await publicApi.delete(`/orders/${orderId}`, {
       headers: {
