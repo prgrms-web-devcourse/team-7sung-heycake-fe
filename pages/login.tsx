@@ -21,7 +21,7 @@ interface ErrorResponse {
   message?: string;
 }
 
-export default function Login() {
+export default function Home() {
   const router = useRouter();
   const { code: authCode } = router.query;
 
@@ -52,7 +52,7 @@ export default function Login() {
   );
 
   useEffect(() => {
-    if (authCode !== undefined) {
+    if (authCode) {
       handleLogin(authCode as string);
     }
   }, [authCode, handleLogin]);
@@ -60,6 +60,8 @@ export default function Login() {
   function isLoggedIn() {
     if (getAccessToken()) {
       router.push('/');
+    } else {
+      router.push('/login');
     }
   }
 
