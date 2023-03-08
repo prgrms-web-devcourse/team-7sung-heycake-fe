@@ -12,12 +12,15 @@ import { getAccessToken } from '@/utils/getAccessToken';
 export default function Header() {
   const [isLogin, setIsLogin] = useState(false);
   const router = useRouter();
+
+  const { code } = router.query;
+
   useEffect(() => {
     const user = getAccessToken();
     if (user) {
       setIsLogin(true);
     }
-  }, []);
+  }, [code]);
 
   const onLogoutHandler = () => {
     deleteAccessToken();
@@ -32,7 +35,7 @@ export default function Header() {
         <ButtonContainer>
           {isLogin ? (
             <>
-              <Link href="/admin">
+              <Link href="/mypage">
                 <IconButton
                   variant="ghost"
                   aria-label="유저"
