@@ -11,6 +11,7 @@ import {
   SliderTrack,
   Textarea,
 } from '@chakra-ui/react';
+import { AxiosError } from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
@@ -20,6 +21,10 @@ import { publicApi } from '@/components/Api';
 import useClickInput from '@/hooks/useClickInput';
 import useImageUpload from '@/hooks/useImageUpload';
 import { getAccessToken } from '@/utils/getAccessToken';
+
+interface ErrorResponse {
+  message?: string;
+}
 
 export default function NewOffer() {
   const router = useRouter();
@@ -76,8 +81,33 @@ export default function NewOffer() {
       alert('오퍼가 성공적으로 등록되었어요.');
       router.push(`orders/${orderId}`);
     } catch (error) {
-      alert('오퍼 등록을 실패했어요. 다시 한번 확인해 주세요.');
-      console.error(error);
+      const axiosError = error as AxiosError<ErrorResponse>;
+      if (!axiosError.response) return;
+
+      const errorMessage = JSON.parse(
+        axiosError.response.data.message ?? '{}'
+      ) as { message?: string };
+
+      if (axiosError.response.status === 400) {
+        alert(errorMessage.message || '검증에 실패했습니다.');
+      } else if (axiosError.response.status === 401) {
+        alert(errorMessage.message || '인증되지 않은 요청입니다.');
+      } else if (axiosError.response?.status === 403) {
+        alert(errorMessage.message || '접근 권한이 없습니다.');
+      } else if (axiosError.response?.status === 404) {
+        alert(errorMessage.message || '존재하지 않는 스레드입니다.');
+      } else if (axiosError.response?.status === 409) {
+        alert(errorMessage.message || '이미 날짜가 지난 주문입니다.');
+      } else if (axiosError.response?.status === 500) {
+        alert(
+          errorMessage.message ||
+            '서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.'
+        );
+      } else {
+        alert(
+          '해당 업체를 선택하는데에 예상치 못한 애러가 발생했어요. 다시 시도해 주세요.'
+        );
+      }
     }
   };
 
