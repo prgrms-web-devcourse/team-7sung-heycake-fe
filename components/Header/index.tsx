@@ -13,12 +13,14 @@ export default function Header() {
   const [isLogin, setIsLogin] = useState(false);
   const router = useRouter();
 
+  const { code } = router.query;
+
   useEffect(() => {
     const user = getAccessToken();
     if (user) {
       setIsLogin(true);
     }
-  }, []);
+  }, [code]);
 
   const onLogoutHandler = () => {
     deleteAccessToken();
