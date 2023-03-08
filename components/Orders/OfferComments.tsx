@@ -7,7 +7,7 @@ import {
   InputGroup,
   InputRightElement,
 } from '@chakra-ui/react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import Image from 'next/image';
 import { useRef } from 'react';
@@ -30,27 +30,41 @@ export default function OfferComments({ offerId }: { offerId: number }) {
     useImageUpload(1);
   const [inputRef, handleFileChoose] = useClickInput();
   const commentRef = useRef<HTMLInputElement>(null);
+  const queryClient = useQueryClient();
   const { data, isLoading, isError } = useQuery<OfferComment[]>(
     ['comments', offerId],
     () => publicApi.get(`/comments?offerId=${offerId}`).then((res) => res.data)
   );
   const accessToken = getAccessToken();
 
-  const handleClick = async (commentId: number) => {
-    await publicApi.delete(`/comments/${commentId}`, {
-      headers: {
-        access_token: accessToken,
+  const removeCommentMutation = useMutation(
+    (commentId: number) =>
+      publicApi.delete(`/comments/${commentId}`, {
+        headers: {
+          access_token: accessToken,
+        },
+      }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['comments', offerId]);
       },
-    });
-  };
+    }
+  );
 
-  if (isLoading) {
-    return <Box>Loading...</Box>;
-  }
-
-  if (isError) {
-    return <Box>Error while fetching comments</Box>;
-  }
+  const addCommentMutation = useMutation(
+    (formData: FormData) =>
+      publicApi.post('/comments', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          access_token: accessToken,
+        },
+      }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['comments', offerId]);
+      },
+    }
+  );
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -74,12 +88,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
     });
 
     try {
-      await publicApi.post('/comments', newFormData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          access_token: accessToken,
-        },
-      });
+      await addCommentMutation.mutateAsync(newFormData);
     } catch (error) {
       const axiosError = error as AxiosError<ErrorResponse>;
       if (!axiosError.response) return;
@@ -109,6 +118,14 @@ export default function OfferComments({ offerId }: { offerId: number }) {
     }
   };
 
+  if (isLoading) {
+    return <Box>Loading...</Box>;
+  }
+
+  if (isError) {
+    return <Box>Error while fetching comments</Box>;
+  }
+
   return (
     <>
       {data.map((comment) => (
@@ -119,7 +136,9 @@ export default function OfferComments({ offerId }: { offerId: number }) {
               size="xs"
               colorScheme="red"
               leftIcon={<AiFillDelete />}
-              onClick={() => handleClick(comment.commentId)}
+              onClick={() =>
+                removeCommentMutation.mutateAsync(comment.commentId)
+              }
             >
               삭제
             </Button>

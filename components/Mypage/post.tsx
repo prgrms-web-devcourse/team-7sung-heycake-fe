@@ -1,4 +1,5 @@
 import { Box, Button, Card, Container, Text } from '@chakra-ui/react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
@@ -13,6 +14,19 @@ export default function Post({
   visitTime,
 }: IMypagePost) {
   const router = useRouter();
+  const queryClient = useQueryClient();
+
+  const deleteOrderMutation = useMutation(deleteOrder, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['orderList']);
+    },
+  });
+
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    deleteOrderMutation.mutate(id);
+  };
+
   return (
     <Container
       width="100"
@@ -48,13 +62,7 @@ export default function Post({
           <Text color="gray">{visitTime.slice(0, -3)}</Text>
         </Container>
       </Container>
-      <Button
-        backgroundColor="hey.lightOrange"
-        onClick={(e) => {
-          e.stopPropagation();
-          deleteOrder(id);
-        }}
-      >
+      <Button backgroundColor="hey.lightOrange" onClick={handleDelete}>
         X
       </Button>
     </Container>
