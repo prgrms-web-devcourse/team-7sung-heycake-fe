@@ -57,13 +57,6 @@ export default function Login() {
     }
   }, [authCode, handleLogin]);
 
-  useEffect(() => {
-    if (window.location.href.includes('?code=')) {
-      const code = window.location.href.split('?code=')[1];
-      handleLogin(code);
-    }
-  }, [handleLogin]);
-
   function isLoggedIn() {
     if (getAccessToken()) {
       router.push('/');
