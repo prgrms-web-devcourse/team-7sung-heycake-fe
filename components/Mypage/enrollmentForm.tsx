@@ -12,6 +12,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import SEOUL_AREA from '@/constants/seoulArea';
+import { deleteAccessToken } from '@/utils/deleteAccessToken';
 import { getAccessToken } from '@/utils/getAccessToken';
 
 import { publicApi } from '../Api';
@@ -81,8 +82,9 @@ export default function EnrollmentForm() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      alert('업체 등록이 성공적으로 신청되었어요.');
-      router.push('/main');
+      alert('업체 등록이 성공적으로 신청되었어요. 다시 로그인 해주세요.');
+      deleteAccessToken();
+      router.push('/');
     } catch (error) {
       console.error(error);
     }
