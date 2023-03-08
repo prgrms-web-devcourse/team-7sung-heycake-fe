@@ -39,7 +39,7 @@ export default function Success() {
           fontSize="1.3rem"
           marginBottom={10}
           _hover={{ bg: 'hey.sub' }}
-          onClick={() => router.push('/main')}
+          onClick={() => router.push('/')}
         >
           메인 페이지로 이동
         </Button>
