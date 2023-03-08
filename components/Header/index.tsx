@@ -32,7 +32,7 @@ export default function Header() {
         <ButtonContainer>
           {isLogin ? (
             <>
-              <Link href="/admin">
+              <Link href="/mypage">
                 <IconButton
                   variant="ghost"
                   aria-label="유저"
