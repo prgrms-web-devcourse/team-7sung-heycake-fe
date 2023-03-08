@@ -41,7 +41,7 @@ export default function Post({
       onClick={() => router.push(`/orders/${id}`)}
     >
       <Card width={74} height={74} shadow="none" marginTop={3}>
-        <Image src={imageUrl} alt="케이크 이미지" fill />
+        {imageUrl && <Image src={imageUrl} alt="케이크 이미지" fill />}
       </Card>
       <Container marginTop={3}>
         <Box
