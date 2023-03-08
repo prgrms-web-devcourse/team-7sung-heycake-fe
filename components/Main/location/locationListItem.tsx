@@ -14,7 +14,7 @@ export default function LocationListItem({
       bgColor="hey.lightOrange"
       onClick={() => {
         setLocation(name);
-        window.localStorage.setItem('location', name);
+        localStorage.setItem('location', name);
         onClose();
       }}
     >
