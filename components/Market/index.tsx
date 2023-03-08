@@ -17,13 +17,12 @@ import MarketTitle from './marketTitle';
 
 export default function MarketProfile() {
   const router = useRouter();
-  const { status, data } = useQuery(
-    ['업체 상세 정보', router.query.id],
-    () => getMarketDetail({ enrollmentId: String(router.query.id) }),
-    { enabled: router.isReady }
+  const id = router.query.id as string;
+  const { status, data } = useQuery(['업체 상세 정보', id], () =>
+    getMarketDetail({ enrollmentId: id })
   );
 
-  if (status === 'loading' || !router.isReady) {
+  if (status === 'loading' || router.isFallback) {
     return <MarketProfileSkeleton />;
   }
 
