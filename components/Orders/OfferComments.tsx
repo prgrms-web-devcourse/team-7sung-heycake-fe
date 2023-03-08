@@ -8,7 +8,7 @@ import {
   InputRightElement,
 } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import Image from 'next/image';
 import { useRef } from 'react';
 import { AiFillDelete, AiFillFileAdd } from 'react-icons/ai';
@@ -37,7 +37,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
   const accessToken = getAccessToken();
 
   const handleClick = async (commentId: number) => {
-    await axios.delete(`/comments/${commentId}`, {
+    await publicApi.delete(`/comments/${commentId}`, {
       headers: {
         access_token: accessToken,
       },
