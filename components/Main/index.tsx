@@ -9,7 +9,8 @@ import {
   Tabs,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { MdPostAdd } from 'react-icons/md';
 
 import { TAB_TABLE } from '@/constants/Main';
@@ -18,7 +19,13 @@ import CakeList from './cake/cakeList';
 import LocationSelectBox from './location/locationSelectBox';
 
 export default function CakeMain() {
+  const router = useRouter();
   const [location, setLocation] = useState('강남구');
+
+  useEffect(() => {
+    const localLocation = localStorage.getItem('location');
+    if (localLocation) setLocation(localLocation as string);
+  }, [router]);
 
   return (
     <Flex>
