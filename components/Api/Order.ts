@@ -36,6 +36,10 @@ export async function getOrderList({
 }
 
 export async function deleteOrder(orderId: string) {
+    if (ACCESS_TOKEN=== null) {
+      alert('로그인을 해주세요');
+      return;
+    }
   try {
     await publicApi.delete(`/orders/${orderId}`, {
       headers: {
