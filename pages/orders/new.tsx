@@ -126,7 +126,7 @@ export default function NewOrder() {
         },
       });
       alert('주문이 성공적으로 등록되었어요.');
-      router.push('/main');
+      router.push('/');
     } catch (error) {
       alert('주문 등록을 실패했어요. 다시 한번 확인해 주세요.');
       console.error(error);
