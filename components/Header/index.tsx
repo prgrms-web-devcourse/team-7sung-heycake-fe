@@ -13,12 +13,14 @@ export default function Header() {
   const [isLogin, setIsLogin] = useState(false);
   const router = useRouter();
 
+  const { code } = router.query;
+
   useEffect(() => {
     const user = getAccessToken();
     if (user) {
       setIsLogin(true);
     }
-  }, []);
+  }, [code]);
 
   const onLogoutHandler = () => {
     deleteAccessToken();
@@ -27,7 +29,7 @@ export default function Header() {
   return (
     <Flex>
       <Container>
-        <Link href="/">
+        <Link href="/main">
           <Image src="/images/logo.png" alt="로고" width={40} height={40} />
         </Link>
         <ButtonContainer>
@@ -48,7 +50,7 @@ export default function Header() {
               />
             </>
           ) : (
-            <Link href="/login">
+            <Link href="/">
               <IconButton
                 variant="ghost"
                 aria-label="로그인"
