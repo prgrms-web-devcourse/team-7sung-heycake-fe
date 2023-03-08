@@ -10,7 +10,7 @@ export default async function postMarketList(
   try {
     const { cursor, category } = request.body;
     const { data }: AxiosResponse = await publicApi.get(
-      `/enrollments/?pageSize=10&cursor=${cursor}&status=${category}`
+      `/enrollments/?pageSize=10&cursorId=${cursor}&status=${category}`
     );
     return response.status(200).end(JSON.stringify(data));
   } catch (err) {
