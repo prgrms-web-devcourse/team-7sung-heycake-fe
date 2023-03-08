@@ -37,7 +37,11 @@ export default function OfferComments({ offerId }: { offerId: number }) {
   const accessToken = getAccessToken();
 
   const handleClick = async (commentId: number) => {
-    await axios.delete(`/comments/${commentId}`);
+    await axios.delete(`/comments/${commentId}`, {
+      headers: {
+        access_token: accessToken,
+      },
+    });
   };
 
   if (isLoading) {
