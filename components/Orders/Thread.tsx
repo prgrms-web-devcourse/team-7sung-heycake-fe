@@ -43,8 +43,7 @@ export default function Thread({ thread, orderId }: ThreadProps) {
       >
         <Link
           style={{ fontSize: '1rem', textDecoration: 'underline' }}
-          href="/market/[enrollmentId]"
-          as={`/market/${thread.enrollmentId}`}
+          href={`/market/${thread.enrollmentId}`}
         >
           {thread.marketName}
         </Link>
