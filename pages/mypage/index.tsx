@@ -8,7 +8,7 @@ export default function Detail() {
   return (
     <MypageContainer>
       <MessageContainer>
-        <strong>허지연님</strong>
+        <strong>회원님</strong>
         <br />
         환영합니다!
       </MessageContainer>
