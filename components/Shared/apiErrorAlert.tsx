@@ -40,7 +40,7 @@ export default function ApiErrorAlert() {
           <Button
             colorScheme="orange"
             color="white"
-            onClick={() => router.replace('/')}
+            onClick={() => router.replace('/main')}
             ml={3}
           >
             메인페이지로 이동
