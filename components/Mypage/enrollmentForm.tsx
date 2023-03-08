@@ -17,8 +17,6 @@ import { getAccessToken } from '@/utils/getAccessToken';
 
 import { publicApi } from '../Api';
 
-const ACCESS_TOKEN = getAccessToken();
-
 const {
   CHECK_BUSINESS_NUMBER_LENGTH,
   CHECK_NUMBER_TYPE,
@@ -44,6 +42,7 @@ type InputProps = {
 };
 
 export default function EnrollmentForm() {
+  const ACCESS_TOKEN = getAccessToken();
   const [marketName, setMarketName] = useState('');
   const [ownerName, setOwnerName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
