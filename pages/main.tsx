@@ -1,42 +1,46 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
+import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 
 import getCakeList from '@/components/Api/Main';
 import CakeMain from '@/components/Main';
+import { getAccessToken } from '@/utils/getAccessToken';
 
 interface ResponseType {
   accessToken: string;
   refreshToken: string;
 }
 
+interface ErrorResponse {
+  message?: string;
+}
+
 export default function Main() {
   const router = useRouter();
-  const { code: authCode, error: kakaoServerError } = router.query;
+  const { code: authCode } = router.query;
 
-  const loginHandler = useCallback(
-    async (currCode: string | string[]) => {
-      const response: ResponseType = await fetch(
-        'https://heycake.kro.kr/login',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            code: currCode,
-          }),
-        }
-      ).then((res) => res.json());
+  const handleLogin = useCallback(
+    async (code: string) => {
+      try {
+        const response: ResponseType = await axios
+          .post('https://heycake.kro.kr/login', { code })
+          .then((res) => res.data);
 
-      if (response) {
-        if (!localStorage.getItem('access_token')) {
+        if (!getAccessToken()) {
           localStorage.setItem('access_token', response.accessToken);
           localStorage.setItem('refresh_token', response.refreshToken);
         }
+
         router.push('/main');
-      } else {
-        router.push('/');
+      } catch (error) {
+        const axiosError = error as AxiosError<ErrorResponse>;
+        if (!axiosError.response) return;
+
+        if (axiosError.response.status === 401) {
+          alert(axiosError.message || '인증되지 않은 요청입니다.');
+        }
+        console.error(error);
       }
     },
     [router]
@@ -44,11 +48,10 @@ export default function Main() {
 
   useEffect(() => {
     if (authCode) {
-      loginHandler(authCode);
-    } else if (kakaoServerError) {
-      router.push('/');
+      handleLogin(authCode as string);
     }
-  }, [loginHandler, authCode, kakaoServerError, router]);
+  }, [authCode, handleLogin]);
+
   return <CakeMain />;
 }
 

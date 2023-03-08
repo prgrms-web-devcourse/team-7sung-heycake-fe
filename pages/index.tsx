@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
+import { getAccessToken } from '@/utils/getAccessToken';
+
 function loginWithKakao() {
   window.Kakao.Auth.authorize({
     redirectUri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI,
@@ -13,7 +15,7 @@ export default function Home() {
   const router = useRouter();
 
   function isLoggedIn() {
-    if (localStorage.getItem('access_token')) {
+    if (getAccessToken()) {
       router.push('/main');
     } else {
       router.push('/');
