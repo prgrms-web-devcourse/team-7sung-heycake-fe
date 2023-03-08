@@ -68,13 +68,15 @@ export const getStaticProps = async () => {
         cursor: '',
       }),
     {
-      staleTime: 10000,
+      staleTime: 20000,
     }
   );
 
   return {
     props: {
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      revalidate: 20,
+      fallback: false,
     },
   };
 };
