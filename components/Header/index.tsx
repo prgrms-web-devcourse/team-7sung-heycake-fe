@@ -12,6 +12,7 @@ import { getAccessToken } from '@/utils/getAccessToken';
 export default function Header() {
   const [isLogin, setIsLogin] = useState(false);
   const router = useRouter();
+
   useEffect(() => {
     const user = getAccessToken();
     if (user) {
