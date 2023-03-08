@@ -9,24 +9,25 @@ export default function Market() {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [{ params: { id: 1 } }],
+  paths: [],
   fallback: true,
 });
 
-export const getStaticProps: GetStaticProps = async (params) => {
+export const getStaticProps: GetStaticProps = async (content) => {
   const queryClient = new QueryClient();
+  const id = content.params?.id as string;
 
   await queryClient.prefetchQuery(
-    ['업체 상세 정보', params.id],
-    () => getMarketDetail({ enrollmentId: String(params.id) }),
+    ['업체 상세 정보', id],
+    () => getMarketDetail({ enrollmentId: id }),
     {
-      staleTime: 20000,
+      staleTime: 1000 * 60 * 60,
     }
   );
 
   return {
     props: {
-      dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      dehydratedState: dehydrate(queryClient),
       revalidate: 86400,
     },
   };
