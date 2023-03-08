@@ -2,18 +2,27 @@ import { Flex, IconButton } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { LoginIcon, LogoutIcon, UserIcon } from '@/public/icon';
+import { deleteAccessToken } from '@/utils/deleteAccessToken';
+import { getAccessToken } from '@/utils/getAccessToken';
 
 export default function Header() {
   const [isLogin, setIsLogin] = useState(false);
+  const router = useRouter();
   useEffect(() => {
-    const user = window.localStorage.getItem('ACCESS_TOKEN');
+    const user = getAccessToken();
     if (user) {
       setIsLogin(true);
     }
   }, []);
+
+  const onLogoutHandler = () => {
+    deleteAccessToken();
+    router.replace('/');
+  };
   return (
     <Flex>
       <Container>
@@ -30,13 +39,12 @@ export default function Header() {
                   icon={<UserIcon w={8} h={8} />}
                 />
               </Link>
-              <Link href="/logout">
-                <IconButton
-                  variant="ghost"
-                  aria-label="로그아웃"
-                  icon={<LogoutIcon w={8} h={8} />}
-                />
-              </Link>
+              <IconButton
+                variant="ghost"
+                aria-label="로그아웃"
+                onClick={onLogoutHandler}
+                icon={<LogoutIcon w={8} h={8} />}
+              />
             </>
           ) : (
             <Link href="/">
