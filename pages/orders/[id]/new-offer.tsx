@@ -79,7 +79,7 @@ export default function NewOffer() {
         },
       });
       alert('오퍼가 성공적으로 등록되었어요.');
-      router.push(`orders/${orderId}`);
+      router.push(`/orders/${orderId}`);
     } catch (error) {
       const axiosError = error as AxiosError<ErrorResponse>;
       if (!axiosError.response) return;
