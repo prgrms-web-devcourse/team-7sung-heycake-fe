@@ -106,7 +106,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
                 ref={commentRef}
                 bg="white"
                 pr="4.5rem"
-                placeholder="Enter password"
+                placeholder="댓글을 입력해 주세요"
               />
               <InputRightElement width="4.5rem">
                 <Button h="1.75rem" size="sm" onClick={handleFileChoose}>

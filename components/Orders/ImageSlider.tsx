@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { AnimatePresence, motion, wrap } from 'framer-motion';
 import { useState } from 'react';
@@ -59,33 +60,42 @@ export default function ImageSlider({ images }: ImageSliderProp) {
         />
       </AnimatePresence>
       {images.length > 1 && (
-        <>
-          <NextButton type="button" onClick={() => paginate(1)}>
-            ‣
-          </NextButton>
+        <ButtonGroup>
           <PrevButton
             type="button"
             className="prev"
             onClick={() => paginate(-1)}
           >
             ‣
-          </PrevButton>
-        </>
+          </PrevButton>{' '}
+          <NextButton type="button" onClick={() => paginate(1)}>
+            ‣
+          </NextButton>
+        </ButtonGroup>
       )}
     </Wrapper>
   );
 }
 
 const Wrapper = styled.section`
+  display: flex;
   height: 250px;
   overflow: hidden;
-  border-radius: 10px;
+`;
+
+const ButtonGroup = styled(Box)`
+  top: calc(7%);
+  position: absolute;
+  display: flex;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
 `;
 
 const NextButton = styled.button`
-  right: 20px;
-  top: calc(8%);
-  position: absolute;
   background: white;
   border-radius: 30px;
   width: 40px;
@@ -101,9 +111,6 @@ const NextButton = styled.button`
 `;
 
 const PrevButton = styled.button`
-  left: 20px;
-  top: calc(8%);
-  position: absolute;
   background: white;
   border-radius: 30px;
   width: 40px;
