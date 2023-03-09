@@ -45,12 +45,23 @@ export default function CakeMain() {
           <TabList
             alignItems="center"
             h="46px"
-            p={2}
+            pl={4}
             whiteSpace="nowrap"
             borderBottom={0}
+            gap={5}
           >
             {TAB_TABLE.map((tab) => (
-              <Tab key={tab.label} h="46px">
+              <Tab
+                key={tab.label}
+                h="42px"
+                px={1}
+                pb={0}
+                _selected={{
+                  fontWeight: '700',
+                  color: 'hey.main',
+                  borderBottom: '2px solid',
+                }}
+              >
                 {tab.label}
               </Tab>
             ))}

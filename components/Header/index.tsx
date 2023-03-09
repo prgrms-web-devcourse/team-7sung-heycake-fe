@@ -1,5 +1,4 @@
 import { Flex, IconButton } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -28,7 +27,8 @@ export default function Header() {
         bg="white"
         width="100%"
         justifyContent="space-between"
-        p={2}
+        px={4}
+        py={2}
       >
         <Link href="/main">
           <Image src="/images/logo.png" alt="로고" width={40} height={40} />
@@ -47,7 +47,7 @@ export default function Header() {
               <IconButton
                 variant="ghost"
                 aria-label="로그인"
-                icon={<LoginIcon w={8} h={8} />}
+                icon={<LoginIcon w={6} h={6} />}
               />
             </Link>
           )}
