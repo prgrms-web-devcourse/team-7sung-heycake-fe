@@ -230,3 +230,19 @@ export const DateCalenderIcon = createIcon({
     </svg>
   ),
 });
+
+export const LocationHeaderIcon = createIcon({
+  displayName: 'LocationHeaderIcon',
+  viewBox: '0 0 80 4',
+  path: (
+    <svg
+      width="80"
+      height="4"
+      viewBox="0 0 80 4"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="80" height="4" rx="2" fill="#E3E3E3" />
+    </svg>
+  ),
+});

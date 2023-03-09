@@ -7,8 +7,7 @@ export interface ICakeList {
 
 export interface ILocationListItem {
   name: string;
-  onClose: () => void;
-  setLocation: TSetLocation;
+  onClick: () => void;
 }
 
 export interface ILocationSelectBox {
