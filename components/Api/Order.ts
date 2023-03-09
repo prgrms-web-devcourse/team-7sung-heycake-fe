@@ -51,5 +51,4 @@ export async function deleteOrder(orderId: string) {
   } catch (error) {
     console.error(error);
   }
-  return console.error('주문을 삭제하는 데 실패하였습니다');
 }
