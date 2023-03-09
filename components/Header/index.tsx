@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { LoginIcon, LogoutIcon, UserIcon } from '@/public/icon';
-import { deleteAccessToken } from '@/utils/deleteAccessToken';
+import { LoginIcon, UserIcon } from '@/public/icon';
 import { getAccessToken } from '@/utils/getAccessToken';
 
 export default function Header() {
@@ -18,14 +17,11 @@ export default function Header() {
   useEffect(() => {
     const user = getAccessToken();
     if (user) {
+      h;
       setIsLogin(true);
     }
   }, [code]);
 
-  const onLogoutHandler = () => {
-    deleteAccessToken();
-    router.replace('/');
-  };
   return (
     <Flex>
       <Container>
@@ -34,21 +30,13 @@ export default function Header() {
         </Link>
         <ButtonContainer>
           {isLogin ? (
-            <>
-              <Link href="/mypage">
-                <IconButton
-                  variant="ghost"
-                  aria-label="유저"
-                  icon={<UserIcon w={8} h={8} />}
-                />
-              </Link>
+            <Link href="/mypage">
               <IconButton
                 variant="ghost"
-                aria-label="로그아웃"
-                onClick={onLogoutHandler}
-                icon={<LogoutIcon w={8} h={8} />}
+                aria-label="유저"
+                icon={<UserIcon w={8} h={8} />}
               />
-            </>
+            </Link>
           ) : (
             <Link href="/">
               <IconButton
