@@ -1,10 +1,11 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 
 import getCakeList from '@/components/Api/Main';
 import CakeMain from '@/components/Main';
+import useHandleAxiosError from '@/hooks/useHandleAxiosError';
 import { getAccessToken } from '@/utils/getAccessToken';
 
 interface ResponseType {
@@ -12,13 +13,10 @@ interface ResponseType {
   refreshToken: string;
 }
 
-interface ErrorResponse {
-  message?: string;
-}
-
 export default function Main() {
   const router = useRouter();
   const { code: authCode } = router.query;
+  const handleAxiosError = useHandleAxiosError();
 
   const handleLogin = useCallback(
     async (code: string) => {
@@ -34,16 +32,10 @@ export default function Main() {
 
         router.push('/main');
       } catch (error) {
-        const axiosError = error as AxiosError<ErrorResponse>;
-        if (!axiosError.response) return;
-
-        if (axiosError.response.status === 401) {
-          alert(axiosError.message || '인증되지 않은 요청입니다.');
-        }
-        console.error(error);
+        handleAxiosError(error);
       }
     },
-    [router]
+    [handleAxiosError, router]
   );
 
   useEffect(() => {

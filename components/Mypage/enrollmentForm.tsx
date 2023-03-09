@@ -12,6 +12,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import SEOUL_AREA from '@/constants/seoulArea';
+import useHandleAxiosError from '@/hooks/useHandleAxiosError';
 import { deleteAccessToken } from '@/utils/deleteAccessToken';
 import { getAccessToken } from '@/utils/getAccessToken';
 
@@ -43,6 +44,7 @@ type InputProps = {
 
 export default function EnrollmentForm() {
   const ACCESS_TOKEN = getAccessToken();
+  const handleAxiosError = useHandleAxiosError();
 
   const router = useRouter();
   const {
@@ -86,7 +88,7 @@ export default function EnrollmentForm() {
       deleteAccessToken();
       router.push('/');
     } catch (error) {
-      console.error(error);
+      handleAxiosError(error);
     }
   };
 
