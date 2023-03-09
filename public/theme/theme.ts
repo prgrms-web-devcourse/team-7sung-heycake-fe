@@ -29,6 +29,36 @@ const heyTheme = extendTheme({
     blue: {
       500: '#F96400',
     },
+
+    PHOTO: {
+      100: '#FFEDED',
+      200: '#FFEDED',
+      800: '#FF0000',
+    },
+
+    LETTERING: {
+      100: '#E7F9ED',
+      200: '#E7F9ED',
+      800: '#006B0B',
+    },
+
+    CHARACTER_IMAGE: {
+      100: '#FFECF7',
+      200: '#FFECF7',
+      800: '#E2007E',
+    },
+
+    CHARACTER_MODEL: {
+      100: '#FFF1D7',
+      200: '#FFF1D7',
+      800: '#D07B0D',
+    },
+
+    ETC: {
+      100: '#EEF0F6',
+      200: '#EEF0F6',
+      800: '#5F656D',
+    },
   },
 });
 

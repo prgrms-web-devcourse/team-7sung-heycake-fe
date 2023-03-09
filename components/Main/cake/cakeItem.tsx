@@ -1,15 +1,11 @@
 import { Badge, Card, CardBody, Flex, Grid, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
-import {
-  CAKE_CATEGORY,
-  CAKE_CATEGORY_COLOR,
-  CAKE_SIZE,
-} from '@/constants/Main';
+import { CAKE_CATEGORY, CAKE_SIZE } from '@/constants/Main';
+import { DateCalenderIcon } from '@/public/icon';
 import { ICakeItem } from '@/types/Main';
 import numberWithCommas from '@/utils/numberWithCommas';
 import { convertBreadFlavor, convertCreamFlavor } from '@/utils/orders';
-import { DateCalenderIcon } from '@/public/icon';
 
 export default function CakeItem({
   category,
@@ -48,7 +44,7 @@ export default function CakeItem({
         </Card>
         <CardBody ml={4}>
           <Badge
-            colorScheme={CAKE_CATEGORY_COLOR[category]}
+            colorScheme={category}
             p={1}
             px={2}
             borderRadius={10}
