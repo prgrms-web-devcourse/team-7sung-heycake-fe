@@ -11,6 +11,7 @@ import {
   SliderThumb,
   SliderTrack,
   Textarea,
+  useToast,
 } from '@chakra-ui/react';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import Image from 'next/image';
@@ -30,6 +31,7 @@ import {
 } from '@/constants/cakeFormat';
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import useClickInput from '@/hooks/useClickInput';
+import useHandleAxiosError from '@/hooks/useHandleAxiosError';
 import useImageUpload from '@/hooks/useImageUpload';
 import {
   BreadFlavor,
@@ -67,6 +69,8 @@ export default function NewOrder() {
   const router = useRouter();
   const requirementRef = useRef<HTMLTextAreaElement>(null);
   const accessToken = getAccessToken();
+  const toast = useToast();
+  const handleAxiosError = useHandleAxiosError();
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputTime = event.target.value;
@@ -77,22 +81,38 @@ export default function NewOrder() {
     event.preventDefault();
 
     if (accessToken === null) {
-      alert('로그인을 해주세요');
+      toast({
+        status: 'error',
+        description: '로그인을 해주세요',
+        isClosable: true,
+      });
       return;
     }
 
     if (formData.title === '' || requirementRef.current === null) {
-      alert('입력한 값을 확인해 주세요');
+      toast({
+        status: 'error',
+        description: '입력한 값을 확인해 주세요',
+        isClosable: true,
+      });
       return;
     }
 
     if (hopePrice < 10000) {
-      alert('최소 금액은 10,000원 이상이에요');
+      toast({
+        status: 'error',
+        description: '최소 금액은 10,000원 이상이에요',
+        isClosable: true,
+      });
       return;
     }
 
     if (!timeRegex.test(visitTime)) {
-      alert('시간을 예시에 맞춰서 입력해 주세요');
+      toast({
+        status: 'error',
+        description: '시간을 예시에 맞춰서 입력해 주세요',
+        isClosable: true,
+      });
       return;
     }
 
@@ -125,11 +145,14 @@ export default function NewOrder() {
           access_token: accessToken,
         },
       });
-      alert('주문이 성공적으로 등록되었어요.');
+      toast({
+        status: 'success',
+        description: '오퍼가 성공적으로 등록되었어요.',
+        isClosable: true,
+      });
       router.push('/main');
     } catch (error) {
-      alert('주문 등록을 실패했어요. 다시 한번 확인해 주세요.');
-      console.error(error);
+      handleAxiosError(error);
     }
   };
 
