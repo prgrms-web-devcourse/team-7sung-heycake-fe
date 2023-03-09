@@ -26,7 +26,6 @@ export default function Post({
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (orderStatus === 'RESERVED') {
-      console.log('cannot delete!');
       toast({
         status: 'error',
         description: '예약된 주문은 삭제할 수 없습니다',
