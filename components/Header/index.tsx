@@ -17,18 +17,23 @@ export default function Header() {
   useEffect(() => {
     const user = getAccessToken();
     if (user) {
-      h;
       setIsLogin(true);
     }
   }, [code]);
 
   return (
     <Flex>
-      <Container>
+      <Flex
+        alignItems="center"
+        bg="white"
+        width="100%"
+        justifyContent="space-between"
+        p={2}
+      >
         <Link href="/main">
           <Image src="/images/logo.png" alt="로고" width={40} height={40} />
         </Link>
-        <ButtonContainer>
+        <Flex gap="10px">
           {isLogin ? (
             <Link href="/mypage">
               <IconButton
@@ -46,24 +51,8 @@ export default function Header() {
               />
             </Link>
           )}
-        </ButtonContainer>
-      </Container>
+        </Flex>
+      </Flex>
     </Flex>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 60px;
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 10px;
-`;

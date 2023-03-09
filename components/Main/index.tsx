@@ -44,32 +44,31 @@ export default function CakeMain() {
         >
           <TabList
             alignItems="center"
-            h="50px"
+            h="46px"
             p={2}
-            overflowX="auto"
-            overflowY="hidden"
             whiteSpace="nowrap"
+            borderBottom={0}
           >
             {TAB_TABLE.map((tab) => (
-              <Tab key={tab.label} h="50px">
+              <Tab key={tab.label} h="46px">
                 {tab.label}
               </Tab>
             ))}
           </TabList>
-          <Flex
-            gap={4}
-            justifyContent="space-between"
-            borderBottom="2px solid"
-            borderColor="hey.sub"
-          >
-            <LocationSelectBox location={location} setLocation={setLocation} />
-            <Link href="/orders/new">
-              <Button w={24} h={10} colorScheme="heys" fontSize="3xl" m={2}>
-                <MdPostAdd />
-              </Button>
-            </Link>
-          </Flex>
         </Box>
+        <Flex
+          gap={4}
+          justifyContent="space-between"
+          borderBottom="2px solid"
+          borderColor="hey.sub"
+        >
+          <LocationSelectBox location={location} setLocation={setLocation} />
+          <Link href="/orders/new">
+            <Button w={24} h={10} colorScheme="heys" fontSize="3xl" m={2}>
+              <MdPostAdd />
+            </Button>
+          </Link>
+        </Flex>
         <TabPanels>
           {TAB_TABLE.map((tab) => (
             <TabPanel p={3} key={tab.label}>
