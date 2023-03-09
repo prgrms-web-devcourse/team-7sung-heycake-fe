@@ -1,4 +1,4 @@
-import { Box, Button, Card, Container, Text } from '@chakra-ui/react';
+import { Box, Button, Card, Container, Text, useToast } from '@chakra-ui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -15,6 +15,7 @@ export default function Post({
 }: IMypagePost) {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const toast = useToast();
 
   const deleteOrderMutation = useMutation(deleteOrder, {
     onSuccess: () => {
@@ -24,7 +25,16 @@ export default function Post({
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    deleteOrderMutation.mutate(id);
+    if (orderStatus === 'RESERVED') {
+      console.log('cannot delete!');
+      toast({
+        status: 'error',
+        description: '예약된 주문은 삭제할 수 없습니다',
+        isClosable: true,
+      });
+    } else {
+      deleteOrderMutation.mutate(id);
+    }
   };
 
   return (
