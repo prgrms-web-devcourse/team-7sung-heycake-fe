@@ -1,3 +1,4 @@
+import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
 import { useCallback } from 'react';
 
@@ -14,6 +15,7 @@ interface RequestBody {
 const useSelectOffer = () => {
   const accessToken = getAccessToken();
   const handleAxiosError = useHandleAxiosError();
+  const toast = useToast();
 
   const mutation = useMutation(
     (body: RequestBody) =>
@@ -24,7 +26,11 @@ const useSelectOffer = () => {
       }),
     {
       onSuccess: () => {
-        alert('해당 업체를 선택하셨어요');
+        toast({
+          status: 'success',
+          description: '해당 업체를 선택하셨어요',
+          isClosable: true,
+        });
       },
       onError: (error) => {
         handleAxiosError(error);
@@ -38,9 +44,14 @@ const useSelectOffer = () => {
       if (accessToken) {
         mutation.mutate(requestBody);
       } else {
-        alert('로그인을 해주세요');
+        toast({
+          status: 'error',
+          description: '로그인을 해주세요',
+          isClosable: true,
+        });
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [accessToken, mutation]
   );
 

@@ -10,6 +10,7 @@ import {
   SliderThumb,
   SliderTrack,
   Textarea,
+  useToast,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -40,22 +41,35 @@ export default function NewOffer() {
     handleFileInputChange,
     resetImages,
   } = useImageUpload(1);
+  const toast = useToast();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (accessToken === null) {
-      alert('로그인을 해주세요');
+      toast({
+        status: 'error',
+        description: '로그인을 해주세요',
+        isClosable: true,
+      });
       return;
     }
 
     if (contentRef.current === null) {
-      alert('오퍼 내용을 입력해 주세요');
+      toast({
+        status: 'error',
+        description: '오퍼 내용을 입력해 주세요',
+        isClosable: true,
+      });
       return;
     }
 
     if (expectedPrice < 10000) {
-      alert('최소 예상 금액은 10,000원 이상이에요');
+      toast({
+        status: 'error',
+        description: '최소 금액은 10,000원 이상이에요',
+        isClosable: true,
+      });
       return;
     }
 
@@ -75,7 +89,11 @@ export default function NewOffer() {
           access_token: accessToken,
         },
       });
-      alert('오퍼가 성공적으로 등록되었어요.');
+      toast({
+        status: 'success',
+        description: '오퍼가 성공적으로 등록되었어요.',
+        isClosable: true,
+      });
       router.push(`/orders/${orderId}`);
     } catch (error) {
       handleAxiosError(error);

@@ -6,6 +6,7 @@ import {
   Input,
   Select,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -45,6 +46,7 @@ type InputProps = {
 export default function EnrollmentForm() {
   const ACCESS_TOKEN = getAccessToken();
   const handleAxiosError = useHandleAxiosError();
+  const toast = useToast();
 
   const router = useRouter();
   const {
@@ -84,7 +86,12 @@ export default function EnrollmentForm() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      alert('업체 등록이 성공적으로 신청되었어요. 다시 로그인 해주세요.');
+      toast({
+        status: 'success',
+        description:
+          '업체 등록이 성공적으로 신청되었어요. 다시 로그인 해주세요.',
+        isClosable: true,
+      });
       deleteAccessToken();
       router.push('/');
     } catch (error) {
