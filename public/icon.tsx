@@ -207,3 +207,26 @@ export const NewOrderIcon = createIcon({
     </svg>
   ),
 });
+
+export const DateCalenderIcon = createIcon({
+  displayName: 'DateCalenderIcon',
+  viewBox: '0 0 16 16',
+  path: (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="16" height="16" fill="white" />
+      <path
+        d="M12.5455 2.5H3.45455C2.92736 2.5 2.5 2.92736 2.5 3.45455V12.5455C2.5 13.0726 2.92737 13.5 3.45455 13.5H12.5455C13.0726 13.5 13.5 13.0726 13.5 12.5455V3.45455C13.5 2.92737 13.0726 2.5 12.5455 2.5Z"
+        stroke="#999999"
+      />
+      <path d="M11 1.5V3.5" stroke="#999999" strokeLinecap="round" />
+      <path d="M5 1.5V3.5" stroke="#999999" strokeLinecap="round" />
+      <path d="M2 5H14" stroke="#999999" />
+    </svg>
+  ),
+});

@@ -1,4 +1,4 @@
-import { Badge, Card, CardBody, Flex, Text } from '@chakra-ui/react';
+import { Badge, Card, CardBody, Flex, Grid, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import {
@@ -8,6 +8,8 @@ import {
 } from '@/constants/Main';
 import { ICakeItem } from '@/types/Main';
 import numberWithCommas from '@/utils/numberWithCommas';
+import { convertBreadFlavor, convertCreamFlavor } from '@/utils/orders';
+import { DateCalenderIcon } from '@/public/icon';
 
 export default function CakeItem({
   category,
@@ -27,6 +29,7 @@ export default function CakeItem({
         borderBottom="2px solid"
         borderColor="hey.lightGray"
         height="154px"
+        pb={6}
       >
         <Card
           variant="unstyled"
@@ -50,17 +53,34 @@ export default function CakeItem({
             px={2}
             borderRadius={10}
             fontWeight={500}
+            fontSize="10px"
           >
             {CAKE_CATEGORY[category]}
           </Badge>
-          <Text>{title}</Text>
-          <Flex>
-            <Text fontSize="sm">{CAKE_SIZE[cakeSize]}</Text>
-            <Text fontSize="sm">{breadFlavor}</Text>
-            <Text fontSize="sm">{creamFlavor}</Text>
-          </Flex>
-          <Text>~ {numberWithCommas(Number(price))} 원</Text>
-          <Text>{visitTime.substring(0, 10)}</Text>
+          <Grid gap={1} mt={1}>
+            <Text fontSize="sm" fontWeight={500}>
+              {title}
+            </Text>
+            <Flex>
+              <Text fontSize="xs" color="hey.lightGray">
+                {`${CAKE_SIZE[cakeSize]} · ${convertBreadFlavor(
+                  breadFlavor
+                )} · ${convertCreamFlavor(creamFlavor)}`}
+              </Text>
+            </Flex>
+            <Text fontSize="sm" fontWeight={700}>
+              ~ {numberWithCommas(Number(price))} 원
+            </Text>
+            <Flex color="gray" alignItems="center" gap={1}>
+              <DateCalenderIcon />
+              <Text fontSize="xs" fontWeight={300}>
+                {`${visitTime.substring(0, 10).replace(/-/g, '.')} ·`}
+              </Text>
+              <Text fontSize="xs" color="hey.main">
+                오퍼+2
+              </Text>
+            </Flex>
+          </Grid>
         </CardBody>
       </Flex>
     </Card>
