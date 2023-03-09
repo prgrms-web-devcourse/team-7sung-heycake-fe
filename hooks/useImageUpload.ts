@@ -10,6 +10,7 @@ type ImageUploadReturn = {
   handleDragOver: (event: React.DragEvent<HTMLDivElement>) => void;
   handleDrop: (event: React.DragEvent<HTMLDivElement>) => void;
   handleFileInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleDeleteImage: (index: number) => void;
   resetImages: () => void;
 };
 
@@ -83,6 +84,11 @@ const useImageUpload = (maxFileLength = 3): ImageUploadReturn => {
     }
   };
 
+  const handleDeleteImage = (index: number) => {
+    setPreviewUrls((prevState) => prevState.filter((_, i) => i !== index));
+    setFiles((prevState) => prevState.filter((_, i) => i !== index));
+  };
+
   const resetImages = () => {
     setPreviewUrls([]);
     setFiles([]);
@@ -94,6 +100,7 @@ const useImageUpload = (maxFileLength = 3): ImageUploadReturn => {
     handleDragOver,
     handleDrop,
     handleFileInputChange,
+    handleDeleteImage,
     resetImages,
   };
 };

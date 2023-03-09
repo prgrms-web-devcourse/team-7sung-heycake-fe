@@ -17,7 +17,6 @@ import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
-import { GrPowerReset } from 'react-icons/gr';
 
 import { publicApi } from '@/components/Api';
 import LocationSelectBox from '@/components/Main/location/locationSelectBox';
@@ -62,7 +61,7 @@ export default function NewOrder() {
     handleDragOver,
     handleDrop,
     handleFileInputChange,
-    resetImages,
+    handleDeleteImage,
   } = useImageUpload();
   const [inputRef, handleFileChoose] = useClickInput();
   const [date, setDate] = useState(new Date());
@@ -184,56 +183,85 @@ export default function NewOrder() {
 
   return (
     <form style={{ margin: '0 auto', padding: '1rem' }} onSubmit={handleSubmit}>
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        height="150px"
-        border="1px dashed grey"
-        borderRadius="5px"
-        cursor="poiner"
-        margin="0 auto"
-        textAlign="center"
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-        onClick={handleFileChoose}
-      >
-        드래그 앤 드랍 또는 클릭하여 파일을 추가하세요.
-        <br />({files.length}/3)
-        <input
-          hidden
-          ref={inputRef}
-          type="file"
-          multiple
-          onChange={handleFileInputChange}
-        />
-      </Flex>
-      <Flex
-        alignItems="center"
-        width="95%"
-        height="70px"
-        margin="0 auto"
-        gap="1rem"
-      >
-        {previewUrls.map((url) => (
-          <Image
-            key={url}
-            src={url}
-            alt="Preview"
-            width={50}
-            height={50}
-            style={{ borderRadius: '10px' }}
-          />
-        ))}
-        {files.length !== 0 && (
-          <Button type="button" onClick={resetImages}>
-            <GrPowerReset />
-          </Button>
-        )}
-      </Flex>
-      <Flex flexDirection="column" width="100%" gap="1rem">
+      <FormControl id="picture" padding="1rem 0">
+        <FormLabel>사진</FormLabel>
+        <Flex gap="1rem">
+          <Flex
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            width="70px"
+            height="70px"
+            border="1px solid #e3e3e3"
+            borderRadius="1rem"
+            cursor="pointer"
+            textAlign="center"
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            onClick={handleFileChoose}
+          >
+            <svg
+              width="26"
+              height="27"
+              viewBox="0 0 26 27"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M10.4545 3.69678C9.3499 3.69678 8.45447 4.59221 8.45447 5.69678V5.69678C8.45447 6.09844 8.12886 6.42406 7.72719 6.42406H4.09082C2.98625 6.42406 2.09082 7.31949 2.09082 8.42406V20.7877C2.09082 21.8923 2.98625 22.7877 4.09082 22.7877H21.9091C23.0136 22.7877 23.9091 21.8923 23.9091 20.7877V8.42406C23.9091 7.31949 23.0136 6.42406 21.9091 6.42406H18.2727C17.871 6.42406 17.5454 6.09844 17.5454 5.69678V5.69678C17.5454 4.59221 16.65 3.69678 15.5454 3.69678H10.4545Z"
+                fill="#E3E3E3"
+              />
+              <ellipse
+                cx="12.9997"
+                cy="14.6061"
+                rx="3.63637"
+                ry="3.63637"
+                fill="white"
+              />
+            </svg>
+            <Flex fontSize="0.9rem">
+              <Box color="hey.main">{files.length}</Box>
+              /3
+            </Flex>
+            <input
+              hidden
+              ref={inputRef}
+              type="file"
+              multiple
+              onChange={handleFileInputChange}
+            />
+          </Flex>
+          <Flex alignItems="center" height="70px" gap="1rem">
+            {previewUrls.map((url, urlIndex) => (
+              <Button
+                width="70px"
+                height="70px"
+                onClick={() => handleDeleteImage(urlIndex)}
+                borderRadius="1rem"
+                padding="0"
+                bg="white"
+              >
+                <Image
+                  key={url}
+                  src={url}
+                  alt="Preview"
+                  width={70}
+                  height={70}
+                  style={{ borderRadius: '1rem' }}
+                />
+              </Button>
+            ))}
+          </Flex>
+        </Flex>
+      </FormControl>
+      <Flex flexDirection="column" width="100%" gap="1.4rem">
         <FormControl id="title">
           <FormLabel>제목</FormLabel>
           <Input
+            borderRadius="1rem"
+            height="3rem"
             type="text"
             name="title"
             value={title}
@@ -245,16 +273,13 @@ export default function NewOrder() {
           <FormLabel>지역</FormLabel>
           <LocationSelectBox location={location} setLocation={setLocation} />
         </FormControl>
-        <FormControl id="hopePrice">
-          <FormLabel display="flex" justifyContent="space-between">
-            희망가격
-            <Checkbox
-              isChecked={directInput}
-              onChange={() => setDirectInput(!directInput)}
-            >
-              직접 입력
-            </Checkbox>
-          </FormLabel>
+        <FormControl
+          display="flex"
+          flexDirection="column"
+          gap="1rem"
+          id="hopePrice"
+        >
+          <FormLabel>희망가격</FormLabel>
           <Slider
             defaultValue={30000}
             min={10000}
@@ -270,6 +295,8 @@ export default function NewOrder() {
             <SliderThumb boxSize={6} />
           </Slider>
           <Input
+            borderRadius="1rem"
+            height="3rem"
             disabled={!directInput}
             type="number"
             name="hopePrice"
@@ -280,15 +307,30 @@ export default function NewOrder() {
             max={100000}
             step={5000}
           />
+          <Checkbox
+            isChecked={directInput}
+            onChange={() => setDirectInput(!directInput)}
+          >
+            직접 입력
+          </Checkbox>
         </FormControl>
         <FormControl id="visitTime">
-          <FormLabel>방문시간</FormLabel>
+          <FormLabel>방문 예정 시간</FormLabel>
           <SingleDatepicker
+            propsConfigs={{
+              inputProps: {
+                borderRadius: '1rem',
+                height: '3rem',
+              },
+            }}
             name="date-input"
             date={date}
             onDateChange={setDate}
           />
           <Input
+            marginTop="1rem"
+            borderRadius="1rem"
+            height="3rem"
             isInvalid={visitTime !== '' && !timeRegex.test(visitTime)}
             type="text"
             name="visitTime"
@@ -302,7 +344,7 @@ export default function NewOrder() {
         </FormControl>
         <CakeSelect<CakeCategory>
           id="cakeCategory"
-          label="케익 종류"
+          label="케이크 종류"
           value={cakeCategory}
           options={cakeCategories}
           onChange={handleChange}
@@ -310,7 +352,7 @@ export default function NewOrder() {
         />
         <CakeSelect<CakeSize>
           id="cakeSize"
-          label="케익 크기"
+          label="케이크 크기"
           value={cakeSize}
           options={cakeSizes}
           onChange={handleChange}
@@ -318,7 +360,7 @@ export default function NewOrder() {
         />
         <CakeSelect<CakeHeight>
           id="cakeHeight"
-          label="케익 높이"
+          label="케이크 높이"
           value={cakeHeight}
           options={cakeHeights}
           onChange={handleChange}
@@ -340,17 +382,25 @@ export default function NewOrder() {
           onChange={handleChange}
           convertOption={convertCreamFlavor}
         />
-        <FormControl id="requirements">
+        <FormControl paddingBottom="3rem" id="requirements">
           <FormLabel>요청사항</FormLabel>
           <Textarea
-            minH="100px"
+            borderRadius="1rem"
+            padding="1rem"
+            minH="182px"
             name="requirements"
             ref={requirementRef}
-            placeholder="요청사항을 입력하세요."
+            placeholder="요청사항을 입력하세요. 예) 과일 알레르기가 있어 과일을 빼주세요."
           />
         </FormControl>
-        <Button background="hey.sub" type="submit">
-          전송하기
+        <Button
+          color="white"
+          background="hey.main"
+          height="3.75rem"
+          borderRadius="1rem"
+          type="submit"
+        >
+          등록
         </Button>
       </Flex>
     </form>
