@@ -50,7 +50,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <link
             rel="stylesheet"
             type="text/css"
-            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
+            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"
           />
           <Layout>
             {router.pathname !== '/' && <Header />}
