@@ -1,4 +1,4 @@
-import { Badge, Card, CardBody, Flex, Grid, Text } from '@chakra-ui/react';
+import { Card, CardBody, Flex, Grid, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import { CAKE_CATEGORY, CAKE_SIZE } from '@/constants/Main';
@@ -13,6 +13,8 @@ export default function CakeItem({
   status,
   visitTime,
   title,
+  breadFlavor,
+  creamFlavor,
 }: ICakeItem) {
   return (
     <Card variant="unstyled" opacity={status !== 'NEW' ? '0.4' : '1'} p={0}>
@@ -32,22 +34,14 @@ export default function CakeItem({
               alt="Cake"
             />
           </Card>
-          <CardBody px={0}>
-            <Text ml={2} fontWeight="700">
-              {title}
-            </Text>
-            <Badge mt={1} bgColor="red.200" color="hey.red">
-              ~ {visitTime.substring(0, 10)}
-            </Badge>
-            <Text fontSize="sm" whiteSpace="nowrap">
-              {CAKE_CATEGORY[category]}
-            </Text>
-            <Text fontSize="sm" whiteSpace="nowrap">
-              {CAKE_SIZE[cakeSize]}
-            </Text>
-            <Badge bgColor="orange.100" colorScheme="red" color="hey.red">
-              ~ ₩ {numberWithCommas(Number(price))}
-            </Badge>
+          <CardBody ml={4}>
+            <Text>{CAKE_CATEGORY[category]}</Text>
+            <Text>{title}</Text>
+            <Text>{CAKE_SIZE[cakeSize]}</Text>
+            <Text>{breadFlavor}</Text>
+            <Text>{creamFlavor}</Text>
+            <Text>~ {numberWithCommas(Number(price))} 원</Text>
+            <Text>{visitTime.substring(0, 10)}</Text>
           </CardBody>
         </Flex>
       </Grid>

@@ -77,6 +77,8 @@ export default function CakeList({ category, location }: any) {
                 title={item.title}
                 category={item.cakeInfo.cakeCategory}
                 cakeSize={item.cakeInfo.cakeSize}
+                creamFlavor={item.cakeInfo.creamFlavor}
+                breadFlavor={item.cakeInfo.breadFlavor}
                 image={item.images[0]}
                 price={item.hopePrice}
                 status={item.orderStatus}

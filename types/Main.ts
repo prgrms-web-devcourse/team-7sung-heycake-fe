@@ -24,6 +24,8 @@ export interface ICakeItem {
   status: TOrderStatus;
   visitTime: string;
   title: string;
+  breadFlavor: string;
+  creamFlavor: string;
 }
 
 export interface ICakeItemData {
