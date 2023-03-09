@@ -9,9 +9,9 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { BiCurrentLocation } from 'react-icons/bi';
 
 import { SEOUL_AREA } from '@/constants/Main';
+import { LocationIcon } from '@/public/icon';
 import { ILocationSelectBox } from '@/types/Main';
 
 import LocationListItem from './locationListItem';
@@ -26,14 +26,13 @@ export default function LocationSelectBox({
     <>
       <Flex
         onClick={onOpen}
-        fontSize="xl"
-        fontWeight="700"
-        gap={2}
-        m={3}
+        fontSize="sm"
+        gap={1}
+        m={4}
         alignItems="center"
-        w="200px"
+        fontWeight={600}
       >
-        <BiCurrentLocation color="orange" fontSize="xl" />
+        <LocationIcon h={6} w={6} />
         <Text pr={2} cursor="pointer">
           서울시 {location}
         </Text>

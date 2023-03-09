@@ -107,14 +107,25 @@ export const LoginIcon = createIcon({
   ),
 });
 
-export const LogoutIcon = createIcon({
-  displayName: 'LogoutIcon',
-  viewBox: '0 0 63 63',
+export const LocationIcon = createIcon({
+  displayName: 'LocationIcon',
+  viewBox: '0 0 24 24',
   path: (
-    <path
-      d="M45.3333 18.6667L41.5733 22.4267L48.4533 29.3333H21.3333V34.6667H48.4533L41.5733 41.5467L45.3333 45.3333L58.6666 32L45.3333 18.6667ZM10.6666 13.3333H31.9999V8H10.6666C7.73325 8 5.33325 10.4 5.33325 13.3333V50.6667C5.33325 53.6 7.73325 56 10.6666 56H31.9999V50.6667H10.6666V13.3333Z"
-      fill="#F96400"
-    />
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="24" height="24" fill="white" />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 20.9612C14.3912 20.9612 19.5 14.6421 19.5 10.5C19.5 6.35786 16.1421 3 12 3C7.85786 3 4.5 6.35786 4.5 10.5C4.5 14.6421 9.60878 20.9612 12 20.9612ZM12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z"
+        fill="#F96400"
+      />
+    </svg>
   ),
 });
 
@@ -141,6 +152,57 @@ export const UserIcon = createIcon({
         stroke="#F96400"
         strokeWidth="2"
         strokeLinecap="round"
+      />
+    </svg>
+  ),
+});
+
+export const NewOrderIcon = createIcon({
+  displayName: 'NewOrderIcon',
+  viewBox: '0 0 25 26',
+  path: (
+    <svg
+      width="25"
+      height="26"
+      viewBox="0 0 25 26"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M20 1L20 7C20 7.55228 20.4477 8 21 8C21.5523 8 22 7.55228 22 7V1C22 0.447715 21.5523 -2.41403e-08 21 0C20.4477 2.4142e-08 20 0.447715 20 1Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M25 4C25 4.55228 24.5523 5 24 5L18 5C17.4477 5 17 4.55228 17 4C17 3.44771 17.4477 3 18 3L24 3C24.5523 3 25 3.44772 25 4Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M6 15C6 14.4477 6.44772 14 7 14H15C15.5523 14 16 14.4477 16 15C16 15.5523 15.5523 16 15 16H7C6.44772 16 6 15.5523 6 15Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M6 19C6 18.4477 6.44772 18 7 18H15C15.5523 18 16 18.4477 16 19C16 19.5523 15.5523 20 15 20H7C6.44772 20 6 19.5523 6 19Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M6 11C6 10.4477 6.44772 10 7 10H15C15.5523 10 16 10.4477 16 11C16 11.5523 15.5523 12 15 12H7C6.44772 12 6 11.5523 6 11Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M0 7C0 4.79086 1.79086 3 4 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H4C2.89543 5 2 5.89543 2 7V22C2 23.1046 2.89543 24 4 24H18C19.1046 24 20 23.1046 20 22V11C20 10.4477 20.4477 10 21 10C21.5523 10 22 10.4477 22 11V22C22 24.2091 20.2091 26 18 26H4C1.79086 26 0 24.2091 0 22V7Z"
+        fill="white"
       />
     </svg>
   ),
