@@ -72,7 +72,7 @@ export default function CakeMain() {
         </Flex>
         <TabPanels>
           {TAB_TABLE.map((tab) => (
-            <TabPanel key={tab.label} p={4}>
+            <TabPanel key={tab.label}>
               <CakeList category={tab.category} location={location} />
             </TabPanel>
           ))}
