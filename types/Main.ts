@@ -25,6 +25,7 @@ export interface ICakeItem {
   title: string;
   breadFlavor: TBreadFlavor;
   creamFlavor: TCreamFlavor;
+  offerCount: string;
 }
 
 export interface ICakeItemData {
@@ -40,6 +41,7 @@ export interface ICakeItemData {
   };
   images: string[];
   hopePrice: string;
+  offerCount: string;
   orderStatus: TOrderStatus;
   visitTime: string;
 }

@@ -83,6 +83,7 @@ export default function CakeList({ category, location }: any) {
                 price={item.hopePrice}
                 status={item.orderStatus}
                 visitTime={item.visitTime}
+                offerCount={item.offerCount}
               />
             </Link>
           ))

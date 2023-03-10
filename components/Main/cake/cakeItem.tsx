@@ -17,6 +17,7 @@ export default function CakeItem({
   title,
   breadFlavor,
   creamFlavor,
+  offerCount,
 }: ICakeItem) {
   return (
     <Card variant="unstyled" my={2}>
@@ -70,11 +71,13 @@ export default function CakeItem({
             <Flex color="gray" alignItems="center" gap={1}>
               <DateCalenderIcon />
               <Text fontSize="xs" fontWeight={300}>
-                {`${visitTime.substring(0, 10).replace(/-/g, '.')} ·`}
+                {`${visitTime.substring(0, 10).replace(/-/g, '.')}`}
               </Text>
-              <Text fontSize="xs" color="hey.main">
-                오퍼+2
-              </Text>
+              {Boolean(offerCount) && (
+                <Text fontSize="xs" color="hey.main">
+                  · 오퍼+{offerCount}
+                </Text>
+              )}
             </Flex>
           </Grid>
         </CardBody>
