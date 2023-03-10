@@ -5,7 +5,7 @@ import { IMypageCount } from './types';
 export default function CountBar({ count }: IMypageCount) {
   return (
     <Container backgroundColor="#F6F7FB" height="46px">
-      <Text fontSize={16} padding={2}>
+      <Text fontSize={16} padding={3}>
         총 {count}건
       </Text>
     </Container>
