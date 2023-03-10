@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
 import { getOrderList } from '@/components/Api/Order';
+import CountBar from '@/components/Mypage/countBar';
 import FilterBar from '@/components/Mypage/filterBar';
 import MypageTitle from '@/components/Mypage/mypageTitle';
 import Post from '@/components/Mypage/post';
@@ -28,6 +29,7 @@ export default function Orderlist() {
     <>
       <MypageTitle title="마이 주문 리스트" isSuccess={false} />
       <FilterBar />
+      <CountBar count={orderList.length} />
       <Container paddingTop={10} overflow="scroll">
         {orderList.length !== 0 ? (
           orderList.map((order) => <Post key={order.id} {...order} />)
