@@ -59,9 +59,19 @@ export const CAKE_CATEGORY = {
   ALL: '전체',
   PHOTO: '포토',
   LETTERING: '레터링',
-  CHARACTER_IMAGE: '캐릭터-사진',
-  CHARACTER_MODEL: '캐릭터-입체',
+  CHARACTER_IMAGE: '캐릭터 - 그림',
+  CHARACTER_MODEL: '캐릭터 - 입체',
   ETC: '기타',
+  '': '',
+};
+
+export const CAKE_CATEGORY_COLOR = {
+  ALL: 'gray',
+  PHOTO: 'red',
+  LETTERING: 'green',
+  CHARACTER_IMAGE: 'pink',
+  CHARACTER_MODEL: 'yellow',
+  ETC: 'gray',
   '': '',
 };
 

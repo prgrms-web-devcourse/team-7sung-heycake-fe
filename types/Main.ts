@@ -7,8 +7,7 @@ export interface ICakeList {
 
 export interface ILocationListItem {
   name: string;
-  onClose: () => void;
-  setLocation: TSetLocation;
+  onClick: () => void;
 }
 
 export interface ILocationSelectBox {
@@ -24,6 +23,8 @@ export interface ICakeItem {
   status: TOrderStatus;
   visitTime: string;
   title: string;
+  breadFlavor: TBreadFlavor;
+  creamFlavor: TCreamFlavor;
 }
 
 export interface ICakeItemData {
@@ -44,7 +45,7 @@ export interface ICakeItemData {
 }
 
 type TCakeSize = 'MINI' | 'NO_1' | 'NO_2';
-type TBreadFlavor = 'VANILLA' | 'CHOCO' | 'GEEN_TEA' | 'CARROT' | 'ETC';
+type TBreadFlavor = 'VANILLA' | 'CHOCO' | 'GREEN_TEA' | 'CARROT' | 'ETC';
 type TCreamFlavor = 'WHIPPED_CREAM' | 'CREAM_CHEESE' | 'CHOCO' | 'OREO' | 'ETC';
 type TOrderStatus = 'NEW' | 'RESERVED' | 'PAID';
 type TSetLocation = (name: string) => void;

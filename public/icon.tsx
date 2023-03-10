@@ -75,33 +75,174 @@ export const MarketOpeningIcon = createIcon({
 
 export const LoginIcon = createIcon({
   displayName: 'LoginIcon',
-  viewBox: '0 0 40 40',
+  viewBox: '0 0 24 24',
   path: (
-    <path
-      d="M18.0312 11.6894L15.7808 13.8642L19.9601 17.903H3.56445V21.0098H19.9601L15.7808 25.0486L18.0312 27.2234L26.0683 19.4564L18.0312 11.6894ZM32.498 30.3302H19.6386V33.437H32.498C34.2662 33.437 35.7128 32.0389 35.7128 30.3302V8.58263C35.7128 6.87389 34.2662 5.47583 32.498 5.47583H19.6386V8.58263H32.498V30.3302Z"
-      fill="#F96400"
-    />
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="24" height="24" fill="white" />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M10.0045 8.38788C10.3439 8.03737 10.8942 8.03737 11.2335 8.38788L13.9955 11.2403C14.3348 11.5909 14.3348 12.1591 13.9955 12.5097L11.2335 15.3621C10.8942 15.7126 10.3439 15.7126 10.0045 15.3621C9.66515 15.0116 9.66515 14.4433 10.0045 14.0928L12.152 11.875L10.0045 9.65718C9.66515 9.30667 9.66515 8.73839 10.0045 8.38788Z"
+        fill="#F96400"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M4.5 11.875C4.5 11.4608 4.87958 11.125 5.34783 11.125H13.4022C13.8704 11.125 14.25 11.4608 14.25 11.875C14.25 12.2892 13.8704 12.625 13.4022 12.625H5.34783C4.87958 12.625 4.5 12.2892 4.5 11.875Z"
+        fill="#F96400"
+      />
+      <path
+        d="M5.625 6.25V6.25C5.625 5.00736 6.63236 4 7.875 4H16.5C18.1569 4 19.5 5.34315 19.5 7V16.75C19.5 18.4069 18.1569 19.75 16.5 19.75H7.875C6.63236 19.75 5.625 18.7426 5.625 17.5V17.5"
+        stroke="#F96400"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
   ),
 });
 
-export const LogoutIcon = createIcon({
-  displayName: 'LogoutIcon',
-  viewBox: '0 0 63 63',
+export const LocationIcon = createIcon({
+  displayName: 'LocationIcon',
+  viewBox: '0 0 24 24',
   path: (
-    <path
-      d="M45.3333 18.6667L41.5733 22.4267L48.4533 29.3333H21.3333V34.6667H48.4533L41.5733 41.5467L45.3333 45.3333L58.6666 32L45.3333 18.6667ZM10.6666 13.3333H31.9999V8H10.6666C7.73325 8 5.33325 10.4 5.33325 13.3333V50.6667C5.33325 53.6 7.73325 56 10.6666 56H31.9999V50.6667H10.6666V13.3333Z"
-      fill="#F96400"
-    />
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="24" height="24" fill="white" />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 20.9612C14.3912 20.9612 19.5 14.6421 19.5 10.5C19.5 6.35786 16.1421 3 12 3C7.85786 3 4.5 6.35786 4.5 10.5C4.5 14.6421 9.60878 20.9612 12 20.9612ZM12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z"
+        fill="#F96400"
+      />
+    </svg>
   ),
 });
 
 export const UserIcon = createIcon({
   displayName: 'UserIcon',
-  viewBox: '0 0 63 63',
+  viewBox: '0 0 24 24',
   path: (
-    <path
-      d="M31.5 31.5C37.3013 31.5 42 26.8013 42 21C42 15.1988 37.3013 10.5 31.5 10.5C25.6987 10.5 21 15.1988 21 21C21 26.8013 25.6987 31.5 31.5 31.5ZM31.5 36.75C24.4913 36.75 10.5 40.2675 10.5 47.25V52.5H52.5V47.25C52.5 40.2675 38.5088 36.75 31.5 36.75Z"
-      fill="#F96400"
-    />
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="24" height="24" fill="white" />
+      <path
+        d="M12 15C15.3137 15 18 12.3137 18 9C18 5.68629 15.3137 3 12 3C8.68629 3 6 5.68629 6 9C6 12.3137 8.68629 15 12 15Z"
+        stroke="#F96400"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M3 20.2499C3.9215 18.6534 5.24703 17.3277 6.84333 16.406C8.43963 15.4843 10.2505 14.999 12.0938 14.999C13.937 14.999 15.7479 15.4843 17.3442 16.406C18.9405 17.3277 20.266 18.6534 21.1875 20.2499"
+        stroke="#F96400"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  ),
+});
+
+export const NewOrderIcon = createIcon({
+  displayName: 'NewOrderIcon',
+  viewBox: '0 0 25 26',
+  path: (
+    <svg
+      width="25"
+      height="26"
+      viewBox="0 0 25 26"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M20 1L20 7C20 7.55228 20.4477 8 21 8C21.5523 8 22 7.55228 22 7V1C22 0.447715 21.5523 -2.41403e-08 21 0C20.4477 2.4142e-08 20 0.447715 20 1Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M25 4C25 4.55228 24.5523 5 24 5L18 5C17.4477 5 17 4.55228 17 4C17 3.44771 17.4477 3 18 3L24 3C24.5523 3 25 3.44772 25 4Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M6 15C6 14.4477 6.44772 14 7 14H15C15.5523 14 16 14.4477 16 15C16 15.5523 15.5523 16 15 16H7C6.44772 16 6 15.5523 6 15Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M6 19C6 18.4477 6.44772 18 7 18H15C15.5523 18 16 18.4477 16 19C16 19.5523 15.5523 20 15 20H7C6.44772 20 6 19.5523 6 19Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M6 11C6 10.4477 6.44772 10 7 10H15C15.5523 10 16 10.4477 16 11C16 11.5523 15.5523 12 15 12H7C6.44772 12 6 11.5523 6 11Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M0 7C0 4.79086 1.79086 3 4 3H14C14.5523 3 15 3.44772 15 4C15 4.55228 14.5523 5 14 5H4C2.89543 5 2 5.89543 2 7V22C2 23.1046 2.89543 24 4 24H18C19.1046 24 20 23.1046 20 22V11C20 10.4477 20.4477 10 21 10C21.5523 10 22 10.4477 22 11V22C22 24.2091 20.2091 26 18 26H4C1.79086 26 0 24.2091 0 22V7Z"
+        fill="white"
+      />
+    </svg>
+  ),
+});
+
+export const DateCalenderIcon = createIcon({
+  displayName: 'DateCalenderIcon',
+  viewBox: '0 0 16 16',
+  path: (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="16" height="16" fill="white" />
+      <path
+        d="M12.5455 2.5H3.45455C2.92736 2.5 2.5 2.92736 2.5 3.45455V12.5455C2.5 13.0726 2.92737 13.5 3.45455 13.5H12.5455C13.0726 13.5 13.5 13.0726 13.5 12.5455V3.45455C13.5 2.92737 13.0726 2.5 12.5455 2.5Z"
+        stroke="#999999"
+      />
+      <path d="M11 1.5V3.5" stroke="#999999" strokeLinecap="round" />
+      <path d="M5 1.5V3.5" stroke="#999999" strokeLinecap="round" />
+      <path d="M2 5H14" stroke="#999999" />
+    </svg>
+  ),
+});
+
+export const LocationHeaderIcon = createIcon({
+  displayName: 'LocationHeaderIcon',
+  viewBox: '0 0 80 4',
+  path: (
+    <svg
+      width="80"
+      height="4"
+      viewBox="0 0 80 4"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="80" height="4" rx="2" fill="#E3E3E3" />
+    </svg>
   ),
 });

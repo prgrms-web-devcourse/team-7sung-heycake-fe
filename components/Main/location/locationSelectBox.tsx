@@ -1,7 +1,9 @@
 import {
+  Button,
   Drawer,
   DrawerBody,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   Flex,
@@ -9,9 +11,10 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { BiCurrentLocation } from 'react-icons/bi';
+import { useState } from 'react';
 
 import { SEOUL_AREA } from '@/constants/Main';
+import { LocationHeaderIcon, LocationIcon } from '@/public/icon';
 import { ILocationSelectBox } from '@/types/Main';
 
 import LocationListItem from './locationListItem';
@@ -21,41 +24,74 @@ export default function LocationSelectBox({
   setLocation,
 }: ILocationSelectBox) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedLocation, SetSelectedLocation] = useState(location);
+  const onLocationSelectHandler = () => {
+    setLocation(selectedLocation);
+    localStorage.setItem('location', selectedLocation);
+    onClose();
+  };
 
   return (
     <>
       <Flex
         onClick={onOpen}
-        fontSize="xl"
-        fontWeight="700"
-        gap={2}
-        m={3}
+        fontSize="sm"
+        gap={1}
+        m={4}
         alignItems="center"
-        w="200px"
+        fontWeight={600}
       >
-        <BiCurrentLocation color="orange" fontSize="xl" />
+        <LocationIcon h={6} w={6} />
         <Text pr={2} cursor="pointer">
           서울시 {location}
         </Text>
       </Flex>
       <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
-        <DrawerContent h="50%">
-          <DrawerHeader borderBottomWidth="1px" cursor="default">
-            지역을 선택해주세요
+        <DrawerContent
+          h={{
+            base: '70%',
+            xl: '50%',
+          }}
+          borderTopRadius={16}
+          style={{ margin: '0 auto', maxWidth: '600px' }}
+        >
+          <DrawerHeader cursor="default" p={0} px={4} mb={2}>
+            <Grid alignContent="space-between" gap={4}>
+              <LocationHeaderIcon justifySelf="center" w={20} />
+              <Text fontSize="18px">희망 지역을 선택해주세요</Text>
+            </Grid>
           </DrawerHeader>
           <DrawerBody>
-            <Grid gap={3} py={2} gridTemplateColumns="repeat(2, 1fr)">
+            <Grid
+              gap={4}
+              gridTemplateColumns={{
+                base: 'repeat(2, 1fr)',
+                md: 'repeat(3, 1fr)',
+              }}
+            >
               {SEOUL_AREA.map((cityName) => (
                 <LocationListItem
                   key={cityName}
                   name={cityName}
-                  onClose={onClose}
-                  setLocation={setLocation}
+                  onClick={() => SetSelectedLocation(cityName)}
                 />
               ))}
             </Grid>
           </DrawerBody>
+          <DrawerFooter justifyContent="center" p={2}>
+            <Button
+              w="80%"
+              minW="280px"
+              h="60px"
+              bg="hey.main"
+              color="white"
+              borderRadius={16}
+              onClick={onLocationSelectHandler}
+            >
+              선택
+            </Button>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>

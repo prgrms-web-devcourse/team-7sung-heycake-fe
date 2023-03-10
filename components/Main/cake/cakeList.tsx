@@ -69,7 +69,7 @@ export default function CakeList({ category, location }: any) {
 
   return (
     <>
-      <Grid padding={0} gap={4} flexDirection="column">
+      <Grid p={0} flexDirection="column">
         {data?.pages.map((page) =>
           page?.content.map((item: ICakeItemData) => (
             <Link key={item.orderId} href={`/orders/${item.orderId}`}>
@@ -77,6 +77,8 @@ export default function CakeList({ category, location }: any) {
                 title={item.title}
                 category={item.cakeInfo.cakeCategory}
                 cakeSize={item.cakeInfo.cakeSize}
+                creamFlavor={item.cakeInfo.creamFlavor}
+                breadFlavor={item.cakeInfo.breadFlavor}
                 image={item.images[0]}
                 price={item.hopePrice}
                 status={item.orderStatus}
@@ -87,7 +89,7 @@ export default function CakeList({ category, location }: any) {
         )}
       </Grid>
       {isFetchingNextPage ? (
-        <Grid justifyContent="center" mt={12}>
+        <Grid justifyContent="center" mt={12} h="80px">
           <CircularProgress size="80px" isIndeterminate color="hey.main" />
         </Grid>
       ) : (
