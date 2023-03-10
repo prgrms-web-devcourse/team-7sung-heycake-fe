@@ -3,14 +3,15 @@ import {
   Button,
   Flex,
   FormControl,
-  Input,
   InputGroup,
   InputRightElement,
+  Textarea,
+  useToast,
 } from '@chakra-ui/react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRef } from 'react';
-import { AiFillDelete, AiFillFileAdd } from 'react-icons/ai';
+import { AiFillFileAdd } from 'react-icons/ai';
 import { GrPowerReset } from 'react-icons/gr';
 
 import useClickInput from '@/hooks/useClickInput';
@@ -22,10 +23,11 @@ import { getAccessToken } from '@/utils/getAccessToken';
 import { publicApi } from '../Api';
 
 export default function OfferComments({ offerId }: { offerId: number }) {
+  const toast = useToast();
   const { previewUrls, files, handleFileInputChange, resetImages } =
     useImageUpload(1);
   const [inputRef, handleFileChoose] = useClickInput();
-  const commentRef = useRef<HTMLInputElement>(null);
+  const commentRef = useRef<HTMLTextAreaElement>(null);
   const queryClient = useQueryClient();
   const { data, isLoading, isError } = useQuery<OfferComment[]>(
     ['comments', offerId],
@@ -67,12 +69,20 @@ export default function OfferComments({ offerId }: { offerId: number }) {
     event.preventDefault();
 
     if (accessToken === null) {
-      alert('로그인을 해주세요');
+      toast({
+        status: 'error',
+        description: '로그인을 해주세요',
+        isClosable: true,
+      });
       return;
     }
 
     if (commentRef.current === null || commentRef.current === undefined) {
-      alert('댓글 내용을 입력해 주세요');
+      toast({
+        status: 'error',
+        description: '댓글 내용을 입력해 주세요',
+        isClosable: true,
+      });
       return;
     }
 
@@ -102,34 +112,41 @@ export default function OfferComments({ offerId }: { offerId: number }) {
   return (
     <>
       {data.map((comment) => (
-        <Flex flexDirection="column" key={comment.commentId} gap="1rem">
+        <Flex flexDirection="column" key={comment.commentId} padding="6px 0">
           <Box display="flex" justifyContent="space-between">
-            <p>{comment.comment}</p>
+            <Flex gap="0.5rem" fontSize="10px" alignItems="center">
+              <Box color="#707070" fontSize="14px">
+                케이크 업체
+              </Box>{' '}
+              2023-03-12
+            </Flex>
             <Button
               size="xs"
-              colorScheme="red"
-              leftIcon={<AiFillDelete />}
               onClick={() =>
                 removeCommentMutation.mutateAsync(comment.commentId)
               }
+              bg="white"
+              color="#707070"
             >
               삭제
             </Button>
           </Box>
+          <p>{comment.comment}</p>
           {comment.image && (
             <Image src={comment.image} alt="profile" width={50} height={50} />
           )}
         </Flex>
       ))}
       <form onSubmit={handleSubmit}>
-        <FormControl>
-          <Flex justify="space-between" align="center">
+        <FormControl borderTop="1px solid #e3e3e3" padding="1rem 0">
+          <Flex justify="space-between" align="center" paddingBottom="1rem">
             <InputGroup size="md">
-              <Input
-                ref={commentRef}
+              <Textarea
+                minH="80px"
                 bg="white"
                 pr="4.5rem"
-                placeholder="댓글을 입력해 주세요"
+                placeholder="댓글을 작성해주세요."
+                ref={commentRef}
               />
               <InputRightElement width="4.5rem">
                 <Button h="1.75rem" size="sm" onClick={handleFileChoose}>
@@ -144,8 +161,10 @@ export default function OfferComments({ offerId }: { offerId: number }) {
                 </Button>
               </InputRightElement>
             </InputGroup>
-            <Button type="submit">전송</Button>
           </Flex>
+          <Button type="submit" bg="#efefef" float="right">
+            등록
+          </Button>
           {previewUrls.length !== 0 && (
             <Flex
               alignItems="center"

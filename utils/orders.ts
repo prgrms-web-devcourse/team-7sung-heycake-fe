@@ -65,13 +65,13 @@ export function convertCreamFlavor(flavor: CreamFlavor) {
 export function convertCakeCategory(cakeCategory: CakeCategory) {
   switch (cakeCategory) {
     case 'PHOTO':
-      return '사진케이크';
+      return '포토';
     case 'LETTERING':
-      return '레터링/글씨케이크';
+      return '레터링';
     case 'CHARACTER_IMAGE':
-      return '캐릭터이미지케이크';
+      return '캐릭터 - 그림';
     case 'CHARACTER_MODEL':
-      return '캐릭터모델링케이크';
+      return '캐릭터 - 입체';
     case 'ETC':
       return '기타';
     default:
