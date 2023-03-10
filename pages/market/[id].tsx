@@ -1,20 +1,11 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Script from 'next/script';
 
 import { getMarketDetail } from '@/components/Api/Market';
 import MarketProfile from '@/components/Market';
 
 export default function Market() {
-  return (
-    <>
-      <Script
-        type="text/javascript"
-        src={`dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_KEY}`}
-      />
-      <MarketProfile />
-    </>
-  );
+  return <MarketProfile />;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => ({
