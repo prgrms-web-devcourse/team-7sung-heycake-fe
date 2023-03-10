@@ -9,10 +9,8 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import Script from 'next/script';
 
-import Header from '@/components/Header';
 import Layout from '@/components/Layout/layout';
 import heyTheme from '@/public/theme/theme';
 
@@ -29,8 +27,6 @@ function kakaoInit() {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={heyTheme}>
@@ -53,7 +49,6 @@ export default function App({ Component, pageProps }: AppProps) {
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"
           />
           <Layout>
-            {router.pathname !== '/' && <Header />}
             <Component {...pageProps} />
           </Layout>
         </Hydrate>
