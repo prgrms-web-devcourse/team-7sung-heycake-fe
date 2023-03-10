@@ -11,3 +11,6 @@ export interface IMypagePost {
   title: string;
   visitTime: string;
 }
+export interface IMypageCount {
+  count: number;
+}
