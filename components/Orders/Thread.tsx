@@ -49,7 +49,7 @@ export default function Thread({ thread, orderId, orderStatus }: ThreadProps) {
         {orderStatus && (
           <Button
             style={{
-              backgroundColor: '#f96400',
+              backgroundColor: 'hey.main',
               color: 'white',
               padding: '10px',
               borderRadius: '5px',
