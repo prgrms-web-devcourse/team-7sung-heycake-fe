@@ -38,7 +38,7 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
           <Box fontSize="2rem" fontWeight="600">
             {order.title}
           </Box>
-          <Box fontSize="1.2rem" color="#777777">
+          <Box fontSize="1.2rem" color="hey.darkGray">
             {order.region}
           </Box>
         </Flex>
