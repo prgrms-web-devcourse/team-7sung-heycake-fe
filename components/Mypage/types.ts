@@ -10,7 +10,16 @@ export interface IMypagePost {
   region: string;
   title: string;
   visitTime: string;
+  createdAt: string;
+  cakeInfo: {
+    cakeCategory: string;
+    cakeSize: string;
+    cakeHeight: string;
+    creamFlavor: string;
+  };
+  hopePrice: number;
 }
+
 export interface IMypageCount {
   count: number;
 }
