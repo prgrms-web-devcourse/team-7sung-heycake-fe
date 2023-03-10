@@ -54,8 +54,7 @@ export default function LocationSelectBox({
             xl: '50%',
           }}
           borderTopRadius={16}
-          m="auto"
-          maxW="650px"
+          style={{ margin: '0 auto', maxWidth: '600px' }}
         >
           <DrawerHeader cursor="default" p={0} px={4} mb={2}>
             <Grid alignContent="space-between" gap={4}>
@@ -69,8 +68,6 @@ export default function LocationSelectBox({
               gridTemplateColumns={{
                 base: 'repeat(2, 1fr)',
                 md: 'repeat(3, 1fr)',
-                lg: 'repeat(4, 1fr)',
-                xl: 'repeat(7, 1fr)',
               }}
             >
               {SEOUL_AREA.map((cityName) => (
