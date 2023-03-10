@@ -76,7 +76,12 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
           신청한 케이크 업체 <Box color="hey.main">{order.offerCount}</Box>
         </Flex>
         {threads?.map((thread) => (
-          <Thread key={thread.offerId} thread={thread} orderId={orderId} />
+          <Thread
+            key={thread.offerId}
+            thread={thread}
+            orderId={orderId}
+            orderStatus={order.orderStatus}
+          />
         ))}
       </Flex>
     </>
