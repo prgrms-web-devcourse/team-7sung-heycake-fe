@@ -97,7 +97,7 @@ export default function Detail() {
           justifyContent="center"
           marginTop={56}
           padding={0}
-          onClick={handleLogout}
+          onClick={handleLogout()}
         >
           <Text fontSize={18} color="hey.normalGray" marginRight={5}>
             로그아웃
