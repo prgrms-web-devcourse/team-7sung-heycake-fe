@@ -1,6 +1,5 @@
 import {
   BreadFlavor,
-  CakeCategory,
   CakeHeight,
   CakeSize,
   CreamFlavor,
@@ -59,23 +58,6 @@ export function convertCreamFlavor(flavor: CreamFlavor) {
       return '오레오';
     default:
       return flavor;
-  }
-}
-
-export function convertCakeCategory(cakeCategory: CakeCategory) {
-  switch (cakeCategory) {
-    case 'PHOTO':
-      return '사진케이크';
-    case 'LETTERING':
-      return '레터링/글씨케이크';
-    case 'CHARACTER_IMAGE':
-      return '캐릭터이미지케이크';
-    case 'CHARACTER_MODEL':
-      return '캐릭터모델링케이크';
-    case 'ETC':
-      return '기타';
-    default:
-      return '';
   }
 }
 
