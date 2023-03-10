@@ -32,12 +32,20 @@ export default function Detail() {
       >
         <Text display="inline" fontSize={30} fontWeight="bold">
           반갑습니다
-          <br />
-          <Text display="inline" color="hey.main">
+        </Text>
+        <Container padding={0}>
+          <Text
+            display="inline"
+            color="hey.main"
+            fontSize={30}
+            fontWeight="bold"
+          >
             헤이, 케이크
           </Text>
-          입니다!
-        </Text>
+          <Text display="inline" fontSize={30} fontWeight="bold">
+            입니다!
+          </Text>
+        </Container>
         <Container display="flex" marginTop={20} padding={0}>
           <Link href="/mypage/orderlist">
             <Box
