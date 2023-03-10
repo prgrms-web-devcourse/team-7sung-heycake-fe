@@ -23,6 +23,3 @@ export interface IMypagePost {
 export interface IMypageCount {
   count: number;
 }
-export interface IMypageCount {
-  count: number;
-}
