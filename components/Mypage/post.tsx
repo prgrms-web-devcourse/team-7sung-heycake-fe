@@ -1,7 +1,8 @@
-import { Box, Button, Card, Container, Text, useToast } from '@chakra-ui/react';
+import { Button, Card, Container, Text, useToast } from '@chakra-ui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { BsDot } from 'react-icons/bs';
 
 import { deleteOrder } from '../Api/Order';
 import { IMypagePost } from './types';
@@ -12,6 +13,9 @@ export default function Post({
   orderStatus,
   title,
   visitTime,
+  createdAt,
+  cakeInfo,
+  hopePrice,
 }: IMypagePost) {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -38,42 +42,40 @@ export default function Post({
 
   return (
     <Container
-      width="100"
-      height="8rem"
-      bgColor="hey.lightOrange"
-      padding="1rem"
       marginBottom="1rem"
-      borderRadius="10"
-      boxShadow="4px 2px 2px lightGrey"
-      display="flex"
       key={id}
       onClick={() => router.push(`/orders/${id}`)}
     >
-      <Card width={74} height={74} shadow="none" marginTop={3}>
-        {imageUrl && <Image src={imageUrl} alt="케이크 이미지" fill />}
-      </Card>
-      <Container marginTop={3}>
-        <Box
-          color="white"
-          borderRadius="1rem"
-          backgroundColor="hey.main"
-          padding="0 1rem"
-          width="fit-content"
-          height={4}
-          fontSize={4}
-        >
-          {orderStatus}
-        </Box>
-        <Container padding="0" marginTop={2}>
-          <Text fontSize="1rem" fontWeight="bold" marginBottom={1}>
-            {title}
+      <Text>주문 일자 {createdAt.slice(0, 10).replaceAll('-', '.')}</Text>
+      <Image
+        src={imageUrl}
+        width={70}
+        height={70}
+        quality={100}
+        alt="케이크 이미지"
+      />
+      <Container>
+        <Card width={20}>{cakeInfo.cakeCategory}</Card>
+        <Text>{title}</Text>
+        <Text>
+          {cakeInfo.cakeSize}|{cakeInfo.creamFlavor}
+        </Text>
+        <Text>~{hopePrice}원</Text>
+        <Container display="flex">
+          <Image
+            src="/images/CalenderIcon.png"
+            width={20}
+            height={10}
+            alt="캘린더 아이콘"
+          />
+          {visitTime.slice(0, 10).replaceAll('-', '.')}
+          <Text>
+            <BsDot />
+            {orderStatus}
           </Text>
-          <Text color="gray">{visitTime.slice(0, -3)}</Text>
         </Container>
+        <Button onClick={(e) => handleDelete(e)}>X</Button>
       </Container>
-      <Button backgroundColor="hey.lightOrange" onClick={handleDelete}>
-        X
-      </Button>
     </Container>
   );
 }
