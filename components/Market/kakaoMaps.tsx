@@ -25,9 +25,7 @@ export default function KakaoMaps({ address, title }: any) {
           });
           kakao.maps.event.addListener(marker, 'click', () => {
             router.push(
-              `https://map.kakao.com/link/map/${Number(result[0].y)},${Number(
-                result[0].x
-              )}`
+              `https://map.kakao.com/link/map/${result[0].y},${result[0].x}`
             );
           });
           const infowindow = new kakao.maps.InfoWindow({
