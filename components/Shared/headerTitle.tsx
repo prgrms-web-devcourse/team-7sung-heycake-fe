@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { ArrowBackIcon } from '@/public/icon';
 import { IMarketTitle } from '@/types/Market';
 
-export default function MarketTitle({ title }: IMarketTitle) {
+export default function HeaderTitle({ title }: IMarketTitle) {
   const router = useRouter();
   return (
     <Flex h={14} p={4} justifyContent="space-between" alignItems="center">

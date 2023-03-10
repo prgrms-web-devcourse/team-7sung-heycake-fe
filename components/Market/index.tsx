@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import ApiErrorAlert from '@/components/Shared/apiErrorAlert';
+import MarketTitle from '@/components/Shared/headerTitle';
 import {
   MarketAddressIcon,
   MarketOpeningIcon,
@@ -11,10 +13,8 @@ import {
 import { numberWithHyphenPhone } from '@/utils/numberWithHyphen';
 
 import { getMarketDetail } from '../Api/Market';
-import ApiErrorAlert from '../Shared/apiErrorAlert';
 import KakaoMaps from './kakaoMaps';
 import MarketProfileSkeleton from './marketProfileSkeleton';
-import MarketTitle from './marketTitle';
 
 export default function MarketProfile() {
   const router = useRouter();
