@@ -1,7 +1,9 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 export default function KakaoMaps({ address, title }: any) {
+  const router = useRouter();
   useEffect(() => {
     window.kakao.maps.load(() => {
       const mapContainer = document.getElementById('map') as HTMLElement;
@@ -21,6 +23,13 @@ export default function KakaoMaps({ address, title }: any) {
             map,
             position: coords,
           });
+          kakao.maps.event.addListener(marker, 'click', () => {
+            router.push(
+              `https://map.kakao.com/link/map/${Number(result[0].y)},${Number(
+                result[0].x
+              )}`
+            );
+          });
           const infowindow = new kakao.maps.InfoWindow({
             content: `<div style="width:150px;text-align:center;padding:6px 0;">${title}</div>`,
           });
@@ -31,5 +40,9 @@ export default function KakaoMaps({ address, title }: any) {
     });
   }, []);
 
-  return <Box id="map" w="100%" h="180px" />;
+  return (
+    <Flex>
+      <Box id="map" w="100%" h="180px" />
+    </Flex>
+  );
 }

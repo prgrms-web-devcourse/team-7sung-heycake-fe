@@ -50,7 +50,7 @@ export default function MarketProfile() {
         />
       </Card>
       <Container px={5} pt={6} fontSize="sm" fontWeight={700}>
-        <Box h="96px">
+        <Box h="92px">
           <Flex alignItems="flex-end">
             <MarketAddressIcon w={4} h={4} />
             <Text fontWeight={400}>
