@@ -1,10 +1,26 @@
-import { Box, Container, Text } from '@chakra-ui/react';
+import { Box, Container, Text, useToast } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import MypageTitle from '@/components/Mypage/mypageTitle';
+import { deleteAccessToken } from '@/utils/deleteAccessToken';
 
 export default function Detail() {
+  const router = useRouter();
+  const toast = useToast();
+
+  function handleLogout() {
+    deleteAccessToken();
+
+    toast({
+      status: 'success',
+      description: '로그아웃이 완료되었습니다.',
+      isClosable: true,
+    });
+    router.replace('/');
+  }
+
   return (
     <>
       <MypageTitle title="마이 페이지" isSuccess={false} />
@@ -81,6 +97,7 @@ export default function Detail() {
           justifyContent="center"
           marginTop={56}
           padding={0}
+          onClick={handleLogout}
         >
           <Text fontSize={18} color="hey.normalGray" marginRight={5}>
             로그아웃
