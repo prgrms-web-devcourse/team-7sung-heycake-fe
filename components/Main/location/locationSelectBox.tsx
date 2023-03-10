@@ -54,6 +54,8 @@ export default function LocationSelectBox({
             xl: '50%',
           }}
           borderTopRadius={16}
+          m="auto"
+          maxW="650px"
         >
           <DrawerHeader cursor="default" p={0} px={4} mb={2}>
             <Grid alignContent="space-between" gap={4}>
