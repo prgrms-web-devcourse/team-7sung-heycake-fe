@@ -70,7 +70,7 @@ export default function MarketProfile() {
       </Container>
       <KakaoMaps address={address} title={data.marketName} />
       <Box h={24} p={4}>
-        <Text fontWeight={500}>매장소개</Text>
+        <Text fontWeight={600}>매장소개</Text>
         <Text mt={2} fontWeight={400}>
           {data.description}
         </Text>
