@@ -1,6 +1,6 @@
-import { ICakeList } from '../types/Main';
+import { CakeList } from '@/types/Main';
 
-export const TAB_TABLE: ICakeList[] = [
+export const TAB_TABLE: CakeList[] = [
   {
     label: '전체',
     category: '',

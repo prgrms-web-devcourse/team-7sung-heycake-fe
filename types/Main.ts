@@ -1,6 +1,6 @@
 import { TMainCategory, TSeoulArea } from './Api';
 
-export interface ICakeList {
+export interface CakeList {
   label: string;
   category: string;
 }

@@ -1,7 +1,7 @@
 import { Head, Html, Main, NextScript } from 'next/document';
 import Script from 'next/script';
 
-import KAKAO_MAP_URL from '@/constants/KakaoConstants';
+import KAKAO_MAP_URL from '@/constants/Kakao';
 
 export default function Document() {
   return (
