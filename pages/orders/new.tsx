@@ -21,6 +21,7 @@ import { useEffect, useRef, useState } from 'react';
 import { publicApi } from '@/components/Api';
 import LocationSelectBox from '@/components/Main/location/locationSelectBox';
 import CakeSelect from '@/components/Orders/CakeSelect';
+import HeaderTitle from '@/components/Shared/headerTitle';
 import {
   breadFlavors,
   cakeCategories,
@@ -183,6 +184,7 @@ export default function NewOrder() {
 
   return (
     <form style={{ margin: '0 auto', padding: '1rem' }} onSubmit={handleSubmit}>
+      <HeaderTitle title="주문표 작성" />
       <FormControl id="picture" padding="1rem 0">
         <FormLabel>사진</FormLabel>
         <Flex gap="1rem">

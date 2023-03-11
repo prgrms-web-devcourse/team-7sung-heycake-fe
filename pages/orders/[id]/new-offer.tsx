@@ -18,6 +18,7 @@ import { useRef, useState } from 'react';
 import { GrPowerReset } from 'react-icons/gr';
 
 import { publicApi } from '@/components/Api';
+import HeaderTitle from '@/components/Shared/headerTitle';
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import useClickInput from '@/hooks/useClickInput';
 import useHandleAxiosError from '@/hooks/useHandleAxiosError';
@@ -103,6 +104,7 @@ export default function NewOffer() {
 
   return (
     <form style={{ margin: '0 auto', padding: '1rem' }} onSubmit={handleSubmit}>
+      <HeaderTitle title="오퍼 신청" />
       <Flex
         justifyContent="center"
         alignItems="center"

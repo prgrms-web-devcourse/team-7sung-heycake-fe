@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { publicApi } from '@/components/Api';
 import { DataTable, ImageSlider, Thread } from '@/components/Orders';
+import HeaderTitle from '@/components/Shared/headerTitle';
 import { CAKE_CATEGORY } from '@/constants/Main';
 import { Order, ThreadDto } from '@/types/orders';
 import { Roles } from '@/types/role';
@@ -55,6 +56,7 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
 
   return (
     <>
+      <HeaderTitle title="" />
       <ImageSlider images={order.images} />
       <Flex flexDirection="column" width="100%" gap="1rem" padding="1rem">
         <Flex flexDirection="column" alignItems="center" gap="0.1rem">
