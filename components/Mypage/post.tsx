@@ -4,8 +4,16 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { BsDot } from 'react-icons/bs';
 
+import { MypagePost } from '@/types/orders';
+import {
+  convertCakeCategory,
+  convertCakeHeight,
+  convertCakeSize,
+  convertCreamFlavor,
+  getOrderStatusText,
+} from '@/utils/orders';
+
 import { deleteOrder } from '../Api/Order';
-import { IMypagePost } from './types';
 
 export default function Post({
   id,
@@ -16,7 +24,8 @@ export default function Post({
   createdAt,
   cakeInfo,
   hopePrice,
-}: IMypagePost) {
+  count,
+}: MypagePost) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const toast = useToast();
@@ -57,10 +66,12 @@ export default function Post({
         alt="케이크 이미지"
       />
       <Container>
-        <Card width={20}>{cakeInfo.cakeCategory}</Card>
+        <Card width={20}>{convertCakeCategory(cakeInfo.cakeCategory)}</Card>
         <Text>{title}</Text>
         <Text>
-          {cakeInfo.cakeSize}|{cakeInfo.creamFlavor}
+          {convertCakeSize(cakeInfo.cakeSize)}&nbsp;|&nbsp;
+          {convertCakeHeight(cakeInfo.cakeHeight)}&nbsp;|&nbsp;
+          {convertCreamFlavor(cakeInfo.creamFlavor)}
         </Text>
         <Text>~{hopePrice}원</Text>
         <Container display="flex">
@@ -73,7 +84,10 @@ export default function Post({
           {visitTime.slice(0, 10).replaceAll('-', '.')}
           <Text>
             <BsDot />
-            {orderStatus}
+            {getOrderStatusText(orderStatus, count) !==
+            ('선택 완료' || '거래 완료' || '알 수 없는 상태')
+              ? `오퍼 ${getOrderStatusText(orderStatus, count)}`
+              : getOrderStatusText(orderStatus, count)}
           </Text>
         </Container>
         <Button onClick={(e) => handleDelete(e)}>X</Button>
