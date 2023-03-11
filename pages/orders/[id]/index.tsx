@@ -1,10 +1,16 @@
-import { Badge, Box, Flex } from '@chakra-ui/react';
+import { Badge, Box, Button, Flex, useToast } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 import { publicApi } from '@/components/Api';
 import { DataTable, ImageSlider, Thread } from '@/components/Orders';
+import HeaderTitle from '@/components/Shared/headerTitle';
 import { CAKE_CATEGORY } from '@/constants/Main';
 import { Order, ThreadDto } from '@/types/orders';
+import { Roles } from '@/types/role';
+import { getAccessToken } from '@/utils/getAccessToken';
+import { getRoleFromToken } from '@/utils/getDecodeToken';
 import numberWithCommas from '@/utils/numberWithCommas';
 import {
   convertBreadFlavor,
@@ -20,8 +26,37 @@ interface OrdersProps {
 }
 
 export default function Orders({ order, threads, orderId }: OrdersProps) {
+  const accessToken = getAccessToken();
+  const [role, setRole] = useState<Roles | null>(null);
+  const router = useRouter();
+  const toast = useToast();
+
+  const handleButtonClick = () => {
+    if (role === 'ROLE_ADMIN' || role === 'ROLE_MARKET') {
+      router.push(`/orders/${orderId}/new-offer`);
+    } else {
+      toast({
+        description: '사장님만 신청할 수 있어요',
+        status: 'warning',
+        duration: 3000,
+      });
+    }
+  };
+
+  useEffect(() => {
+    const handleSetRole = () => {
+      if (accessToken) {
+        const roleFromToken = getRoleFromToken(accessToken);
+        if (roleFromToken) setRole(roleFromToken);
+      }
+    };
+
+    handleSetRole();
+  }, [accessToken]);
+
   return (
     <>
+      <HeaderTitle title="" />
       <ImageSlider images={order.images} />
       <Flex flexDirection="column" width="100%" gap="1rem" padding="1rem">
         <Flex flexDirection="column" alignItems="center" gap="0.1rem">
@@ -75,14 +110,32 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
         <Flex fontSize="1.4rem" fontWeight="700" gap="0.5rem" paddingTop="1rem">
           신청한 케이크 업체 <Box color="hey.main">{order.offerCount}</Box>
         </Flex>
-        {threads?.map((thread) => (
+        {threads.map((thread) => (
           <Thread
             key={thread.offerId}
             thread={thread}
             orderId={orderId}
-            orderStatus={order.orderStatus}
+            order={order}
           />
         ))}
+        {threads.length === 0 && <Box>아직 신청온 업체가 없어요 ㅠㅠ</Box>}
+        {order.orderStatus === 'NEW' ? (
+          <Button
+            color="white"
+            background="hey.main"
+            height="3.75rem"
+            borderRadius="1rem"
+            type="submit"
+            _hover={{ bg: 'hey.main' }}
+            onClick={handleButtonClick}
+          >
+            신청하기
+          </Button>
+        ) : (
+          <Button height="3.75rem" borderRadius="1rem" type="submit" isDisabled>
+            신청 종료
+          </Button>
+        )}
       </Flex>
     </>
   );

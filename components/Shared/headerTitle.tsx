@@ -8,7 +8,12 @@ export default function HeaderTitle({ title }: IMarketTitle) {
   const router = useRouter();
   return (
     <Flex h={14} p={4} justifyContent="space-between" alignItems="center">
-      <ArrowBackIcon w={6} h={6} onClick={() => router.back()} />
+      <ArrowBackIcon
+        w={6}
+        h={6}
+        onClick={() => router.back()}
+        cursor="pointer"
+      />
       <Text fontSize="18px" align="center" fontWeight="500">
         {title}
       </Text>
