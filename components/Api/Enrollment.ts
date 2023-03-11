@@ -1,3 +1,4 @@
+import ERROR_MESSAGES from '@/constants/errorMessages';
 import { getAccessToken } from '@/utils/getAccessToken';
 
 import { publicApi } from '.';
@@ -6,8 +7,7 @@ const ACCESS_TOKEN = getAccessToken();
 
 export default async function postEnrollment(data: object) {
   if (ACCESS_TOKEN === null) {
-    alert('로그인을 해주세요');
-    return;
+    throw Error(ERROR_MESSAGES.CHECK_LOGIN);
   }
   try {
     await publicApi.post('/enrollments', data, {
@@ -17,6 +17,6 @@ export default async function postEnrollment(data: object) {
       },
     });
   } catch (error) {
-    console.error(error);
+    throw Error();
   }
 }
