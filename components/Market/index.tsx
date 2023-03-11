@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { getMarketDetail } from '@/components/Api/Market';
-import ApiErrorAlert from '@/components/Shared/apiErrorAlert';
+import ErrorPage from '@/components/Error';
 import HeaderTitle from '@/components/Shared/headerTitle';
 import KakaoMaps from '@/components/Shared/kakaoMaps';
 import MarketProfileSkeleton from '@/components/Shared/marketProfileSkeleton';
@@ -30,7 +30,7 @@ export default function MarketProfile() {
   }
 
   if (status === 'error') {
-    return <ApiErrorAlert />;
+    return <ErrorPage />;
   }
 
   const address = `${data.marketAddress.city} ${data.marketAddress.district}`;
