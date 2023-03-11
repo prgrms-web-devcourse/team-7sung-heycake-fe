@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import { CAKE_CATEGORY, CAKE_SIZE } from '@/constants/Main';
 import { DateCalenderIcon } from '@/public/icon';
-import { ICakeItem } from '@/types/Main';
+import { CakeItem } from '@/types/Main';
 import numberWithCommas from '@/utils/numberWithCommas';
 import { convertBreadFlavor, convertCreamFlavor } from '@/utils/orders';
 
@@ -18,7 +18,7 @@ export default function CakeItem({
   breadFlavor,
   creamFlavor,
   offerCount,
-}: ICakeItem) {
+}: CakeItem) {
   return (
     <Card variant="unstyled" my={2}>
       <Flex

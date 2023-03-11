@@ -15,14 +15,14 @@ import { useState } from 'react';
 
 import { SEOUL_AREA } from '@/constants/Main';
 import { LocationHeaderIcon, LocationIcon } from '@/public/icon';
-import { ILocationSelectBox } from '@/types/Main';
+import { LocationSelectBox } from '@/types/Main';
 
 import LocationListItem from './locationListItem';
 
 export default function LocationSelectBox({
   location,
   setLocation,
-}: ILocationSelectBox) {
+}: LocationSelectBox) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedLocation, SetSelectedLocation] = useState(location);
   const onLocationSelectHandler = () => {
