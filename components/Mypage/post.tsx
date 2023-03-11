@@ -52,7 +52,9 @@ export default function Post({
       key={id}
       onClick={() => router.push(`/orders/${id}`)}
     >
-      <Text>주문 일자 {createdAt.slice(0, 10).replaceAll('-', '.')}</Text>
+      <Text>
+        주문번호 {createdAt.slice(0, 10).replaceAll('-', '').concat(id)}
+      </Text>
       <Image
         src={imageUrl}
         width={70}
