@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import {
+  Box,
   Button,
   Container,
   Flex,
@@ -8,6 +9,7 @@ import {
   Input,
   Select,
   Text,
+  Textarea,
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
@@ -25,6 +27,7 @@ import { getAccessToken } from '@/utils/getAccessToken';
 import { publicApi } from '../Api';
 
 const {
+  CHECK_EMPTY_INPUT,
   CHECK_BUSINESS_NUMBER_LENGTH,
   CHECK_NUMBER_TYPE,
   CHECK_OWNER_NAME_LENGTH,
@@ -67,6 +70,8 @@ export default function EnrollmentForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<InputProps>();
+
+  console.log(errors);
 
   const onSubmit: SubmitHandler<InputProps> = async (data) => {
     const businessLicenseImage: { [key: string]: any } = {
@@ -122,7 +127,7 @@ export default function EnrollmentForm() {
             alignItems="center"
             height="150px"
             maxWidth={340}
-            border="1px dashed grey"
+            border="1px dashed #E9E9E9"
             borderRadius="5px"
             cursor="poiner"
             margin="0 auto"
@@ -133,7 +138,13 @@ export default function EnrollmentForm() {
           >
             {files.length !== 0 ? (
               <Container display="flex" flexDir="column" alignItems="center">
-                <img src={URL.createObjectURL(files[0])} alt="업체 이미지" />{' '}
+                <img
+                  src={URL.createObjectURL(files[0])}
+                  alt="업체 이미지"
+                  {...register('marketImage', {
+                    required: '업체 이미지는 필수 입니다.',
+                  })}
+                />
               </Container>
             ) : (
               <Container
@@ -151,7 +162,6 @@ export default function EnrollmentForm() {
                 사진 추가
               </Container>
             )}
-
             <input
               hidden
               ref={inputRef}
@@ -173,22 +183,36 @@ export default function EnrollmentForm() {
               </Button>
             )}
           </Flex>
+          {errors.marketImage && (
+            <Box color="red" marginTop={1}>
+              {errors.marketImage.message}
+            </Box>
+          )}
         </FormControl>
-        <FormControl height={100} width={350}>
+        <FormControl height={110} width={350}>
           <FormLabel>상호명</FormLabel>
           <Input
             type="text"
             placeholder="상호명을 입력해주세요."
-            {...register('marketName', { required: true })}
+            borderRadius={12}
+            {...register('marketName', {
+              required: CHECK_EMPTY_INPUT,
+            })}
           />
+          {errors.marketName && (
+            <Box color="red" marginTop={1}>
+              {errors.marketName.message}
+            </Box>
+          )}
         </FormControl>
-        <FormControl height={100} width={350}>
+        <FormControl height={110} width={350}>
           <FormLabel>대표자 이름</FormLabel>
           <Input
             type="text"
             placeholder="대표자 이름을 입력해주세요."
+            borderRadius={12}
             {...register('ownerName', {
-              required: true,
+              required: CHECK_EMPTY_INPUT,
               minLength: 2,
               maxLength: {
                 value: 20,
@@ -201,22 +225,32 @@ export default function EnrollmentForm() {
             })}
           />
           {errors.ownerName && (
-            <Text fontSize="8px" color="red">
+            <Box color="red" marginTop={1}>
               {errors.ownerName.message}
-            </Text>
+            </Box>
           )}
         </FormControl>
-        <FormControl height={100} width={350}>
+        <FormControl height={110} width={350}>
           <FormLabel>개업 일자</FormLabel>
-          <Input type="date" {...register('openDate', { required: true })} />
+          <Input
+            type="date"
+            borderRadius={12}
+            {...register('openDate', { required: CHECK_EMPTY_INPUT })}
+          />
+          {errors.openDate && (
+            <Box color="red" marginTop={1}>
+              {errors.openDate.message}
+            </Box>
+          )}
         </FormControl>
-        <FormControl height={100} width={350}>
+        <FormControl height={110} width={350}>
           <FormLabel>업체 전화번호</FormLabel>
           <Input
             type="text"
             placeholder="업체 전화번호를 입력해주세요."
+            borderRadius={12}
             {...register('phoneNumber', {
-              required: true,
+              required: CHECK_EMPTY_INPUT,
               pattern: {
                 value: /^[0-9+]*$/,
                 message: CHECK_NUMBER_TYPE,
@@ -224,28 +258,32 @@ export default function EnrollmentForm() {
             })}
           />
           {errors.phoneNumber && (
-            <Text fontSize="8px" color="red">
+            <Box color="red" marginTop={1}>
               {errors.phoneNumber.message}
-            </Text>
+            </Box>
           )}
         </FormControl>
-        <FormControl height={150} width={350}>
+        <FormControl height={162} width={350}>
           <FormLabel>주소</FormLabel>
           <Container display="flex" padding={0}>
             <Select
-              {...register('city', { required: true })}
+              {...register('city', { required: CHECK_EMPTY_INPUT })}
               width={170}
               marginRight={2}
               marginBottom={2}
               defaultValue=""
+              borderRadius={12}
             >
-              <option value="">시 선택</option>
+              <option value="" color="hey.normalGray">
+                시 선택
+              </option>
               <option value="서울시">서울시</option>
             </Select>
             <Select
-              defaultValue=""
-              {...register('district', { required: true })}
+              {...register('district', { required: CHECK_EMPTY_INPUT })}
               width={170}
+              defaultValue=""
+              borderRadius={12}
             >
               <option value="">구 선택</option>
               {SEOUL_AREA.map((area) => (
@@ -259,17 +297,34 @@ export default function EnrollmentForm() {
             <Input
               type="text"
               placeholder="상세 주소를 입력해주세요."
-              {...register('detailAddress', { required: true })}
+              borderRadius={12}
+              {...register('detailAddress', { required: CHECK_EMPTY_INPUT })}
             />
           </Container>
+          {(errors.city && (
+            <Box color="red" marginTop={1}>
+              {errors.city.message}
+            </Box>
+          )) ||
+            (errors.district && (
+              <Box color="red" marginTop={1}>
+                {errors.district.message}
+              </Box>
+            )) ||
+            (errors.detailAddress && (
+              <Box color="red" marginTop={1}>
+                {errors.detailAddress.message}
+              </Box>
+            ))}
         </FormControl>
-        <FormControl height={100} width={350}>
+        <FormControl height={110} width={350}>
           <FormLabel>사업자 등록 번호</FormLabel>
           <Input
             type="text"
             placeholder="사업자 등록 번호를 입력해주세요."
+            borderRadius={12}
             {...register('businessNumber', {
-              required: true,
+              required: CHECK_EMPTY_INPUT,
               pattern: {
                 value: /^[0-9+]*$/,
                 message: CHECK_NUMBER_TYPE,
@@ -282,51 +337,77 @@ export default function EnrollmentForm() {
             })}
           />
           {errors.businessNumber && (
-            <Text fontSize="8px" color="red">
+            <Box color="red" marginTop={1}>
               {errors.businessNumber.message}
-            </Text>
+            </Box>
           )}
         </FormControl>
-        <FormControl height={100} width={350}>
+        <FormControl height={110} width={350}>
           <FormLabel>사업자 등록 사진</FormLabel>
           <Input
             type="file"
-            {...register('businessLicenseImage', { required: true })}
+            {...register('businessLicenseImage', {
+              required: CHECK_EMPTY_INPUT,
+            })}
             padding={1}
           />
+          {errors.businessLicenseImage && (
+            <Box color="red" marginTop={1}>
+              {errors.businessLicenseImage.message}
+            </Box>
+          )}
         </FormControl>
-        <FormControl width={350} height={100}>
+        <FormControl height={110} width={350}>
           <FormLabel>영업 시간</FormLabel>
           <Input
             type="time"
-            {...register('openTime', { required: true })}
+            borderRadius={12}
+            {...register('openTime', { required: CHECK_EMPTY_INPUT })}
             width={170}
             marginRight={2}
           />
           <Input
             type="time"
-            {...register('endTime', { required: true })}
+            borderRadius={12}
+            {...register('endTime', { required: CHECK_EMPTY_INPUT })}
             width={170}
           />
+          {(errors.openTime && (
+            <Box color="red" marginTop={1}>
+              {errors.openTime.message}
+            </Box>
+          )) ||
+            (errors.endTime && (
+              <Box color="red" marginTop={1}>
+                {errors.endTime.message}
+              </Box>
+            ))}
         </FormControl>
-        <FormControl height={100} width={350}>
+        <FormControl>
           <FormLabel>업체 설명</FormLabel>
-          <Input
-            type="text"
+          <Textarea
             placeholder="업체 설명을 입력해주세요."
-            {...register('description', { required: true })}
+            borderRadius={12}
+            {...register('description', { required: CHECK_EMPTY_INPUT })}
           />
+          {errors.description && (
+            <Box color="red" marginTop={1}>
+              {errors.description.message}
+            </Box>
+          )}
         </FormControl>
         <Button
           type="submit"
           width={350}
-          padding={1}
-          bg="hey.lightOrange"
-          fontSize="1.3rem"
-          marginBottom={10}
-          _hover={{ bg: 'hey.sub' }}
+          height={14}
+          backgroundColor="hey.main"
+          color="white"
+          borderRadius={10}
+          fontSize={16}
+          fontWeight="medium"
+          marginTop={16}
         >
-          등록하기
+          등록
         </Button>
       </form>
     </Flex>

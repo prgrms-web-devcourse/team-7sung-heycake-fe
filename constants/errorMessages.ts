@@ -1,4 +1,5 @@
 const ERROR_MESSAGES = {
+  CHECK_EMPTY_INPUT: '* 필수 입력값입니다.',
   CHECK_BUSINESS_NUMBER_LENGTH: '* 10자리 수를 올바르게 작성해주세요.',
   CHECK_NUMBER_TYPE: '* 숫자만 작성해해주세요',
   CHECK_OWNER_NAME_LENGTH: '* 올바른 이름을 작성해주세요.',
