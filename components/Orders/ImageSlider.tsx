@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { AnimatePresence, motion, wrap } from 'framer-motion';
 import { useState } from 'react';
@@ -28,14 +28,21 @@ export default function ImageSlider({ images }: ImageSliderProp) {
   const imageIndex = wrap(0, images.length, page);
 
   const paginate = (newDirection: number) => {
-    setPage([page + newDirection, newDirection]);
+    if (page === 0 && newDirection === -1) {
+      setPage([2, newDirection]);
+    } else if (page === 2 && newDirection === 1) {
+      setPage([0, newDirection]);
+    } else {
+      setPage([page + newDirection, newDirection]);
+    }
   };
+
   return (
-    <Wrapper>
+    <Flex height="300px" overflow="hidden">
       <AnimatePresence initial={false} custom={direction}>
         <motion.img
           key={page}
-          src={images[imageIndex]}
+          src={images[imageIndex] ?? '/images/logo.png'}
           custom={direction}
           variants={variants}
           initial="enter"
@@ -66,25 +73,57 @@ export default function ImageSlider({ images }: ImageSliderProp) {
             className="prev"
             onClick={() => paginate(-1)}
           >
-            ‣
-          </PrevButton>{' '}
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g opacity="0.9">
+                <path
+                  opacity="0.2"
+                  d="M9 5L15 12L9 19"
+                  stroke="#292929"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </g>
+            </svg>
+          </PrevButton>
           <NextButton type="button" onClick={() => paginate(1)}>
-            ‣
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g opacity="0.9">
+                <path
+                  opacity="0.2"
+                  d="M9 5L15 12L9 19"
+                  stroke="#292929"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </g>
+            </svg>
           </NextButton>
+          <PhotoCount>
+            <Box w={2.5}>{page + 1}</Box>
+            /3
+          </PhotoCount>
         </ButtonGroup>
       )}
-    </Wrapper>
+    </Flex>
   );
 }
 
-const Wrapper = styled.section`
-  display: flex;
-  height: 250px;
-  overflow: hidden;
-`;
-
 const ButtonGroup = styled(Box)`
-  top: calc(7%);
+  top: calc(11%);
   position: absolute;
   display: flex;
   width: 100%;
@@ -96,8 +135,6 @@ const ButtonGroup = styled(Box)`
 `;
 
 const NextButton = styled.button`
-  background: white;
-  border-radius: 30px;
   width: 40px;
   height: 40px;
   display: flex;
@@ -111,8 +148,6 @@ const NextButton = styled.button`
 `;
 
 const PrevButton = styled.button`
-  background: white;
-  border-radius: 30px;
   width: 40px;
   height: 40px;
   display: flex;
@@ -124,4 +159,17 @@ const PrevButton = styled.button`
   font-size: 18px;
   z-index: 2;
   transform: scale(-1);
+`;
+
+const PhotoCount = styled(Box)`
+  display: flex;
+  position: absolute;
+  top: 130px;
+  width: 50px;
+  right: calc(4%);
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 11.5px;
 `;
