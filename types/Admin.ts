@@ -12,4 +12,5 @@ export interface IMarketItem extends IMarketList {
   marketName: string;
   businessNumber: string;
   status: TStatus;
+  createdAt: string;
 }

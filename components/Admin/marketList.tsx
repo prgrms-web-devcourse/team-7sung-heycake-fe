@@ -48,6 +48,7 @@ export default function MarketList({ category }: IMarketList) {
                 marketName={item.marketName}
                 businessNumber={item.businessNumber}
                 status={item.status}
+                createdAt={item.createdAt}
               />
             </Stack>
           ))

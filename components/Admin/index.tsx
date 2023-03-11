@@ -18,7 +18,7 @@ export default function Admin() {
         <Tabs colorScheme="heys" isLazy minW="350px" w="650px">
           <TabList alignItems="center" h="60px" p={2}>
             <Tab w="50%" h="60px">
-              승인 목록
+              승인 대기 목록
             </Tab>
             <Tab w="50%" h="60px">
               거절 목록
