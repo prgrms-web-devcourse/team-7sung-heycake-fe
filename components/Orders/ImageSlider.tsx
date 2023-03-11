@@ -1,5 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { Box, Button, Flex } from '@chakra-ui/react';
 import { AnimatePresence, motion, wrap } from 'framer-motion';
 import { useState } from 'react';
 
@@ -67,10 +66,33 @@ export default function ImageSlider({ images }: ImageSliderProp) {
         />
       </AnimatePresence>
       {images.length > 1 && (
-        <ButtonGroup>
-          <PrevButton
+        <Flex
+          position="absolute"
+          top="11%"
+          width="100%"
+          maxWidth="560px"
+          margin="0 auto"
+          justifyContent="space-between"
+          alignItems=" center"
+          padding=" 0 1rem"
+        >
+          <Button
+            width="40px"
+            height="40px"
+            display="flex"
+            justify-content="center"
+            alignItems="center"
+            userSelect="none"
+            cursor="pointer"
+            fontWeight="bold"
+            fontSize="18px"
+            padding="0"
+            zIndex="2"
+            bg="none"
             type="button"
-            className="prev"
+            transform="scale(-1)"
+            _hover={{ backgroundColor: 'none' }}
+            _active={{ backgroundColor: 'none' }}
             onClick={() => paginate(-1)}
           >
             <svg
@@ -91,8 +113,25 @@ export default function ImageSlider({ images }: ImageSliderProp) {
                 />
               </g>
             </svg>
-          </PrevButton>
-          <NextButton type="button" onClick={() => paginate(1)}>
+          </Button>
+          <Button
+            width="40px"
+            height="40px"
+            display="flex"
+            justify-content="center"
+            alignItems="center"
+            userSelect="none"
+            cursor="pointer"
+            fontWeight="bold"
+            fontSize="18px"
+            padding="0"
+            zIndex="2"
+            bg="none"
+            _hover={{ backgroundColor: 'none' }}
+            _active={{ backgroundColor: 'none' }}
+            type="button"
+            onClick={() => paginate(1)}
+          >
             <svg
               width="24"
               height="24"
@@ -111,65 +150,23 @@ export default function ImageSlider({ images }: ImageSliderProp) {
                 />
               </g>
             </svg>
-          </NextButton>
-          <PhotoCount>
+          </Button>
+          <Flex
+            position="absolute"
+            top="130px"
+            width="45px"
+            right="4%"
+            zIndex="3"
+            bg="rgba(0, 0, 0, 0.5)"
+            color="white"
+            padding="0.2rem 0.6rem"
+            borderRadius="11.5px"
+          >
             <Box w={2.5}>{page + 1}</Box>
             /3
-          </PhotoCount>
-        </ButtonGroup>
+          </Flex>
+        </Flex>
       )}
     </Flex>
   );
 }
-
-const ButtonGroup = styled(Box)`
-  top: calc(11%);
-  position: absolute;
-  display: flex;
-  width: 100%;
-  max-width: 560px;
-  margin: 0 auto;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-`;
-
-const NextButton = styled.button`
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 18px;
-  z-index: 2;
-`;
-
-const PrevButton = styled.button`
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 18px;
-  z-index: 2;
-  transform: scale(-1);
-`;
-
-const PhotoCount = styled(Box)`
-  display: flex;
-  position: absolute;
-  top: 130px;
-  width: 50px;
-  right: calc(4%);
-  z-index: 3;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 0.2rem 0.6rem;
-  border-radius: 11.5px;
-`;
