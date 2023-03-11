@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { postMarketList } from '@/components/Api/Market';
-import ApiErrorAlert from '@/components/Shared/apiErrorAlert';
+import ErrorPage from '@/components/Error';
 import { IMarketItem, IMarketList } from '@/types/Admin';
 
 import AdminListSkeleton from './adminLIstSkeleton';
@@ -31,7 +31,7 @@ export default function MarketList({ category }: IMarketList) {
   }
 
   if (status === 'error') {
-    return <ApiErrorAlert />;
+    return <ErrorPage />;
   }
 
   return (

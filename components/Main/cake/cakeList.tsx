@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import getCakeList from '@/components/Api/Main';
-import ApiErrorAlert from '@/components/Shared/apiErrorAlert';
+import ErrorPage from '@/components/Error';
 import { ICakeItemData } from '@/types/Main';
 
 import CakeItem from './cakeItem';
@@ -64,7 +64,7 @@ export default function CakeList({ category, location }: any) {
   }
 
   if (status === 'error') {
-    return <ApiErrorAlert />;
+    return <ErrorPage />;
   }
 
   return (
