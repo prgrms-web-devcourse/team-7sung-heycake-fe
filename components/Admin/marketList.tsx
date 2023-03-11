@@ -5,12 +5,12 @@ import { useInView } from 'react-intersection-observer';
 
 import { postMarketList } from '@/components/Api/Market';
 import ErrorPage from '@/components/Error';
-import { IMarketItem, IMarketList } from '@/types/Admin';
+import { IMarketItem, MarketList } from '@/types/Admin';
 
 import AdminListSkeleton from './adminLIstSkeleton';
 import MarketItem from './marketItem';
 
-export default function MarketList({ category }: IMarketList) {
+export default function MarketList({ category }: MarketList) {
   const { ref, inView } = useInView();
   const { data, status, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
     ['승인 마켓 리스트', category],
