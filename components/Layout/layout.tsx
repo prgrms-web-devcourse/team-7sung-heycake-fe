@@ -8,7 +8,7 @@ function Layout({ children }: Props) {
   return (
     <VStack
       align="stretch"
-      justify="stretch"
+      justify="center"
       maxW="560px"
       m="auto"
       minH="100vh"
