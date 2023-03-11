@@ -3,9 +3,11 @@ import { Container, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { AiOutlineLeft } from 'react-icons/ai';
 
-import { IMypageTitle } from './types';
+interface MypageInfo {
+  title: string;
+}
 
-export default function MypageTitle({ title }: IMypageTitle) {
+export default function MypageTitle({ title }: MypageInfo) {
   const router = useRouter();
 
   return (

@@ -1,8 +1,8 @@
 import { Container, Text } from '@chakra-ui/react';
 
-import { IMypageCount } from './types';
+import { MypageCount } from '@/types/orders';
 
-export default function CountBar({ count }: IMypageCount) {
+export default function CountBar({ count }: MypageCount) {
   return (
     <Container backgroundColor="#F6F7FB" height="46px">
       <Text fontSize={16} padding={3}>

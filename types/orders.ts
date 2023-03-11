@@ -29,6 +29,30 @@ export interface CakeForm {
   creamFlavor: CreamFlavor;
 }
 
+export interface MypagePost {
+  id: string;
+  imageUrl: string;
+  orderStatus: OrderStatus;
+  region: string;
+  title: string;
+  visitTime: string;
+  createdAt: string;
+  cakeInfo: MypagePostInfo;
+  hopePrice: number;
+  count: number;
+}
+
+export interface MypagePostInfo {
+  cakeCategory: CakeCategory;
+  cakeSize: CakeSize;
+  cakeHeight: CakeHeight;
+  creamFlavor: CreamFlavor;
+}
+
+export interface MypageCount {
+  count: number;
+}
+
 export type OrderStatus = 'NEW' | 'RESERVED' | 'PAID';
 
 export type CakeCategory =
