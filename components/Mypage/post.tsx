@@ -87,8 +87,9 @@ export default function Post({
             borderRadius="6px"
             display="flex"
             justifyContent="center"
-            fontSize={10}
+            fontSize={12}
             marginBottom={1}
+            padding={0}
           >
             {convertCakeCategory(cakeInfo.cakeCategory)}
           </Badge>
