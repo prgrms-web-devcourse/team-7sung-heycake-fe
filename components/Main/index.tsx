@@ -7,13 +7,15 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
+  useToast,
 } from '@chakra-ui/react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import ERROR_MESSAGES from '@/constants/errorMessages';
 import { TAB_TABLE } from '@/constants/Main';
 import { NewOrderIcon } from '@/public/icon';
+import { getAccessToken } from '@/utils/getAccessToken';
 
 import Header from '../Header';
 import CakeList from './cake/cakeList';
@@ -22,11 +24,25 @@ import LocationSelectBox from './location/locationSelectBox';
 export default function CakeMain() {
   const router = useRouter();
   const [location, setLocation] = useState('강남구');
+  const accessToken = getAccessToken();
+  const toast = useToast();
 
   useEffect(() => {
     const localLocation = localStorage.getItem('location');
     if (localLocation) setLocation(localLocation as string);
   }, [router]);
+
+  const handleNewOrderClick = () => {
+    if (accessToken) {
+      router.push('/orders/new');
+    } else {
+      toast({
+        title: ERROR_MESSAGES.CHECK_LOGIN,
+        status: 'error',
+        duration: 3000,
+      });
+    }
+  };
 
   return (
     <>
@@ -80,22 +96,21 @@ export default function CakeMain() {
               </TabPanel>
             ))}
           </TabPanels>
-          <Link href="/orders/new">
-            <Button
-              w="52px"
-              h="52px"
-              colorScheme="heys"
-              bg="hey.main"
-              position="fixed"
-              zIndex="10"
-              borderRadius="104px"
-              right={4}
-              bottom={8}
-              p={0}
-            >
-              <NewOrderIcon w={6} h={6} />
-            </Button>
-          </Link>
+          <Button
+            w="52px"
+            h="52px"
+            colorScheme="heys"
+            bg="hey.main"
+            position="fixed"
+            zIndex="10"
+            borderRadius="104px"
+            right={4}
+            bottom={8}
+            p={0}
+            onClick={handleNewOrderClick}
+          >
+            <NewOrderIcon w={6} h={6} />
+          </Button>
         </Tabs>
       </Flex>
     </>
