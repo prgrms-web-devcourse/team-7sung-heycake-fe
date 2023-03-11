@@ -5,6 +5,7 @@ import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 
 import { DataTable } from '@/components/Orders';
+import HeaderTitle from '@/components/Shared/headerTitle';
 import useSelectOffer from '@/hooks/useSelectOffer';
 import numberWithCommas from '@/utils/numberWithCommas';
 
@@ -27,6 +28,7 @@ export default function Pay({
 
   return (
     <Box padding="1rem">
+      <HeaderTitle title="주문/결제" />
       <Text
         bg="rgba(249, 100, 0, 0.2)"
         color="hey.main"

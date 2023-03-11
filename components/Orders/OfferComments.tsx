@@ -124,7 +124,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
             <Flex gap="0.5rem" fontSize="10px" alignItems="center">
               <Box color="#707070" fontSize="14px">
                 케이크 업체
-              </Box>{' '}
+              </Box>
               2023-03-12
             </Flex>
             <Button

@@ -11,8 +11,11 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
-import { ThreadDto } from '@/types/orders';
+import { Order, ThreadDto } from '@/types/orders';
+import { getAccessToken } from '@/utils/getAccessToken';
+import { getMemberIdFromToken } from '@/utils/getDecodeToken';
 import numberWithCommas from '@/utils/numberWithCommas';
 
 import OfferComments from './OfferComments';
@@ -20,11 +23,24 @@ import OfferComments from './OfferComments';
 interface ThreadProps {
   thread: ThreadDto;
   orderId: string;
-  orderStatus: string;
+  order: Order;
 }
 
-export default function Thread({ thread, orderId, orderStatus }: ThreadProps) {
+export default function Thread({ thread, orderId, order }: ThreadProps) {
   const router = useRouter();
+  const accessToken = getAccessToken();
+  const [memberId, setMemberId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleSetMemberId = () => {
+      if (accessToken) {
+        const member = getMemberIdFromToken(accessToken);
+        if (member) setMemberId(member);
+      }
+    };
+
+    handleSetMemberId();
+  }, [accessToken, memberId]);
 
   const handlePayment = () => {
     router.push(
@@ -52,7 +68,7 @@ export default function Thread({ thread, orderId, orderStatus }: ThreadProps) {
         <Box fontSize="1.5rem">
           {thread.createDate ?? orderId ?? '23.03.11'}
         </Box>
-        {orderStatus === 'NEW' && (
+        {order.orderStatus === 'NEW' && order.memberId === memberId && (
           <Button
             backgroundColor="hey.main"
             color="white"
