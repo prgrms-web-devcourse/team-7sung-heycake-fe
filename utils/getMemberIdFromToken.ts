@@ -4,13 +4,12 @@ interface DecodedToken {
   [key: string]: any;
 }
 
-const decodeToken = (token: string): DecodedToken | null => {
+export const decodeToken = (token: string): DecodedToken | null => {
   try {
     const decoded = jwt.decode(token);
     return decoded as DecodedToken;
   } catch (err) {
-    console.error(err);
-    return null;
+    throw Error();
   }
 };
 
