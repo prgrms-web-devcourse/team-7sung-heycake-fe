@@ -14,6 +14,7 @@ import { useRef } from 'react';
 import { AiFillFileAdd } from 'react-icons/ai';
 import { GrPowerReset } from 'react-icons/gr';
 
+import ERROR_MESSAGES from '@/constants/errorMessages';
 import useClickInput from '@/hooks/useClickInput';
 import useHandleAxiosError from '@/hooks/useHandleAxiosError';
 import useImageUpload from '@/hooks/useImageUpload';
@@ -47,6 +48,9 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       onSuccess: () => {
         queryClient.invalidateQueries(['comments', offerId]);
       },
+      onError: (error) => {
+        handleAxiosError(error);
+      },
     }
   );
 
@@ -62,6 +66,9 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       onSuccess: () => {
         queryClient.invalidateQueries(['comments', offerId]);
       },
+      onError: (error) => {
+        handleAxiosError(error);
+      },
     }
   );
 
@@ -71,7 +78,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
     if (accessToken === null) {
       toast({
         status: 'error',
-        description: '로그인을 해주세요',
+        description: ERROR_MESSAGES.CHECK_LOGIN,
         isClosable: true,
       });
       return;
