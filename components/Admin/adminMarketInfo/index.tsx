@@ -13,16 +13,19 @@ import {
   MarketOpeningIcon,
   MarketTelIcon,
 } from '@/public/icon';
-import { numberWithHyphenPhone } from '@/utils/numberWithHyphen';
+import {
+  numberWithHyphenMarket,
+  numberWithHyphenPhone,
+} from '@/utils/numberWithHyphen';
 
-export default function AdminMarket() {
+export default function AdminMarketInfo() {
   const router = useRouter();
   const id = router.query.id as string;
   const { status, data } = useQuery(
     ['업체 상세 정보', id],
     () => getMarketDetail({ enrollmentId: id }),
     {
-      enabled: router.isReady,
+      enabled: Boolean(router.query.id),
     }
   );
   if (status === 'loading' || router.isFallback) {
@@ -49,6 +52,18 @@ export default function AdminMarket() {
         />
       </Card>
       <Container px={5} pt={6} fontSize="sm" fontWeight={700}>
+        <Box my={4}>
+          <Text fontWeight={600}>사업자</Text>
+          <Text ml={1} fontWeight={400}>
+            {data.ownerName}
+          </Text>
+          <Text fontWeight={600} mt={2}>
+            사업자 번호
+          </Text>
+          <Text ml={1} fontWeight={400}>
+            {numberWithHyphenMarket(Number(data.businessNumber))}
+          </Text>
+        </Box>
         <Box h="92px">
           <Flex alignItems="flex-end">
             <MarketAddressIcon w={4} h={4} />
@@ -70,7 +85,7 @@ export default function AdminMarket() {
       </Container>
       <KakaoMaps address={address} title={data.marketName} />
       <Box h={24} p={4}>
-        <Text fontWeight={500}>매장소개</Text>
+        <Text fontWeight={600}>매장소개</Text>
         <Text mt={2} fontWeight={400}>
           {data.description}
         </Text>

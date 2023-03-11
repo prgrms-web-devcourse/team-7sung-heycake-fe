@@ -57,13 +57,13 @@ export default function MarketItem({
       <Text p={4}>{createdAt.substring(0, 10).replace(/-/g, '.')}</Text>
       <Divider mx="3%" w="94%" />
       <Flex p={4} alignItems="center">
-        <Link key={enrollmentId} href={`/market/${enrollmentId}`}>
+        <Link key={enrollmentId} href={`/admin/${enrollmentId}`}>
           <Card variant="unstyled" width="72px" height="72px" overflow="hidden">
             <Image fill sizes="20vw" src={imageUrl} alt="MARKET" />
           </Card>
         </Link>
         <CardBody p={0} px={4}>
-          <Link key={enrollmentId} href={`/market/${enrollmentId}`}>
+          <Link key={enrollmentId} href={`/admin/${enrollmentId}`}>
             <Text fontWeight="600">{marketName}</Text>
             <Text fontSize="sm" fontWeight="400" color="hey.darkGray">
               사업자 번호 {numberWithHyphenMarket(Number(businessNumber))}

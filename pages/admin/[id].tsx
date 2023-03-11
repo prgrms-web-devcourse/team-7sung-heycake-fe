@@ -1,10 +1,11 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
+import AdminMarketInfo from '@/components/Admin/adminMarketInfo';
 import { getMarketDetail } from '@/components/Api/Market';
 
 export default function AdminMarket() {
-  return <AdminMarket />;
+  return <AdminMarketInfo />;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => ({
