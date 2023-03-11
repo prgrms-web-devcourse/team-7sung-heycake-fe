@@ -22,7 +22,7 @@ export default function Main() {
     async (code: string) => {
       try {
         const response: ResponseType = await axios
-          .post('https://heycake.kro.kr/login', { code })
+          .post(`${process.env.NEXT_PUBLIC_LOGIN_URL}`, { code })
           .then((res) => res.data);
 
         if (!getAccessToken()) {
