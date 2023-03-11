@@ -24,7 +24,7 @@ export default function Detail() {
   return (
     <>
       <HeaderTitle title="마이 페이지" />
-      <Container display="flex" flexDirection="column" padding={32}>
+      <Container display="flex" flexDirection="column" py={32} px={10}>
         <Text display="inline" fontSize={24} fontWeight="bold">
           반갑습니다
         </Text>
@@ -35,7 +35,7 @@ export default function Detail() {
             fontSize={24}
             fontWeight="bold"
           >
-            헤이, 케이크
+            헤이, 케이크&nbsp;
           </Text>
           <Text display="inline" fontSize={24} fontWeight="bold">
             입니다!
