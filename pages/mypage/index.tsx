@@ -1,4 +1,5 @@
 import { Box, Container, Flex, Text, useToast } from '@chakra-ui/react';
+import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -24,7 +25,19 @@ export default function Detail() {
   return (
     <>
       <HeaderTitle title="마이 페이지" />
-      <Container display="flex" flexDirection="column" py={32} px={10}>
+      <Container
+        display="flex"
+        flexDirection="column"
+        py={32}
+        px={32}
+        margin={0}
+        css={css`
+          @media (max-width: 390px) {
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+          }
+        `}
+      >
         <Text display="inline" fontSize={24} fontWeight="bold">
           반갑습니다
         </Text>
@@ -41,7 +54,7 @@ export default function Detail() {
             입니다!
           </Text>
         </Container>
-        <Flex justifyContent="center" gap="1rem" marginTop={20}>
+        <Flex justifyContent="center" gap="1rem" marginTop={20} width="100%">
           <Link href="/mypage/orderlist">
             <Box
               display="flex"
