@@ -81,6 +81,6 @@ export interface ThreadDto {
   content: string;
   commentCount: number;
   enrollmentId: number;
-  createDate: string;
+  createdDate: string;
   isPaid: boolean;
 }
