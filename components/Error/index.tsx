@@ -5,6 +5,7 @@ import { ErrorPageIcon } from '@/public/icon';
 
 export default function ErrorPage() {
   const router = useRouter();
+
   return (
     <Grid alignContent="space-between" justifyContent="center">
       <Box />

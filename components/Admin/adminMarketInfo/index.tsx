@@ -28,6 +28,7 @@ export default function AdminMarketInfo() {
       enabled: Boolean(router.query.id),
     }
   );
+
   if (status === 'loading' || router.isFallback) {
     return <MarketProfileSkeleton />;
   }

@@ -1,10 +1,10 @@
 export type MarketStatus = 'WAITING' | 'APPROVED' | 'DELETED';
 
-export interface MarketList {
+export interface MarketListProps {
   category: MarketStatus;
 }
 
-export interface IMarketItem extends MarketList {
+export interface MarketItemProps extends MarketListProps {
   phoneNumber: string;
   enrollmentId: string;
   imageUrl: string;
