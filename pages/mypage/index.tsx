@@ -1,9 +1,9 @@
-import { Box, Container, Text, useToast } from '@chakra-ui/react';
+import { Box, Container, Flex, Text, useToast } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import MypageTitle from '@/components/Mypage/mypageTitle';
+import HeaderTitle from '@/components/Shared/headerTitle';
 import deleteAccessToken from '@/utils/deleteAccessToken';
 
 export default function Detail() {
@@ -23,30 +23,25 @@ export default function Detail() {
 
   return (
     <>
-      <MypageTitle title="마이 페이지" />
-      <Container
-        display="flex"
-        flexDirection="column"
-        flexDir="column"
-        padding="150px 0 0 30px"
-      >
-        <Text display="inline" fontSize={30} fontWeight="bold">
+      <HeaderTitle title="마이 페이지" />
+      <Container display="flex" flexDirection="column" padding={32}>
+        <Text display="inline" fontSize={24} fontWeight="bold">
           반갑습니다
         </Text>
         <Container padding={0}>
           <Text
             display="inline"
             color="hey.main"
-            fontSize={30}
+            fontSize={24}
             fontWeight="bold"
           >
             헤이, 케이크
           </Text>
-          <Text display="inline" fontSize={30} fontWeight="bold">
+          <Text display="inline" fontSize={24} fontWeight="bold">
             입니다!
           </Text>
         </Container>
-        <Container display="flex" marginTop={20} padding={0}>
+        <Flex justifyContent="center" gap="1rem" marginTop={20}>
           <Link href="/mypage/orderlist">
             <Box
               display="flex"
@@ -54,23 +49,24 @@ export default function Detail() {
               alignContent="center"
               border="1px solid"
               borderColor="hey.lightGray"
-              width="154px"
-              height="140px"
-              padding={5}
+              minW="150px"
+              minH="150px"
+              padding={6}
               borderRadius={10}
               _hover={{ borderColor: 'hey.main' }}
             >
-              <Container>
+              <Flex flexDirection="column" alignItems="center" gap="1rem">
                 <Image
                   src="/images/cakeIcon.png"
-                  width={66}
-                  height={66}
+                  width="50"
+                  height="50"
                   quality={100}
                   alt="주문 리스트 아이콘"
                 />
-              </Container>
-
-              <Text fontSize={16}>내 주문 리스트</Text>
+                <Text fontSize={16} marginTop={1}>
+                  내 주문 리스트
+                </Text>
+              </Flex>
             </Box>
           </Link>
           <Link href="/mypage/enrollment">
@@ -79,27 +75,27 @@ export default function Detail() {
               flexDir="column"
               border="1px solid"
               borderColor="hey.lightGray"
-              width="154px"
-              height="140px"
-              padding={5}
+              minW="150px"
+              minH="150px"
+              padding={6}
               borderRadius={10}
-              marginLeft={5}
               _hover={{ borderColor: 'hey.main' }}
             >
-              <Container>
+              <Flex flexDirection="column" alignItems="center" gap="1rem">
                 <Image
                   src="/images/shop.png"
-                  width={66}
-                  height={66}
+                  width="50"
+                  height="50"
                   quality={100}
                   alt="업체 등록 아이콘"
                 />
-              </Container>
-
-              <Text fontSize={16}>업체 정보 등록</Text>
+                <Text fontSize={16} marginTop={1}>
+                  업체 정보 등록
+                </Text>
+              </Flex>
             </Box>
           </Link>
-        </Container>
+        </Flex>
         <Container
           display="flex"
           justifyContent="center"
