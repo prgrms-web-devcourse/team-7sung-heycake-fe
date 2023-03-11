@@ -1,6 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import {
   Button,
   Container,
+  Flex,
   FormControl,
   FormLabel,
   Input,
@@ -10,10 +12,13 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { GrPowerReset } from 'react-icons/gr';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import SEOUL_AREA from '@/constants/seoulArea';
+import useClickInput from '@/hooks/useClickInput';
 import useHandleAxiosError from '@/hooks/useHandleAxiosError';
+import useImageUpload from '@/hooks/useImageUpload';
 import deleteAccessToken from '@/utils/deleteAccessToken';
 import { getAccessToken } from '@/utils/getAccessToken';
 
@@ -47,7 +52,15 @@ export default function EnrollmentForm() {
   const ACCESS_TOKEN = getAccessToken();
   const handleAxiosError = useHandleAxiosError();
   const toast = useToast();
+  const {
+    files,
+    handleDragOver,
+    handleDrop,
+    handleFileInputChange,
+    resetImages,
+  } = useImageUpload(1);
 
+  const [inputRef, handleFileChoose] = useClickInput();
   const router = useRouter();
   const {
     register,
@@ -100,170 +113,222 @@ export default function EnrollmentForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} id="enrollmentForm">
-      <FormControl height={100} width={350}>
-        <FormLabel>업체 이미지 업로드</FormLabel>
-        <Input
-          type="file"
-          {...register('marketImage', { required: true })}
-          padding={1}
-        />
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>상호명</FormLabel>
-        <Input
-          type="text"
-          placeholder="상호명을 입력해주세요."
-          {...register('marketName', { required: true })}
-        />
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>대표자 이름</FormLabel>
-        <Input
-          type="text"
-          placeholder="대표자 이름을 입력해주세요."
-          {...register('ownerName', {
-            required: true,
-            minLength: 2,
-            maxLength: {
-              value: 20,
-              message: CHECK_OWNER_NAME_LENGTH,
-            },
-            pattern: {
-              value: /[ㄱ-ㅎ|가-힣|a-z|A-Z]/,
-              message: CHECK_OWNER_NAME_TYPE,
-            },
-          })}
-        />
-        {errors.ownerName && (
-          <Text fontSize="8px" color="red">
-            {errors.ownerName.message}
-          </Text>
-        )}
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>개업 일자</FormLabel>
-        <Input type="date" {...register('openDate', { required: true })} />
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>업체 전화번호</FormLabel>
-        <Input
-          type="text"
-          placeholder="업체 전화번호를 입력해주세요."
-          {...register('phoneNumber', {
-            required: true,
-            pattern: {
-              value: /^[0-9+]*$/,
-              message: CHECK_NUMBER_TYPE,
-            },
-          })}
-        />
-        {errors.phoneNumber && (
-          <Text fontSize="8px" color="red">
-            {errors.phoneNumber.message}
-          </Text>
-        )}
-      </FormControl>
-      <FormControl height={150} width={350}>
-        <FormLabel>주소</FormLabel>
-        <Container display="flex" padding={0}>
-          <Select
-            {...register('city', { required: true })}
-            width={170}
-            marginRight={2}
-            marginBottom={2}
-            defaultValue=""
+    <Flex justifyContent="center">
+      <form onSubmit={handleSubmit(onSubmit)} id="enrollmentForm">
+        <FormControl>
+          <FormLabel>업체 이미지 업로드</FormLabel>
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            height="150px"
+            maxWidth={340}
+            border="1px dashed grey"
+            borderRadius="5px"
+            cursor="poiner"
+            margin="0 auto"
+            textAlign="center"
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            onClick={handleFileChoose}
           >
-            <option value="">시 선택</option>
-            <option value="서울시">서울시</option>
-          </Select>
-          <Select
-            defaultValue=""
-            {...register('district', { required: true })}
-            width={170}
+            {files.length !== 0 ? (
+              <Container display="flex" flexDir="column" alignItems="center">
+                <img src={URL.createObjectURL(files[0])} alt="업체 이미지" />{' '}
+              </Container>
+            ) : (
+              <Container
+                color="hey.normalGray"
+                display="flex"
+                flexDir="column"
+                alignItems="center"
+              >
+                <img
+                  src="/images/cameraIcon.png"
+                  width={30}
+                  height={30}
+                  alt="카메라 아이콘"
+                />
+                사진 추가
+              </Container>
+            )}
+
+            <input
+              hidden
+              ref={inputRef}
+              type="file"
+              multiple
+              onChange={handleFileInputChange}
+            />
+          </Flex>
+          <Flex
+            alignItems="center"
+            width="95%"
+            height="70px"
+            margin="0"
+            gap="1rem"
           >
-            <option value="">구 선택</option>
-            {SEOUL_AREA.map((area) => (
-              <option key={area} value={area}>
-                {area}
-              </option>
-            ))}
-          </Select>
-        </Container>
-        <Container padding={0}>
+            {files.length !== 0 && (
+              <Button type="button" onClick={resetImages}>
+                <GrPowerReset />
+              </Button>
+            )}
+          </Flex>
+        </FormControl>
+        <FormControl height={100} width={350}>
+          <FormLabel>상호명</FormLabel>
           <Input
             type="text"
-            placeholder="상세 주소를 입력해주세요."
-            {...register('detailAddress', { required: true })}
+            placeholder="상호명을 입력해주세요."
+            {...register('marketName', { required: true })}
           />
-        </Container>
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>사업자 등록 번호</FormLabel>
-        <Input
-          type="text"
-          placeholder="사업자 등록 번호를 입력해주세요."
-          {...register('businessNumber', {
-            required: true,
-            pattern: {
-              value: /^[0-9+]*$/,
-              message: CHECK_NUMBER_TYPE,
-            },
-            minLength: 10,
-            maxLength: {
-              value: 10,
-              message: CHECK_BUSINESS_NUMBER_LENGTH,
-            },
-          })}
-        />
-        {errors.businessNumber && (
-          <Text fontSize="8px" color="red">
-            {errors.businessNumber.message}
-          </Text>
-        )}
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>사업자 등록 사진</FormLabel>
-        <Input
-          type="file"
-          {...register('businessLicenseImage', { required: true })}
+        </FormControl>
+        <FormControl height={100} width={350}>
+          <FormLabel>대표자 이름</FormLabel>
+          <Input
+            type="text"
+            placeholder="대표자 이름을 입력해주세요."
+            {...register('ownerName', {
+              required: true,
+              minLength: 2,
+              maxLength: {
+                value: 20,
+                message: CHECK_OWNER_NAME_LENGTH,
+              },
+              pattern: {
+                value: /[ㄱ-ㅎ|가-힣|a-z|A-Z]/,
+                message: CHECK_OWNER_NAME_TYPE,
+              },
+            })}
+          />
+          {errors.ownerName && (
+            <Text fontSize="8px" color="red">
+              {errors.ownerName.message}
+            </Text>
+          )}
+        </FormControl>
+        <FormControl height={100} width={350}>
+          <FormLabel>개업 일자</FormLabel>
+          <Input type="date" {...register('openDate', { required: true })} />
+        </FormControl>
+        <FormControl height={100} width={350}>
+          <FormLabel>업체 전화번호</FormLabel>
+          <Input
+            type="text"
+            placeholder="업체 전화번호를 입력해주세요."
+            {...register('phoneNumber', {
+              required: true,
+              pattern: {
+                value: /^[0-9+]*$/,
+                message: CHECK_NUMBER_TYPE,
+              },
+            })}
+          />
+          {errors.phoneNumber && (
+            <Text fontSize="8px" color="red">
+              {errors.phoneNumber.message}
+            </Text>
+          )}
+        </FormControl>
+        <FormControl height={150} width={350}>
+          <FormLabel>주소</FormLabel>
+          <Container display="flex" padding={0}>
+            <Select
+              {...register('city', { required: true })}
+              width={170}
+              marginRight={2}
+              marginBottom={2}
+              defaultValue=""
+            >
+              <option value="">시 선택</option>
+              <option value="서울시">서울시</option>
+            </Select>
+            <Select
+              defaultValue=""
+              {...register('district', { required: true })}
+              width={170}
+            >
+              <option value="">구 선택</option>
+              {SEOUL_AREA.map((area) => (
+                <option key={area} value={area}>
+                  {area}
+                </option>
+              ))}
+            </Select>
+          </Container>
+          <Container padding={0}>
+            <Input
+              type="text"
+              placeholder="상세 주소를 입력해주세요."
+              {...register('detailAddress', { required: true })}
+            />
+          </Container>
+        </FormControl>
+        <FormControl height={100} width={350}>
+          <FormLabel>사업자 등록 번호</FormLabel>
+          <Input
+            type="text"
+            placeholder="사업자 등록 번호를 입력해주세요."
+            {...register('businessNumber', {
+              required: true,
+              pattern: {
+                value: /^[0-9+]*$/,
+                message: CHECK_NUMBER_TYPE,
+              },
+              minLength: 10,
+              maxLength: {
+                value: 10,
+                message: CHECK_BUSINESS_NUMBER_LENGTH,
+              },
+            })}
+          />
+          {errors.businessNumber && (
+            <Text fontSize="8px" color="red">
+              {errors.businessNumber.message}
+            </Text>
+          )}
+        </FormControl>
+        <FormControl height={100} width={350}>
+          <FormLabel>사업자 등록 사진</FormLabel>
+          <Input
+            type="file"
+            {...register('businessLicenseImage', { required: true })}
+            padding={1}
+          />
+        </FormControl>
+        <FormControl width={350} height={100}>
+          <FormLabel>영업 시간</FormLabel>
+          <Input
+            type="time"
+            {...register('openTime', { required: true })}
+            width={170}
+            marginRight={2}
+          />
+          <Input
+            type="time"
+            {...register('endTime', { required: true })}
+            width={170}
+          />
+        </FormControl>
+        <FormControl height={100} width={350}>
+          <FormLabel>업체 설명</FormLabel>
+          <Input
+            type="text"
+            placeholder="업체 설명을 입력해주세요."
+            {...register('description', { required: true })}
+          />
+        </FormControl>
+        <Button
+          type="submit"
+          width={350}
           padding={1}
-        />
-      </FormControl>
-      <FormControl width={350} height={100}>
-        <FormLabel>영업 시간</FormLabel>
-        <Input
-          type="time"
-          {...register('openTime', { required: true })}
-          width={170}
-          marginRight={2}
-        />
-
-        <Input
-          type="time"
-          {...register('endTime', { required: true })}
-          width={170}
-        />
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>업체 설명</FormLabel>
-        <Input
-          type="text"
-          placeholder="업체 설명을 입력해주세요."
-          {...register('description', { required: true })}
-        />
-      </FormControl>
-      <Button
-        type="submit"
-        width={350}
-        padding={1}
-        bg="hey.lightOrange"
-        fontSize="1.3rem"
-        marginBottom={10}
-        _hover={{ bg: 'hey.sub' }}
-      >
-        등록하기
-      </Button>
-    </form>
+          bg="hey.lightOrange"
+          fontSize="1.3rem"
+          marginBottom={10}
+          _hover={{ bg: 'hey.sub' }}
+        >
+          등록하기
+        </Button>
+      </form>
+    </Flex>
   );
 }
