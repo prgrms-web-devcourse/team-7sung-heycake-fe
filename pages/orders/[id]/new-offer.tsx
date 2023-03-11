@@ -103,7 +103,7 @@ export default function NewOffer() {
   };
 
   return (
-    <form style={{ margin: '0 auto', padding: '1rem' }} onSubmit={handleSubmit}>
+    <form style={{ paddingBottom: '2rem' }} onSubmit={handleSubmit}>
       <HeaderTitle title="오퍼 신청" />
       <Flex
         justifyContent="center"
