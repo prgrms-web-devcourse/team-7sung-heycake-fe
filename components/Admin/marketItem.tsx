@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardBody,
   CardFooter,
@@ -16,6 +15,10 @@ import { patchMarketStatus } from '@/components/Api/Market';
 import { IMarketItem } from '@/types/Admin';
 import { numberWithHyphenMarket } from '@/utils/numberWithHyphen';
 
+import ApprovedContainer from './buttonContainer/approvedContainer';
+import DeletedContainer from './buttonContainer/deletedContainer';
+import WaitingContainer from './buttonContainer/waitingContainer';
+
 export default function MarketItem({
   category,
   enrollmentId,
@@ -27,21 +30,16 @@ export default function MarketItem({
   const [isDeleted, setIsDeleted] = useState(false);
   const queryClient = useQueryClient();
 
-  const onRejectClickHandler = () => {
+  const onClickHandler = (status: any) => {
     setIsDeleted(true);
-    patchMarketStatus({ status: 'DELETED', enrollmentId });
-    queryClient.invalidateQueries(['승인 마켓 리스트', 'DELETED']);
+    patchMarketStatus({ status, enrollmentId });
+    queryClient.invalidateQueries(['승인 마켓 리스트', status]);
   };
 
-  const onApproveClickHandler = () => {
-    setIsDeleted(true);
-    patchMarketStatus({ status: 'APPROVED', enrollmentId });
-  };
-
-  const onWaitingClickHandler = () => {
-    setIsDeleted(true);
-    patchMarketStatus({ status: 'WAITING', enrollmentId });
-    queryClient.invalidateQueries(['승인 마켓 리스트', 'WAITING']);
+  const buttonContainer = {
+    APPROVED: <ApprovedContainer />,
+    WAITING: <WaitingContainer onClickHandler={onClickHandler} />,
+    DELETED: <DeletedContainer onClickHandler={onClickHandler} />,
   };
 
   if (isDeleted) {
@@ -74,42 +72,7 @@ export default function MarketItem({
         </CardBody>
       </Flex>
       <CardFooter p={2} px={4}>
-        {category === 'DELETED' ? (
-          <Button
-            w="100%"
-            h={12}
-            fontWeight={500}
-            bg="hey.main"
-            color="white"
-            borderRadius={16}
-            onClick={onWaitingClickHandler}
-          >
-            승인 대기로 변경
-          </Button>
-        ) : (
-          <Flex justifyContent="space-between" w="100%" gap="5%">
-            <Button
-              bg="white"
-              w="50%"
-              h={12}
-              borderRadius={16}
-              variant="outline"
-              onClick={onRejectClickHandler}
-            >
-              거절
-            </Button>
-            <Button
-              bg="hey.main"
-              color="white"
-              w="50%"
-              h={12}
-              borderRadius={16}
-              onClick={onApproveClickHandler}
-            >
-              승인
-            </Button>
-          </Flex>
-        )}
+        {buttonContainer[category]}
       </CardFooter>
     </Card>
   );

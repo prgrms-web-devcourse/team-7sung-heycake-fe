@@ -17,14 +17,20 @@ export default function Admin() {
       <Flex>
         <Tabs colorScheme="heys" isLazy minW="350px" w="650px">
           <TabList alignItems="center" h="60px" p={2}>
-            <Tab w="50%" h="60px">
-              승인 대기 목록
+            <Tab w="33%" h={14}>
+              승인 목록
             </Tab>
-            <Tab w="50%" h="60px">
+            <Tab w="33%" h={14}>
+              대기 목록
+            </Tab>
+            <Tab w="33%" h={14}>
               거절 목록
             </Tab>
           </TabList>
           <TabPanels>
+            <TabPanel>
+              <MarketList category="APPROVED" />
+            </TabPanel>
             <TabPanel>
               <MarketList category="WAITING" />
             </TabPanel>
