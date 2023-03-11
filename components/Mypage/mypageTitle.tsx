@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Container, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { AiOutlineLeft } from 'react-icons/ai';

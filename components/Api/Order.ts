@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import { IgetOrderList } from '@/types/Api';
 import { getAccessToken } from '@/utils/getAccessToken';
