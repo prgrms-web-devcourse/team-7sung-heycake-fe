@@ -82,7 +82,7 @@ export default function NewOrder() {
     if (accessToken === null) {
       toast({
         status: 'error',
-        description: '로그인을 해주세요',
+        description: ERROR_MESSAGES.CHECK_LOGIN,
         isClosable: true,
       });
       return;

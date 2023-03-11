@@ -1,4 +1,4 @@
-/* eslint-disable consistent-return */
+import ERROR_MESSAGES from '@/constants/errorMessages';
 import { IgetOrderList } from '@/types/Api';
 import { getAccessToken } from '@/utils/getAccessToken';
 
@@ -12,8 +12,7 @@ export async function getOrderList({
   orderStatus = null,
 }: IgetOrderList) {
   if (ACCESS_TOKEN === null) {
-    alert('로그인을 해주세요');
-    return;
+    throw Error(ERROR_MESSAGES.CHECK_LOGIN);
   }
   try {
     const response = await publicApi.get(`/orders/my`, {
@@ -31,15 +30,14 @@ export async function getOrderList({
       return response.data.myOrderResponseList;
     }
   } catch (error) {
-    console.error(error);
+    throw Error();
   }
-  return console.error('주문 리스트 조회에 실패하였습니다');
+  throw Error('주문 리스트 조회에 실패하였습니다');
 }
 
 export async function deleteOrder(orderId: string) {
   if (ACCESS_TOKEN === null) {
-    alert('로그인을 해주세요');
-    return;
+    throw Error(ERROR_MESSAGES.CHECK_LOGIN);
   }
   try {
     await publicApi.delete(`/orders/${orderId}`, {
@@ -49,6 +47,6 @@ export async function deleteOrder(orderId: string) {
       },
     });
   } catch (error) {
-    console.error(error);
+    throw Error();
   }
 }

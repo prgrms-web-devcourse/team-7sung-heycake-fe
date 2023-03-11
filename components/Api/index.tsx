@@ -7,7 +7,7 @@ const setInterceptor = (instance: AxiosInstance) => {
     (response) => response,
     (error) => {
       if (error.code === 'ECONNABORTED' || error.response?.status === 408) {
-        alert(API_ERROR_MESSAGES.REQUEST_EXPIRATION);
+        throw Error(API_ERROR_MESSAGES.REQUEST_EXPIRATION);
       }
       return Promise.reject(error);
     }

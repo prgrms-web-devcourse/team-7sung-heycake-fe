@@ -96,15 +96,11 @@ export default function Pay({
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  console.log(query);
-
-  return {
-    props: {
-      id: query.id,
-      expectedPrice: query.expectedPrice,
-      threadOfferId: query.threadOfferId,
-      marketName: query.marketName,
-    },
-  };
-};
+export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
+  props: {
+    id: query.id,
+    expectedPrice: query.expectedPrice,
+    threadOfferId: query.threadOfferId,
+    marketName: query.marketName,
+  },
+});

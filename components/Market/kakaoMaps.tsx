@@ -36,6 +36,7 @@ export default function KakaoMaps({ address, title }: any) {
         }
       });
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -18,6 +18,7 @@ import { useRef, useState } from 'react';
 import { GrPowerReset } from 'react-icons/gr';
 
 import { publicApi } from '@/components/Api';
+import ERROR_MESSAGES from '@/constants/errorMessages';
 import useClickInput from '@/hooks/useClickInput';
 import useHandleAxiosError from '@/hooks/useHandleAxiosError';
 import useImageUpload from '@/hooks/useImageUpload';
@@ -49,7 +50,7 @@ export default function NewOffer() {
     if (accessToken === null) {
       toast({
         status: 'error',
-        description: '로그인을 해주세요',
+        description: ERROR_MESSAGES.CHECK_LOGIN,
         isClosable: true,
       });
       return;

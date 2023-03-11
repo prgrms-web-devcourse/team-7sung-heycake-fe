@@ -3,6 +3,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import useHandleAxiosError from '@/hooks/useHandleAxiosError';
+
 import { deleteOrder } from '../Api/Order';
 import { IMypagePost } from './types';
 
@@ -16,10 +18,14 @@ export default function Post({
   const router = useRouter();
   const queryClient = useQueryClient();
   const toast = useToast();
+  const handleAxiosError = useHandleAxiosError();
 
   const deleteOrderMutation = useMutation(deleteOrder, {
     onSuccess: () => {
       queryClient.invalidateQueries(['orderList']);
+    },
+    onError: (error) => {
+      handleAxiosError(error);
     },
   });
 

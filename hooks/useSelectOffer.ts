@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
 import { publicApi } from '@/components/Api';
+import ERROR_MESSAGES from '@/constants/errorMessages';
 import { getAccessToken } from '@/utils/getAccessToken';
 
 import useHandleAxiosError from './useHandleAxiosError';
@@ -49,7 +50,7 @@ const useSelectOffer = () => {
       } else {
         toast({
           status: 'error',
-          description: '로그인을 해주세요',
+          description: ERROR_MESSAGES.CHECK_LOGIN,
           isClosable: true,
         });
       }
