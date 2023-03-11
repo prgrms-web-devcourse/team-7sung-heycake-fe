@@ -11,7 +11,7 @@ import Post from '@/components/Mypage/post';
 import { MypagePost } from '@/types/orders';
 
 export default function Orderlist() {
-  const [status, setStatus] = useState<string>('');
+  const [status, setStatus] = useState<string>('NEW');
 
   const { data: orderList, isError } = useQuery<MypagePost[]>(
     ['orderList'],
