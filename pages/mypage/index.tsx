@@ -23,7 +23,7 @@ export default function Detail() {
 
   return (
     <>
-      <MypageTitle title="마이 페이지" isSuccess={false} />
+      <MypageTitle title="마이 페이지" />
       <Container
         display="flex"
         flexDirection="column"
