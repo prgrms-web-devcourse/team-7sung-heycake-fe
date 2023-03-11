@@ -1,7 +1,9 @@
 import { Button, Container, Text } from '@chakra-ui/react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export default function NotExist() {
+  const router = useRouter();
   return (
     <Container
       display="flex"
@@ -38,6 +40,7 @@ export default function NotExist() {
         fontSize={16}
         fontWeight="medium"
         marginTop={36}
+        onClick={() => router.push('/orders/new')}
       >
         주문하러 가기
       </Button>
