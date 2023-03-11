@@ -65,10 +65,12 @@ export default function MarketItem({
           </Card>
         </Link>
         <CardBody p={0} px={4}>
-          <Text fontWeight="600">{marketName}</Text>
-          <Text fontSize="sm" fontWeight="400" color="hey.darkGray">
-            사업자 번호 {numberWithHyphenMarket(Number(businessNumber))}
-          </Text>
+          <Link key={enrollmentId} href={`/market/${enrollmentId}`}>
+            <Text fontWeight="600">{marketName}</Text>
+            <Text fontSize="sm" fontWeight="400" color="hey.darkGray">
+              사업자 번호 {numberWithHyphenMarket(Number(businessNumber))}
+            </Text>
+          </Link>
         </CardBody>
       </Flex>
       <CardFooter p={2} px={4}>
