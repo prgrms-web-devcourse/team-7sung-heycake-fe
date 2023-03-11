@@ -1,6 +1,10 @@
 import { Button } from '@chakra-ui/react';
 
-export default function DeletedContainer({ onClickHandler }: any) {
+import { OnClickMarketStatus } from '@/types/Admin';
+
+export default function DeletedContainer({
+  onClickHandler,
+}: OnClickMarketStatus) {
   return (
     <Button
       w="100%"

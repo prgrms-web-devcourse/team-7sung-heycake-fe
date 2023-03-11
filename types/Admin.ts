@@ -13,3 +13,7 @@ export interface IMarketItem extends IMarketList {
   status: TStatus;
   createdAt: string;
 }
+
+export interface OnClickMarketStatus {
+  onClickHandler: (arg0: TStatus) => void;
+}

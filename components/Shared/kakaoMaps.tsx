@@ -2,7 +2,12 @@ import { Box, Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-export default function KakaoMaps({ address, title }: any) {
+interface KakaoMapsProps {
+  address: string;
+  title: string;
+}
+
+export default function KakaoMaps({ address, title }: KakaoMapsProps) {
   const router = useRouter();
   useEffect(() => {
     window.kakao?.maps.load(() => {
