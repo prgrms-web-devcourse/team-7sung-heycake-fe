@@ -8,7 +8,6 @@ import {
   FormLabel,
   Input,
   Select,
-  Text,
   Textarea,
   useToast,
 } from '@chakra-ui/react';
@@ -70,8 +69,6 @@ export default function EnrollmentForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<InputProps>();
-
-  console.log(errors);
 
   const onSubmit: SubmitHandler<InputProps> = async (data) => {
     const businessLicenseImage: { [key: string]: any } = {
