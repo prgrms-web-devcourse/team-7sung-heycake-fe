@@ -272,3 +272,22 @@ export const LocationHeaderIcon = createIcon({
     </svg>
   ),
 });
+
+export const ErrorPageIcon = createIcon({
+  displayName: 'ErrorPageIcon',
+  viewBox: '0 0 124 109',
+  path: (
+    <svg
+      width="124"
+      height="109"
+      viewBox="0 0 124 109"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M50.2128 6.70068C55.4803 -2.23357 68.5197 -2.23356 73.7872 6.70069L122.118 88.6749C127.429 97.6834 120.867 109 110.331 109H13.6691C3.13351 109 -3.42945 97.6833 1.88181 88.6749L50.2128 6.70068Z"
+        fill="#F1F1F1"
+      />
+    </svg>
+  ),
+});
