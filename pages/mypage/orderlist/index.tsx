@@ -32,7 +32,7 @@ export default function Orderlist() {
   return (
     <>
       <HeaderTitle title="마이 주문 리스트" />
-      <FilterBar setStatusFun={setStatus} />
+      <FilterBar setStatusFun={setStatus} status={status} />
       <CountBar count={filteredOrderList.length} />
       <Container paddingTop={10} overflow="scroll">
         {filteredOrderList.length !== 0 ? (
