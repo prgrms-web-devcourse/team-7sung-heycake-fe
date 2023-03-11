@@ -4,9 +4,17 @@ import { useRouter } from 'next/router';
 import EnrollmentInfo from '@/components/Mypage/enrollmentInfo';
 import MypageTitle from '@/components/Mypage/mypageTitle';
 
+interface RouterQuery {
+  marketName: string;
+  ownerName: string;
+  phoneNumber: string;
+}
+
 export default function Success() {
   const router = useRouter();
-  const { marketName, ownerName, phoneNumber } = router.query;
+  const { marketName, ownerName, phoneNumber } =
+    router.query as unknown as RouterQuery;
+
   return (
     <>
       <MypageTitle title="업체 정보 등록" isSuccess />
