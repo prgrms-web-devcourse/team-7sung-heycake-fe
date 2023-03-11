@@ -15,7 +15,7 @@ import {
 } from '@/public/icon';
 import { numberWithHyphenPhone } from '@/utils/numberWithHyphen';
 
-export default function MarketProfile() {
+export default function AdminMarket() {
   const router = useRouter();
   const id = router.query.id as string;
   const { status, data } = useQuery(
