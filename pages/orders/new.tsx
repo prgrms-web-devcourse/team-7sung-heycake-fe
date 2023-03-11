@@ -21,6 +21,7 @@ import { useEffect, useRef, useState } from 'react';
 import { publicApi } from '@/components/Api';
 import LocationSelectBox from '@/components/Main/location/locationSelectBox';
 import CakeSelect from '@/components/Orders/CakeSelect';
+import RemoveImageButton from '@/components/Orders/RemoveImageButton';
 import HeaderTitle from '@/components/Shared/headerTitle';
 import {
   breadFlavors,
@@ -71,6 +72,14 @@ export default function NewOrder() {
   const accessToken = getAccessToken();
   const toast = useToast();
   const handleAxiosError = useHandleAxiosError();
+
+  const handleSliderChange = (price: number) => {
+    setHopePrice(price);
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDirectInput(e.target.checked);
+  };
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputTime = event.target.value;
@@ -183,7 +192,7 @@ export default function NewOrder() {
   } = formData;
 
   return (
-    <form style={{ margin: '0 auto', padding: '1rem' }} onSubmit={handleSubmit}>
+    <form style={{ paddingBottom: '2rem' }} onSubmit={handleSubmit}>
       <HeaderTitle title="주문표 작성" />
       <FormControl id="picture" padding="1rem 0">
         <FormLabel>사진</FormLabel>
@@ -237,23 +246,28 @@ export default function NewOrder() {
           </Flex>
           <Flex alignItems="center" height="70px" gap="1rem">
             {previewUrls.map((url, urlIndex) => (
-              <Button
-                width="70px"
-                height="70px"
-                onClick={() => handleDeleteImage(urlIndex)}
-                borderRadius="1rem"
-                padding="0"
-                bg="white"
-              >
-                <Image
-                  key={url}
-                  src={url}
-                  alt="Preview"
-                  width={70}
-                  height={70}
-                  style={{ borderRadius: '1rem' }}
+              <Box position="relative" display="inline-block">
+                <Button
+                  width="70px"
+                  height="70px"
+                  onClick={() => handleDeleteImage(urlIndex)}
+                  borderRadius="1rem"
+                  padding="0"
+                  bg="white"
+                >
+                  <Image
+                    key={url}
+                    src={url}
+                    alt="Preview"
+                    width={70}
+                    height={70}
+                    style={{ borderRadius: '1rem' }}
+                  />
+                </Button>
+                <RemoveImageButton
+                  onClick={() => handleDeleteImage(urlIndex)}
                 />
-              </Button>
+              </Box>
             ))}
           </Flex>
         </Flex>
@@ -283,12 +297,12 @@ export default function NewOrder() {
         >
           <FormLabel>희망가격</FormLabel>
           <Slider
-            defaultValue={30000}
             min={10000}
             max={100000}
             step={5000}
-            value={hopePrice}
-            onChange={setHopePrice}
+            defaultValue={hopePrice}
+            value={directInput ? undefined : hopePrice}
+            onChange={handleSliderChange}
           >
             <SliderTrack bg="red.100">
               <Box position="relative" right={10} />
@@ -300,19 +314,13 @@ export default function NewOrder() {
             borderRadius="1rem"
             height="3rem"
             disabled={!directInput}
-            type="number"
+            type="text"
             name="hopePrice"
-            value={hopePrice !== 0 ? hopePrice : ''}
+            value={hopePrice}
             onChange={(e) => setHopePrice(+e.target.value)}
             placeholder="희망가격을 입력하세요."
-            min={10000}
-            max={100000}
-            step={5000}
           />
-          <Checkbox
-            isChecked={directInput}
-            onChange={() => setDirectInput(!directInput)}
-          >
+          <Checkbox isChecked={directInput} onChange={handleCheckboxChange}>
             직접 입력
           </Checkbox>
         </FormControl>
@@ -384,7 +392,7 @@ export default function NewOrder() {
           onChange={handleChange}
           convertOption={convertCreamFlavor}
         />
-        <FormControl paddingBottom="3rem" id="requirements">
+        <FormControl paddingBottom="2rem" id="requirements">
           <FormLabel>요청사항</FormLabel>
           <Textarea
             borderRadius="1rem"
