@@ -1,4 +1,4 @@
-import { TMainCategory, TSeoulArea } from './Api';
+import { MainCategory, TSeoulArea } from './Api';
 
 export interface CakeList {
   label: string;
@@ -16,7 +16,7 @@ export interface ILocationSelectBox {
 }
 
 export interface ICakeItem {
-  category: TMainCategory;
+  category: MainCategory;
   cakeSize: TCakeSize;
   image: string;
   price: string;
@@ -33,7 +33,7 @@ export interface ICakeItemData {
   title: string;
   region: TSeoulArea;
   cakeInfo: {
-    cakeCategory: TMainCategory;
+    cakeCategory: MainCategory;
     cakeSize: TCakeSize;
     breadFlavor: TBreadFlavor;
     creamFlavor: TCreamFlavor;
