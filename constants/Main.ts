@@ -1,6 +1,4 @@
-import { CakeList } from '@/types/Main';
-
-export const TAB_TABLE: CakeList[] = [
+export const TAB_TABLE = [
   {
     label: '전체',
     category: '',

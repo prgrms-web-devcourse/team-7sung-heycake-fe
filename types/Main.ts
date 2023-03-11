@@ -15,7 +15,7 @@ export interface LocationSelectBoxProps {
   setLocation: SetLocation;
 }
 
-export interface CakeItem {
+export interface CakeItemProps {
   category: MainCategory;
   cakeSize: CakeSize;
   image: string;
