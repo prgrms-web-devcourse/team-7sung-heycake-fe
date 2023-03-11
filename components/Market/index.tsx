@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import ApiErrorAlert from '@/components/Shared/apiErrorAlert';
-import MarketTitle from '@/components/Shared/headerTitle';
 import {
   MarketAddressIcon,
   MarketOpeningIcon,
@@ -13,6 +12,7 @@ import {
 import { numberWithHyphenPhone } from '@/utils/numberWithHyphen';
 
 import { getMarketDetail } from '../Api/Market';
+import HeaderTitle from '../Shared/headerTitle';
 import KakaoMaps from './kakaoMaps';
 import MarketProfileSkeleton from './marketProfileSkeleton';
 
@@ -39,7 +39,7 @@ export default function MarketProfile() {
 
   return (
     <>
-      <MarketTitle title={data.marketName} />
+      <HeaderTitle title={data.marketName} />
       <Card w="100%" h={200} overflow="hidden" borderRadius={0}>
         <Image
           src={data.marketImage}

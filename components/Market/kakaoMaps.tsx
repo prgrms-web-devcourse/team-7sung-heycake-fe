@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 export default function KakaoMaps({ address, title }: any) {
   const router = useRouter();
   useEffect(() => {
-    window.kakao.maps.load(() => {
+    window.kakao?.maps.load(() => {
       const mapContainer = document.getElementById('map') as HTMLElement;
       const mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667),
