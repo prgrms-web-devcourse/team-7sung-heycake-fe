@@ -1,6 +1,15 @@
 import { Container } from '@chakra-ui/react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-export default function FilterBar() {
+interface SetStatus {
+  setStatusFun: Dispatch<SetStateAction<string>>;
+}
+
+export default function FilterBar({ setStatusFun }: SetStatus) {
+  const [currStatus, setCurrStatus] = useState('NEW');
+
+  setStatusFun(currStatus);
+
   return (
     <Container
       display="flex"
@@ -18,6 +27,7 @@ export default function FilterBar() {
         fontSize="14px"
         padding={2}
         _hover={{ borderBottom: '3px solid orange', color: 'hey.main' }}
+        onClick={() => setCurrStatus('NEW')}
       >
         진행 중 주문
       </Container>
@@ -30,6 +40,7 @@ export default function FilterBar() {
         padding={2}
         fontSize="14px"
         _hover={{ borderBottom: '3px solid orange', color: 'hey.main' }}
+        onClick={() => setCurrStatus('PAID')}
       >
         진행 완료 주문
       </Container>

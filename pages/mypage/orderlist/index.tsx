@@ -1,5 +1,6 @@
 import { Box, Container } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
 import { getOrderList } from '@/components/Api/Order';
 import CountBar from '@/components/Mypage/countBar';
@@ -10,6 +11,8 @@ import Post from '@/components/Mypage/post';
 import { MypagePost } from '@/types/orders';
 
 export default function Orderlist() {
+  const [status, setStatus] = useState<string>('');
+
   const { data: orderList, isError } = useQuery<MypagePost[]>(
     ['orderList'],
     () => getOrderList({ cursorId: null, pageSize: null, orderStatus: null })
@@ -18,6 +21,9 @@ export default function Orderlist() {
   if (!orderList) {
     return <Box>Loading...</Box>;
   }
+  const filteredOrderList = orderList.filter(
+    (order) => order.orderStatus === status
+  );
 
   if (isError) {
     return <Box>Error while fetching orderList</Box>;
@@ -26,11 +32,11 @@ export default function Orderlist() {
   return (
     <>
       <MypageTitle title="마이 주문 리스트" />
-      <FilterBar />
-      <CountBar count={orderList.length} />
+      <FilterBar setStatusFun={setStatus} />
+      <CountBar count={filteredOrderList.length} />
       <Container paddingTop={10} overflow="scroll">
-        {orderList.length !== 0 ? (
-          orderList.map((order) => (
+        {filteredOrderList.length !== 0 ? (
+          filteredOrderList.map((order) => (
             <Post key={order.id} {...order} count={orderList.length} />
           ))
         ) : (
