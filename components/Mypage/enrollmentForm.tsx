@@ -13,13 +13,10 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { GrPowerReset } from 'react-icons/gr';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import SEOUL_AREA from '@/constants/seoulArea';
-import useClickInput from '@/hooks/useClickInput';
 import useHandleAxiosError from '@/hooks/useHandleAxiosError';
-import useImageUpload from '@/hooks/useImageUpload';
 import deleteAccessToken from '@/utils/deleteAccessToken';
 import { getAccessToken } from '@/utils/getAccessToken';
 
@@ -54,15 +51,7 @@ export default function EnrollmentForm() {
   const ACCESS_TOKEN = getAccessToken();
   const handleAxiosError = useHandleAxiosError();
   const toast = useToast();
-  const {
-    files,
-    handleDragOver,
-    handleDrop,
-    handleFileInputChange,
-    resetImages,
-  } = useImageUpload(1);
 
-  const [inputRef, handleFileChoose] = useClickInput();
   const router = useRouter();
   const {
     register,
@@ -117,69 +106,15 @@ export default function EnrollmentForm() {
   return (
     <Flex justifyContent="center">
       <form onSubmit={handleSubmit(onSubmit)} id="enrollmentForm">
-        <FormControl>
+        <FormControl height={110} width={350}>
           <FormLabel>업체 이미지 업로드</FormLabel>
-          <Flex
-            justifyContent="center"
-            alignItems="center"
-            height="150px"
-            maxWidth={340}
-            border="1px dashed #E9E9E9"
-            borderRadius="5px"
-            cursor="poiner"
-            margin="0 auto"
-            textAlign="center"
-            onDragOver={handleDragOver}
-            onDrop={handleDrop}
-            onClick={handleFileChoose}
-          >
-            {files.length !== 0 ? (
-              <Container display="flex" flexDir="column" alignItems="center">
-                <img
-                  src={URL.createObjectURL(files[0])}
-                  alt="업체 이미지"
-                  {...register('marketImage', {
-                    required: '업체 이미지는 필수 입니다.',
-                  })}
-                />
-              </Container>
-            ) : (
-              <Container
-                color="hey.normalGray"
-                display="flex"
-                flexDir="column"
-                alignItems="center"
-              >
-                <img
-                  src="/images/cameraIcon.png"
-                  width={30}
-                  height={30}
-                  alt="카메라 아이콘"
-                />
-                사진 추가
-              </Container>
-            )}
-            <input
-              hidden
-              ref={inputRef}
-              type="file"
-              multiple
-              onChange={handleFileInputChange}
-            />
-          </Flex>
-          <Flex
-            alignItems="center"
-            width="95%"
-            height="70px"
-            margin="0"
-            gap="1rem"
-          >
-            {files.length !== 0 && (
-              <Button type="button" onClick={resetImages}>
-                <GrPowerReset />
-              </Button>
-            )}
-          </Flex>
+          <Input
+            type="file"
+            {...register('marketImage', {
+              required: CHECK_EMPTY_INPUT,
+            })}
+            padding={1}
+          />
           {errors.marketImage && (
             <Box color="red" marginTop={1}>
               {errors.marketImage.message}
