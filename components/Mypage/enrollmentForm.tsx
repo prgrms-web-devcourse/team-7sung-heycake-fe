@@ -102,33 +102,26 @@ export default function EnrollmentForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} id="enrollmentForm">
       <FormControl height={100} width={350}>
-        <FormLabel>사업자 등록 번호</FormLabel>
+        <FormLabel>업체 이미지 업로드</FormLabel>
+        <Input
+          type="file"
+          {...register('marketImage', { required: true })}
+          padding={1}
+        />
+      </FormControl>
+      <FormControl height={100} width={350}>
+        <FormLabel>상호명</FormLabel>
         <Input
           type="text"
-          placeholder="10자리 숫자만 입력해주세요."
-          {...register('businessNumber', {
-            required: true,
-            pattern: {
-              value: /^[0-9+]*$/,
-              message: CHECK_NUMBER_TYPE,
-            },
-            minLength: 10,
-            maxLength: {
-              value: 10,
-              message: CHECK_BUSINESS_NUMBER_LENGTH,
-            },
-          })}
+          placeholder="상호명을 입력해주세요."
+          {...register('marketName', { required: true })}
         />
-        {errors.businessNumber && (
-          <Text fontSize="8px" color="red">
-            {errors.businessNumber.message}
-          </Text>
-        )}
       </FormControl>
       <FormControl height={100} width={350}>
         <FormLabel>대표자 이름</FormLabel>
         <Input
           type="text"
+          placeholder="대표자 이름을 입력해주세요."
           {...register('ownerName', {
             required: true,
             minLength: 2,
@@ -153,14 +146,10 @@ export default function EnrollmentForm() {
         <Input type="date" {...register('openDate', { required: true })} />
       </FormControl>
       <FormControl height={100} width={350}>
-        <FormLabel>상호명</FormLabel>
-        <Input type="text" {...register('marketName', { required: true })} />
-      </FormControl>
-      <FormControl height={100} width={350}>
         <FormLabel>업체 전화번호</FormLabel>
         <Input
           type="text"
-          placeholder="숫자만 입력해주세요."
+          placeholder="업체 전화번호를 입력해주세요."
           {...register('phoneNumber', {
             required: true,
             pattern: {
@@ -204,10 +193,42 @@ export default function EnrollmentForm() {
         <Container padding={0}>
           <Input
             type="text"
-            placeholder="상세 주소를 입력해주세요"
+            placeholder="상세 주소를 입력해주세요."
             {...register('detailAddress', { required: true })}
           />
         </Container>
+      </FormControl>
+      <FormControl height={100} width={350}>
+        <FormLabel>사업자 등록 번호</FormLabel>
+        <Input
+          type="text"
+          placeholder="사업자 등록 번호를 입력해주세요."
+          {...register('businessNumber', {
+            required: true,
+            pattern: {
+              value: /^[0-9+]*$/,
+              message: CHECK_NUMBER_TYPE,
+            },
+            minLength: 10,
+            maxLength: {
+              value: 10,
+              message: CHECK_BUSINESS_NUMBER_LENGTH,
+            },
+          })}
+        />
+        {errors.businessNumber && (
+          <Text fontSize="8px" color="red">
+            {errors.businessNumber.message}
+          </Text>
+        )}
+      </FormControl>
+      <FormControl height={100} width={350}>
+        <FormLabel>사업자 등록 사진</FormLabel>
+        <Input
+          type="file"
+          {...register('businessLicenseImage', { required: true })}
+          padding={1}
+        />
       </FormControl>
       <FormControl width={350} height={100}>
         <FormLabel>영업 시간</FormLabel>
@@ -226,22 +247,10 @@ export default function EnrollmentForm() {
       </FormControl>
       <FormControl height={100} width={350}>
         <FormLabel>업체 설명</FormLabel>
-        <Input type="text" {...register('description', { required: true })} />
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>사업자 등록증 사진</FormLabel>
         <Input
-          type="file"
-          {...register('businessLicenseImage', { required: true })}
-          padding={1}
-        />
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>업체 대표 사진</FormLabel>
-        <Input
-          type="file"
-          {...register('marketImage', { required: true })}
-          padding={1}
+          type="text"
+          placeholder="업체 설명을 입력해주세요."
+          {...register('description', { required: true })}
         />
       </FormControl>
       <Button
