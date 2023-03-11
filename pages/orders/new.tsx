@@ -144,12 +144,12 @@ export default function NewOrder() {
           access_token: accessToken,
         },
       });
+      router.push('/main');
       toast({
         status: 'success',
-        description: '오퍼가 성공적으로 등록되었어요.',
+        description: '주문이 성공적으로 등록되었어요.',
         isClosable: true,
       });
-      router.push('/main');
     } catch (error) {
       handleAxiosError(error);
     }
