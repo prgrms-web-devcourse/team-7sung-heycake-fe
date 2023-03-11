@@ -17,7 +17,7 @@ export default function Success() {
 
   return (
     <>
-      <MypageTitle title="업체 정보 등록" isSuccess />
+      <MypageTitle title="업체 정보 등록" />
       <Container display="flex" flexDir="column" alignItems="center">
         <Text fontWeight={800} fontSize="1.3rem" margin="3rem 0 3rem 0">
           등록 신청이 완료되었습니다!
