@@ -1,5 +1,5 @@
 export type TStatus = 'WAITING' | 'APPROVED' | 'DELETED';
-export type TMarketCategory = '' | 'DELETED';
+export type TMarketCategory = 'WAITING' | 'DELETED';
 
 export interface IMarketList {
   category: TMarketCategory;

@@ -22,7 +22,6 @@ export default function MarketItem({
   imageUrl,
   marketName,
   businessNumber,
-  status,
   createdAt,
 }: IMarketItem) {
   const [isDeleted, setIsDeleted] = useState(false);
@@ -42,12 +41,10 @@ export default function MarketItem({
   const onWaitingClickHandler = () => {
     setIsDeleted(true);
     patchMarketStatus({ status: 'WAITING', enrollmentId });
-    queryClient.invalidateQueries(['승인 마켓 리스트', '']);
+    queryClient.invalidateQueries(['승인 마켓 리스트', 'WAITING']);
   };
 
-  // (category === '' && status === 'DELETED') 는 백엔드 전체리스트 수정후 변경.
-
-  if (isDeleted || (category === '' && status === 'DELETED')) {
+  if (isDeleted) {
     return null;
   }
 
