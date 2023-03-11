@@ -2,9 +2,9 @@ import { Box, Flex, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import { ArrowBackIcon } from '@/public/icon';
-import { IMarketTitle } from '@/types/Market';
+import { MarketTitle } from '@/types/Market';
 
-export default function HeaderTitle({ title }: IMarketTitle) {
+export default function HeaderTitle({ title }: MarketTitle) {
   const router = useRouter();
   return (
     <Flex h={14} p={4} justifyContent="space-between" alignItems="center">

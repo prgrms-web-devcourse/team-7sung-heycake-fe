@@ -1,3 +1,3 @@
-export interface IMarketTitle {
+export interface MarketTitle {
   title: string;
 }
