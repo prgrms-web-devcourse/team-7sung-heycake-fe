@@ -5,12 +5,12 @@ export interface CakeList {
   category: string;
 }
 
-export interface LocationListItem {
+export interface LocationListItemProps {
   name: string;
   onClick: () => void;
 }
 
-export interface LocationSelectBox {
+export interface LocationSelectBoxProps {
   location: string;
   setLocation: SetLocation;
 }

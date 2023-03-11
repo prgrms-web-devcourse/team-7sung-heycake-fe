@@ -1,8 +1,11 @@
 import { Button } from '@chakra-ui/react';
 
-import { LocationListItem } from '@/types/Main';
+import { LocationListItemProps } from '@/types/Main';
 
-export default function LocationListItem({ name, onClick }: LocationListItem) {
+export default function LocationListItem({
+  name,
+  onClick,
+}: LocationListItemProps) {
   return (
     <Button
       h={12}
