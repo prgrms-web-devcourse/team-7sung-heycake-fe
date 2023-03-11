@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import MypageTitle from '@/components/Mypage/mypageTitle';
-import { deleteAccessToken } from '@/utils/deleteAccessToken';
+import deleteAccessToken from '@/utils/deleteAccessToken';
 
 export default function Detail() {
   const router = useRouter();
