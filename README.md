@@ -1,6 +1,5 @@
-# hey-cake
+![헤이케이크](https://user-images.githubusercontent.com/77133565/224466167-11bd50a2-5daa-4032-b86b-a67535c41656.png)
 
-![heyCakeLogo-removebg-preview](https://user-images.githubusercontent.com/77133565/219610710-381cd66c-b511-466f-926a-92460d557809.png)
 
 ## 🏠 Members
 

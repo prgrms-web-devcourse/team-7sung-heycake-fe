@@ -1,5 +1,6 @@
 import { useToast } from '@chakra-ui/react';
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
 import { publicApi } from '@/components/Api';
@@ -16,6 +17,7 @@ const useSelectOffer = () => {
   const accessToken = getAccessToken();
   const handleAxiosError = useHandleAxiosError();
   const toast = useToast();
+  const router = useRouter();
 
   const mutation = useMutation(
     (body: RequestBody) =>
@@ -26,9 +28,10 @@ const useSelectOffer = () => {
       }),
     {
       onSuccess: () => {
+        router.push(`/main`);
         toast({
           status: 'success',
-          description: '해당 업체를 선택하셨어요',
+          description: '만나서 결제를 선택하셨어요',
           isClosable: true,
         });
       },
