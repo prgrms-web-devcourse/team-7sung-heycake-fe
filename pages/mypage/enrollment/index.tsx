@@ -6,7 +6,7 @@ import MypageTitle from '@/components/Mypage/mypageTitle';
 export default function Enrollment() {
   return (
     <>
-      <MypageTitle title="업체 정보 등록" isSuccess={false} />
+      <MypageTitle title="업체 정보 등록" />
       <Container overflow="scroll" paddingTop={8}>
         <EnrollmentForm />
       </Container>

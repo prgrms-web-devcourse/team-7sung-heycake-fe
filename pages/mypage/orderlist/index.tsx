@@ -1,16 +1,19 @@
-import { Box, Button, Container, Text } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import { getOrderList } from '@/components/Api/Order';
+import CountBar from '@/components/Mypage/countBar';
+import FilterBar from '@/components/Mypage/filterBar';
 import MypageTitle from '@/components/Mypage/mypageTitle';
+import NotExist from '@/components/Mypage/notExist';
 import Post from '@/components/Mypage/post';
-import { IMypagePost } from '@/components/Mypage/types';
+import { MypagePost } from '@/types/orders';
 
 export default function Orderlist() {
-  const router = useRouter();
+  const [status, setStatus] = useState<string>('NEW');
 
-  const { data: orderList, isError } = useQuery<IMypagePost[]>(
+  const { data: orderList, isError } = useQuery<MypagePost[]>(
     ['orderList'],
     () => getOrderList({ cursorId: null, pageSize: null, orderStatus: null })
   );
@@ -18,6 +21,9 @@ export default function Orderlist() {
   if (!orderList) {
     return <Box>Loading...</Box>;
   }
+  const filteredOrderList = orderList.filter(
+    (order) => order.orderStatus === status
+  );
 
   if (isError) {
     return <Box>Error while fetching orderList</Box>;
@@ -25,27 +31,16 @@ export default function Orderlist() {
 
   return (
     <>
-      <MypageTitle title="내 주문 리스트" isSuccess={false} />
+      <MypageTitle title="마이 주문 리스트" />
+      <FilterBar setStatusFun={setStatus} />
+      <CountBar count={filteredOrderList.length} />
       <Container paddingTop={10} overflow="scroll">
-        {orderList.length !== 0 ? (
-          orderList.map((order) => <Post key={order.id} {...order} />)
+        {filteredOrderList.length !== 0 ? (
+          filteredOrderList.map((order) => (
+            <Post key={order.id} {...order} count={orderList.length} />
+          ))
         ) : (
-          <Container display="flex" flexDir="column" alignItems="center">
-            <Text fontSize="1.2rem" fontWeight="bold" margin="12rem 0 2rem 0">
-              아직 주문이 존재하지 않아요!
-            </Text>
-            <Button
-              fontSize="1.2rem"
-              fontWeight="bold"
-              marginTop="2rem"
-              backgroundColor="hey.lightOrange"
-              width="20rem"
-              _hover={{ bg: 'hey.sub' }}
-              onClick={() => router.push('/orders/new')}
-            >
-              주문 등록하러 가기
-            </Button>
-          </Container>
+          <NotExist />
         )}
       </Container>
     </>
