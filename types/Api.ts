@@ -1,4 +1,4 @@
-import { TMarketCategory, TStatus } from './Admin';
+import { TStatus } from './Admin';
 
 export interface IgetCakeList {
   location: TSeoulArea;
@@ -12,7 +12,7 @@ export interface IgetMarketDetail {
 
 export interface IpostMarketList {
   cursor: string;
-  category: TMarketCategory;
+  category: TStatus;
 }
 
 export interface IPatchMarketStatus {

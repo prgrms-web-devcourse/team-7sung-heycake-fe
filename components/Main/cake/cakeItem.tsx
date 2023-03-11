@@ -41,6 +41,7 @@ export default function CakeItem({
             sizes="20vw"
             src={image || '/images/sampleCake.jpg'}
             alt="Cake"
+            style={{ objectFit: 'cover' }}
           />
         </Card>
         <CardBody ml={4}>

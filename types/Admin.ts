@@ -1,8 +1,7 @@
 export type TStatus = 'WAITING' | 'APPROVED' | 'DELETED';
-export type TMarketCategory = '' | 'DELETED';
 
 export interface IMarketList {
-  category: TMarketCategory;
+  category: TStatus;
 }
 
 export interface IMarketItem extends IMarketList {
@@ -12,4 +11,5 @@ export interface IMarketItem extends IMarketList {
   marketName: string;
   businessNumber: string;
   status: TStatus;
+  createdAt: string;
 }
