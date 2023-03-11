@@ -13,10 +13,13 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { GrPowerReset } from 'react-icons/gr';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import SEOUL_AREA from '@/constants/seoulArea';
+import useClickInput from '@/hooks/useClickInput';
 import useHandleAxiosError from '@/hooks/useHandleAxiosError';
+import useImageUpload from '@/hooks/useImageUpload';
 import deleteAccessToken from '@/utils/deleteAccessToken';
 import { getAccessToken } from '@/utils/getAccessToken';
 
@@ -51,7 +54,15 @@ export default function EnrollmentForm() {
   const ACCESS_TOKEN = getAccessToken();
   const handleAxiosError = useHandleAxiosError();
   const toast = useToast();
+  const {
+    files,
+    handleDragOver,
+    handleDrop,
+    handleFileInputChange,
+    resetImages,
+  } = useImageUpload(1);
 
+  const [inputRef, handleFileChoose] = useClickInput();
   const router = useRouter();
   const {
     register,
