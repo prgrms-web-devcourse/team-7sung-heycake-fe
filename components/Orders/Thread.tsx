@@ -7,10 +7,10 @@ import {
   Box,
   Button,
   Flex,
-  useToast,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { ThreadDto } from '@/types/orders';
 import numberWithCommas from '@/utils/numberWithCommas';
@@ -24,7 +24,13 @@ interface ThreadProps {
 }
 
 export default function Thread({ thread, orderId, orderStatus }: ThreadProps) {
-  const toast = useToast();
+  const router = useRouter();
+
+  const handlePayment = () => {
+    router.push(
+      `/orders/${orderId}/pay?threadOfferId=${thread.offerId}&expectedPrice=${thread.expectedPrice}&marketName=${thread.marketName}`
+    );
+  };
 
   return (
     <Flex
@@ -46,20 +52,13 @@ export default function Thread({ thread, orderId, orderStatus }: ThreadProps) {
         <Box fontSize="1.5rem">
           {thread.createDate ?? orderId ?? '23.03.11'}
         </Box>
-        {orderStatus && (
+        {orderStatus === 'NEW' && (
           <Button
-            style={{
-              backgroundColor: 'hey.main',
-              color: 'white',
-              padding: '10px',
-              borderRadius: '5px',
-            }}
-            onClick={() =>
-              toast({
-                status: 'success',
-                description: '개발 중이에요',
-              })
-            }
+            backgroundColor="hey.main"
+            color="white"
+            padding="10px"
+            borderRadius="5px"
+            onClick={handlePayment}
           >
             결제하기
           </Button>
