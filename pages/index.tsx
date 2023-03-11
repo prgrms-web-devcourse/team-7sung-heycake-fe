@@ -31,10 +31,10 @@ export default function Home() {
   return (
     <>
       <Container
+        justifyContent="center"
         display="flex"
         flexDir="column"
         alignItems="center"
-        padding="14rem 0 10rem 0"
       >
         <Image
           src="/images/logo.png"
@@ -43,7 +43,7 @@ export default function Home() {
           height={200}
           quality={100}
         />
-        <Text color="hey.normalGray" fontSize="sm">
+        <Text color="hey.normalGray" fontSize="sm" paddingBottom="1rem">
           나만의 커스텀 케이크 주문 제작 플랫폼
         </Text>
       </Container>
