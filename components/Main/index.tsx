@@ -28,6 +28,7 @@ export default function CakeMain() {
   const accessToken = getAccessToken();
   const toast = useToast();
   const [loading, setLoading] = useState(false);
+  const [timeoutId, setTimeoutId] = useState<number | null>(null);
 
   useEffect(() => {
     const localLocation = localStorage.getItem('location');
@@ -35,8 +36,25 @@ export default function CakeMain() {
   }, [router]);
 
   useEffect(() => {
-    const handleStart = () => setLoading(true);
-    const handleComplete = () => setLoading(false);
+    const handleStart = () => {
+      setLoading(true);
+      setTimeoutId(
+        window.setTimeout(() => {
+          setLoading(false);
+          toast({
+            description: '데이터를 받아오고 있어요!',
+            status: 'info',
+            duration: 3000,
+          });
+        }, 3000)
+      );
+    };
+    const handleComplete = () => {
+      setLoading(false);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
 
     router.events.on('routeChangeStart', handleStart);
     router.events.on('routeChangeComplete', handleComplete);
@@ -46,8 +64,11 @@ export default function CakeMain() {
       router.events.off('routeChangeStart', handleStart);
       router.events.off('routeChangeComplete', handleComplete);
       router.events.off('routeChangeError', handleComplete);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
     };
-  }, [router]);
+  }, [router, loading, timeoutId, toast]);
 
   const handleNewOrderClick = () => {
     if (accessToken) {
