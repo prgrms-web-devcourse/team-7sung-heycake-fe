@@ -63,7 +63,7 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
     <>
       <HeaderTitle title="" />
       <Box position="relative">
-        {order.orderStatus === 'NEW' && (
+        {order.orderStatus !== 'NEW' && (
           <Flex
             justifyContent="center"
             alignItems="center"

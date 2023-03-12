@@ -29,6 +29,7 @@ export default function CakeItem({
         pb={6}
       >
         <Card
+          position="relative"
           variant="unstyled"
           width="100px"
           height="116px"
@@ -36,6 +37,22 @@ export default function CakeItem({
           overflow="hidden"
           opacity={status !== 'NEW' ? '0.2' : '1'}
         >
+          {status === 'NEW' && (
+            <Flex
+              justifyContent="center"
+              alignItems="center"
+              position="absolute"
+              top={0}
+              left={0}
+              w="100%"
+              h="100%"
+              bg="rgba(0,0,0,0.2)"
+              zIndex={4}
+              color="white"
+            >
+              제작 완료
+            </Flex>
+          )}
           <Image
             fill
             sizes="20vw"
