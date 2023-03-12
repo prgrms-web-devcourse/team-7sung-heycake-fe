@@ -9,11 +9,51 @@ const useHandleAxiosError = () => {
   const handleAxiosError = (axiosError: unknown) => {
     if (!isAxiosError(axiosError)) return;
 
-    toast({
-      description: '잠시 후 다시 시도해주세요.',
-      status: 'error',
-      isClosable: true,
-    });
+    const { response } = axiosError as AxiosError<ErrorMessage>;
+
+    if (response?.status === 400) {
+      toast({
+        description: '잘못된 요청입니다. 입력값을 확인해주세요.',
+        status: 'error',
+        isClosable: true,
+      });
+    } else if (response?.status === 401) {
+      toast({
+        description: '인증이 필요한 서비스에요',
+        status: 'error',
+        isClosable: true,
+      });
+    } else if (response?.status === 404) {
+      toast({
+        description: '올바른 접근이 아니에요',
+        status: 'error',
+        isClosable: true,
+      });
+    } else if (response?.status === 403) {
+      toast({
+        description: '권한이 없어요',
+        status: 'error',
+        isClosable: true,
+      });
+    } else if (response?.status === 409) {
+      toast({
+        description: '이미 완료된 주문이에요',
+        status: 'error',
+        isClosable: true,
+      });
+    } else if (response?.status === 500) {
+      toast({
+        description: '서버에서 에러가 발생했어요. 잠시 후 다시 시도해주세요.',
+        status: 'error',
+        isClosable: true,
+      });
+    } else {
+      toast({
+        description: '잠시 후 다시 시도해주세요.',
+        status: 'error',
+        isClosable: true,
+      });
+    }
   };
 
   const isAxiosError = (error: unknown): error is AxiosError<ErrorMessage> =>
