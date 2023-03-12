@@ -23,7 +23,7 @@ const SEOUL_AREA = [
   '은평구',
   '종로구',
   '중구',
-  '중량구',
+  '중랑구',
 ];
 
 export default SEOUL_AREA;

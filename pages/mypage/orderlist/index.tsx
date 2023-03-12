@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { getOrderList } from '@/components/Api/Order';
 import CountBar from '@/components/Mypage/countBar';
 import FilterBar from '@/components/Mypage/filterBar';
-import MypageTitle from '@/components/Mypage/mypageTitle';
 import NotExist from '@/components/Mypage/notExist';
 import Post from '@/components/Mypage/post';
+import HeaderTitle from '@/components/Shared/headerTitle';
 import { MypagePost } from '@/types/orders';
 
 export default function Orderlist() {
@@ -31,8 +31,8 @@ export default function Orderlist() {
 
   return (
     <>
-      <MypageTitle title="마이 주문 리스트" />
-      <FilterBar setStatusFun={setStatus} />
+      <HeaderTitle title="마이 주문 리스트" />
+      <FilterBar setStatusFun={setStatus} status={status} />
       <CountBar count={filteredOrderList.length} />
       <Container paddingTop={10} overflow="scroll">
         {filteredOrderList.length !== 0 ? (
