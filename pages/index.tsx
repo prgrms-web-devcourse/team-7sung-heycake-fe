@@ -24,7 +24,7 @@ export default function Home() {
 
   useEffect(() => {
     router.prefetch('/main');
-    // isLoggedIn();
+    isLoggedIn();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
