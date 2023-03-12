@@ -73,6 +73,8 @@ export default function Thread({ thread, orderId, order }: ThreadProps) {
             padding="10px"
             borderRadius="5px"
             onClick={handlePayment}
+            _hover={{ backgroundColor: 'none' }}
+            _active={{ backgroundColor: 'none' }}
           >
             결제하기
           </Button>
