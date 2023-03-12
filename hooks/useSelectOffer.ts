@@ -33,7 +33,6 @@ const useSelectOffer = () => {
         toast({
           status: 'success',
           description: '만나서 결제를 선택하셨어요',
-          isClosable: true,
         });
       },
       onError: (error) => {
@@ -51,7 +50,6 @@ const useSelectOffer = () => {
         toast({
           status: 'error',
           description: ERROR_MESSAGES.CHECK_LOGIN,
-          isClosable: true,
         });
       }
     },

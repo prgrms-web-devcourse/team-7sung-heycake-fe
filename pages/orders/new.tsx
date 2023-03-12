@@ -95,7 +95,6 @@ export default function NewOrder() {
       toast({
         status: 'error',
         description: ERROR_MESSAGES.CHECK_LOGIN,
-        isClosable: true,
       });
       return;
     }
@@ -104,7 +103,6 @@ export default function NewOrder() {
       toast({
         status: 'error',
         description: '제목을 입력해 주세요',
-        isClosable: true,
       });
       return;
     }
@@ -113,7 +111,6 @@ export default function NewOrder() {
       toast({
         status: 'error',
         description: '최소 금액은 10,000원 이상이에요',
-        isClosable: true,
       });
       return;
     }
@@ -122,7 +119,6 @@ export default function NewOrder() {
       toast({
         status: 'error',
         description: '방문 예정 시간을 입력해 주세요',
-        isClosable: true,
       });
       return;
     }
@@ -131,7 +127,6 @@ export default function NewOrder() {
       toast({
         status: 'error',
         description: '요청사항을 입력해 주세요',
-        isClosable: true,
       });
       return;
     }
@@ -140,7 +135,6 @@ export default function NewOrder() {
       toast({
         status: 'error',
         description: '예시 사진을 1개 이상 첨부해 주세요',
-        isClosable: true,
       });
       return;
     }
@@ -178,7 +172,6 @@ export default function NewOrder() {
       toast({
         status: 'success',
         description: '주문을 등록했어요',
-        isClosable: true,
       });
     } catch (error) {
       handleAxiosError(error);
