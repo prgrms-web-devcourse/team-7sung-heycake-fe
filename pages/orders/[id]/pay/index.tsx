@@ -55,7 +55,7 @@ export default function Pay({
           flexDirection="column"
           minW="150px"
           minH="150px"
-          onClick={() => selectOffer(id, threadOfferId)}
+          onClick={() => selectOffer(id, threadOfferId, false)}
           _hover={{ backgroundColor: 'none' }}
         >
           <Image width="50" height="50" src="/images/cash.png" alt="cash" />

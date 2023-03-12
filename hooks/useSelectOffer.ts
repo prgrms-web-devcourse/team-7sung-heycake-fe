@@ -12,6 +12,7 @@ import useHandleAxiosError from './useHandleAxiosError';
 interface RequestBody {
   orderId: string;
   offerId: number;
+  isPaid: boolean;
 }
 
 const useSelectOffer = () => {
@@ -42,8 +43,8 @@ const useSelectOffer = () => {
   );
 
   const selectOffer = useCallback(
-    (orderId: string, offerId: number) => {
-      const requestBody = { orderId, offerId };
+    (orderId: string, offerId: number, isPaid: boolean) => {
+      const requestBody = { orderId, offerId, isPaid };
       if (accessToken) {
         mutation.mutate(requestBody);
       } else {
