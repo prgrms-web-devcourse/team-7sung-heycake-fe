@@ -9,11 +9,8 @@ const useHandleAxiosError = () => {
   const handleAxiosError = (axiosError: unknown) => {
     if (!isAxiosError(axiosError)) return;
 
-    const { data } = axiosError.response ?? {};
-    const messageData = data?.message;
-
     toast({
-      description: messageData || '잠시 후 다시 시도해주세요.',
+      description: '잠시 후 다시 시도해주세요.',
       status: 'error',
       isClosable: true,
     });
