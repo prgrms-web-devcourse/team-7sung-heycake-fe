@@ -4,14 +4,12 @@ import {
   Flex,
   FormControl,
   InputGroup,
-  InputRightElement,
   Textarea,
   useToast,
 } from '@chakra-ui/react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRef } from 'react';
-import { AiFillFileAdd } from 'react-icons/ai';
 import { GrPowerReset } from 'react-icons/gr';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
@@ -116,6 +114,8 @@ export default function OfferComments({ offerId }: { offerId: number }) {
     return <Box>Error while fetching comments</Box>;
   }
 
+  console.log(data);
+
   return (
     <>
       {data.map((comment) => (
@@ -147,26 +147,33 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       <form onSubmit={handleSubmit}>
         <FormControl borderTop="1px solid #e3e3e3" padding="1rem 0">
           <Flex justify="space-between" align="center" paddingBottom="1rem">
-            <InputGroup size="md">
+            <InputGroup size="md" gap="1rem">
+              <Button
+                h="44px"
+                w="44px"
+                onClick={handleFileChoose}
+                bg="white"
+                border="1px solid #e3e3e3"
+                borderRadius="12px"
+                _hover={{ bg: 'white' }}
+              >
+                <input
+                  hidden
+                  ref={inputRef}
+                  type="file"
+                  multiple
+                  onChange={handleFileInputChange}
+                />
+                <Image src="/images/cameraIcon.png" fill alt="cameraIcon" />
+              </Button>
               <Textarea
                 minH="80px"
                 bg="white"
                 pr="4.5rem"
+                borderRadius="1rem"
                 placeholder="댓글을 작성해주세요."
                 ref={commentRef}
               />
-              <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={handleFileChoose}>
-                  <input
-                    hidden
-                    ref={inputRef}
-                    type="file"
-                    multiple
-                    onChange={handleFileInputChange}
-                  />
-                  <AiFillFileAdd />
-                </Button>
-              </InputRightElement>
             </InputGroup>
           </Flex>
           <Button type="submit" bg="#efefef" float="right">
