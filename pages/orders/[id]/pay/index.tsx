@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Flex, Text } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, Text, useToast } from '@chakra-ui/react';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
 import { randomBytes } from 'crypto';
 import { GetServerSideProps } from 'next';
@@ -11,12 +11,16 @@ import numberWithCommas from '@/utils/numberWithCommas';
 
 interface PayProps {
   id: string;
-  threadOfferId: number;
-  expectedPrice: number;
+  threadOfferId: string;
+  expectedPrice: string;
   marketName: string;
 }
 
-const orderId = randomBytes(16).toString('base64');
+const orderId = randomBytes(16)
+  .toString('base64')
+  .replace(/[+/]/g, '-')
+  .replace(/=/g, '')
+  .slice(0, 64);
 
 export default function Pay({
   id,
@@ -25,6 +29,7 @@ export default function Pay({
   marketName,
 }: PayProps) {
   const selectOffer = useSelectOffer();
+  const toast = useToast();
 
   return (
     <Box padding="1rem">
@@ -41,7 +46,7 @@ export default function Pay({
       <DataTable
         color="black"
         title="총 주문 금액"
-        value={`${numberWithCommas(expectedPrice)}원`}
+        value={`${numberWithCommas(Number(expectedPrice))}원`}
       />
       <Divider borderBottomWidth={12} p={4} />
       <Box fontWeight="bold" p="2rem 0">
@@ -55,7 +60,7 @@ export default function Pay({
           flexDirection="column"
           minW="150px"
           minH="150px"
-          onClick={() => selectOffer(id, threadOfferId, false)}
+          onClick={() => selectOffer(id, Number(threadOfferId), false)}
           _hover={{ backgroundColor: 'none' }}
         >
           <Image width="50" height="50" src="/images/cash.png" alt="cash" />
@@ -75,18 +80,24 @@ export default function Pay({
             ).then((tossPayments) => {
               tossPayments
                 .requestPayment('카드', {
-                  amount: expectedPrice,
+                  amount: Number(expectedPrice),
                   orderId,
                   orderName: marketName,
                   customerName: '헤이 케이크',
-                  successUrl: `https://heycake.vercel.app/orders/${id}`,
-                  failUrl: `https://heycake.vercel.app/orders/${id}`,
+                  successUrl: `https://heycake.vercel.app/orders/${id}/pay/success?threadOfferId=${threadOfferId}`,
+                  failUrl: `https://heycake.vercel.app/orders/${id}/pay/fail`,
                 })
                 .catch((error) => {
                   if (error.code === 'USER_CANCEL') {
-                    // 결제 고객이 결제창을 닫았을 때 에러 처리
+                    toast({
+                      status: 'error',
+                      description: '결제가 취소되었습니다.',
+                    });
                   } else if (error.code === 'INVALID_CARD_COMPANY') {
-                    // 유효하지 않은 카드 코드에 대한 에러 처리
+                    toast({
+                      status: 'error',
+                      description: '유효하지 않은 카드입니다.',
+                    });
                   }
                 });
             });
