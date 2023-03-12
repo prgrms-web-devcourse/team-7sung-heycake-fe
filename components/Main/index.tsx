@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Flex,
+  Spinner,
   Tab,
   TabList,
   TabPanel,
@@ -26,10 +27,26 @@ export default function CakeMain() {
   const [location, setLocation] = useState('강남구');
   const accessToken = getAccessToken();
   const toast = useToast();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const localLocation = localStorage.getItem('location');
     if (localLocation) setLocation(localLocation as string);
+  }, [router]);
+
+  useEffect(() => {
+    const handleStart = () => setLoading(true);
+    const handleComplete = () => setLoading(false);
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleComplete);
+    router.events.on('routeChangeError', handleComplete);
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleComplete);
+      router.events.off('routeChangeError', handleComplete);
+    };
   }, [router]);
 
   const handleNewOrderClick = () => {
@@ -47,6 +64,19 @@ export default function CakeMain() {
   return (
     <>
       <Header />
+      {loading && (
+        <Spinner
+          color="hey.main"
+          size="xl"
+          thickness="4px"
+          speed="0.65s"
+          position="fixed"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          zIndex="4"
+        />
+      )}
       <Flex>
         <Tabs colorScheme="heys" isLazy minW="350px" w="100%" m={0}>
           <Box
