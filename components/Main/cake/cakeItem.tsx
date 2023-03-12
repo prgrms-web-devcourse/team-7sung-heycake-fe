@@ -35,7 +35,6 @@ export default function CakeItem({
           height="116px"
           borderRadius={8}
           overflow="hidden"
-          opacity={status !== 'NEW' ? '0.2' : '1'}
         >
           {status === 'NEW' && (
             <Flex
