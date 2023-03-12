@@ -29,11 +29,13 @@ const useSelectOffer = () => {
         },
       }),
     {
-      onSuccess: () => {
+      onSuccess: (_, variables) => {
         router.push(`/main`);
         toast({
           status: 'success',
-          description: '만나서 결제를 선택하셨어요',
+          description: variables.isPaid
+            ? '결제 완료! 만나서 수령해주세요'
+            : '만나서 결제를 선택하셨어요',
         });
       },
       onError: (error) => {
