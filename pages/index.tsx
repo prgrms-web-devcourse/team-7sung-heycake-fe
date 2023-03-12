@@ -1,4 +1,4 @@
-import { Button, Container, Text } from '@chakra-ui/react';
+import { Button, Container, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -24,12 +24,12 @@ export default function Home() {
 
   useEffect(() => {
     router.prefetch('/main');
-    isLoggedIn();
+    // isLoggedIn();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <>
+    <VStack minH="100vh" justifyContent="center">
       <Container
         justifyContent="center"
         display="flex"
@@ -79,6 +79,6 @@ export default function Home() {
           비회원으로 둘러보기
         </Button>
       </Container>
-    </>
+    </VStack>
   );
 }
