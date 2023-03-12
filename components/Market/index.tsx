@@ -25,6 +25,7 @@ export default function MarketProfile() {
       enabled: router.isReady,
     }
   );
+
   if (status === 'loading' || router.isFallback) {
     return <MarketProfileSkeleton />;
   }

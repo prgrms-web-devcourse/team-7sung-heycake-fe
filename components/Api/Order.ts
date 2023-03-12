@@ -1,5 +1,5 @@
 import ERROR_MESSAGES from '@/constants/errorMessages';
-import { IgetOrderList } from '@/types/Api';
+import { GetOrderList } from '@/types/Api';
 import { getAccessToken } from '@/utils/getAccessToken';
 
 import { publicApi } from '.';
@@ -10,7 +10,7 @@ export async function getOrderList({
   cursorId = null,
   pageSize = null,
   orderStatus = null,
-}: IgetOrderList) {
+}: GetOrderList) {
   if (ACCESS_TOKEN === null) {
     throw Error(ERROR_MESSAGES.CHECK_LOGIN);
   }

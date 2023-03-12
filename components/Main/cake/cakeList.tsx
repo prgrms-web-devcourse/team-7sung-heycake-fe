@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer';
 
 import getCakeList from '@/components/Api/Main';
 import ErrorPage from '@/components/Error';
-import { ICakeItemData } from '@/types/Main';
+import { CakeItemJson } from '@/types/Main';
 
 import CakeItem from './cakeItem';
 import CakeListSkeleton from './cakeListSkeleton';
@@ -71,7 +71,7 @@ export default function CakeList({ category, location }: any) {
     <>
       <Grid p={0} flexDirection="column">
         {data?.pages.map((page) =>
-          page?.content.map((item: ICakeItemData) => (
+          page?.content.map((item: CakeItemJson) => (
             <Link key={item.orderId} href={`/orders/${item.orderId}`}>
               <CakeItem
                 title={item.title}

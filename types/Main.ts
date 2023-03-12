@@ -1,53 +1,53 @@
-import { TMainCategory, TSeoulArea } from './Api';
+import { MainCategory, TSeoulArea } from './Api';
 
-export interface ICakeList {
+export interface CakeList {
   label: string;
   category: string;
 }
 
-export interface ILocationListItem {
+export interface LocationListItemProps {
   name: string;
   onClick: () => void;
 }
 
-export interface ILocationSelectBox {
+export interface LocationSelectBoxProps {
   location: string;
-  setLocation: TSetLocation;
+  setLocation: SetLocation;
 }
 
-export interface ICakeItem {
-  category: TMainCategory;
-  cakeSize: TCakeSize;
+export interface CakeItemProps {
+  category: MainCategory;
+  cakeSize: CakeSize;
   image: string;
   price: string;
-  status: TOrderStatus;
+  status: OrderStatus;
   visitTime: string;
   title: string;
-  breadFlavor: TBreadFlavor;
-  creamFlavor: TCreamFlavor;
+  breadFlavor: BreadFlavor;
+  creamFlavor: CreamFlavor;
   offerCount: string;
 }
 
-export interface ICakeItemData {
+export interface CakeItemJson {
   orderId: string;
   title: string;
   region: TSeoulArea;
   cakeInfo: {
-    cakeCategory: TMainCategory;
-    cakeSize: TCakeSize;
-    breadFlavor: TBreadFlavor;
-    creamFlavor: TCreamFlavor;
+    cakeCategory: MainCategory;
+    cakeSize: CakeSize;
+    breadFlavor: BreadFlavor;
+    creamFlavor: CreamFlavor;
     requirements: string;
   };
   images: string[];
   hopePrice: string;
   offerCount: string;
-  orderStatus: TOrderStatus;
+  orderStatus: OrderStatus;
   visitTime: string;
 }
 
-type TCakeSize = 'MINI' | 'NO_1' | 'NO_2';
-type TBreadFlavor = 'VANILLA' | 'CHOCO' | 'GREEN_TEA' | 'CARROT' | 'ETC';
-type TCreamFlavor = 'WHIPPED_CREAM' | 'CREAM_CHEESE' | 'CHOCO' | 'OREO' | 'ETC';
-type TOrderStatus = 'NEW' | 'RESERVED' | 'PAID';
-type TSetLocation = (name: string) => void;
+type CakeSize = 'MINI' | 'NO_1' | 'NO_2';
+type BreadFlavor = 'VANILLA' | 'CHOCO' | 'GREEN_TEA' | 'CARROT' | 'ETC';
+type CreamFlavor = 'WHIPPED_CREAM' | 'CREAM_CHEESE' | 'CHOCO' | 'OREO' | 'ETC';
+type OrderStatus = 'NEW' | 'RESERVED' | 'PAID';
+type SetLocation = (name: string) => void;

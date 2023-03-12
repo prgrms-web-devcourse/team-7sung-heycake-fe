@@ -1,6 +1,10 @@
 import { Button, Flex } from '@chakra-ui/react';
 
-export default function WaitingContainer({ onClickHandler }: any) {
+import { OnClickMarketStatus } from '@/types/Admin';
+
+export default function WaitingContainer({
+  onClickHandler,
+}: OnClickMarketStatus) {
   return (
     <Flex justifyContent="space-between" w="100%" gap="5%">
       <Button

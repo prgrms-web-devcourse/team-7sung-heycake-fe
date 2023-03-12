@@ -17,8 +17,8 @@ import { TAB_TABLE } from '@/constants/Main';
 import { NewOrderIcon } from '@/public/icon';
 import { getAccessToken } from '@/utils/getAccessToken';
 
-import Header from '../Header';
 import CakeList from './cake/cakeList';
+import Header from './header';
 import LocationSelectBox from './location/locationSelectBox';
 
 export default function CakeMain() {

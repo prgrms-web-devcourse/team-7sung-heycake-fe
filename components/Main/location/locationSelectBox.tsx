@@ -13,16 +13,16 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import { SEOUL_AREA } from '@/constants/Main';
+import SEOUL_AREA from '@/constants/seoulArea';
 import { LocationHeaderIcon, LocationIcon } from '@/public/icon';
-import { ILocationSelectBox } from '@/types/Main';
+import { LocationSelectBoxProps } from '@/types/Main';
 
 import LocationListItem from './locationListItem';
 
 export default function LocationSelectBox({
   location,
   setLocation,
-}: ILocationSelectBox) {
+}: LocationSelectBoxProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedLocation, SetSelectedLocation] = useState(location);
   const onLocationSelectHandler = () => {

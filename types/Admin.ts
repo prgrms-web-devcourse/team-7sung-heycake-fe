@@ -1,15 +1,19 @@
-export type TStatus = 'WAITING' | 'APPROVED' | 'DELETED';
+export type MarketStatus = 'WAITING' | 'APPROVED' | 'DELETED';
 
-export interface IMarketList {
-  category: TStatus;
+export interface MarketListProps {
+  category: MarketStatus;
 }
 
-export interface IMarketItem extends IMarketList {
+export interface MarketItemProps extends MarketListProps {
   phoneNumber: string;
   enrollmentId: string;
   imageUrl: string;
   marketName: string;
   businessNumber: string;
-  status: TStatus;
+  status: MarketStatus;
   createdAt: string;
+}
+
+export interface OnClickMarketStatus {
+  onClickHandler: (arg0: MarketStatus) => void;
 }

@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import { patchMarketStatus } from '@/components/Api/Market';
-import { IMarketItem } from '@/types/Admin';
+import { MarketItemProps, MarketStatus } from '@/types/Admin';
 import { numberWithHyphenMarket } from '@/utils/numberWithHyphen';
 
 import ApprovedContainer from './buttonContainer/approvedContainer';
@@ -26,11 +26,11 @@ export default function MarketItem({
   marketName,
   businessNumber,
   createdAt,
-}: IMarketItem) {
+}: MarketItemProps) {
   const [isDeleted, setIsDeleted] = useState(false);
   const queryClient = useQueryClient();
 
-  const onClickHandler = (status: any) => {
+  const onClickHandler = (status: MarketStatus) => {
     setIsDeleted(true);
     patchMarketStatus({ status, enrollmentId });
     queryClient.invalidateQueries(['승인 마켓 리스트', status]);

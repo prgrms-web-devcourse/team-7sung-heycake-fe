@@ -1,26 +1,26 @@
-import { TStatus } from './Admin';
+import { MarketStatus } from './Admin';
 
-export interface IgetCakeList {
+export interface GetCakeList {
   location: TSeoulArea;
-  category: TMainCategory;
+  category: MainCategory;
   cursor: string;
 }
 
-export interface IgetMarketDetail {
+export interface GetMarketDetail {
   enrollmentId: string;
 }
 
-export interface IpostMarketList {
+export interface PostMarketList {
   cursor: string;
-  category: TStatus;
+  category: MarketStatus;
 }
 
-export interface IPatchMarketStatus {
+export interface PatchMarketStatus {
   enrollmentId: string;
-  status: TStatus;
+  status: MarketStatus;
 }
 
-export type TMainCategory =
+export type MainCategory =
   | ''
   | 'ALL'
   | 'PHOTO'
@@ -58,7 +58,7 @@ export type TSeoulArea =
 
 type Nullable<T> = T | null;
 
-export interface IgetOrderList {
+export interface GetOrderList {
   cursorId: Nullable<number>;
   pageSize: Nullable<number>;
   orderStatus: Nullable<string>;
