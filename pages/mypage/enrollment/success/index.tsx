@@ -2,7 +2,7 @@ import { Button, Container, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import EnrollmentInfo from '@/components/Mypage/enrollmentInfo';
-import MypageTitle from '@/components/Mypage/mypageTitle';
+import HeaderTitle from '@/components/Shared/headerTitle';
 
 interface RouterQuery {
   marketName: string;
@@ -17,7 +17,7 @@ export default function Success() {
 
   return (
     <>
-      <MypageTitle title="업체 정보 등록" />
+      <HeaderTitle title="업체 정보 등록" />
       <Container display="flex" flexDir="column" alignItems="center">
         <Text fontWeight={800} fontSize="1.3rem" margin="3rem 0 3rem 0">
           등록 신청이 완료되었습니다!

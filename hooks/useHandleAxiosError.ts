@@ -11,16 +11,9 @@ const useHandleAxiosError = () => {
 
     const { data } = axiosError.response ?? {};
     const messageData = data?.message;
-    const errorMessage =
-      JSON.parse(
-        messageData?.substring(
-          messageData.indexOf('{') ?? 0,
-          messageData.lastIndexOf('}') + 1 ?? messageData.length
-        ) ?? '{}'
-      ).message ?? '';
 
     toast({
-      description: errorMessage || '잠시 후 다시 시도해주세요.',
+      description: messageData || '잠시 후 다시 시도해주세요.',
       status: 'error',
       isClosable: true,
     });
