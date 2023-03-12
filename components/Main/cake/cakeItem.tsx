@@ -49,7 +49,7 @@ export default function CakeItem({
               zIndex={4}
               color="white"
             >
-              제작 완료
+              주문 완료
             </Flex>
           )}
           <Image

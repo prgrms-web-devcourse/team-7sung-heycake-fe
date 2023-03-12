@@ -77,7 +77,7 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
             color="white"
             fontSize="2rem"
           >
-            제작 완료
+            주문 완료
           </Flex>
         )}
         <ImageSlider images={order.images} />
