@@ -138,6 +138,7 @@ export default function CakeMain() {
             bottom={8}
             p={0}
             onClick={handleNewOrderClick}
+            _hover={{ backgroundColor: 'none' }}
           >
             <NewOrderIcon w={6} h={6} />
           </Button>

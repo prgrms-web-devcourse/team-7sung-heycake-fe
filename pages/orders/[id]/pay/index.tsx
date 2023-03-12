@@ -56,6 +56,7 @@ export default function Pay({
           minW="150px"
           minH="150px"
           onClick={() => selectOffer(id, threadOfferId)}
+          _hover={{ backgroundColor: 'none' }}
         >
           <Image width="50" height="50" src="/images/cash.png" alt="cash" />
           <Box>만나서</Box> 직접 결제
@@ -67,6 +68,7 @@ export default function Pay({
           flexDirection="column"
           minW="150px"
           minH="150px"
+          _hover={{ backgroundColor: 'none' }}
           onClick={() => {
             loadTossPayments(
               process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY as string

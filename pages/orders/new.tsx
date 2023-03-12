@@ -259,6 +259,7 @@ export default function NewOrder() {
                     borderRadius="1rem"
                     padding="0"
                     bg="white"
+                    _hover={{ backgroundColor: 'none' }}
                   >
                     <Image
                       key={url}

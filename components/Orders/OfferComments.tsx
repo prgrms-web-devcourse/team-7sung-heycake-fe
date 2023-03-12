@@ -133,6 +133,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
               }
               bg="white"
               color="#707070"
+              _hover={{ backgroundColor: 'none' }}
             >
               삭제
             </Button>
@@ -175,7 +176,12 @@ export default function OfferComments({ offerId }: { offerId: number }) {
               />
             </InputGroup>
           </Flex>
-          <Button type="submit" bg="#efefef" float="right">
+          <Button
+            type="submit"
+            bg="#efefef"
+            float="right"
+            _hover={{ backgroundColor: 'none' }}
+          >
             등록
           </Button>
           {previewUrls.length !== 0 && (
@@ -195,6 +201,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
                     borderRadius="1rem"
                     padding="0"
                     bg="white"
+                    _hover={{ backgroundColor: 'none' }}
                   >
                     <Image
                       key={url}

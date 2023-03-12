@@ -336,6 +336,7 @@ export default function EnrollmentForm() {
           fontSize={16}
           fontWeight="medium"
           marginTop={16}
+          _hover={{ backgroundColor: 'none' }}
         >
           등록
         </Button>

@@ -173,6 +173,7 @@ export default function NewOffer() {
                     borderRadius="1rem"
                     padding="0"
                     bg="white"
+                    _hover={{ backgroundColor: 'none' }}
                   >
                     <Image
                       key={url}

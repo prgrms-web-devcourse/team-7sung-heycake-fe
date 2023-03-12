@@ -71,6 +71,7 @@ export default function Post({
           fontSize={12}
           background="none"
           color="hey.normalGray"
+          _hover={{ backgroundColor: 'none' }}
         >
           삭제
         </Button>

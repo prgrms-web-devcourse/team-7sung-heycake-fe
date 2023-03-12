@@ -89,6 +89,7 @@ export default function LocationSelectBox({
               color="white"
               borderRadius={16}
               onClick={onLocationSelectHandler}
+              _hover={{ backgroundColor: 'none' }}
             >
               선택
             </Button>
