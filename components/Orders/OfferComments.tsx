@@ -77,7 +77,6 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       toast({
         status: 'error',
         description: ERROR_MESSAGES.CHECK_LOGIN,
-        isClosable: true,
       });
       return;
     }
@@ -86,7 +85,6 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       toast({
         status: 'error',
         description: '댓글 내용을 입력해 주세요',
-        isClosable: true,
       });
       return;
     }
@@ -103,6 +101,10 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       await addCommentMutation.mutateAsync(newFormData);
     } catch (error) {
       handleAxiosError(error);
+      toast({
+        status: 'error',
+        description: '댓글은 작성자와 사장님만 등록 가능해요',
+      });
     }
   };
 
