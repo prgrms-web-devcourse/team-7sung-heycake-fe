@@ -114,8 +114,6 @@ export default function OfferComments({ offerId }: { offerId: number }) {
     return <Box>Error while fetching comments</Box>;
   }
 
-  console.log(data);
-
   return (
     <>
       {data.map((comment) => (
@@ -123,9 +121,8 @@ export default function OfferComments({ offerId }: { offerId: number }) {
           <Box display="flex" justifyContent="space-between">
             <Flex gap="0.5rem" fontSize="10px" alignItems="center">
               <Box color="#707070" fontSize="14px">
-                케이크 업체
+                {comment.nickname}
               </Box>
-              2023-03-12
             </Flex>
             <Button
               size="xs"
