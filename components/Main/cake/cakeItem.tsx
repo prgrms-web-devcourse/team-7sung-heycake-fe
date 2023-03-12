@@ -36,7 +36,7 @@ export default function CakeItem({
           borderRadius={8}
           overflow="hidden"
         >
-          {status === 'NEW' && (
+          {status !== 'NEW' && (
             <Flex
               justifyContent="center"
               alignItems="center"
