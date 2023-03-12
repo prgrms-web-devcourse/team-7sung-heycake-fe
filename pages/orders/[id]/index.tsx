@@ -62,7 +62,26 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
   return (
     <>
       <HeaderTitle title="" />
-      <ImageSlider images={order.images} />
+      <Box position="relative">
+        {order.orderStatus === 'NEW' && (
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            position="absolute"
+            top={0}
+            left={0}
+            w="100%"
+            h="100%"
+            bg="rgba(0,0,0,0.2)"
+            zIndex={4}
+            color="white"
+            fontSize="2rem"
+          >
+            제작 완료
+          </Flex>
+        )}
+        <ImageSlider images={order.images} />
+      </Box>
       <Flex flexDirection="column" width="100%" gap="1rem" padding="1rem">
         <Flex flexDirection="column" alignItems="center" gap="0.1rem">
           <Badge
