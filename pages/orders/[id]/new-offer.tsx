@@ -253,6 +253,7 @@ export default function NewOffer() {
             height="3.75rem"
             borderRadius="1rem"
             type="submit"
+            _hover={{ bg: 'hey.main' }}
           >
             등록
           </Button>
