@@ -10,7 +10,6 @@ import {
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRef } from 'react';
-import { GrPowerReset } from 'react-icons/gr';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import useClickInput from '@/hooks/useClickInput';
@@ -20,10 +19,11 @@ import { OfferComment } from '@/types/offer';
 import { getAccessToken } from '@/utils/getAccessToken';
 
 import { publicApi } from '../Api';
+import RemoveImageButton from './RemoveImageButton';
 
 export default function OfferComments({ offerId }: { offerId: number }) {
   const toast = useToast();
-  const { previewUrls, files, handleFileInputChange, resetImages } =
+  const { previewUrls, files, handleFileInputChange, handleDeleteImage } =
     useImageUpload(1);
   const [inputRef, handleFileChoose] = useClickInput();
   const commentRef = useRef<HTMLTextAreaElement>(null);
@@ -184,21 +184,30 @@ export default function OfferComments({ offerId }: { offerId: number }) {
               margin="0 auto"
               gap="1rem"
             >
-              {previewUrls.map((url) => (
-                <Image
-                  key={url}
-                  src={url}
-                  alt="Preview"
-                  width={50}
-                  height={50}
-                  style={{ borderRadius: '10px' }}
-                />
+              {previewUrls.map((url, urlIndex) => (
+                <Box position="relative" display="inline-block" key={url}>
+                  <Button
+                    width="70px"
+                    height="70px"
+                    onClick={() => handleDeleteImage(urlIndex)}
+                    borderRadius="1rem"
+                    padding="0"
+                    bg="white"
+                  >
+                    <Image
+                      key={url}
+                      src={url}
+                      alt="Preview"
+                      width={70}
+                      height={70}
+                      style={{ borderRadius: '1rem' }}
+                    />
+                  </Button>
+                  <RemoveImageButton
+                    onClick={() => handleDeleteImage(urlIndex)}
+                  />
+                </Box>
               ))}
-              {files.length !== 0 && (
-                <Button type="button" onClick={resetImages}>
-                  <GrPowerReset />
-                </Button>
-              )}
             </Flex>
           )}
         </FormControl>
