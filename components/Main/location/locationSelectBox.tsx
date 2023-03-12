@@ -37,7 +37,8 @@ export default function LocationSelectBox({
         onClick={onOpen}
         fontSize="sm"
         gap={1}
-        m={4}
+        p={4}
+        pb={0}
         alignItems="center"
         fontWeight={600}
       >

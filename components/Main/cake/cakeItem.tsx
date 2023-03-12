@@ -23,8 +23,8 @@ export default function CakeItem({
     <Card variant="unstyled" my={2}>
       <Flex
         alignItems="center"
-        borderBottom="2px solid"
-        borderColor="hey.lightGray"
+        borderBottom="1px solid"
+        borderColor="#e3e3e3"
         height="154px"
         pb={6}
       >
@@ -51,31 +51,26 @@ export default function CakeItem({
             px={2}
             borderRadius={10}
             fontWeight={500}
-            fontSize="10px"
           >
             {CAKE_CATEGORY[category]}
           </Badge>
           <Grid gap={1} mt={1}>
-            <Text fontSize="sm" fontWeight={500}>
-              {title}
-            </Text>
+            <Text fontWeight={600}>{title}</Text>
             <Flex>
-              <Text fontSize="xs" color="hey.lightGray">
+              <Text fontSize="sm" color="hey.normalGray">
                 {`${CAKE_SIZE[cakeSize]} · ${convertBreadFlavor(
                   breadFlavor
                 )} · ${convertCreamFlavor(creamFlavor)}`}
               </Text>
             </Flex>
-            <Text fontSize="sm" fontWeight={700}>
-              ~ {numberWithCommas(Number(price))} 원
-            </Text>
+            <Text fontWeight={600}>~ {numberWithCommas(Number(price))} 원</Text>
             <Flex color="gray" alignItems="center" gap={1}>
               <DateCalenderIcon />
-              <Text fontSize="xs" fontWeight={300}>
+              <Text fontSize="sm" fontWeight={300}>
                 {`${visitTime.substring(0, 10).replace(/-/g, '.')}`}
               </Text>
               {Boolean(offerCount) && (
-                <Text fontSize="xs" color="hey.main">
+                <Text fontSize="sm" color="hey.main">
                   · 오퍼+{offerCount}
                 </Text>
               )}
