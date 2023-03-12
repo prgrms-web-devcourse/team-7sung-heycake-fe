@@ -65,9 +65,7 @@ export default function Thread({ thread, orderId, order }: ThreadProps) {
         borderBottom="1px solid #e3e3e3"
         paddingBottom="1rem"
       >
-        <Box fontSize="1.5rem">
-          {thread.createDate ?? orderId ?? '23.03.11'}
-        </Box>
+        <Box fontSize="1.5rem">{thread.createdDate}</Box>
         {order.orderStatus === 'NEW' && order.memberId === memberId && (
           <Button
             backgroundColor="hey.main"

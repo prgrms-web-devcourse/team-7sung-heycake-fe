@@ -182,15 +182,6 @@ export default function NewOrder() {
     }
   }, []);
 
-  const {
-    title,
-    cakeCategory,
-    cakeSize,
-    cakeHeight,
-    breadFlavor,
-    creamFlavor,
-  } = formData;
-
   return (
     <form style={{ paddingBottom: '2rem' }} onSubmit={handleSubmit}>
       <HeaderTitle title="주문표 작성" />
@@ -280,7 +271,7 @@ export default function NewOrder() {
             height="3rem"
             type="text"
             name="title"
-            value={title}
+            value={formData.title}
             onChange={handleChange}
             placeholder="제목을 입력하세요."
           />
@@ -355,7 +346,7 @@ export default function NewOrder() {
         <CakeSelect<CakeCategory>
           id="cakeCategory"
           label="케이크 종류"
-          value={cakeCategory}
+          value={formData.cakeCategory}
           options={cakeCategories}
           onChange={handleChange}
           convertOption={convertCakeCategory}
@@ -363,7 +354,7 @@ export default function NewOrder() {
         <CakeSelect<CakeSize>
           id="cakeSize"
           label="케이크 크기"
-          value={cakeSize}
+          value={formData.cakeSize}
           options={cakeSizes}
           onChange={handleChange}
           convertOption={convertCakeSize}
@@ -371,7 +362,7 @@ export default function NewOrder() {
         <CakeSelect<CakeHeight>
           id="cakeHeight"
           label="케이크 높이"
-          value={cakeHeight}
+          value={formData.cakeHeight}
           options={cakeHeights}
           onChange={handleChange}
           convertOption={convertCakeHeight}
@@ -379,7 +370,7 @@ export default function NewOrder() {
         <CakeSelect<BreadFlavor>
           id="breadFlavor"
           label="빵 종류"
-          value={breadFlavor}
+          value={formData.breadFlavor}
           options={breadFlavors}
           onChange={handleChange}
           convertOption={convertBreadFlavor}
@@ -387,7 +378,7 @@ export default function NewOrder() {
         <CakeSelect<CreamFlavor>
           id="creamFlavor"
           label="크림 맛"
-          value={creamFlavor}
+          value={formData.creamFlavor}
           options={creamFlavors}
           onChange={handleChange}
           convertOption={convertCreamFlavor}

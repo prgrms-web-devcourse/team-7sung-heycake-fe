@@ -171,7 +171,7 @@ export default function NewOffer() {
           min={10000}
           max={100000}
           step={5000}
-          value={expectedPrice}
+          value={directInput ? undefined : expectedPrice}
           onChange={setExpectedPrice}
         >
           <SliderTrack bg="red.100">
@@ -181,15 +181,12 @@ export default function NewOffer() {
           <SliderThumb boxSize={6} />
         </Slider>
         <Input
-          disabled={!directInput}
-          type="number"
+          type="text"
           name="expectedPrice"
-          value={expectedPrice !== 0 ? expectedPrice : ''}
+          disabled={!directInput}
+          value={expectedPrice}
           onChange={(e) => setExpectedPrice(+e.target.value)}
           placeholder="희망가격을 입력하세요."
-          min={10000}
-          max={100000}
-          step={5000}
         />
         <Textarea
           minH="200px"
