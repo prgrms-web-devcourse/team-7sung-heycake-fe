@@ -28,6 +28,7 @@ export default function ErrorPage() {
         px={40}
         mt="180%"
         borderRadius={16}
+        _hover={{ backgroundColor: 'none' }}
       >
         홈 화면으로
       </Button>
