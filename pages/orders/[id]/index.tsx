@@ -94,7 +94,13 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
         )}
         <ImageSlider images={order.images} />
       </Box>
-      <Flex flexDirection="column" width="100%" gap="1rem" padding="1rem">
+      <Flex
+        flexDirection="column"
+        width="100%"
+        gap="1rem"
+        padding="1rem"
+        paddingBottom="8rem"
+      >
         <Flex flexDirection="column" alignItems="center" gap="0.1rem">
           <Badge
             colorScheme={order.cakeInfo.cakeCategory}
@@ -102,7 +108,6 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
             px={2}
             borderRadius={10}
             fontWeight={500}
-            fontSize="10px"
           >
             {CAKE_CATEGORY[order.cakeInfo.cakeCategory]}
           </Badge>
@@ -176,6 +181,11 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
         )}
         {order.orderStatus === 'NEW' ? (
           <Button
+            w="92%"
+            maxW="530px"
+            position="fixed"
+            zIndex="10"
+            bottom={8}
             color="white"
             background="hey.main"
             height="3.75rem"
@@ -187,7 +197,17 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
             신청하기
           </Button>
         ) : (
-          <Button height="3.75rem" borderRadius="1rem" type="submit" isDisabled>
+          <Button
+            w="92%"
+            maxW="530px"
+            position="fixed"
+            zIndex="10"
+            bottom={8}
+            height="3.75rem"
+            borderRadius="1rem"
+            type="submit"
+            isDisabled
+          >
             신청 종료
           </Button>
         )}
