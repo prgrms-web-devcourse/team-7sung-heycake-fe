@@ -1,4 +1,12 @@
-import { Badge, Box, Button, Flex, useToast } from '@chakra-ui/react';
+import {
+  Badge,
+  Box,
+  Button,
+  Flex,
+  Image,
+  Text,
+  useToast,
+} from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -142,7 +150,26 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
             order={order}
           />
         ))}
-        {threads.length === 0 && <Box>아직 신청온 업체가 없어요 ㅠㅠ</Box>}
+        {threads.length === 0 && (
+          <Flex flexDir="column" alignItems="center" padding={4}>
+            <Image
+              src="/images/grayCakeIcon.png"
+              alt="회색 케이크 아이콘"
+              width={120}
+              height={120}
+            />
+            <Flex flexDir="column" alignItems="center" padding={4}>
+              <Text fontSize={20} fontWeight="600">
+                아직 신청한 업체가 없어요!
+              </Text>
+              <Text fontSize={16} textAlign="center" padding="8px 0">
+                사장님이시라면 신청하기 버튼을 눌러
+                <br />
+                주문확인서를 작성해보세요.
+              </Text>
+            </Flex>
+          </Flex>
+        )}
         {order.orderStatus === 'NEW' ? (
           <Button
             color="white"
