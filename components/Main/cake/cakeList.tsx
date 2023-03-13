@@ -32,7 +32,7 @@ export default function CakeList({ category, location }: any) {
   useEffect(() => {
     if (inView) fetchNextPage();
     if (status === 'success' && data?.pages[0]?.content.length === 0) {
-      const id = `cake empty`;
+      const id = 'cake empty';
       if (!toast.isActive(id)) {
         toast({
           id,
