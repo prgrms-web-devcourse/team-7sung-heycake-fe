@@ -2,7 +2,6 @@ import { Box, Button, Divider, Flex, Text, useToast } from '@chakra-ui/react';
 import { loadTossPayments } from '@tosspayments/payment-sdk';
 import { randomBytes } from 'crypto';
 import { GetServerSideProps } from 'next';
-import Image from 'next/image';
 
 import { DataTable } from '@/components/Orders';
 import HeaderTitle from '@/components/Shared/headerTitle';
@@ -63,7 +62,6 @@ export default function Pay({
           onClick={() => selectOffer(id, Number(threadOfferId), false)}
           _hover={{ backgroundColor: 'none' }}
         >
-          <Image width="50" height="50" src="/images/cash.png" alt="cash" />
           <Box>만나서</Box> 직접 결제
         </Button>
         <Button
@@ -103,8 +101,7 @@ export default function Pay({
             });
           }}
         >
-          <Image width="50" height="50" src="/images/toss.png" alt="cash" />
-          <Box>토스로</Box> 지금 결제
+          <Box>카드로</Box> 지금 결제
         </Button>
       </Flex>
     </Box>
