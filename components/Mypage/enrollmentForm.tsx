@@ -9,18 +9,17 @@ import {
   Input,
   Select,
   Textarea,
-  useToast,
 } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import SEOUL_AREA from '@/constants/seoulArea';
 import useHandleAxiosError from '@/hooks/useHandleAxiosError';
-import deleteAccessToken from '@/utils/deleteAccessToken';
 import { getAccessToken } from '@/utils/getAccessToken';
 
 import { publicApi } from '../Api';
+import SuccessModal from './successModal';
 
 const {
   CHECK_EMPTY_INPUT,
@@ -50,13 +49,29 @@ type InputProps = {
 export default function EnrollmentForm() {
   const ACCESS_TOKEN = getAccessToken();
   const handleAxiosError = useHandleAxiosError();
-  const toast = useToast();
-  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<InputProps>();
+
+  const [success, setSuccess] = useState(false);
+  const [marketName, setMarketName] = useState('');
+  const [ownerName, setOwnerName] = useState('');
+  const [city, setCity] = useState('');
+  const [district, setDistrict] = useState('');
+  const [detailAddress, setDetailAddress] = useState('');
+  const [address, setAddress] = useState('');
+  const [allSuccess, setAllSuccess] = useState(false);
+
+  const checkAllSuccess = () => {
+    setMarketName(marketName);
+    setOwnerName(ownerName);
+    setAddress(`${city} ${district} ${detailAddress}`);
+
+    setSuccess(true);
+    return allSuccess;
+  };
 
   const onSubmit: SubmitHandler<InputProps> = async (data) => {
     const businessLicenseImage: { [key: string]: any } = {
@@ -80,7 +95,6 @@ export default function EnrollmentForm() {
     formData.append('description', data.description);
     formData.append('businessLicenseImage', businessLicenseImage[0]);
     formData.append('marketImage', marketImage[0]);
-    formData.append('memberId', '4');
 
     try {
       await publicApi.post('/enrollments', formData, {
@@ -89,13 +103,10 @@ export default function EnrollmentForm() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      toast({
-        status: 'success',
-        description:
-          '업체 등록이 성공적으로 신청되었어요. 다시 로그인 해주세요.',
-      });
-      deleteAccessToken();
-      router.push('/');
+      setMarketName(data.marketName);
+      setOwnerName(data.ownerName);
+      setAddress(`${data.city} ${data.district} ${data.detailAddress}`);
+      setSuccess(true);
     } catch (error) {
       handleAxiosError(error);
     }
@@ -103,7 +114,22 @@ export default function EnrollmentForm() {
 
   return (
     <Flex justifyContent="center">
-      <form onSubmit={handleSubmit(onSubmit)} id="enrollmentForm">
+      <SuccessModal
+        success={success}
+        setAllSuccessFun={setAllSuccess}
+        setSuccessFun={setSuccess}
+        marketName={marketName}
+        ownerName={ownerName}
+        address={address}
+      />
+      <form
+        onSubmit={() => {
+          if (checkAllSuccess()) {
+            handleSubmit(onSubmit);
+          }
+        }}
+        id="enrollmentForm"
+      >
         <FormControl height={110} width={350}>
           <FormLabel>업체 이미지 업로드</FormLabel>
           <Input
@@ -128,6 +154,7 @@ export default function EnrollmentForm() {
             {...register('marketName', {
               required: CHECK_EMPTY_INPUT,
             })}
+            onChange={(e) => setMarketName(e.target.value)}
           />
           {errors.marketName && (
             <Box color="red" marginTop={1}>
@@ -153,6 +180,7 @@ export default function EnrollmentForm() {
                 message: CHECK_OWNER_NAME_TYPE,
               },
             })}
+            onChange={(e) => setOwnerName(e.target.value)}
           />
           {errors.ownerName && (
             <Box color="red" marginTop={1}>
@@ -198,6 +226,7 @@ export default function EnrollmentForm() {
           <Container display="flex" padding={0}>
             <Select
               {...register('city', { required: CHECK_EMPTY_INPUT })}
+              onChange={(e) => setCity(e.target.value)}
               width={170}
               marginRight={2}
               marginBottom={2}
@@ -211,6 +240,7 @@ export default function EnrollmentForm() {
             </Select>
             <Select
               {...register('district', { required: CHECK_EMPTY_INPUT })}
+              onChange={(e) => setDistrict(e.target.value)}
               width={170}
               defaultValue=""
               borderRadius={12}
@@ -229,6 +259,7 @@ export default function EnrollmentForm() {
               placeholder="상세 주소를 입력해주세요."
               borderRadius={12}
               {...register('detailAddress', { required: CHECK_EMPTY_INPUT })}
+              onChange={(e) => setDetailAddress(e.target.value)}
             />
           </Container>
           {(errors.city && (
@@ -327,7 +358,7 @@ export default function EnrollmentForm() {
           )}
         </FormControl>
         <Button
-          type="submit"
+          onClick={checkAllSuccess}
           width={350}
           height={14}
           backgroundColor="hey.main"
