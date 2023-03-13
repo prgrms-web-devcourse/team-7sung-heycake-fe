@@ -47,7 +47,12 @@ export default function LocationSelectBox({
           서울시 {location}
         </Text>
       </Flex>
-      <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
+      <Drawer
+        placement="bottom"
+        onClose={onClose}
+        isOpen={isOpen}
+        autoFocus={false}
+      >
         <DrawerOverlay />
         <DrawerContent
           h={{

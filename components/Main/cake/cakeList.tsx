@@ -38,7 +38,7 @@ export default function CakeList({ category, location }: any) {
           id,
           status: 'info',
           position: 'bottom',
-          duration: 2000,
+          duration: 1500,
           render: () => (
             <Box
               m={3}
