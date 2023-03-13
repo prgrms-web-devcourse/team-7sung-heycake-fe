@@ -98,8 +98,9 @@ export default function NewOrder() {
           id: toastId,
           status: 'error',
           description: ERROR_MESSAGES.CHECK_LOGIN,
+          duration: 1000,
           containerStyle: {
-            marginBottom: '380px',
+            marginBottom: '60px',
           },
         });
       }
@@ -113,8 +114,9 @@ export default function NewOrder() {
           id: toastId,
           status: 'error',
           description: '제목을 입력해 주세요',
+          duration: 1000,
           containerStyle: {
-            marginBottom: '380px',
+            marginBottom: '60px',
           },
         });
       }
@@ -128,8 +130,9 @@ export default function NewOrder() {
           id: toastId,
           status: 'error',
           description: '최소 금액은 10,000원 이상이에요',
+          duration: 1000,
           containerStyle: {
-            marginBottom: '380px',
+            marginBottom: '60px',
           },
         });
       }
@@ -143,8 +146,9 @@ export default function NewOrder() {
           id: toastId,
           status: 'error',
           description: '방문 예정 시간을 입력해 주세요',
+          duration: 1000,
           containerStyle: {
-            marginBottom: '380px',
+            marginBottom: '60px',
           },
         });
       }
@@ -158,8 +162,9 @@ export default function NewOrder() {
           id: toastId,
           status: 'error',
           description: '요청사항을 입력해 주세요',
+          duration: 1000,
           containerStyle: {
-            marginBottom: '380px',
+            marginBottom: '60px',
           },
         });
       }
@@ -173,8 +178,9 @@ export default function NewOrder() {
           id: toastId,
           status: 'error',
           description: '예시 사진을 1개 이상 첨부해 주세요',
+          duration: 1000,
           containerStyle: {
-            marginBottom: '380px',
+            marginBottom: '60px',
           },
         });
       }
@@ -217,8 +223,9 @@ export default function NewOrder() {
           id: toastId,
           status: 'success',
           description: '주문을 등록했어요',
+          duration: 1000,
           containerStyle: {
-            marginBottom: '380px',
+            marginBottom: '60px',
           },
         });
       }

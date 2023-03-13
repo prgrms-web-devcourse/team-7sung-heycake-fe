@@ -93,8 +93,9 @@ export default function Pay({
                         id: toastId,
                         status: 'error',
                         description: '결제가 취소되었습니다.',
+                        duration: 1000,
                         containerStyle: {
-                          marginBottom: '380px',
+                          marginBottom: '60px',
                         },
                       });
                     }
@@ -105,8 +106,9 @@ export default function Pay({
                         id: toastId,
                         status: 'error',
                         description: '유효하지 않은 카드입니다.',
+                        duration: 1000,
                         containerStyle: {
-                          marginBottom: '380px',
+                          marginBottom: '60px',
                         },
                       });
                     }

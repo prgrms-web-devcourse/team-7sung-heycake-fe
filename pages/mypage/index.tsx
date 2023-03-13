@@ -20,8 +20,9 @@ export default function Detail() {
         id: toastId,
         status: 'success',
         description: '로그아웃이 완료되었습니다.',
+        duration: 1000,
         containerStyle: {
-          marginBottom: '380px',
+          marginBottom: '60px',
         },
       });
     }

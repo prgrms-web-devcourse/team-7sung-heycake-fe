@@ -49,9 +49,10 @@ export default function Post({
         toast({
           id: toastId,
           status: 'error',
+          duration: 1000,
           description: '예약된 주문은 삭제할 수 없습니다',
           containerStyle: {
-            marginBottom: '380px',
+            marginBottom: '60px',
           },
         });
       }

@@ -51,9 +51,9 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
           description:
             '사장님이시라면 마이페이지에서 사장님 등록을 할 수 있어요',
           status: 'warning',
-          duration: 3000,
+          duration: 1000,
           containerStyle: {
-            marginBottom: '380px',
+            marginBottom: '60px',
           },
         });
       }

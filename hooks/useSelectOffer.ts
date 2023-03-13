@@ -36,11 +36,12 @@ const useSelectOffer = () => {
           toast({
             id: toastId,
             status: 'success',
+            duration: 1000,
             description: variables.isPaid
               ? '결제 완료! 만나서 수령해주세요'
               : '만나서 결제를 선택하셨어요',
             containerStyle: {
-              marginBottom: '380px',
+              marginBottom: '60px',
             },
           });
         }
@@ -62,9 +63,10 @@ const useSelectOffer = () => {
           toast({
             id: toastId,
             status: 'error',
+            duration: 1000,
             description: ERROR_MESSAGES.CHECK_LOGIN,
             containerStyle: {
-              marginBottom: '380px',
+              marginBottom: '60px',
             },
           });
         }
