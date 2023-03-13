@@ -28,7 +28,7 @@ export default function SuccessModal({ ...props }: SuccessInfo) {
   const [open, setOpen] = useState(props.success);
 
   function handleSuccess() {
-     const toastId = 'success';
+    const toastId = 'success';
     if (!toast.isActive(toastId)) {
       toast({
         id: toastId,
