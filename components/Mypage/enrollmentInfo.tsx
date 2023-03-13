@@ -1,7 +1,12 @@
-/* eslint-disable react/prop-types */
 import { Container, Text } from '@chakra-ui/react';
 
-export default function EnrollmentInfo({ ...props }) {
+interface EnrollmentProps {
+  marketName: string;
+  ownerName: string;
+  phoneNumber: string;
+}
+
+export default function EnrollmentInfo({ ...props }: EnrollmentProps) {
   return (
     <Container
       display="flex"

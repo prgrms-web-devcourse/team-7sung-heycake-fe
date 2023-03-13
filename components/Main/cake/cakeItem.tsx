@@ -1,17 +1,11 @@
-import {
-  Badge,
-  Card,
-  CardBody,
-  Divider,
-  Flex,
-  Grid,
-  Text,
-} from '@chakra-ui/react';
+import { Badge, Card, CardBody, Flex, Grid, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import { CAKE_CATEGORY, CAKE_SIZE } from '@/constants/Main';
-import { ICakeItem } from '@/types/Main';
+import { DateCalenderIcon } from '@/public/icon';
+import { CakeItemProps } from '@/types/Main';
 import numberWithCommas from '@/utils/numberWithCommas';
+import { convertBreadFlavor, convertCreamFlavor } from '@/utils/orders';
 
 export default function CakeItem({
   category,
@@ -21,72 +15,85 @@ export default function CakeItem({
   status,
   visitTime,
   title,
-}: ICakeItem) {
+  breadFlavor,
+  creamFlavor,
+  offerCount,
+}: CakeItemProps) {
   return (
-    <Card
-      bgImage={status !== 'NEW' ? '/images/completedCake.png' : ''}
-      bgPosition="center"
-    >
-      <Card
-        borderColor="hey.sub"
-        borderWidth="2px"
-        bgColor="orange.50"
-        variant="outline"
-        opacity={status !== 'NEW' ? '0.4' : '1'}
+    <Card variant="unstyled" my={2}>
+      <Flex
+        alignItems="center"
+        borderBottom="1px solid"
+        borderColor="#e3e3e3"
+        height="154px"
+        pb={6}
       >
-        <Grid>
-          <Flex m={1} justifyContent="space-between">
-            <Text ml={2} fontWeight="700">
-              {title}
-            </Text>
-            <Badge mt={1} bgColor="red.200" color="hey.red">
-              ~ {visitTime.substring(0, 10)}
-            </Badge>
-          </Flex>
-          <Flex>
-            <Card m={2} width="100px" height="100px">
-              <Image
-                fill
-                sizes="20vw"
-                src={image || '/images/sampleCake.jpg'}
-                alt="Cake"
-              />
-            </Card>
-            <CardBody px={0}>
-              <Flex padding={0} gap={1} flexDirection="column">
-                <Flex align="center" gap={4} justifyContent="space-between">
-                  <Text color="hey.main" whiteSpace="nowrap" fontWeight={700}>
-                    항목
-                  </Text>
-                  <Text fontSize="sm" whiteSpace="nowrap">
-                    {CAKE_CATEGORY[category]}
-                  </Text>
-                </Flex>
-                <Divider borderColor="hey.main" />
-                <Flex align="center" gap={4} justifyContent="space-between">
-                  <Text color="hey.main" whiteSpace="nowrap" fontWeight={700}>
-                    케익 크기
-                  </Text>
-                  <Text fontSize="sm" whiteSpace="nowrap">
-                    {CAKE_SIZE[cakeSize]}
-                  </Text>
-                </Flex>
-                <Divider borderColor="hey.main" />
-              </Flex>
-            </CardBody>
-            <Flex flexDirection="column" p={2}>
-              <Badge
-                bgColor="orange.100"
-                colorScheme="red"
-                color="hey.red"
-                mt={20}
-              >
-                ~ ₩ {numberWithCommas(Number(price))}
-              </Badge>
+        <Card
+          position="relative"
+          variant="unstyled"
+          width="100px"
+          height="116px"
+          borderRadius={8}
+          overflow="hidden"
+        >
+          {status !== 'NEW' && (
+            <Flex
+              justifyContent="center"
+              alignItems="center"
+              position="absolute"
+              top={0}
+              left={0}
+              w="100%"
+              h="100%"
+              bg="rgba(0,0,0,0.2)"
+              zIndex={4}
+              color="white"
+            >
+              주문 완료
             </Flex>
-          </Flex>
-        </Grid>
-      </Card>
+          )}
+          <Image
+            fill
+            sizes="20vw"
+            src={image || '/images/sampleCake.jpg'}
+            alt="Cake"
+            style={{ objectFit: 'cover' }}
+          />
+        </Card>
+        <CardBody ml={4}>
+          <Badge
+            colorScheme={category}
+            p={1}
+            px={2}
+            borderRadius={10}
+            fontWeight={500}
+          >
+            {CAKE_CATEGORY[category]}
+          </Badge>
+          <Grid gap={1} mt={1}>
+            <Text fontWeight={600}>{title}</Text>
+            <Flex>
+              <Text fontSize="sm" color="hey.normalGray">
+                {`${CAKE_SIZE[cakeSize]} · ${convertBreadFlavor(
+                  breadFlavor
+                )} · ${convertCreamFlavor(creamFlavor)}`}
+              </Text>
+            </Flex>
+            <Text fontWeight={600}>~ {numberWithCommas(Number(price))} 원</Text>
+            <Flex color="gray" alignItems="center" gap={1}>
+              <DateCalenderIcon />
+              <Text fontSize="sm" fontWeight={300}>
+                {`${visitTime.substring(0, 10).replace(/-/g, '.')}`}
+              </Text>
+              {Boolean(offerCount) && (
+                <Text fontSize="sm" color="hey.main">
+                  · 오퍼+{offerCount}
+                </Text>
+              )}
+            </Flex>
+          </Grid>
+        </CardBody>
+      </Flex>
     </Card>
   );
 }

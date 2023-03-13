@@ -4,13 +4,13 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { postMarketList } from '@/components/Api/Market';
-import ApiErrorAlert from '@/components/Shared/apiErrorAlert';
-import { IMarketItem, IMarketList } from '@/types/Admin';
+import ErrorPage from '@/components/Error';
+import { MarketItemProps, MarketListProps } from '@/types/Admin';
 
 import AdminListSkeleton from './adminLIstSkeleton';
 import MarketItem from './marketItem';
 
-export default function MarketList({ category }: IMarketList) {
+export default function MarketList({ category }: MarketListProps) {
   const { ref, inView } = useInView();
   const { data, status, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
     ['승인 마켓 리스트', category],
@@ -31,14 +31,14 @@ export default function MarketList({ category }: IMarketList) {
   }
 
   if (status === 'error') {
-    return <ApiErrorAlert />;
+    return <ErrorPage />;
   }
 
   return (
     <>
       <Grid gap={0}>
         {data?.pages.map((page) =>
-          page?.enrollments.map((item: IMarketItem) => (
+          page?.enrollments.map((item: MarketItemProps) => (
             <Stack key={item.enrollmentId}>
               <MarketItem
                 phoneNumber={item.phoneNumber}
@@ -48,6 +48,7 @@ export default function MarketList({ category }: IMarketList) {
                 marketName={item.marketName}
                 businessNumber={item.businessNumber}
                 status={item.status}
+                createdAt={item.createdAt}
               />
             </Stack>
           ))

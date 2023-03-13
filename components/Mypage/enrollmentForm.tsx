@@ -1,23 +1,28 @@
+/* eslint-disable @next/next/no-img-element */
 import {
+  Box,
   Button,
   Container,
+  Flex,
   FormControl,
   FormLabel,
   Input,
   Select,
-  Text,
+  Textarea,
 } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import SEOUL_AREA from '@/constants/seoulArea';
-import { deleteAccessToken } from '@/utils/deleteAccessToken';
+import useHandleAxiosError from '@/hooks/useHandleAxiosError';
 import { getAccessToken } from '@/utils/getAccessToken';
 
 import { publicApi } from '../Api';
+import SuccessModal from './successModal';
 
 const {
+  CHECK_EMPTY_INPUT,
   CHECK_BUSINESS_NUMBER_LENGTH,
   CHECK_NUMBER_TYPE,
   CHECK_OWNER_NAME_LENGTH,
@@ -43,13 +48,17 @@ type InputProps = {
 
 export default function EnrollmentForm() {
   const ACCESS_TOKEN = getAccessToken();
-
-  const router = useRouter();
+  const handleAxiosError = useHandleAxiosError();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<InputProps>();
+
+  const [success, setSuccess] = useState(false);
+  const [marketName, setMarketName] = useState('');
+  const [ownerName, setOwnerName] = useState('');
+  const [address, setAddress] = useState('');
 
   const onSubmit: SubmitHandler<InputProps> = async (data) => {
     const businessLicenseImage: { [key: string]: any } = {
@@ -73,7 +82,6 @@ export default function EnrollmentForm() {
     formData.append('description', data.description);
     formData.append('businessLicenseImage', businessLicenseImage[0]);
     formData.append('marketImage', marketImage[0]);
-    formData.append('memberId', '4');
 
     try {
       await publicApi.post('/enrollments', formData, {
@@ -82,170 +90,261 @@ export default function EnrollmentForm() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      alert('업체 등록이 성공적으로 신청되었어요. 다시 로그인 해주세요.');
-      deleteAccessToken();
-      router.push('/');
+      setMarketName(data.marketName);
+      setOwnerName(data.ownerName);
+      setAddress(`${data.city} ${data.district} ${data.detailAddress}`);
+      setSuccess(true);
     } catch (error) {
-      console.error(error);
+      handleAxiosError(error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} id="enrollmentForm">
-      <FormControl height={100} width={350}>
-        <FormLabel>사업자 등록 번호</FormLabel>
-        <Input
-          type="text"
-          placeholder="10자리 숫자만 입력해주세요."
-          {...register('businessNumber', {
-            required: true,
-            pattern: {
-              value: /^[0-9+]*$/,
-              message: CHECK_NUMBER_TYPE,
-            },
-            minLength: 10,
-            maxLength: {
-              value: 10,
-              message: CHECK_BUSINESS_NUMBER_LENGTH,
-            },
-          })}
-        />
-        {errors.businessNumber && (
-          <Text fontSize="8px" color="red">
-            {errors.businessNumber.message}
-          </Text>
-        )}
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>대표자 이름</FormLabel>
-        <Input
-          type="text"
-          {...register('ownerName', {
-            required: true,
-            minLength: 2,
-            maxLength: {
-              value: 20,
-              message: CHECK_OWNER_NAME_LENGTH,
-            },
-            pattern: {
-              value: /[ㄱ-ㅎ|가-힣|a-z|A-Z]/,
-              message: CHECK_OWNER_NAME_TYPE,
-            },
-          })}
-        />
-        {errors.ownerName && (
-          <Text fontSize="8px" color="red">
-            {errors.ownerName.message}
-          </Text>
-        )}
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>개업 일자</FormLabel>
-        <Input type="date" {...register('openDate', { required: true })} />
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>상호명</FormLabel>
-        <Input type="text" {...register('marketName', { required: true })} />
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>업체 전화번호</FormLabel>
-        <Input
-          type="text"
-          placeholder="숫자만 입력해주세요."
-          {...register('phoneNumber', {
-            required: true,
-            pattern: {
-              value: /^[0-9+]*$/,
-              message: CHECK_NUMBER_TYPE,
-            },
-          })}
-        />
-        {errors.phoneNumber && (
-          <Text fontSize="8px" color="red">
-            {errors.phoneNumber.message}
-          </Text>
-        )}
-      </FormControl>
-      <FormControl height={150} width={350}>
-        <FormLabel>주소</FormLabel>
-        <Container display="flex" padding={0}>
-          <Select
-            {...register('city', { required: true })}
-            width={170}
-            marginRight={2}
-            marginBottom={2}
-            defaultValue=""
-          >
-            <option value="">시 선택</option>
-            <option value="서울시">서울시</option>
-          </Select>
-          <Select
-            defaultValue=""
-            {...register('district', { required: true })}
-            width={170}
-          >
-            <option value="">구 선택</option>
-            {SEOUL_AREA.map((area) => (
-              <option key={area} value={area}>
-                {area}
-              </option>
-            ))}
-          </Select>
-        </Container>
-        <Container padding={0}>
+    <Flex justifyContent="center">
+      <SuccessModal
+        success={success}
+        marketName={marketName}
+        ownerName={ownerName}
+        address={address}
+      />
+      <form onSubmit={handleSubmit(onSubmit)} id="enrollmentForm">
+        <FormControl height={110} width={350}>
+          <FormLabel>업체 이미지 업로드</FormLabel>
+          <Input
+            type="file"
+            {...register('marketImage', {
+              required: CHECK_EMPTY_INPUT,
+            })}
+            padding={1}
+          />
+          {errors.marketImage && (
+            <Box color="red" marginTop={1}>
+              {errors.marketImage.message}
+            </Box>
+          )}
+        </FormControl>
+        <FormControl height={110} width={350}>
+          <FormLabel>상호명</FormLabel>
           <Input
             type="text"
-            placeholder="상세 주소를 입력해주세요"
-            {...register('detailAddress', { required: true })}
+            placeholder="상호명을 입력해주세요."
+            borderRadius={12}
+            {...register('marketName', {
+              required: CHECK_EMPTY_INPUT,
+            })}
           />
-        </Container>
-      </FormControl>
-      <FormControl width={350} height={100}>
-        <FormLabel>영업 시간</FormLabel>
-        <Input
-          type="time"
-          {...register('openTime', { required: true })}
-          width={170}
-          marginRight={2}
-        />
-
-        <Input
-          type="time"
-          {...register('endTime', { required: true })}
-          width={170}
-        />
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>업체 설명</FormLabel>
-        <Input type="text" {...register('description', { required: true })} />
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>사업자 등록증 사진</FormLabel>
-        <Input
-          type="file"
-          {...register('businessLicenseImage', { required: true })}
-          padding={1}
-        />
-      </FormControl>
-      <FormControl height={100} width={350}>
-        <FormLabel>업체 대표 사진</FormLabel>
-        <Input
-          type="file"
-          {...register('marketImage', { required: true })}
-          padding={1}
-        />
-      </FormControl>
-      <Button
-        type="submit"
-        width={350}
-        padding={1}
-        bg="hey.lightOrange"
-        fontSize="1.3rem"
-        marginBottom={10}
-        _hover={{ bg: 'hey.sub' }}
-      >
-        등록하기
-      </Button>
-    </form>
+          {errors.marketName && (
+            <Box color="red" marginTop={1}>
+              {errors.marketName.message}
+            </Box>
+          )}
+        </FormControl>
+        <FormControl height={110} width={350}>
+          <FormLabel>대표자 이름</FormLabel>
+          <Input
+            type="text"
+            placeholder="대표자 이름을 입력해주세요."
+            borderRadius={12}
+            {...register('ownerName', {
+              required: CHECK_EMPTY_INPUT,
+              minLength: 2,
+              maxLength: {
+                value: 20,
+                message: CHECK_OWNER_NAME_LENGTH,
+              },
+              pattern: {
+                value: /[ㄱ-ㅎ|가-힣|a-z|A-Z]/,
+                message: CHECK_OWNER_NAME_TYPE,
+              },
+            })}
+          />
+          {errors.ownerName && (
+            <Box color="red" marginTop={1}>
+              {errors.ownerName.message}
+            </Box>
+          )}
+        </FormControl>
+        <FormControl height={110} width={350}>
+          <FormLabel>개업 일자</FormLabel>
+          <Input
+            type="date"
+            borderRadius={12}
+            {...register('openDate', { required: CHECK_EMPTY_INPUT })}
+          />
+          {errors.openDate && (
+            <Box color="red" marginTop={1}>
+              {errors.openDate.message}
+            </Box>
+          )}
+        </FormControl>
+        <FormControl height={110} width={350}>
+          <FormLabel>업체 전화번호</FormLabel>
+          <Input
+            type="text"
+            placeholder="업체 전화번호를 입력해주세요."
+            borderRadius={12}
+            {...register('phoneNumber', {
+              required: CHECK_EMPTY_INPUT,
+              pattern: {
+                value: /^[0-9+]*$/,
+                message: CHECK_NUMBER_TYPE,
+              },
+            })}
+          />
+          {errors.phoneNumber && (
+            <Box color="red" marginTop={1}>
+              {errors.phoneNumber.message}
+            </Box>
+          )}
+        </FormControl>
+        <FormControl height={162} width={350}>
+          <FormLabel>주소</FormLabel>
+          <Container display="flex" padding={0}>
+            <Select
+              {...register('city', { required: CHECK_EMPTY_INPUT })}
+              width={170}
+              marginRight={2}
+              marginBottom={2}
+              defaultValue=""
+              borderRadius={12}
+            >
+              <option value="" color="hey.normalGray">
+                시 선택
+              </option>
+              <option value="서울시">서울시</option>
+            </Select>
+            <Select
+              {...register('district', { required: CHECK_EMPTY_INPUT })}
+              width={170}
+              defaultValue=""
+              borderRadius={12}
+            >
+              <option value="">구 선택</option>
+              {SEOUL_AREA.map((area) => (
+                <option key={area} value={area}>
+                  {area}
+                </option>
+              ))}
+            </Select>
+          </Container>
+          <Container padding={0}>
+            <Input
+              type="text"
+              placeholder="상세 주소를 입력해주세요."
+              borderRadius={12}
+              {...register('detailAddress', { required: CHECK_EMPTY_INPUT })}
+            />
+          </Container>
+          {(errors.city && (
+            <Box color="red" marginTop={1}>
+              {errors.city.message}
+            </Box>
+          )) ||
+            (errors.district && (
+              <Box color="red" marginTop={1}>
+                {errors.district.message}
+              </Box>
+            )) ||
+            (errors.detailAddress && (
+              <Box color="red" marginTop={1}>
+                {errors.detailAddress.message}
+              </Box>
+            ))}
+        </FormControl>
+        <FormControl height={110} width={350}>
+          <FormLabel>사업자 등록 번호</FormLabel>
+          <Input
+            type="text"
+            placeholder="사업자 등록 번호를 입력해주세요."
+            borderRadius={12}
+            {...register('businessNumber', {
+              required: CHECK_EMPTY_INPUT,
+              pattern: {
+                value: /^[0-9+]*$/,
+                message: CHECK_NUMBER_TYPE,
+              },
+              minLength: 10,
+              maxLength: {
+                value: 10,
+                message: CHECK_BUSINESS_NUMBER_LENGTH,
+              },
+            })}
+          />
+          {errors.businessNumber && (
+            <Box color="red" marginTop={1}>
+              {errors.businessNumber.message}
+            </Box>
+          )}
+        </FormControl>
+        <FormControl height={110} width={350}>
+          <FormLabel>사업자 등록 사진</FormLabel>
+          <Input
+            type="file"
+            {...register('businessLicenseImage', {
+              required: CHECK_EMPTY_INPUT,
+            })}
+            padding={1}
+          />
+          {errors.businessLicenseImage && (
+            <Box color="red" marginTop={1}>
+              {errors.businessLicenseImage.message}
+            </Box>
+          )}
+        </FormControl>
+        <FormControl height={110} width={350}>
+          <FormLabel>영업 시간</FormLabel>
+          <Input
+            type="time"
+            borderRadius={12}
+            {...register('openTime', { required: CHECK_EMPTY_INPUT })}
+            width={170}
+            marginRight={2}
+          />
+          <Input
+            type="time"
+            borderRadius={12}
+            {...register('endTime', { required: CHECK_EMPTY_INPUT })}
+            width={170}
+          />
+          {(errors.openTime && (
+            <Box color="red" marginTop={1}>
+              {errors.openTime.message}
+            </Box>
+          )) ||
+            (errors.endTime && (
+              <Box color="red" marginTop={1}>
+                {errors.endTime.message}
+              </Box>
+            ))}
+        </FormControl>
+        <FormControl>
+          <FormLabel>업체 설명</FormLabel>
+          <Textarea
+            placeholder="업체 설명을 입력해주세요."
+            borderRadius={12}
+            {...register('description', { required: CHECK_EMPTY_INPUT })}
+          />
+          {errors.description && (
+            <Box color="red" marginTop={1}>
+              {errors.description.message}
+            </Box>
+          )}
+        </FormControl>
+        <Button
+          type="submit"
+          width={350}
+          height={14}
+          backgroundColor="hey.main"
+          color="white"
+          borderRadius={10}
+          fontSize={16}
+          fontWeight="medium"
+          marginTop={16}
+          _hover={{ backgroundColor: 'none' }}
+        >
+          등록
+        </Button>
+      </form>
+    </Flex>
   );
 }

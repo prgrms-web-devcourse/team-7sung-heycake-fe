@@ -11,16 +11,18 @@ import {
   SliderThumb,
   SliderTrack,
   Textarea,
+  useToast,
 } from '@chakra-ui/react';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
-import { GrPowerReset } from 'react-icons/gr';
 
 import { publicApi } from '@/components/Api';
 import LocationSelectBox from '@/components/Main/location/locationSelectBox';
 import CakeSelect from '@/components/Orders/CakeSelect';
+import RemoveImageButton from '@/components/Orders/RemoveImageButton';
+import HeaderTitle from '@/components/Shared/headerTitle';
 import {
   breadFlavors,
   cakeCategories,
@@ -30,6 +32,7 @@ import {
 } from '@/constants/cakeFormat';
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import useClickInput from '@/hooks/useClickInput';
+import useHandleAxiosError from '@/hooks/useHandleAxiosError';
 import useImageUpload from '@/hooks/useImageUpload';
 import {
   BreadFlavor,
@@ -60,13 +63,23 @@ export default function NewOrder() {
     handleDragOver,
     handleDrop,
     handleFileInputChange,
-    resetImages,
+    handleDeleteImage,
   } = useImageUpload();
   const [inputRef, handleFileChoose] = useClickInput();
   const [date, setDate] = useState(new Date());
   const router = useRouter();
   const requirementRef = useRef<HTMLTextAreaElement>(null);
   const accessToken = getAccessToken();
+  const toast = useToast();
+  const handleAxiosError = useHandleAxiosError();
+
+  const handleSliderChange = (price: number) => {
+    setHopePrice(price);
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDirectInput(e.target.checked);
+  };
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputTime = event.target.value;
@@ -76,23 +89,101 @@ export default function NewOrder() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (requirementRef.current === null) return;
+
     if (accessToken === null) {
-      alert('로그인을 해주세요');
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: ERROR_MESSAGES.CHECK_LOGIN,
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
-    if (formData.title === '' || requirementRef.current === null) {
-      alert('입력한 값을 확인해 주세요');
+    if (formData.title === '') {
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '제목을 입력해 주세요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
     if (hopePrice < 10000) {
-      alert('최소 금액은 10,000원 이상이에요');
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '최소 금액은 10,000원 이상이에요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
-    if (!timeRegex.test(visitTime)) {
-      alert('시간을 예시에 맞춰서 입력해 주세요');
+    if (visitTime === '') {
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '방문 예정 시간을 입력해 주세요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
+      return;
+    }
+
+    if (requirementRef.current.value === '') {
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '요청사항을 입력해 주세요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
+      return;
+    }
+
+    if (files.length === 0) {
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '예시 사진을 1개 이상 첨부해 주세요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
@@ -125,11 +216,21 @@ export default function NewOrder() {
           access_token: accessToken,
         },
       });
-      alert('주문이 성공적으로 등록되었어요.');
       router.push('/main');
+      const toastId = 'success';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'success',
+          description: '주문을 등록했어요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
     } catch (error) {
-      alert('주문 등록을 실패했어요. 다시 한번 확인해 주세요.');
-      console.error(error);
+      handleAxiosError(error);
     }
   };
 
@@ -150,191 +251,231 @@ export default function NewOrder() {
     }
   }, []);
 
-  const {
-    title,
-    cakeCategory,
-    cakeSize,
-    cakeHeight,
-    breadFlavor,
-    creamFlavor,
-  } = formData;
-
   return (
-    <form style={{ margin: '0 auto', padding: '1rem' }} onSubmit={handleSubmit}>
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        height="150px"
-        border="1px dashed grey"
-        borderRadius="5px"
-        cursor="poiner"
-        margin="0 auto"
-        textAlign="center"
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-        onClick={handleFileChoose}
-      >
-        드래그 앤 드랍 또는 클릭하여 파일을 추가하세요.
-        <br />({files.length}/3)
-        <input
-          hidden
-          ref={inputRef}
-          type="file"
-          multiple
-          onChange={handleFileInputChange}
-        />
-      </Flex>
-      <Flex
-        alignItems="center"
-        width="95%"
-        height="70px"
-        margin="0 auto"
-        gap="1rem"
-      >
-        {previewUrls.map((url) => (
-          <Image
-            key={url}
-            src={url}
-            alt="Preview"
-            width={50}
-            height={50}
-            style={{ borderRadius: '10px' }}
-          />
-        ))}
-        {files.length !== 0 && (
-          <Button type="button" onClick={resetImages}>
-            <GrPowerReset />
-          </Button>
-        )}
-      </Flex>
-      <Flex flexDirection="column" width="100%" gap="1rem">
-        <FormControl id="title">
-          <FormLabel>제목</FormLabel>
-          <Input
-            type="text"
-            name="title"
-            value={title}
-            onChange={handleChange}
-            placeholder="제목을 입력하세요."
-          />
-        </FormControl>
-        <FormControl id="region">
-          <FormLabel>지역</FormLabel>
-          <LocationSelectBox location={location} setLocation={setLocation} />
-        </FormControl>
-        <FormControl id="hopePrice">
-          <FormLabel display="flex" justifyContent="space-between">
-            희망가격
-            <Checkbox
-              isChecked={directInput}
-              onChange={() => setDirectInput(!directInput)}
+    <form onSubmit={handleSubmit}>
+      <HeaderTitle title="주문표 작성" />
+      <Box padding="0 20px" paddingBottom="2rem">
+        <FormControl id="picture" padding="1rem 0">
+          <FormLabel>사진</FormLabel>
+          <Flex gap="1rem">
+            <Flex
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+              width="70px"
+              height="70px"
+              border="1px solid #e3e3e3"
+              borderRadius="1rem"
+              cursor="pointer"
+              textAlign="center"
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
+              onClick={handleFileChoose}
             >
+              <svg
+                width="26"
+                height="27"
+                viewBox="0 0 26 27"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M10.4545 3.69678C9.3499 3.69678 8.45447 4.59221 8.45447 5.69678V5.69678C8.45447 6.09844 8.12886 6.42406 7.72719 6.42406H4.09082C2.98625 6.42406 2.09082 7.31949 2.09082 8.42406V20.7877C2.09082 21.8923 2.98625 22.7877 4.09082 22.7877H21.9091C23.0136 22.7877 23.9091 21.8923 23.9091 20.7877V8.42406C23.9091 7.31949 23.0136 6.42406 21.9091 6.42406H18.2727C17.871 6.42406 17.5454 6.09844 17.5454 5.69678V5.69678C17.5454 4.59221 16.65 3.69678 15.5454 3.69678H10.4545Z"
+                  fill="#E3E3E3"
+                />
+                <ellipse
+                  cx="12.9997"
+                  cy="14.6061"
+                  rx="3.63637"
+                  ry="3.63637"
+                  fill="white"
+                />
+              </svg>
+              <Flex fontSize="0.9rem">
+                <Box color="hey.main">{files.length}</Box>
+                /3
+              </Flex>
+              <input
+                hidden
+                ref={inputRef}
+                type="file"
+                multiple
+                onChange={handleFileInputChange}
+              />
+            </Flex>
+            <Flex alignItems="center" height="70px" gap="1rem">
+              {previewUrls.map((url, urlIndex) => (
+                <Box position="relative" display="inline-block" key={url}>
+                  <Button
+                    width="70px"
+                    height="70px"
+                    onClick={() => handleDeleteImage(urlIndex)}
+                    borderRadius="1rem"
+                    padding="0"
+                    bg="white"
+                    _hover={{ backgroundColor: 'none' }}
+                  >
+                    <Image
+                      key={url}
+                      src={url}
+                      alt="Preview"
+                      width={70}
+                      height={70}
+                      style={{ borderRadius: '1rem' }}
+                    />
+                  </Button>
+                  <RemoveImageButton
+                    onClick={() => handleDeleteImage(urlIndex)}
+                  />
+                </Box>
+              ))}
+            </Flex>
+          </Flex>
+        </FormControl>
+        <Flex flexDirection="column" width="100%" gap="1.4rem">
+          <FormControl id="title">
+            <FormLabel>제목</FormLabel>
+            <Input
+              borderRadius="1rem"
+              height="3rem"
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              placeholder="제목을 입력하세요."
+            />
+          </FormControl>
+          <FormControl id="region">
+            <FormLabel>지역</FormLabel>
+            <LocationSelectBox location={location} setLocation={setLocation} />
+          </FormControl>
+          <FormControl
+            display="flex"
+            flexDirection="column"
+            gap="1rem"
+            id="hopePrice"
+          >
+            <FormLabel>희망가격</FormLabel>
+            <Slider
+              min={10000}
+              max={100000}
+              step={5000}
+              defaultValue={hopePrice}
+              value={directInput ? undefined : hopePrice}
+              onChange={handleSliderChange}
+            >
+              <SliderTrack bg="red.100">
+                <Box position="relative" right={10} />
+                <SliderFilledTrack bg="tomato" />
+              </SliderTrack>
+              <SliderThumb boxSize={6} />
+            </Slider>
+            <Input
+              borderRadius="1rem"
+              height="3rem"
+              disabled={!directInput}
+              type="text"
+              name="hopePrice"
+              value={hopePrice}
+              onChange={(e) => setHopePrice(+e.target.value)}
+              placeholder="희망가격을 입력하세요."
+            />
+            <Checkbox isChecked={directInput} onChange={handleCheckboxChange}>
               직접 입력
             </Checkbox>
-          </FormLabel>
-          <Slider
-            defaultValue={30000}
-            min={10000}
-            max={100000}
-            step={5000}
-            value={hopePrice}
-            onChange={setHopePrice}
+          </FormControl>
+          <FormControl id="visitTime">
+            <FormLabel>방문 예정 시간</FormLabel>
+            <SingleDatepicker
+              propsConfigs={{
+                inputProps: {
+                  borderRadius: '1rem',
+                  height: '3rem',
+                },
+              }}
+              name="date-input"
+              date={date}
+              onDateChange={setDate}
+            />
+            <Input
+              marginTop="1rem"
+              borderRadius="1rem"
+              height="3rem"
+              type="time"
+              name="visitTime"
+              value={visitTime}
+              onChange={handleTimeChange}
+              placeholder="방문시간을 입력하세요."
+            />
+          </FormControl>
+          <CakeSelect<CakeCategory>
+            id="cakeCategory"
+            label="케이크 종류"
+            value={formData.cakeCategory}
+            options={cakeCategories}
+            onChange={handleChange}
+            convertOption={convertCakeCategory}
+          />
+          <CakeSelect<CakeSize>
+            id="cakeSize"
+            label="케이크 크기"
+            value={formData.cakeSize}
+            options={cakeSizes}
+            onChange={handleChange}
+            convertOption={convertCakeSize}
+          />
+          <CakeSelect<CakeHeight>
+            id="cakeHeight"
+            label="케이크 높이"
+            value={formData.cakeHeight}
+            options={cakeHeights}
+            onChange={handleChange}
+            convertOption={convertCakeHeight}
+          />
+          <CakeSelect<BreadFlavor>
+            id="breadFlavor"
+            label="빵 종류"
+            value={formData.breadFlavor}
+            options={breadFlavors}
+            onChange={handleChange}
+            convertOption={convertBreadFlavor}
+          />
+          <CakeSelect<CreamFlavor>
+            id="creamFlavor"
+            label="크림 맛"
+            value={formData.creamFlavor}
+            options={creamFlavors}
+            onChange={handleChange}
+            convertOption={convertCreamFlavor}
+          />
+          <FormControl paddingBottom="2rem" id="requirements">
+            <FormLabel>요청사항</FormLabel>
+            <Textarea
+              borderRadius="1rem"
+              padding="1rem"
+              minH="182px"
+              name="requirements"
+              ref={requirementRef}
+              placeholder="요청사항을 입력하세요. 예) 과일 알레르기가 있어 과일을 빼주세요."
+            />
+          </FormControl>
+          <Button
+            color="white"
+            background="hey.main"
+            height="3.75rem"
+            borderRadius="1rem"
+            type="submit"
+            _hover={{ bg: 'hey.main' }}
           >
-            <SliderTrack bg="red.100">
-              <Box position="relative" right={10} />
-              <SliderFilledTrack bg="tomato" />
-            </SliderTrack>
-            <SliderThumb boxSize={6} />
-          </Slider>
-          <Input
-            disabled={!directInput}
-            type="number"
-            name="hopePrice"
-            value={hopePrice !== 0 ? hopePrice : ''}
-            onChange={(e) => setHopePrice(+e.target.value)}
-            placeholder="희망가격을 입력하세요."
-            min={10000}
-            max={100000}
-            step={5000}
-          />
-        </FormControl>
-        <FormControl id="visitTime">
-          <FormLabel>방문시간</FormLabel>
-          <SingleDatepicker
-            name="date-input"
-            date={date}
-            onDateChange={setDate}
-          />
-          <Input
-            isInvalid={visitTime !== '' && !timeRegex.test(visitTime)}
-            type="text"
-            name="visitTime"
-            value={visitTime}
-            onChange={handleTimeChange}
-            placeholder="방문시간을 입력하세요."
-          />
-          {visitTime !== '' && !timeRegex.test(visitTime) && (
-            <Box color="red">{ERROR_MESSAGES.CHECK_INPUT_TIME}</Box>
-          )}
-        </FormControl>
-        <CakeSelect<CakeCategory>
-          id="cakeCategory"
-          label="케익 종류"
-          value={cakeCategory}
-          options={cakeCategories}
-          onChange={handleChange}
-          convertOption={convertCakeCategory}
-        />
-        <CakeSelect<CakeSize>
-          id="cakeSize"
-          label="케익 크기"
-          value={cakeSize}
-          options={cakeSizes}
-          onChange={handleChange}
-          convertOption={convertCakeSize}
-        />
-        <CakeSelect<CakeHeight>
-          id="cakeHeight"
-          label="케익 높이"
-          value={cakeHeight}
-          options={cakeHeights}
-          onChange={handleChange}
-          convertOption={convertCakeHeight}
-        />
-        <CakeSelect<BreadFlavor>
-          id="breadFlavor"
-          label="빵 종류"
-          value={breadFlavor}
-          options={breadFlavors}
-          onChange={handleChange}
-          convertOption={convertBreadFlavor}
-        />
-        <CakeSelect<CreamFlavor>
-          id="creamFlavor"
-          label="크림 맛"
-          value={creamFlavor}
-          options={creamFlavors}
-          onChange={handleChange}
-          convertOption={convertCreamFlavor}
-        />
-        <FormControl id="requirements">
-          <FormLabel>요청사항</FormLabel>
-          <Textarea
-            minH="100px"
-            name="requirements"
-            ref={requirementRef}
-            placeholder="요청사항을 입력하세요."
-          />
-        </FormControl>
-        <Button background="hey.sub" type="submit">
-          전송하기
-        </Button>
-      </Flex>
+            등록
+          </Button>
+        </Flex>
+      </Box>
     </form>
   );
 }
-
-const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
 
 const initialFormData: CakeForm = {
   title: '',

@@ -1,4 +1,4 @@
-import { Button, Container, Text } from '@chakra-ui/react';
+import { Button, Container, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -22,19 +22,19 @@ export default function Home() {
     }
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     router.prefetch('/main');
     isLoggedIn();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <>
+    <VStack minH="100vh" justifyContent="center">
       <Container
+        justifyContent="center"
         display="flex"
         flexDir="column"
         alignItems="center"
-        padding="14rem 0 10rem 0"
       >
         <Image
           src="/images/logo.png"
@@ -43,7 +43,7 @@ export default function Home() {
           height={200}
           quality={100}
         />
-        <Text color="hey.normalGray" fontSize="sm">
+        <Text color="hey.normalGray" fontSize="sm" paddingBottom="1rem">
           나만의 커스텀 케이크 주문 제작 플랫폼
         </Text>
       </Container>
@@ -55,6 +55,7 @@ export default function Home() {
           height="60px"
           bgColor="hey.kakaoOrange"
           borderRadius="10px"
+          _hover={{ backgroundColor: 'none' }}
         >
           <Image
             src="/images/kakao_login_large_wide.png"
@@ -79,6 +80,6 @@ export default function Home() {
           비회원으로 둘러보기
         </Button>
       </Container>
-    </>
+    </VStack>
   );
 }

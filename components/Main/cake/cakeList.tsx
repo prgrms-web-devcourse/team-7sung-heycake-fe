@@ -1,12 +1,12 @@
-import { Box, CircularProgress, Grid, useToast } from '@chakra-ui/react';
+import { CircularProgress, Grid, useToast } from '@chakra-ui/react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import getCakeList from '@/components/Api/Main';
-import ApiErrorAlert from '@/components/Shared/apiErrorAlert';
-import { ICakeItemData } from '@/types/Main';
+import ErrorPage from '@/components/Error';
+import { CakeItemJson } from '@/types/Main';
 
 import CakeItem from './cakeItem';
 import CakeListSkeleton from './cakeListSkeleton';
@@ -32,27 +32,17 @@ export default function CakeList({ category, location }: any) {
   useEffect(() => {
     if (inView) fetchNextPage();
     if (status === 'success' && data?.pages[0]?.content.length === 0) {
-      const id = `cake empty`;
-      if (!toast.isActive(id)) {
+      const toastId = 'info';
+      if (!toast.isActive(toastId)) {
         toast({
-          id,
+          id: toastId,
           status: 'info',
           position: 'bottom',
-          duration: 2000,
-          render: () => (
-            <Box
-              m={3}
-              mb={80}
-              color="white"
-              p={3}
-              bg="hey.darkGray"
-              borderRadius={6}
-              textAlign="center"
-              fontWeight="500"
-            >
-              해당 지역에 케이크가 없습니다
-            </Box>
-          ),
+          description: '해당 지역에 케이크가 없어요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
         });
       }
     }
@@ -64,30 +54,33 @@ export default function CakeList({ category, location }: any) {
   }
 
   if (status === 'error') {
-    return <ApiErrorAlert />;
+    return <ErrorPage />;
   }
 
   return (
     <>
-      <Grid padding={0} gap={4} flexDirection="column">
+      <Grid p={0} flexDirection="column">
         {data?.pages.map((page) =>
-          page?.content.map((item: ICakeItemData) => (
+          page?.content.map((item: CakeItemJson) => (
             <Link key={item.orderId} href={`/orders/${item.orderId}`}>
               <CakeItem
                 title={item.title}
                 category={item.cakeInfo.cakeCategory}
                 cakeSize={item.cakeInfo.cakeSize}
+                creamFlavor={item.cakeInfo.creamFlavor}
+                breadFlavor={item.cakeInfo.breadFlavor}
                 image={item.images[0]}
                 price={item.hopePrice}
                 status={item.orderStatus}
                 visitTime={item.visitTime}
+                offerCount={item.offerCount}
               />
             </Link>
           ))
         )}
       </Grid>
       {isFetchingNextPage ? (
-        <Grid justifyContent="center" mt={12}>
+        <Grid justifyContent="center" mt={12} h="80px">
           <CircularProgress size="80px" isIndeterminate color="hey.main" />
         </Grid>
       ) : (

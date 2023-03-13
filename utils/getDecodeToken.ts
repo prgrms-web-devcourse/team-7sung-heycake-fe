@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
 
+import { Roles } from '@/types/role';
+
 interface DecodedToken {
   [key: string]: any;
 }
@@ -9,14 +11,16 @@ const decodeToken = (token: string): DecodedToken | null => {
     const decoded = jwt.decode(token);
     return decoded as DecodedToken;
   } catch (err) {
-    console.error(err);
-    return null;
+    throw Error();
   }
 };
 
-const getMemberIdFromToken = (token: string): string | null => {
+export const getMemberIdFromToken = (token: string): number | null => {
   const decoded = decodeToken(token);
   return decoded?.memberId || null;
 };
 
-export default getMemberIdFromToken;
+export const getRoleFromToken = (token: string): Roles | null => {
+  const decoded = decodeToken(token);
+  return decoded?.roles[0] || null;
+};

@@ -1,18 +1,30 @@
-import { Box, Flex, Heading, Tag } from '@chakra-ui/react';
+import {
+  Badge,
+  Box,
+  Button,
+  Flex,
+  Image,
+  Text,
+  useToast,
+} from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 import { publicApi } from '@/components/Api';
 import { DataTable, ImageSlider, Thread } from '@/components/Orders';
+import HeaderTitle from '@/components/Shared/headerTitle';
+import { CAKE_CATEGORY } from '@/constants/Main';
 import { Order, ThreadDto } from '@/types/orders';
+import { Roles } from '@/types/role';
+import { getAccessToken } from '@/utils/getAccessToken';
+import { getRoleFromToken } from '@/utils/getDecodeToken';
+import numberWithCommas from '@/utils/numberWithCommas';
 import {
   convertBreadFlavor,
-  convertCakeCategory,
   convertCakeHeight,
   convertCakeSize,
   convertCreamFlavor,
-  getOrderStatusText,
 } from '@/utils/orders';
 
 interface OrdersProps {
@@ -22,86 +34,183 @@ interface OrdersProps {
 }
 
 export default function Orders({ order, threads, orderId }: OrdersProps) {
+  const accessToken = getAccessToken();
+  const [role, setRole] = useState<Roles | null>(null);
+  const router = useRouter();
+  const toast = useToast();
+
+  const handleButtonClick = () => {
+    if (role === 'ROLE_ADMIN' || role === 'ROLE_MARKET') {
+      router.push(`/orders/${orderId}/new-offer`);
+    } else {
+      const toastId = 'success';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          title: '사장님만 신청할 수 있어요',
+          description:
+            '사장님이시라면 마이페이지에서 사장님 등록을 할 수 있어요',
+          status: 'warning',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    const handleSetRole = () => {
+      if (accessToken) {
+        const roleFromToken = getRoleFromToken(accessToken);
+        if (roleFromToken) setRole(roleFromToken);
+      }
+    };
+
+    handleSetRole();
+  }, [accessToken]);
+
   return (
     <>
-      <ImageSlider images={order.images} />
+      <HeaderTitle title="" />
+      <Box position="relative">
+        {order.orderStatus !== 'NEW' && (
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            position="absolute"
+            top={0}
+            left={0}
+            w="100%"
+            h="100%"
+            bg="rgba(0,0,0,0.2)"
+            zIndex={4}
+            color="white"
+            fontSize="2rem"
+          >
+            주문 완료
+          </Flex>
+        )}
+        <ImageSlider images={order.images} />
+      </Box>
       <Flex
         flexDirection="column"
-        style={{ width: '100%', gap: '1rem', padding: '1rem' }}
+        width="100%"
+        gap="1rem"
+        padding="1rem"
+        paddingBottom="8rem"
       >
-        <div>
-          <Tag
-            style={{
-              color: 'white',
-              backgroundColor: '#e53e3e',
-              padding: '0 1rem',
-              paddingBottom: '2px',
-              borderRadius: '1rem',
-            }}
+        <Flex flexDirection="column" alignItems="center" gap="0.1rem">
+          <Badge
+            colorScheme={order.cakeInfo.cakeCategory}
+            p={1}
+            px={2}
+            borderRadius={10}
+            fontWeight={500}
           >
-            {getOrderStatusText(order.orderStatus, order.offerCount)}
-          </Tag>
-          <Heading as="h1" size="xl">
+            {CAKE_CATEGORY[order.cakeInfo.cakeCategory]}
+          </Badge>
+          <Box fontSize="2rem" fontWeight="600">
             {order.title}
-          </Heading>
-          <Box fontSize="0.9rem" color="#777777">
+          </Box>
+          <Box fontSize="1.2rem" color="hey.darkGray">
             {order.region}
           </Box>
-        </div>
-        <DataTable
-          title="케익 맛"
-          value={convertBreadFlavor(order.cakeInfo.breadFlavor)}
-        />
-        <DataTable
-          title="케익 카테고리"
-          value={convertCakeCategory(order.cakeInfo.cakeCategory)}
-        />
-        <DataTable
-          title="케익 높이"
-          value={convertCakeHeight(order.cakeInfo.cakeHeight)}
-        />
-        <DataTable
-          title="케익 사이즈"
-          value={convertCakeSize(order.cakeInfo.cakeSize)}
-        />
-        <DataTable
-          title="케익 크림 맛"
-          value={convertCreamFlavor(order.cakeInfo.creamFlavor)}
-        />
-        <Box padding="2rem 0" fontSize="0.8rem">
-          {order.cakeInfo.requirements}
+        </Flex>
+        <Box fontSize="1.4rem" fontWeight="700" paddingTop="1rem">
+          주문 요약
         </Box>
-        <Flex
-          justifyContent="space-between"
-          bg="#feebcb"
-          padding="1.4rem"
-          alignItems="center"
-          fontWeight="bold"
-          borderRadius="6px"
-        >
-          <Image
-            alt="birthday-cake"
-            src="/images/birthday-cake.png"
-            width={40}
-            height={40}
+        <Box bg="#f8f8f8" padding="2rem" borderRadius="1rem">
+          <DataTable
+            title="희망 가격"
+            value={`~ ${numberWithCommas(order.hopePrice)}원`}
           />
-          신청한 케이크 업체 {order.offerCount}개
-          <Link
-            style={{
-              backgroundColor: '#f96400',
-              color: 'white',
-              padding: '10px',
-              borderRadius: '5px',
-            }}
-            href="/orders/[orderId]/new-offer"
-            as={`/orders/${orderId}/new-offer`}
+          <DataTable title="방문 예정 시간" value={order.visitDate} />
+          <DataTable
+            title="케이크 맛"
+            value={convertBreadFlavor(order.cakeInfo.breadFlavor)}
+          />
+          <DataTable
+            title="케이크 높이"
+            value={convertCakeHeight(order.cakeInfo.cakeHeight)}
+          />
+          <DataTable
+            title="케이크 크기"
+            value={convertCakeSize(order.cakeInfo.cakeSize)}
+          />
+          <DataTable
+            title="크림 맛"
+            value={convertCreamFlavor(order.cakeInfo.creamFlavor)}
+          />
+        </Box>
+        <Box fontSize="1.4rem" fontWeight="700" paddingTop="1rem">
+          요청사항
+        </Box>
+        <Box padding="1rem 0">{order.cakeInfo.requirements}</Box>
+        <Flex fontSize="1.4rem" fontWeight="700" gap="0.5rem" paddingTop="1rem">
+          신청한 케이크 업체 <Box color="hey.main">{order.offerCount}</Box>
+        </Flex>
+        {threads.map((thread) => (
+          <Thread
+            key={thread.offerId}
+            thread={thread}
+            orderId={orderId}
+            order={order}
+          />
+        ))}
+        {threads.length === 0 && (
+          <Flex flexDir="column" alignItems="center" padding={4}>
+            <Image
+              src="/images/grayCakeIcon.png"
+              alt="회색 케이크 아이콘"
+              width={120}
+              height={120}
+            />
+            <Flex flexDir="column" alignItems="center" padding={4}>
+              <Text fontSize={20} fontWeight="600">
+                아직 신청한 업체가 없어요!
+              </Text>
+              <Text fontSize={16} textAlign="center" padding="8px 0">
+                사장님이시라면 신청하기 버튼을 눌러
+                <br />
+                주문확인서를 작성해보세요.
+              </Text>
+            </Flex>
+          </Flex>
+        )}
+        {order.orderStatus === 'NEW' ? (
+          <Button
+            w="92%"
+            maxW="530px"
+            position="fixed"
+            zIndex="10"
+            bottom={8}
+            color="white"
+            background="hey.main"
+            height="3.75rem"
+            borderRadius="1rem"
+            type="submit"
+            _hover={{ bg: 'hey.main' }}
+            onClick={handleButtonClick}
           >
             신청하기
-          </Link>
-        </Flex>
-        {threads?.map((thread) => (
-          <Thread key={thread.offerId} thread={thread} orderId={orderId} />
-        ))}
+          </Button>
+        ) : (
+          <Button
+            w="92%"
+            maxW="530px"
+            position="fixed"
+            zIndex="10"
+            bottom={8}
+            height="3.75rem"
+            borderRadius="1rem"
+            type="submit"
+            isDisabled
+          >
+            신청 종료
+          </Button>
+        )}
       </Flex>
     </>
   );

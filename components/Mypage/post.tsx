@@ -1,10 +1,20 @@
-import { Box, Button, Card, Container, Text } from '@chakra-ui/react';
+import { Badge, Button, Container, Text, useToast } from '@chakra-ui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { BsDot } from 'react-icons/bs';
+
+import useHandleAxiosError from '@/hooks/useHandleAxiosError';
+import { MypagePost } from '@/types/orders';
+import {
+  convertCakeCategory,
+  convertCakeHeight,
+  convertCakeSize,
+  convertCreamFlavor,
+  getOrderStatusText,
+} from '@/utils/orders';
 
 import { deleteOrder } from '../Api/Order';
-import { IMypagePost } from './types';
 
 export default function Post({
   id,
@@ -12,59 +22,128 @@ export default function Post({
   orderStatus,
   title,
   visitTime,
-}: IMypagePost) {
+  createdAt,
+  cakeInfo,
+  hopePrice,
+  count,
+}: MypagePost) {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const toast = useToast();
+  const handleAxiosError = useHandleAxiosError();
 
   const deleteOrderMutation = useMutation(deleteOrder, {
     onSuccess: () => {
       queryClient.invalidateQueries(['orderList']);
     },
+    onError: (error) => {
+      handleAxiosError(error);
+    },
   });
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    deleteOrderMutation.mutate(id);
+    if (orderStatus === 'RESERVED') {
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          duration: 1000,
+          description: '예약된 주문은 삭제할 수 없습니다',
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
+    } else {
+      deleteOrderMutation.mutate(id);
+    }
   };
 
   return (
     <Container
-      width="100"
-      height="8rem"
-      bgColor="hey.lightOrange"
-      padding="1rem"
-      marginBottom="1rem"
-      borderRadius="10"
-      boxShadow="4px 2px 2px lightGrey"
-      display="flex"
+      marginBottom="4rem"
       key={id}
       onClick={() => router.push(`/orders/${id}`)}
+      height={140}
+      width={360}
+      padding={0}
     >
-      <Card width={74} height={74} shadow="none" marginTop={3}>
-        {imageUrl && <Image src={imageUrl} alt="케이크 이미지" fill />}
-      </Card>
-      <Container marginTop={3}>
-        <Box
-          color="white"
-          borderRadius="1rem"
-          backgroundColor="hey.main"
-          padding="0 1rem"
-          width="fit-content"
-          height={4}
-          fontSize={4}
+      <Container display="flex" justifyContent="space-between">
+        <Text fontSize={18} fontWeight="semibold">
+          주문번호 {createdAt.slice(0, 10).replaceAll('-', '').concat(id)}
+        </Text>
+        <Button
+          onClick={(e) => handleDelete(e)}
+          fontSize={12}
+          background="none"
+          color="hey.normalGray"
+          _hover={{ backgroundColor: 'none' }}
         >
-          {orderStatus}
-        </Box>
-        <Container padding="0" marginTop={2}>
-          <Text fontSize="1rem" fontWeight="bold" marginBottom={1}>
+          삭제
+        </Button>
+      </Container>
+      <Container display="flex" marginTop={2}>
+        <Container width="240px" height="150px" borderRadius="7px" padding={0}>
+          <Image
+            src={imageUrl}
+            width={120}
+            height={120}
+            quality={100}
+            alt="케이크 이미지"
+          />
+        </Container>
+        <Container>
+          <Badge
+            width={12}
+            borderRadius="6px"
+            display="flex"
+            justifyContent="center"
+            fontSize={12}
+            marginBottom={1}
+            padding={0}
+          >
+            {convertCakeCategory(cakeInfo.cakeCategory)}
+          </Badge>
+          <Text fontSize={14} marginBottom={1}>
             {title}
           </Text>
-          <Text color="gray">{visitTime.slice(0, -3)}</Text>
+          <Text
+            fontSize={12}
+            color="hey.normalGray"
+            display="flex"
+            marginBottom={1}
+          >
+            {convertCakeSize(cakeInfo.cakeSize)}
+            <BsDot />
+            {convertCakeHeight(cakeInfo.cakeHeight)}
+            <BsDot />
+            {convertCreamFlavor(cakeInfo.creamFlavor)}
+          </Text>
+          <Text fontSize={14} fontWeight="bold" marginBottom={1}>
+            ~{hopePrice}원
+          </Text>
+          <Container display="flex" marginBottom={1} padding={0}>
+            <Image
+              src="/images/CalenderIcon.png"
+              width={20}
+              height={10}
+              alt="캘린더 아이콘"
+            />
+            <Text color="hey.normalGray" fontSize={12} display="flex">
+              {visitTime.slice(0, 10).replaceAll('-', '.')}
+              <BsDot />
+            </Text>
+            <Text color="hey.main" fontSize={12}>
+              {getOrderStatusText(orderStatus, count) !==
+              ('선택 완료' || '거래 완료' || '알 수 없는 상태')
+                ? `오퍼 ${getOrderStatusText(orderStatus, count)}`
+                : getOrderStatusText(orderStatus, count)}
+            </Text>
+          </Container>
         </Container>
       </Container>
-      <Button backgroundColor="hey.lightOrange" onClick={handleDelete}>
-        X
-      </Button>
     </Container>
   );
 }

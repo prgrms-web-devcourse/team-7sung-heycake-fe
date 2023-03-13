@@ -1,5 +1,6 @@
 body {
   font-family: 'Pretendard', sans-serif !important;
+  user-select: none;
 }
 
 ::-webkit-scrollbar {

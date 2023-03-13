@@ -1,22 +1,24 @@
 import { Button } from '@chakra-ui/react';
 
-import { ILocationListItem } from '@/types/Main';
+import { LocationListItemProps } from '@/types/Main';
 
 export default function LocationListItem({
   name,
-  onClose,
-  setLocation,
-}: ILocationListItem) {
+  onClick,
+}: LocationListItemProps) {
   return (
     <Button
-      h={14}
-      fontSize="2xl"
-      bgColor="hey.lightOrange"
-      onClick={() => {
-        setLocation(name);
-        localStorage.setItem('location', name);
-        onClose();
+      h={12}
+      variant="outline"
+      fontWeight={400}
+      _focus={{
+        color: 'hey.main',
+        bg: 'white',
+        fontWeight: '700',
+        borderColor: 'hey.main',
       }}
+      onClick={onClick}
+      _hover={{ backgroundColor: 'none' }}
     >
       {name}
     </Button>

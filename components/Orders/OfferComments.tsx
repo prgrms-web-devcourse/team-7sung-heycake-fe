@@ -3,39 +3,41 @@ import {
   Button,
   Flex,
   FormControl,
-  Input,
+  Image as ChakraImage,
   InputGroup,
-  InputRightElement,
+  Textarea,
+  useToast,
 } from '@chakra-ui/react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 import Image from 'next/image';
-import { useRef } from 'react';
-import { AiFillDelete, AiFillFileAdd } from 'react-icons/ai';
-import { GrPowerReset } from 'react-icons/gr';
+import { useEffect, useRef, useState } from 'react';
 
+import ERROR_MESSAGES from '@/constants/errorMessages';
 import useClickInput from '@/hooks/useClickInput';
+import useHandleAxiosError from '@/hooks/useHandleAxiosError';
 import useImageUpload from '@/hooks/useImageUpload';
 import { OfferComment } from '@/types/offer';
+import formatCommentDate from '@/utils/formatCommentDate';
 import { getAccessToken } from '@/utils/getAccessToken';
+import { getMemberIdFromToken } from '@/utils/getDecodeToken';
 
 import { publicApi } from '../Api';
-
-interface ErrorResponse {
-  message?: string;
-}
+import RemoveImageButton from './RemoveImageButton';
 
 export default function OfferComments({ offerId }: { offerId: number }) {
-  const { previewUrls, files, handleFileInputChange, resetImages } =
+  const toast = useToast();
+  const { previewUrls, files, handleFileInputChange, handleDeleteImage } =
     useImageUpload(1);
   const [inputRef, handleFileChoose] = useClickInput();
-  const commentRef = useRef<HTMLInputElement>(null);
+  const commentRef = useRef<HTMLTextAreaElement>(null);
   const queryClient = useQueryClient();
   const { data, isLoading, isError } = useQuery<OfferComment[]>(
     ['comments', offerId],
     () => publicApi.get(`/comments?offerId=${offerId}`).then((res) => res.data)
   );
   const accessToken = getAccessToken();
+  const handleAxiosError = useHandleAxiosError();
+  const [memberId, setMemberId] = useState<number | null>(null);
 
   const removeCommentMutation = useMutation(
     (commentId: number) =>
@@ -48,8 +50,22 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       onSuccess: () => {
         queryClient.invalidateQueries(['comments', offerId]);
       },
+      onError: (error) => {
+        handleAxiosError(error);
+      },
     }
   );
+
+  useEffect(() => {
+    const handleSetMemberId = () => {
+      if (accessToken) {
+        const member = getMemberIdFromToken(accessToken);
+        if (member) setMemberId(member);
+      }
+    };
+
+    handleSetMemberId();
+  }, [accessToken, memberId]);
 
   const addCommentMutation = useMutation(
     (formData: FormData) =>
@@ -63,6 +79,9 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       onSuccess: () => {
         queryClient.invalidateQueries(['comments', offerId]);
       },
+      onError: (error) => {
+        handleAxiosError(error);
+      },
     }
   );
 
@@ -70,12 +89,34 @@ export default function OfferComments({ offerId }: { offerId: number }) {
     event.preventDefault();
 
     if (accessToken === null) {
-      alert('로그인을 해주세요');
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: ERROR_MESSAGES.CHECK_LOGIN,
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
     if (commentRef.current === null || commentRef.current === undefined) {
-      alert('댓글 내용을 입력해 주세요');
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '댓글 내용을 입력해 주세요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
@@ -90,30 +131,18 @@ export default function OfferComments({ offerId }: { offerId: number }) {
     try {
       await addCommentMutation.mutateAsync(newFormData);
     } catch (error) {
-      const axiosError = error as AxiosError<ErrorResponse>;
-      if (!axiosError.response) return;
-
-      const errorMessage = JSON.parse(
-        axiosError.response.data.message ?? '{}'
-      ) as { message?: string };
-
-      if (axiosError.response.status === 400) {
-        alert(errorMessage.message || '검증에 실패했습니다.');
-      } else if (axiosError.response.status === 401) {
-        alert(errorMessage.message || '인증되지 않은 요청입니다.');
-      } else if (axiosError.response?.status === 403) {
-        alert(errorMessage.message || '접근 권한이 없습니다.');
-      } else if (axiosError.response?.status === 404) {
-        alert(errorMessage.message || '존재하지 않는 스레드입니다.');
-      } else if (axiosError.response?.status === 500) {
-        alert(
-          errorMessage.message ||
-            '서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.'
-        );
-      } else {
-        alert(
-          '해당 업체를 선택하는데에 예상치 못한 애러가 발생했어요. 다시 시도해 주세요.'
-        );
+      handleAxiosError(error);
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '댓글은 작성자와 사장님만 등록 가능해요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
       }
     }
   };
@@ -129,50 +158,81 @@ export default function OfferComments({ offerId }: { offerId: number }) {
   return (
     <>
       {data.map((comment) => (
-        <Flex flexDirection="column" key={comment.commentId} gap="1rem">
+        <Flex flexDirection="column" key={comment.commentId} padding="6px 0">
           <Box display="flex" justifyContent="space-between">
-            <p>{comment.comment}</p>
-            <Button
-              size="xs"
-              colorScheme="red"
-              leftIcon={<AiFillDelete />}
-              onClick={() =>
-                removeCommentMutation.mutateAsync(comment.commentId)
-              }
-            >
-              삭제
-            </Button>
+            <Flex gap="0.5rem" fontSize="10px" alignItems="center">
+              <Box color="#707070" fontSize="14px">
+                {comment.nickname}
+              </Box>
+              {formatCommentDate(comment.createdAt)}
+            </Flex>
+            {comment.memberId === memberId && (
+              <Button
+                size="xs"
+                onClick={() =>
+                  removeCommentMutation.mutateAsync(comment.commentId)
+                }
+                bg="white"
+                color="#707070"
+                _hover={{ backgroundColor: 'none' }}
+              >
+                삭제
+              </Button>
+            )}
           </Box>
+          <Box>{comment.comment}</Box>
           {comment.image && (
             <Image src={comment.image} alt="profile" width={50} height={50} />
           )}
         </Flex>
       ))}
       <form onSubmit={handleSubmit}>
-        <FormControl>
-          <Flex justify="space-between" align="center">
-            <InputGroup size="md">
-              <Input
-                ref={commentRef}
+        <FormControl borderTop="1px solid #e3e3e3" padding="1rem 0">
+          <Flex justify="space-between" align="center" paddingBottom="1rem">
+            <InputGroup size="md" gap="1rem">
+              <Button
+                h="44px"
+                w="44px"
+                onClick={handleFileChoose}
+                bg="white"
+                p={0}
+                border="1px solid #e3e3e3"
+                borderRadius="12px"
+                _hover={{ bg: 'white' }}
+              >
+                <input
+                  hidden
+                  ref={inputRef}
+                  type="file"
+                  multiple
+                  onChange={handleFileInputChange}
+                />
+                <ChakraImage
+                  src="/images/cameraIcon.png"
+                  width="24px"
+                  height="24px"
+                  alt="cameraIcon"
+                />
+              </Button>
+              <Textarea
+                minH="80px"
                 bg="white"
                 pr="4.5rem"
-                placeholder="댓글을 입력해 주세요"
+                fontSize="14px"
+                borderRadius="1rem"
+                placeholder="댓글을 작성해주세요."
+                ref={commentRef}
               />
-              <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={handleFileChoose}>
-                  <input
-                    hidden
-                    ref={inputRef}
-                    type="file"
-                    multiple
-                    onChange={handleFileInputChange}
-                  />
-                  <AiFillFileAdd />
-                </Button>
-              </InputRightElement>
             </InputGroup>
-            <Button type="submit">전송</Button>
           </Flex>
+          <Button
+            type="submit"
+            bg="#efefef"
+            float="right"
+            _hover={{ backgroundColor: 'none' }}
+          >
+            등록
+          </Button>
           {previewUrls.length !== 0 && (
             <Flex
               alignItems="center"
@@ -181,21 +241,31 @@ export default function OfferComments({ offerId }: { offerId: number }) {
               margin="0 auto"
               gap="1rem"
             >
-              {previewUrls.map((url) => (
-                <Image
-                  key={url}
-                  src={url}
-                  alt="Preview"
-                  width={50}
-                  height={50}
-                  style={{ borderRadius: '10px' }}
-                />
+              {previewUrls.map((url, urlIndex) => (
+                <Box position="relative" display="inline-block" key={url}>
+                  <Button
+                    width="70px"
+                    height="70px"
+                    onClick={() => handleDeleteImage(urlIndex)}
+                    borderRadius="1rem"
+                    padding="0"
+                    bg="white"
+                    _hover={{ backgroundColor: 'none' }}
+                  >
+                    <Image
+                      key={url}
+                      src={url}
+                      alt="Preview"
+                      width={70}
+                      height={70}
+                      style={{ borderRadius: '1rem' }}
+                    />
+                  </Button>
+                  <RemoveImageButton
+                    onClick={() => handleDeleteImage(urlIndex)}
+                  />
+                </Box>
               ))}
-              {files.length !== 0 && (
-                <Button type="button" onClick={resetImages}>
-                  <GrPowerReset />
-                </Button>
-              )}
             </Flex>
           )}
         </FormControl>

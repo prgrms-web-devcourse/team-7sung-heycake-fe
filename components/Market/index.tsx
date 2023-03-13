@@ -1,25 +1,29 @@
-import { Container, Divider, Flex, Text } from '@chakra-ui/react';
+import { Box, Card, Container, Flex, Text } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import { getMarketDetail } from '@/components/Api/Market';
+import ErrorPage from '@/components/Error';
+import HeaderTitle from '@/components/Shared/headerTitle';
+import KakaoMaps from '@/components/Shared/kakaoMaps';
+import MarketProfileSkeleton from '@/components/Shared/marketProfileSkeleton';
 import {
   MarketAddressIcon,
-  MarketInfoIcon,
   MarketOpeningIcon,
   MarketTelIcon,
 } from '@/public/icon';
-
-import { getMarketDetail } from '../Api/Market';
-import ApiErrorAlert from '../Shared/apiErrorAlert';
-import MarketProfileSkeleton from './marketProfileSkeleton';
-import MarketTitle from './marketTitle';
+import { numberWithHyphenPhone } from '@/utils/numberWithHyphen';
 
 export default function MarketProfile() {
   const router = useRouter();
   const id = router.query.id as string;
-  const { status, data } = useQuery(['업체 상세 정보', id], () =>
-    getMarketDetail({ enrollmentId: id })
+  const { status, data } = useQuery(
+    ['업체 상세 정보', id],
+    () => getMarketDetail({ enrollmentId: id }),
+    {
+      enabled: router.isReady,
+    }
   );
 
   if (status === 'loading' || router.isFallback) {
@@ -27,58 +31,51 @@ export default function MarketProfile() {
   }
 
   if (status === 'error') {
-    return <ApiErrorAlert />;
+    return <ErrorPage />;
   }
 
-  const address = `${data.marketAddress.city} ${data.marketAddress.district} ${data.marketAddress.detailAddress}`;
+  const address = `${data.marketAddress.city} ${data.marketAddress.district}`;
   const openingHours = `${data.openTime} ~ ${data.endTime}`;
 
   return (
     <>
-      <MarketTitle title={data.marketName} />
-      <Container centerContent gap={5} padding={4}>
-        <Image src={data.marketImage} alt="로고" width={240} height={240} />
-        <Container padding={0}>
-          <Flex align="center" gap={2}>
-            <MarketInfoIcon w={7} h={7} />
-            <Text color="hey.main" fontWeight={800} fontSize="xl">
-              업체 소개
+      <HeaderTitle title={data.marketName} />
+      <Card w="100%" h={200} overflow="hidden" borderRadius={0}>
+        <Image
+          src={data.marketImage}
+          alt="로고"
+          fill
+          sizes="40vh"
+          style={{ objectFit: 'cover' }}
+        />
+      </Card>
+      <Container px={5} pt={5} fontSize="sm" fontWeight={700}>
+        <Box h="92px">
+          <Flex>
+            <MarketAddressIcon w={6} h={6} mb={1} />
+            <Text fontWeight={400}>
+              {address} {data.marketAddress.detailAddress}
             </Text>
           </Flex>
-          <Text padding={2}>{data.description}</Text>
-        </Container>
-        <Divider borderColor="hey.main" />
-        <Container padding={0}>
-          <Flex align="center" gap={2}>
-            <MarketAddressIcon w={8} h={8} />
-            <Text color="hey.main" fontWeight={800} fontSize="xl">
-              주소
+          <Flex>
+            <MarketTelIcon w={6} h={6} mb={1} />
+            <Text fontWeight={400}>
+              {numberWithHyphenPhone(data.phoneNumber)}
             </Text>
           </Flex>
-          <Text padding={2}>{address}</Text>
-        </Container>
-        <Divider borderColor="hey.main" />
-        <Container padding={0}>
-          <Flex align="center" gap={2}>
-            <MarketTelIcon w={7} h={7} />
-            <Text color="hey.main" fontWeight={800} fontSize="xl">
-              전화번호
-            </Text>
+          <Flex>
+            <MarketOpeningIcon w={6} h={6} mb={1} />
+            <Text fontWeight={400}>{openingHours}</Text>
           </Flex>
-          <Text padding={2}>{data.phoneNumber}</Text>
-        </Container>
-        <Divider borderColor="hey.main" />
-        <Container padding={0}>
-          <Flex align="center" gap={2}>
-            <MarketOpeningIcon w={7} h={7} />
-            <Text color="hey.main" fontWeight={800} fontSize="xl">
-              영업시간
-            </Text>
-          </Flex>
-          <Text padding={2}>{openingHours}</Text>
-        </Container>
-        <Divider borderColor="hey.main" />
+        </Box>
       </Container>
+      <KakaoMaps address={address} title={data.marketName} />
+      <Box h={24} p={4}>
+        <Text fontWeight={600}>매장소개</Text>
+        <Text mt={2} fontWeight={400}>
+          {data.description}
+        </Text>
+      </Box>
     </>
   );
 }

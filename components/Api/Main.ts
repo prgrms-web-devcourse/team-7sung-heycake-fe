@@ -1,5 +1,5 @@
 import API_ERROR_MESSAGES from '@/constants/Api';
-import { IgetCakeList } from '@/types/Api';
+import { GetCakeList } from '@/types/Api';
 
 import { internalApi } from '.';
 
@@ -7,7 +7,7 @@ export default async function getCakeList({
   location,
   category,
   cursor,
-}: IgetCakeList) {
+}: GetCakeList) {
   try {
     const response = await internalApi.post(`/api/orders`, {
       location,
