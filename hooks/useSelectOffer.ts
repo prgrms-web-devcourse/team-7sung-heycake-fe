@@ -31,15 +31,19 @@ const useSelectOffer = () => {
     {
       onSuccess: (_, variables) => {
         router.push(`/main`);
-        toast({
-          status: 'success',
-          description: variables.isPaid
-            ? '결제 완료! 만나서 수령해주세요'
-            : '만나서 결제를 선택하셨어요',
-          containerStyle: {
-            marginBottom: '380px',
-          },
-        });
+        const toastId = 'success';
+        if (!toast.isActive(toastId)) {
+          toast({
+            id: toastId,
+            status: 'success',
+            description: variables.isPaid
+              ? '결제 완료! 만나서 수령해주세요'
+              : '만나서 결제를 선택하셨어요',
+            containerStyle: {
+              marginBottom: '380px',
+            },
+          });
+        }
       },
       onError: (error) => {
         handleAxiosError(error);
@@ -53,13 +57,17 @@ const useSelectOffer = () => {
       if (accessToken) {
         mutation.mutate(requestBody);
       } else {
-        toast({
-          status: 'error',
-          description: ERROR_MESSAGES.CHECK_LOGIN,
-          containerStyle: {
-            marginBottom: '380px',
-          },
-        });
+        const toastId = 'error';
+        if (!toast.isActive(toastId)) {
+          toast({
+            id: toastId,
+            status: 'error',
+            description: ERROR_MESSAGES.CHECK_LOGIN,
+            containerStyle: {
+              marginBottom: '380px',
+            },
+          });
+        }
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -36,14 +36,18 @@ export default function CakeMain() {
     if (accessToken) {
       router.push('/orders/new');
     } else {
-      toast({
-        title: ERROR_MESSAGES.CHECK_LOGIN,
-        status: 'error',
-        duration: 3000,
-        containerStyle: {
-          marginBottom: '380px',
-        },
-      });
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          title: ERROR_MESSAGES.CHECK_LOGIN,
+          status: 'error',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
     }
   };
 

@@ -44,13 +44,17 @@ export default function Post({
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (orderStatus === 'RESERVED') {
-      toast({
-        status: 'error',
-        description: '예약된 주문은 삭제할 수 없습니다',
-        containerStyle: {
-          marginBottom: '380px',
-        },
-      });
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '예약된 주문은 삭제할 수 없습니다',
+          containerStyle: {
+            marginBottom: '380px',
+          },
+        });
+      }
     } else {
       deleteOrderMutation.mutate(id);
     }

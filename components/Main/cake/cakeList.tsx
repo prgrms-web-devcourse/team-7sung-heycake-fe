@@ -32,16 +32,16 @@ export default function CakeList({ category, location }: any) {
   useEffect(() => {
     if (inView) fetchNextPage();
     if (status === 'success' && data?.pages[0]?.content.length === 0) {
-      const id = 'cake empty';
-      if (!toast.isActive(id)) {
+      const toastId = 'info';
+      if (!toast.isActive(toastId)) {
         toast({
-          id,
+          id: toastId,
           status: 'info',
           position: 'bottom',
-          duration: 1500,
           description: '해당 지역에 케이크가 없어요',
+          duration: 1000,
           containerStyle: {
-            marginBottom: '380px',
+            marginBottom: '60px',
           },
         });
       }
