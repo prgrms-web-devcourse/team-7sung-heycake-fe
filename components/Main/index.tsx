@@ -104,7 +104,13 @@ export default function CakeMain() {
             position="fixed"
             zIndex="10"
             borderRadius="104px"
-            right={4}
+            right={{
+              base: '24px',
+              md: '120px',
+              lg: '240px',
+              xl: '30%',
+              '2xl': '35%',
+            }}
             bottom={8}
             p={0}
             onClick={handleNewOrderClick}
