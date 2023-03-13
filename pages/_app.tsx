@@ -95,11 +95,11 @@ export default function App({ Component, pageProps }: AppProps) {
               <Spinner
                 color="hey.main"
                 size="xl"
-                thickness="4px"
+                thickness="5px"
                 speed="0.65s"
                 position="fixed"
                 top="50%"
-                left="50%"
+                left="45%"
                 transform="translate(-50%, -50%)"
                 zIndex="4"
               />
