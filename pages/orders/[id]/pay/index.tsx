@@ -82,8 +82,8 @@ export default function Pay({
                   orderId,
                   orderName: marketName,
                   customerName: '헤이 케이크',
-                  successUrl: `https://heycake.vercel.app/orders/${id}/pay/success?threadOfferId=${threadOfferId}`,
-                  failUrl: `https://heycake.vercel.app/orders/${id}/pay/fail`,
+                  successUrl: `${process.env.NEXT_PUBLIC_INTERNAL_API_URL}/orders/${id}/pay/success?threadOfferId=${threadOfferId}`,
+                  failUrl: `${process.env.NEXT_PUBLIC_INTERNAL_API_URL}/orders/${id}/pay/fail`,
                 })
                 .catch((error) => {
                   if (error.code === 'USER_CANCEL') {
