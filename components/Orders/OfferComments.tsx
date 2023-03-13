@@ -16,6 +16,7 @@ import useClickInput from '@/hooks/useClickInput';
 import useHandleAxiosError from '@/hooks/useHandleAxiosError';
 import useImageUpload from '@/hooks/useImageUpload';
 import { OfferComment } from '@/types/offer';
+import formatCommentDate from '@/utils/formatCommentDate';
 import { getAccessToken } from '@/utils/getAccessToken';
 
 import { publicApi } from '../Api';
@@ -125,6 +126,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
               <Box color="#707070" fontSize="14px">
                 {comment.nickname}
               </Box>
+              {formatCommentDate(comment.createdAt)}
             </Flex>
             <Button
               size="xs"

@@ -4,4 +4,5 @@ export interface OfferComment {
   comment: string;
   image: string;
   nickname: string;
+  createdAt: string;
 }
