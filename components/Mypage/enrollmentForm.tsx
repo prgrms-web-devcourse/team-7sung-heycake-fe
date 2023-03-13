@@ -9,18 +9,17 @@ import {
   Input,
   Select,
   Textarea,
-  useToast,
 } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import SEOUL_AREA from '@/constants/seoulArea';
 import useHandleAxiosError from '@/hooks/useHandleAxiosError';
-import deleteAccessToken from '@/utils/deleteAccessToken';
 import { getAccessToken } from '@/utils/getAccessToken';
 
 import { publicApi } from '../Api';
+import SuccessModal from './successModal';
 
 const {
   CHECK_EMPTY_INPUT,
@@ -50,13 +49,16 @@ type InputProps = {
 export default function EnrollmentForm() {
   const ACCESS_TOKEN = getAccessToken();
   const handleAxiosError = useHandleAxiosError();
-  const toast = useToast();
-  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<InputProps>();
+
+  const [success, setSuccess] = useState(false);
+  const [marketName, setMarketName] = useState('');
+  const [ownerName, setOwnerName] = useState('');
+  const [address, setAddress] = useState('');
 
   const onSubmit: SubmitHandler<InputProps> = async (data) => {
     const businessLicenseImage: { [key: string]: any } = {
@@ -80,7 +82,6 @@ export default function EnrollmentForm() {
     formData.append('description', data.description);
     formData.append('businessLicenseImage', businessLicenseImage[0]);
     formData.append('marketImage', marketImage[0]);
-    formData.append('memberId', '4');
 
     try {
       await publicApi.post('/enrollments', formData, {
@@ -89,14 +90,10 @@ export default function EnrollmentForm() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      toast({
-        status: 'success',
-        description:
-          '업체 등록이 성공적으로 신청되었어요. 다시 로그인 해주세요.',
-        isClosable: true,
-      });
-      deleteAccessToken();
-      router.push('/');
+      setMarketName(data.marketName);
+      setOwnerName(data.ownerName);
+      setAddress(`${data.city} ${data.district} ${data.detailAddress}`);
+      setSuccess(true);
     } catch (error) {
       handleAxiosError(error);
     }
@@ -104,6 +101,12 @@ export default function EnrollmentForm() {
 
   return (
     <Flex justifyContent="center">
+      <SuccessModal
+        success={success}
+        marketName={marketName}
+        ownerName={ownerName}
+        address={address}
+      />
       <form onSubmit={handleSubmit(onSubmit)} id="enrollmentForm">
         <FormControl height={110} width={350}>
           <FormLabel>업체 이미지 업로드</FormLabel>
