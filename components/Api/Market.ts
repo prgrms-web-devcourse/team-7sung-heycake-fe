@@ -4,6 +4,7 @@ import {
   PatchMarketStatus,
   PostMarketList,
 } from '@/types/Api';
+import { getAccessToken } from '@/utils/getAccessToken';
 
 import { internalApi } from '.';
 
@@ -42,7 +43,10 @@ export async function patchMarketStatus({
   enrollmentId,
 }: PatchMarketStatus) {
   try {
+    const token =
+      typeof window !== 'undefined' ? (getAccessToken() as string) : '';
     const response = await internalApi.patch(`/api/marketstatus`, {
+      token,
       status,
       enrollmentId,
     });

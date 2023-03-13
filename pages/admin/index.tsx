@@ -1,5 +1,10 @@
 import Admin from '@/components/Admin';
+import AuthRequired from '@/utils/authRequire';
 
 export default function AdminPage() {
-  return <Admin />;
+  return (
+    <AuthRequired>
+      <Admin />;
+    </AuthRequired>
+  );
 }

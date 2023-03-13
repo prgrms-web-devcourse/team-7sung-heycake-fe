@@ -3,9 +3,14 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import AdminMarketInfo from '@/components/Admin/adminMarketInfo';
 import { getMarketDetail } from '@/components/Api/Market';
+import AuthRequired from '@/utils/authRequire';
 
 export default function AdminMarket() {
-  return <AdminMarketInfo />;
+  return (
+    <AuthRequired>
+      <AdminMarketInfo />;
+    </AuthRequired>
+  );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => ({
