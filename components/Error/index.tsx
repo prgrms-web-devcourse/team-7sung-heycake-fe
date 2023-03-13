@@ -15,8 +15,8 @@ export default function ErrorPage() {
           시스템 점검 중입니다.
         </Text>
         <Text mt={4}>
-          안정적인 서비스 제공을 위한 시스템 점검 작업 중이므로 잠시 후 다시
-          접속해 주세요
+          안정적인 서비스 제공을 위한
+          <br /> 시스템 점검 작업 중이므로 잠시 후<br /> 다시 접속해 주세요
         </Text>
       </Box>
       <Button
