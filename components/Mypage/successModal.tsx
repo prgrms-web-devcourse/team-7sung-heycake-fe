@@ -28,11 +28,20 @@ export default function SuccessModal({ ...props }: SuccessInfo) {
   const [open, setOpen] = useState(props.success);
 
   function handleSuccess() {
-    toast({
-      status: 'success',
-      description: '업체 등록이 성공적으로 신청되었어요. 다시 로그인 해주세요.',
-      isClosable: true,
-    });
+     const toastId = 'success';
+    if (!toast.isActive(toastId)) {
+      toast({
+        id: toastId,
+        status: 'success',
+        description:
+          '업체 등록이 성공적으로 신청되었어요. 다시 로그인 해주세요.',
+        duration: 1000,
+        isClosable: true,
+        containerStyle: {
+          marginBottom: '60px',
+        },
+      });
+    }
     deleteAccessToken();
     router.push('/');
   }
