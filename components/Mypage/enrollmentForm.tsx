@@ -107,6 +107,13 @@ export default function EnrollmentForm() {
       setOwnerName(data.ownerName);
       setAddress(`${data.city} ${data.district} ${data.detailAddress}`);
       setSuccess(true);
+      toast({
+        status: 'success',
+        description:
+          '업체 등록이 성공적으로 신청되었어요. 다시 로그인 해주세요.',
+      });
+      deleteAccessToken();
+      router.push('/');
     } catch (error) {
       handleAxiosError(error);
     }
@@ -367,6 +374,7 @@ export default function EnrollmentForm() {
           fontSize={16}
           fontWeight="medium"
           marginTop={16}
+          _hover={{ backgroundColor: 'none' }}
         >
           등록
         </Button>

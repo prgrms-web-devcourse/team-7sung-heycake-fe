@@ -14,6 +14,7 @@ export default function DeletedContainer({
       color="white"
       borderRadius={16}
       onClick={() => onClickHandler('WAITING')}
+      _hover={{ backgroundColor: 'none' }}
     >
       승인 대기로 변경
     </Button>

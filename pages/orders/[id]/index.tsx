@@ -1,4 +1,12 @@
-import { Badge, Box, Button, Flex, useToast } from '@chakra-ui/react';
+import {
+  Badge,
+  Box,
+  Button,
+  Flex,
+  Image,
+  Text,
+  useToast,
+} from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -40,6 +48,11 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
         status: 'warning',
         duration: 3000,
       });
+      toast({
+        description: '사장님이시라면 마이페이지에서 신청하실 수 있어요',
+        status: 'warning',
+        duration: 3000,
+      });
     }
   };
 
@@ -57,7 +70,26 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
   return (
     <>
       <HeaderTitle title="" />
-      <ImageSlider images={order.images} />
+      <Box position="relative">
+        {order.orderStatus !== 'NEW' && (
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            position="absolute"
+            top={0}
+            left={0}
+            w="100%"
+            h="100%"
+            bg="rgba(0,0,0,0.2)"
+            zIndex={4}
+            color="white"
+            fontSize="2rem"
+          >
+            주문 완료
+          </Flex>
+        )}
+        <ImageSlider images={order.images} />
+      </Box>
       <Flex flexDirection="column" width="100%" gap="1rem" padding="1rem">
         <Flex flexDirection="column" alignItems="center" gap="0.1rem">
           <Badge
@@ -118,7 +150,26 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
             order={order}
           />
         ))}
-        {threads.length === 0 && <Box>아직 신청온 업체가 없어요 ㅠㅠ</Box>}
+        {threads.length === 0 && (
+          <Flex flexDir="column" alignItems="center" padding={4}>
+            <Image
+              src="/images/grayCakeIcon.png"
+              alt="회색 케이크 아이콘"
+              width={120}
+              height={120}
+            />
+            <Flex flexDir="column" alignItems="center" padding={4}>
+              <Text fontSize={20} fontWeight="600">
+                아직 신청한 업체가 없어요!
+              </Text>
+              <Text fontSize={16} textAlign="center" padding="8px 0">
+                사장님이시라면 신청하기 버튼을 눌러
+                <br />
+                주문확인서를 작성해보세요.
+              </Text>
+            </Flex>
+          </Flex>
+        )}
         {order.orderStatus === 'NEW' ? (
           <Button
             color="white"

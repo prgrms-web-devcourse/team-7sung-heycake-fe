@@ -4,15 +4,12 @@ import {
   Flex,
   FormControl,
   InputGroup,
-  InputRightElement,
   Textarea,
   useToast,
 } from '@chakra-ui/react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRef } from 'react';
-import { AiFillFileAdd } from 'react-icons/ai';
-import { GrPowerReset } from 'react-icons/gr';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import useClickInput from '@/hooks/useClickInput';
@@ -22,10 +19,11 @@ import { OfferComment } from '@/types/offer';
 import { getAccessToken } from '@/utils/getAccessToken';
 
 import { publicApi } from '../Api';
+import RemoveImageButton from './RemoveImageButton';
 
 export default function OfferComments({ offerId }: { offerId: number }) {
   const toast = useToast();
-  const { previewUrls, files, handleFileInputChange, resetImages } =
+  const { previewUrls, files, handleFileInputChange, handleDeleteImage } =
     useImageUpload(1);
   const [inputRef, handleFileChoose] = useClickInput();
   const commentRef = useRef<HTMLTextAreaElement>(null);
@@ -79,7 +77,6 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       toast({
         status: 'error',
         description: ERROR_MESSAGES.CHECK_LOGIN,
-        isClosable: true,
       });
       return;
     }
@@ -88,7 +85,6 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       toast({
         status: 'error',
         description: '댓글 내용을 입력해 주세요',
-        isClosable: true,
       });
       return;
     }
@@ -105,6 +101,10 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       await addCommentMutation.mutateAsync(newFormData);
     } catch (error) {
       handleAxiosError(error);
+      toast({
+        status: 'error',
+        description: '댓글은 작성자와 사장님만 등록 가능해요',
+      });
     }
   };
 
@@ -123,9 +123,8 @@ export default function OfferComments({ offerId }: { offerId: number }) {
           <Box display="flex" justifyContent="space-between">
             <Flex gap="0.5rem" fontSize="10px" alignItems="center">
               <Box color="#707070" fontSize="14px">
-                케이크 업체
+                {comment.nickname}
               </Box>
-              2023-03-12
             </Flex>
             <Button
               size="xs"
@@ -134,6 +133,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
               }
               bg="white"
               color="#707070"
+              _hover={{ backgroundColor: 'none' }}
             >
               삭제
             </Button>
@@ -147,29 +147,41 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       <form onSubmit={handleSubmit}>
         <FormControl borderTop="1px solid #e3e3e3" padding="1rem 0">
           <Flex justify="space-between" align="center" paddingBottom="1rem">
-            <InputGroup size="md">
+            <InputGroup size="md" gap="1rem">
+              <Button
+                h="44px"
+                w="44px"
+                onClick={handleFileChoose}
+                bg="white"
+                border="1px solid #e3e3e3"
+                borderRadius="12px"
+                _hover={{ bg: 'white' }}
+              >
+                <input
+                  hidden
+                  ref={inputRef}
+                  type="file"
+                  multiple
+                  onChange={handleFileInputChange}
+                />
+                <Image src="/images/cameraIcon.png" fill alt="cameraIcon" />
+              </Button>
               <Textarea
                 minH="80px"
                 bg="white"
                 pr="4.5rem"
+                borderRadius="1rem"
                 placeholder="댓글을 작성해주세요."
                 ref={commentRef}
               />
-              <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={handleFileChoose}>
-                  <input
-                    hidden
-                    ref={inputRef}
-                    type="file"
-                    multiple
-                    onChange={handleFileInputChange}
-                  />
-                  <AiFillFileAdd />
-                </Button>
-              </InputRightElement>
             </InputGroup>
           </Flex>
-          <Button type="submit" bg="#efefef" float="right">
+          <Button
+            type="submit"
+            bg="#efefef"
+            float="right"
+            _hover={{ backgroundColor: 'none' }}
+          >
             등록
           </Button>
           {previewUrls.length !== 0 && (
@@ -180,21 +192,31 @@ export default function OfferComments({ offerId }: { offerId: number }) {
               margin="0 auto"
               gap="1rem"
             >
-              {previewUrls.map((url) => (
-                <Image
-                  key={url}
-                  src={url}
-                  alt="Preview"
-                  width={50}
-                  height={50}
-                  style={{ borderRadius: '10px' }}
-                />
+              {previewUrls.map((url, urlIndex) => (
+                <Box position="relative" display="inline-block" key={url}>
+                  <Button
+                    width="70px"
+                    height="70px"
+                    onClick={() => handleDeleteImage(urlIndex)}
+                    borderRadius="1rem"
+                    padding="0"
+                    bg="white"
+                    _hover={{ backgroundColor: 'none' }}
+                  >
+                    <Image
+                      key={url}
+                      src={url}
+                      alt="Preview"
+                      width={70}
+                      height={70}
+                      style={{ borderRadius: '1rem' }}
+                    />
+                  </Button>
+                  <RemoveImageButton
+                    onClick={() => handleDeleteImage(urlIndex)}
+                  />
+                </Box>
               ))}
-              {files.length !== 0 && (
-                <Button type="button" onClick={resetImages}>
-                  <GrPowerReset />
-                </Button>
-              )}
             </Flex>
           )}
         </FormControl>

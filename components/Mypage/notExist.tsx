@@ -41,6 +41,7 @@ export default function NotExist() {
         fontWeight="medium"
         marginTop={36}
         onClick={() => router.push('/orders/new')}
+        _hover={{ backgroundColor: 'none' }}
       >
         주문하러 가기
       </Button>

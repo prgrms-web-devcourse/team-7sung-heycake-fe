@@ -11,6 +11,7 @@ export default function ApprovedContainer() {
       borderColor="hey.main"
       borderRadius={16}
       isDisabled
+      _hover={{ backgroundColor: 'none' }}
     >
       승인 완료
     </Button>

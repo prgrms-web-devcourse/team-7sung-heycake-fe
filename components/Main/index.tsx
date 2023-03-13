@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Flex,
+  Spinner,
   Tab,
   TabList,
   TabPanel,
@@ -26,11 +27,48 @@ export default function CakeMain() {
   const [location, setLocation] = useState('강남구');
   const accessToken = getAccessToken();
   const toast = useToast();
+  const [loading, setLoading] = useState(false);
+  const [timeoutId, setTimeoutId] = useState<number | null>(null);
 
   useEffect(() => {
     const localLocation = localStorage.getItem('location');
     if (localLocation) setLocation(localLocation as string);
   }, [router]);
+
+  useEffect(() => {
+    const handleStart = () => {
+      setLoading(true);
+      setTimeoutId(
+        window.setTimeout(() => {
+          setLoading(false);
+          toast({
+            description: '데이터를 받아오고 있어요!',
+            status: 'info',
+            duration: 3000,
+          });
+        }, 3000)
+      );
+    };
+    const handleComplete = () => {
+      setLoading(false);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleComplete);
+    router.events.on('routeChangeError', handleComplete);
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleComplete);
+      router.events.off('routeChangeError', handleComplete);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [router, loading, timeoutId, toast]);
 
   const handleNewOrderClick = () => {
     if (accessToken) {
@@ -47,6 +85,19 @@ export default function CakeMain() {
   return (
     <>
       <Header />
+      {loading && (
+        <Spinner
+          color="hey.main"
+          size="xl"
+          thickness="4px"
+          speed="0.65s"
+          position="fixed"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          zIndex="4"
+        />
+      )}
       <Flex>
         <Tabs colorScheme="heys" isLazy minW="350px" w="100%" m={0}>
           <Box
@@ -108,6 +159,7 @@ export default function CakeMain() {
             bottom={8}
             p={0}
             onClick={handleNewOrderClick}
+            _hover={{ backgroundColor: 'none' }}
           >
             <NewOrderIcon w={6} h={6} />
           </Button>

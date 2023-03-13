@@ -73,8 +73,23 @@ export default function Thread({ thread, orderId, order }: ThreadProps) {
             padding="10px"
             borderRadius="5px"
             onClick={handlePayment}
+            _hover={{ backgroundColor: 'none' }}
+            _active={{ backgroundColor: 'none' }}
           >
             결제하기
+          </Button>
+        )}
+        {order.orderStatus !== 'NEW' && thread.isPaid && (
+          <Button
+            backgroundColor="white"
+            border="1px solid #F96400"
+            color="#F96400"
+            padding="10px"
+            borderRadius="5px"
+            _hover={{ backgroundColor: 'none', cursor: 'default' }}
+            _active={{ backgroundColor: 'none' }}
+          >
+            결제완료
           </Button>
         )}
       </Flex>

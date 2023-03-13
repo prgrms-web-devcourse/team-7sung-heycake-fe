@@ -17,7 +17,6 @@ export default function Detail() {
     toast({
       status: 'success',
       description: '로그아웃이 완료되었습니다.',
-      isClosable: true,
     });
     router.replace('/');
   }

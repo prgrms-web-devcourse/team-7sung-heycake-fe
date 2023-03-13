@@ -47,7 +47,6 @@ export default function Post({
       toast({
         status: 'error',
         description: '예약된 주문은 삭제할 수 없습니다',
-        isClosable: true,
       });
     } else {
       deleteOrderMutation.mutate(id);
@@ -72,6 +71,7 @@ export default function Post({
           fontSize={12}
           background="none"
           color="hey.normalGray"
+          _hover={{ backgroundColor: 'none' }}
         >
           삭제
         </Button>

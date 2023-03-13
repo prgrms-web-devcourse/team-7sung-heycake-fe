@@ -12,6 +12,7 @@ import useHandleAxiosError from './useHandleAxiosError';
 interface RequestBody {
   orderId: string;
   offerId: number;
+  isPaid: boolean;
 }
 
 const useSelectOffer = () => {
@@ -28,12 +29,13 @@ const useSelectOffer = () => {
         },
       }),
     {
-      onSuccess: () => {
+      onSuccess: (_, variables) => {
         router.push(`/main`);
         toast({
           status: 'success',
-          description: '만나서 결제를 선택하셨어요',
-          isClosable: true,
+          description: variables.isPaid
+            ? '결제 완료! 만나서 수령해주세요'
+            : '만나서 결제를 선택하셨어요',
         });
       },
       onError: (error) => {
@@ -43,15 +45,14 @@ const useSelectOffer = () => {
   );
 
   const selectOffer = useCallback(
-    (orderId: string, offerId: number) => {
-      const requestBody = { orderId, offerId };
+    (orderId: string, offerId: number, isPaid: boolean) => {
+      const requestBody = { orderId, offerId, isPaid };
       if (accessToken) {
         mutation.mutate(requestBody);
       } else {
         toast({
           status: 'error',
           description: ERROR_MESSAGES.CHECK_LOGIN,
-          isClosable: true,
         });
       }
     },
