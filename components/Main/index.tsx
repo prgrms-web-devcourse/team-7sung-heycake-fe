@@ -129,7 +129,16 @@ export default function CakeMain() {
             onClick={handleNewOrderClick}
             _hover={{ backgroundColor: 'none' }}
           >
-            <NewOrderIcon w={6} h={6} />
+            <NewOrderIcon
+              w={{
+                base: '24px',
+                xl: '38px',
+              }}
+              h={{
+                base: '24px',
+                xl: '38px',
+              }}
+            />
           </Button>
         </Tabs>
       </Flex>
