@@ -42,7 +42,6 @@ export default function CakeList({ category, location }: any) {
           render: () => (
             <Box
               m={3}
-              mb={80}
               color="white"
               p={3}
               bg="hey.darkGray"
@@ -50,7 +49,7 @@ export default function CakeList({ category, location }: any) {
               textAlign="center"
               fontWeight="500"
             >
-              해당 지역에 케이크가 없습니다
+              해당 지역에 케이크가 없어요
             </Box>
           ),
         });
