@@ -8,10 +8,17 @@ export default async function patchMarketStatus(
   response: NextApiResponse
 ) {
   try {
-    const { status, enrollmentId } = request.body;
+    const { status, enrollmentId, token } = request.body;
     const { data }: AxiosResponse = await publicApi.patch(
       `/enrollments/${enrollmentId}`,
-      { status }
+      {
+        status,
+      },
+      {
+        headers: {
+          access_token: `${token}`,
+        },
+      }
     );
     return response.status(200).end(JSON.stringify(data));
   } catch (err) {

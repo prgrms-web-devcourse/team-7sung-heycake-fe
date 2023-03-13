@@ -4,6 +4,8 @@ import {
   PatchMarketStatus,
   PostMarketList,
 } from '@/types/Api';
+import { getAccessToken } from '@/utils/getAccessToken';
+import { getRoleFromToken } from '@/utils/getDecodeToken';
 
 import { internalApi } from '.';
 
@@ -42,10 +44,14 @@ export async function patchMarketStatus({
   enrollmentId,
 }: PatchMarketStatus) {
   try {
+    const token =
+      typeof window !== 'undefined' ? (getAccessToken() as string) : '';
     const response = await internalApi.patch(`/api/marketstatus`, {
+      token,
       status,
       enrollmentId,
     });
+    console.log(status, enrollmentId, token);
     if (response.status === 200) {
       return response.data;
     }
