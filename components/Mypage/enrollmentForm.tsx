@@ -93,7 +93,6 @@ export default function EnrollmentForm() {
         status: 'success',
         description:
           '업체 등록이 성공적으로 신청되었어요. 다시 로그인 해주세요.',
-        isClosable: true,
       });
       deleteAccessToken();
       router.push('/');
@@ -337,6 +336,7 @@ export default function EnrollmentForm() {
           fontSize={16}
           fontWeight="medium"
           marginTop={16}
+          _hover={{ backgroundColor: 'none' }}
         >
           등록
         </Button>

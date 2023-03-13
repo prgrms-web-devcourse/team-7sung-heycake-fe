@@ -37,7 +37,8 @@ export default function LocationSelectBox({
         onClick={onOpen}
         fontSize="sm"
         gap={1}
-        m={4}
+        p={4}
+        pb={0}
         alignItems="center"
         fontWeight={600}
       >
@@ -88,6 +89,7 @@ export default function LocationSelectBox({
               color="white"
               borderRadius={16}
               onClick={onLocationSelectHandler}
+              _hover={{ backgroundColor: 'none' }}
             >
               선택
             </Button>

@@ -14,6 +14,7 @@ export default function WaitingContainer({
         borderRadius={16}
         variant="outline"
         onClick={() => onClickHandler('DELETED')}
+        _hover={{ backgroundColor: 'none' }}
       >
         거절
       </Button>
@@ -24,6 +25,7 @@ export default function WaitingContainer({
         h={12}
         borderRadius={16}
         onClick={() => onClickHandler('APPROVED')}
+        _hover={{ backgroundColor: 'none' }}
       >
         승인
       </Button>

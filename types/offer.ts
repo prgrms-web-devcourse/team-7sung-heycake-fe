@@ -3,4 +3,5 @@ export interface OfferComment {
   memberId: number;
   comment: string;
   image: string;
+  nickname: string;
 }

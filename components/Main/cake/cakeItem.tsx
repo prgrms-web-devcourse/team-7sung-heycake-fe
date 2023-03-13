@@ -23,19 +23,35 @@ export default function CakeItem({
     <Card variant="unstyled" my={2}>
       <Flex
         alignItems="center"
-        borderBottom="2px solid"
-        borderColor="hey.lightGray"
+        borderBottom="1px solid"
+        borderColor="#e3e3e3"
         height="154px"
         pb={6}
       >
         <Card
+          position="relative"
           variant="unstyled"
           width="100px"
           height="116px"
           borderRadius={8}
           overflow="hidden"
-          opacity={status !== 'NEW' ? '0.2' : '1'}
         >
+          {status !== 'NEW' && (
+            <Flex
+              justifyContent="center"
+              alignItems="center"
+              position="absolute"
+              top={0}
+              left={0}
+              w="100%"
+              h="100%"
+              bg="rgba(0,0,0,0.2)"
+              zIndex={4}
+              color="white"
+            >
+              주문 완료
+            </Flex>
+          )}
           <Image
             fill
             sizes="20vw"
@@ -51,31 +67,26 @@ export default function CakeItem({
             px={2}
             borderRadius={10}
             fontWeight={500}
-            fontSize="10px"
           >
             {CAKE_CATEGORY[category]}
           </Badge>
           <Grid gap={1} mt={1}>
-            <Text fontSize="sm" fontWeight={500}>
-              {title}
-            </Text>
+            <Text fontWeight={600}>{title}</Text>
             <Flex>
-              <Text fontSize="xs" color="hey.lightGray">
+              <Text fontSize="sm" color="hey.normalGray">
                 {`${CAKE_SIZE[cakeSize]} · ${convertBreadFlavor(
                   breadFlavor
                 )} · ${convertCreamFlavor(creamFlavor)}`}
               </Text>
             </Flex>
-            <Text fontSize="sm" fontWeight={700}>
-              ~ {numberWithCommas(Number(price))} 원
-            </Text>
+            <Text fontWeight={600}>~ {numberWithCommas(Number(price))} 원</Text>
             <Flex color="gray" alignItems="center" gap={1}>
               <DateCalenderIcon />
-              <Text fontSize="xs" fontWeight={300}>
+              <Text fontSize="sm" fontWeight={300}>
                 {`${visitTime.substring(0, 10).replace(/-/g, '.')}`}
               </Text>
               {Boolean(offerCount) && (
-                <Text fontSize="xs" color="hey.main">
+                <Text fontSize="sm" color="hey.main">
                   · 오퍼+{offerCount}
                 </Text>
               )}

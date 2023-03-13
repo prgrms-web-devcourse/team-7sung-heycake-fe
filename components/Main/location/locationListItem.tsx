@@ -18,6 +18,7 @@ export default function LocationListItem({
         borderColor: 'hey.main',
       }}
       onClick={onClick}
+      _hover={{ backgroundColor: 'none' }}
     >
       {name}
     </Button>

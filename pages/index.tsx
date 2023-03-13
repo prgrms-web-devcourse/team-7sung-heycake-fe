@@ -55,6 +55,7 @@ export default function Home() {
           height="60px"
           bgColor="hey.kakaoOrange"
           borderRadius="10px"
+          _hover={{ backgroundColor: 'none' }}
         >
           <Image
             src="/images/kakao_login_large_wide.png"
