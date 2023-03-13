@@ -11,14 +11,12 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 
 import deleteAccessToken from '@/utils/deleteAccessToken';
 
 interface SuccessInfo {
   success: boolean;
-  setAllSuccessFun: Dispatch<SetStateAction<boolean>>;
-  setSuccessFun: Dispatch<SetStateAction<boolean>>;
   marketName: string;
   ownerName: string;
   address: string;
@@ -27,6 +25,7 @@ interface SuccessInfo {
 export default function SuccessModal({ ...props }: SuccessInfo) {
   const router = useRouter();
   const toast = useToast();
+  const [open, setOpen] = useState(props.success);
 
   function handleSuccess() {
     const toastId = 'success';
@@ -43,16 +42,11 @@ export default function SuccessModal({ ...props }: SuccessInfo) {
         },
       });
     }
-    props.setAllSuccessFun(true);
     deleteAccessToken();
     router.push('/');
   }
   return (
-    <Modal
-      isOpen={props.success}
-      onClose={() => props.setSuccessFun(false)}
-      closeOnOverlayClick
-    >
+    <Modal isOpen={open} onClose={() => setOpen(false)} closeOnOverlayClick>
       <ModalOverlay />
       <ModalContent width={400} height={600} borderRadius="14px">
         <ModalHeader marginTop={8}>
@@ -70,13 +64,13 @@ export default function SuccessModal({ ...props }: SuccessInfo) {
             </Text>
             <Text>{props.marketName}</Text>
           </Container>
-          <Container marginTop={6}>
+          <Container>
             <Text fontWeight="bold" fontSize={18}>
               대표자 이름
             </Text>
             <Text>{props.ownerName}</Text>
           </Container>
-          <Container marginTop={6}>
+          <Container>
             <Text fontWeight="bold" fontSize={18}>
               주소
             </Text>
@@ -86,18 +80,6 @@ export default function SuccessModal({ ...props }: SuccessInfo) {
 
         <Container marginBottom={8} display="flex" justifyContent="center">
           <ModalFooter>
-            <Button
-              variant="ghost"
-              onClick={() => props.setSuccessFun(false)}
-              border="1px"
-              borderRadius="12px"
-              width="10rem"
-              height="3rem"
-              borderColor="hey.lightGray"
-              marginRight={4}
-            >
-              정보 수정
-            </Button>
             <Button
               colorScheme="blue"
               width="10rem"

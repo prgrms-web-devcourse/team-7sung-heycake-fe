@@ -58,20 +58,7 @@ export default function EnrollmentForm() {
   const [success, setSuccess] = useState(false);
   const [marketName, setMarketName] = useState('');
   const [ownerName, setOwnerName] = useState('');
-  const [city, setCity] = useState('');
-  const [district, setDistrict] = useState('');
-  const [detailAddress, setDetailAddress] = useState('');
   const [address, setAddress] = useState('');
-  const [allSuccess, setAllSuccess] = useState(false);
-
-  const checkAllSuccess = () => {
-    setMarketName(marketName);
-    setOwnerName(ownerName);
-    setAddress(`${city} ${district} ${detailAddress}`);
-
-    setSuccess(true);
-    return allSuccess;
-  };
 
   const onSubmit: SubmitHandler<InputProps> = async (data) => {
     const businessLicenseImage: { [key: string]: any } = {
@@ -116,20 +103,11 @@ export default function EnrollmentForm() {
     <Flex justifyContent="center">
       <SuccessModal
         success={success}
-        setAllSuccessFun={setAllSuccess}
-        setSuccessFun={setSuccess}
         marketName={marketName}
         ownerName={ownerName}
         address={address}
       />
-      <form
-        onSubmit={() => {
-          if (checkAllSuccess()) {
-            handleSubmit(onSubmit);
-          }
-        }}
-        id="enrollmentForm"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} id="enrollmentForm">
         <FormControl height={110} width={350}>
           <FormLabel>업체 이미지 업로드</FormLabel>
           <Input
@@ -154,7 +132,6 @@ export default function EnrollmentForm() {
             {...register('marketName', {
               required: CHECK_EMPTY_INPUT,
             })}
-            onChange={(e) => setMarketName(e.target.value)}
           />
           {errors.marketName && (
             <Box color="red" marginTop={1}>
@@ -180,7 +157,6 @@ export default function EnrollmentForm() {
                 message: CHECK_OWNER_NAME_TYPE,
               },
             })}
-            onChange={(e) => setOwnerName(e.target.value)}
           />
           {errors.ownerName && (
             <Box color="red" marginTop={1}>
@@ -226,7 +202,6 @@ export default function EnrollmentForm() {
           <Container display="flex" padding={0}>
             <Select
               {...register('city', { required: CHECK_EMPTY_INPUT })}
-              onChange={(e) => setCity(e.target.value)}
               width={170}
               marginRight={2}
               marginBottom={2}
@@ -240,7 +215,6 @@ export default function EnrollmentForm() {
             </Select>
             <Select
               {...register('district', { required: CHECK_EMPTY_INPUT })}
-              onChange={(e) => setDistrict(e.target.value)}
               width={170}
               defaultValue=""
               borderRadius={12}
@@ -259,7 +233,6 @@ export default function EnrollmentForm() {
               placeholder="상세 주소를 입력해주세요."
               borderRadius={12}
               {...register('detailAddress', { required: CHECK_EMPTY_INPUT })}
-              onChange={(e) => setDetailAddress(e.target.value)}
             />
           </Container>
           {(errors.city && (
@@ -358,7 +331,7 @@ export default function EnrollmentForm() {
           )}
         </FormControl>
         <Button
-          onClick={checkAllSuccess}
+          type="submit"
           width={350}
           height={14}
           backgroundColor="hey.main"
