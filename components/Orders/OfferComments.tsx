@@ -3,13 +3,14 @@ import {
   Button,
   Flex,
   FormControl,
+  Image as ChakraImage,
   InputGroup,
   Textarea,
   useToast,
 } from '@chakra-ui/react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import ERROR_MESSAGES from '@/constants/errorMessages';
 import useClickInput from '@/hooks/useClickInput';
@@ -18,6 +19,7 @@ import useImageUpload from '@/hooks/useImageUpload';
 import { OfferComment } from '@/types/offer';
 import formatCommentDate from '@/utils/formatCommentDate';
 import { getAccessToken } from '@/utils/getAccessToken';
+import { getMemberIdFromToken } from '@/utils/getDecodeToken';
 
 import { publicApi } from '../Api';
 import RemoveImageButton from './RemoveImageButton';
@@ -35,6 +37,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
   );
   const accessToken = getAccessToken();
   const handleAxiosError = useHandleAxiosError();
+  const [memberId, setMemberId] = useState<number | null>(null);
 
   const removeCommentMutation = useMutation(
     (commentId: number) =>
@@ -52,6 +55,17 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       },
     }
   );
+
+  useEffect(() => {
+    const handleSetMemberId = () => {
+      if (accessToken) {
+        const member = getMemberIdFromToken(accessToken);
+        if (member) setMemberId(member);
+      }
+    };
+
+    handleSetMemberId();
+  }, [accessToken, memberId]);
 
   const addCommentMutation = useMutation(
     (formData: FormData) =>
@@ -152,19 +166,21 @@ export default function OfferComments({ offerId }: { offerId: number }) {
               </Box>
               {formatCommentDate(comment.createdAt)}
             </Flex>
-            <Button
-              size="xs"
-              onClick={() =>
-                removeCommentMutation.mutateAsync(comment.commentId)
-              }
-              bg="white"
-              color="#707070"
-              _hover={{ backgroundColor: 'none' }}
-            >
-              삭제
-            </Button>
+            {comment.memberId === memberId && (
+              <Button
+                size="xs"
+                onClick={() =>
+                  removeCommentMutation.mutateAsync(comment.commentId)
+                }
+                bg="white"
+                color="#707070"
+                _hover={{ backgroundColor: 'none' }}
+              >
+                삭제
+              </Button>
+            )}
           </Box>
-          <p>{comment.comment}</p>
+          <Box>{comment.comment}</Box>
           {comment.image && (
             <Image src={comment.image} alt="profile" width={50} height={50} />
           )}
@@ -179,6 +195,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
                 w="44px"
                 onClick={handleFileChoose}
                 bg="white"
+                p={0}
                 border="1px solid #e3e3e3"
                 borderRadius="12px"
                 _hover={{ bg: 'white' }}
@@ -190,12 +207,18 @@ export default function OfferComments({ offerId }: { offerId: number }) {
                   multiple
                   onChange={handleFileInputChange}
                 />
-                <Image src="/images/cameraIcon.png" fill alt="cameraIcon" />
+                <ChakraImage
+                  src="/images/cameraIcon.png"
+                  width="24px"
+                  height="24px"
+                  alt="cameraIcon"
+                />
               </Button>
               <Textarea
                 minH="80px"
                 bg="white"
                 pr="4.5rem"
+                fontSize="14px"
                 borderRadius="1rem"
                 placeholder="댓글을 작성해주세요."
                 ref={commentRef}
