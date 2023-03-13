@@ -40,12 +40,19 @@ export default function App({ Component, pageProps }: AppProps) {
       setTimeoutId(
         window.setTimeout(() => {
           setLoading(false);
-          toast({
-            description: '데이터를 받아오고 있어요!',
-            status: 'info',
-            duration: 3000,
-          });
-        }, 3000)
+          const toastId = 'info';
+          if (!toast.isActive(toastId)) {
+            toast({
+              id: toastId,
+              description: '데이터를 받아오고 있어요!',
+              status: 'info',
+              duration: 1000,
+              containerStyle: {
+                marginBottom: '60px',
+              },
+            });
+          }
+        }, 4000)
       );
     };
     const handleComplete = () => {

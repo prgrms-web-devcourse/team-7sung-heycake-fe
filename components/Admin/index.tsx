@@ -16,7 +16,15 @@ export default function Admin() {
       <HeaderTitle title="신청 업체 관리" />
       <Flex>
         <Tabs colorScheme="heys" isLazy minW="350px" w="650px">
-          <TabList alignItems="center" h="60px" p={2}>
+          <TabList
+            alignItems="center"
+            h="60px"
+            p={2}
+            position="sticky"
+            top={14}
+            zIndex={3000}
+            bg="white"
+          >
             <Tab w="33%" h={14}>
               승인 목록
             </Tab>

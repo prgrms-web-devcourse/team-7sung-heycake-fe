@@ -14,10 +14,18 @@ export default function Detail() {
   function handleLogout() {
     deleteAccessToken();
 
-    toast({
-      status: 'success',
-      description: '로그아웃이 완료되었습니다.',
-    });
+    const toastId = 'success';
+    if (!toast.isActive(toastId)) {
+      toast({
+        id: toastId,
+        status: 'success',
+        description: '로그아웃이 완료되었습니다.',
+        duration: 1000,
+        containerStyle: {
+          marginBottom: '60px',
+        },
+      });
+    }
     router.replace('/');
   }
 

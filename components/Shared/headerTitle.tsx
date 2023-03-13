@@ -7,7 +7,17 @@ import { HeaderTitleProps } from '@/types/Shared';
 export default function HeaderTitle({ title }: HeaderTitleProps) {
   const router = useRouter();
   return (
-    <Flex h={14} p={4} justifyContent="space-between" alignItems="center">
+    <Flex
+      h={14}
+      w="100%"
+      p={4}
+      justifyContent="space-between"
+      alignItems="center"
+      position="sticky"
+      bg="white"
+      top={0}
+      zIndex={4000}
+    >
       <ArrowBackIcon
         w={6}
         h={6}

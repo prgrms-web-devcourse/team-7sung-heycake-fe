@@ -60,26 +60,50 @@ export default function NewOffer() {
     if (contentRef.current === null) return;
 
     if (accessToken === null) {
-      toast({
-        status: 'error',
-        description: ERROR_MESSAGES.CHECK_LOGIN,
-      });
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: ERROR_MESSAGES.CHECK_LOGIN,
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
     if (contentRef.current.value === '') {
-      toast({
-        status: 'error',
-        description: '오퍼 내용을 입력해 주세요',
-      });
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '오퍼 내용을 입력해 주세요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
     if (expectedPrice < 10000) {
-      toast({
-        status: 'error',
-        description: '최소 금액은 10,000원 이상이에요',
-      });
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '최소 금액은 10,000원 이상이에요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
@@ -99,10 +123,18 @@ export default function NewOffer() {
           access_token: accessToken,
         },
       });
-      toast({
-        status: 'success',
-        description: '오퍼가 성공적으로 등록되었어요.',
-      });
+      const toastId = 'success';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'success',
+          description: '오퍼가 성공적으로 등록되었어요.',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       router.push(`/orders/${orderId}`);
     } catch (error) {
       handleAxiosError(error);

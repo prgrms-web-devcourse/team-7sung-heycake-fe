@@ -49,22 +49,22 @@ export default function MarketProfile() {
           style={{ objectFit: 'cover' }}
         />
       </Card>
-      <Container px={5} pt={6} fontSize="sm" fontWeight={700}>
+      <Container px={5} pt={5} fontSize="sm" fontWeight={700}>
         <Box h="92px">
-          <Flex alignItems="flex-end">
-            <MarketAddressIcon w={4} h={4} />
+          <Flex>
+            <MarketAddressIcon w={6} h={6} mb={1} />
             <Text fontWeight={400}>
               {address} {data.marketAddress.detailAddress}
             </Text>
           </Flex>
-          <Flex alignItems="flex-end">
-            <MarketTelIcon w={4} h={4} />
+          <Flex>
+            <MarketTelIcon w={6} h={6} mb={1} />
             <Text fontWeight={400}>
               {numberWithHyphenPhone(data.phoneNumber)}
             </Text>
           </Flex>
-          <Flex alignItems="flex-end">
-            <MarketOpeningIcon w={4} h={4} />
+          <Flex>
+            <MarketOpeningIcon w={6} h={6} mb={1} />
             <Text fontWeight={400}>{openingHours}</Text>
           </Flex>
         </Box>

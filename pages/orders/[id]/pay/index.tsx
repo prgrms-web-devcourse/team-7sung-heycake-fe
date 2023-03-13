@@ -87,15 +87,31 @@ export default function Pay({
                 })
                 .catch((error) => {
                   if (error.code === 'USER_CANCEL') {
-                    toast({
-                      status: 'error',
-                      description: '결제가 취소되었습니다.',
-                    });
+                    const toastId = 'error';
+                    if (!toast.isActive(toastId)) {
+                      toast({
+                        id: toastId,
+                        status: 'error',
+                        description: '결제가 취소되었습니다.',
+                        duration: 1000,
+                        containerStyle: {
+                          marginBottom: '60px',
+                        },
+                      });
+                    }
                   } else if (error.code === 'INVALID_CARD_COMPANY') {
-                    toast({
-                      status: 'error',
-                      description: '유효하지 않은 카드입니다.',
-                    });
+                    const toastId = 'error';
+                    if (!toast.isActive(toastId)) {
+                      toast({
+                        id: toastId,
+                        status: 'error',
+                        description: '유효하지 않은 카드입니다.',
+                        duration: 1000,
+                        containerStyle: {
+                          marginBottom: '60px',
+                        },
+                      });
+                    }
                   }
                 });
             });

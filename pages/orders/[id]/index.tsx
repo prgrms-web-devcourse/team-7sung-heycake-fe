@@ -43,16 +43,20 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
     if (role === 'ROLE_ADMIN' || role === 'ROLE_MARKET') {
       router.push(`/orders/${orderId}/new-offer`);
     } else {
-      toast({
-        description: '사장님만 신청할 수 있어요',
-        status: 'warning',
-        duration: 3000,
-      });
-      toast({
-        description: '사장님이시라면 마이페이지에서 신청하실 수 있어요',
-        status: 'warning',
-        duration: 3000,
-      });
+      const toastId = 'success';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          title: '사장님만 신청할 수 있어요',
+          description:
+            '사장님이시라면 마이페이지에서 사장님 등록을 할 수 있어요',
+          status: 'warning',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
     }
   };
 

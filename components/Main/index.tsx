@@ -36,11 +36,18 @@ export default function CakeMain() {
     if (accessToken) {
       router.push('/orders/new');
     } else {
-      toast({
-        title: ERROR_MESSAGES.CHECK_LOGIN,
-        status: 'error',
-        duration: 3000,
-      });
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          title: ERROR_MESSAGES.CHECK_LOGIN,
+          status: 'error',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
     }
   };
 
@@ -122,7 +129,16 @@ export default function CakeMain() {
             onClick={handleNewOrderClick}
             _hover={{ backgroundColor: 'none' }}
           >
-            <NewOrderIcon w={6} h={6} />
+            <NewOrderIcon
+              w={{
+                base: '24px',
+                xl: '38px',
+              }}
+              h={{
+                base: '24px',
+                xl: '38px',
+              }}
+            />
           </Button>
         </Tabs>
       </Flex>

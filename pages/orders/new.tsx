@@ -92,50 +92,98 @@ export default function NewOrder() {
     if (requirementRef.current === null) return;
 
     if (accessToken === null) {
-      toast({
-        status: 'error',
-        description: ERROR_MESSAGES.CHECK_LOGIN,
-      });
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: ERROR_MESSAGES.CHECK_LOGIN,
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
     if (formData.title === '') {
-      toast({
-        status: 'error',
-        description: '제목을 입력해 주세요',
-      });
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '제목을 입력해 주세요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
     if (hopePrice < 10000) {
-      toast({
-        status: 'error',
-        description: '최소 금액은 10,000원 이상이에요',
-      });
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '최소 금액은 10,000원 이상이에요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
     if (visitTime === '') {
-      toast({
-        status: 'error',
-        description: '방문 예정 시간을 입력해 주세요',
-      });
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '방문 예정 시간을 입력해 주세요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
     if (requirementRef.current.value === '') {
-      toast({
-        status: 'error',
-        description: '요청사항을 입력해 주세요',
-      });
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '요청사항을 입력해 주세요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
     if (files.length === 0) {
-      toast({
-        status: 'error',
-        description: '예시 사진을 1개 이상 첨부해 주세요',
-      });
+      const toastId = 'error';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'error',
+          description: '예시 사진을 1개 이상 첨부해 주세요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
       return;
     }
 
@@ -169,10 +217,18 @@ export default function NewOrder() {
         },
       });
       router.push('/main');
-      toast({
-        status: 'success',
-        description: '주문을 등록했어요',
-      });
+      const toastId = 'success';
+      if (!toast.isActive(toastId)) {
+        toast({
+          id: toastId,
+          status: 'success',
+          description: '주문을 등록했어요',
+          duration: 1000,
+          containerStyle: {
+            marginBottom: '60px',
+          },
+        });
+      }
     } catch (error) {
       handleAxiosError(error);
     }
