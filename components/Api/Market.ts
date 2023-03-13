@@ -5,7 +5,6 @@ import {
   PostMarketList,
 } from '@/types/Api';
 import { getAccessToken } from '@/utils/getAccessToken';
-import { getRoleFromToken } from '@/utils/getDecodeToken';
 
 import { internalApi } from '.';
 
@@ -51,7 +50,6 @@ export async function patchMarketStatus({
       status,
       enrollmentId,
     });
-    console.log(status, enrollmentId, token);
     if (response.status === 200) {
       return response.data;
     }
