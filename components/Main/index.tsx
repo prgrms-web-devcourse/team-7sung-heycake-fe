@@ -97,8 +97,14 @@ export default function CakeMain() {
             ))}
           </TabPanels>
           <Button
-            w="52px"
-            h="52px"
+            w={{
+              base: '52px',
+              xl: '80px',
+            }}
+            h={{
+              base: '52px',
+              xl: '80px',
+            }}
             colorScheme="heys"
             bg="hey.main"
             position="fixed"
