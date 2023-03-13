@@ -45,7 +45,7 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
     } else {
       toast({
         title: '사장님만 신청할 수 있어요',
-        description: '사장님이시라면 마이페이지에서 신청하실 수 있어요',
+        description: '사장님이시라면 마이페이지에서 사장님 등록을 할 수 있어요',
         status: 'warning',
         duration: 3000,
         containerStyle: {
