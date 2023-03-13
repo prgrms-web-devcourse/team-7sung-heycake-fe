@@ -40,6 +40,9 @@ export default function CakeMain() {
         title: ERROR_MESSAGES.CHECK_LOGIN,
         status: 'error',
         duration: 3000,
+        containerStyle: {
+          marginBottom: '380px',
+        },
       });
     }
   };

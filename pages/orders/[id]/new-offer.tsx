@@ -63,6 +63,9 @@ export default function NewOffer() {
       toast({
         status: 'error',
         description: ERROR_MESSAGES.CHECK_LOGIN,
+        containerStyle: {
+          marginBottom: '380px',
+        },
       });
       return;
     }
@@ -71,6 +74,9 @@ export default function NewOffer() {
       toast({
         status: 'error',
         description: '오퍼 내용을 입력해 주세요',
+        containerStyle: {
+          marginBottom: '380px',
+        },
       });
       return;
     }
@@ -79,6 +85,9 @@ export default function NewOffer() {
       toast({
         status: 'error',
         description: '최소 금액은 10,000원 이상이에요',
+        containerStyle: {
+          marginBottom: '380px',
+        },
       });
       return;
     }
@@ -102,6 +111,9 @@ export default function NewOffer() {
       toast({
         status: 'success',
         description: '오퍼가 성공적으로 등록되었어요.',
+        containerStyle: {
+          marginBottom: '380px',
+        },
       });
       router.push(`/orders/${orderId}`);
     } catch (error) {

@@ -47,11 +47,17 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
         description: '사장님만 신청할 수 있어요',
         status: 'warning',
         duration: 3000,
+        containerStyle: {
+          marginBottom: '380px',
+        },
       });
       toast({
         description: '사장님이시라면 마이페이지에서 신청하실 수 있어요',
         status: 'warning',
         duration: 3000,
+        containerStyle: {
+          marginBottom: '380px',
+        },
       });
     }
   };

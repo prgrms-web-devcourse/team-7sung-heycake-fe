@@ -77,6 +77,9 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       toast({
         status: 'error',
         description: ERROR_MESSAGES.CHECK_LOGIN,
+        containerStyle: {
+          marginBottom: '380px',
+        },
       });
       return;
     }
@@ -85,6 +88,9 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       toast({
         status: 'error',
         description: '댓글 내용을 입력해 주세요',
+        containerStyle: {
+          marginBottom: '380px',
+        },
       });
       return;
     }
@@ -104,6 +110,9 @@ export default function OfferComments({ offerId }: { offerId: number }) {
       toast({
         status: 'error',
         description: '댓글은 작성자와 사장님만 등록 가능해요',
+        containerStyle: {
+          marginBottom: '380px',
+        },
       });
     }
   };

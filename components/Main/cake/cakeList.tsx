@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Grid, useToast } from '@chakra-ui/react';
+import { CircularProgress, Grid, useToast } from '@chakra-ui/react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useEffect } from 'react';
@@ -39,19 +39,10 @@ export default function CakeList({ category, location }: any) {
           status: 'info',
           position: 'bottom',
           duration: 1500,
-          render: () => (
-            <Box
-              m={3}
-              color="white"
-              p={3}
-              bg="hey.darkGray"
-              borderRadius={6}
-              textAlign="center"
-              fontWeight="500"
-            >
-              해당 지역에 케이크가 없어요
-            </Box>
-          ),
+          description: '해당 지역에 케이크가 없어요',
+          containerStyle: {
+            marginBottom: '380px',
+          },
         });
       }
     }

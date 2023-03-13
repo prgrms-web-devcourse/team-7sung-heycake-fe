@@ -36,6 +36,9 @@ const useSelectOffer = () => {
           description: variables.isPaid
             ? '결제 완료! 만나서 수령해주세요'
             : '만나서 결제를 선택하셨어요',
+          containerStyle: {
+            marginBottom: '380px',
+          },
         });
       },
       onError: (error) => {
@@ -53,6 +56,9 @@ const useSelectOffer = () => {
         toast({
           status: 'error',
           description: ERROR_MESSAGES.CHECK_LOGIN,
+          containerStyle: {
+            marginBottom: '380px',
+          },
         });
       }
     },

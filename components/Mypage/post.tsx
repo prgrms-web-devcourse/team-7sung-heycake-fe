@@ -47,6 +47,9 @@ export default function Post({
       toast({
         status: 'error',
         description: '예약된 주문은 삭제할 수 없습니다',
+        containerStyle: {
+          marginBottom: '380px',
+        },
       });
     } else {
       deleteOrderMutation.mutate(id);

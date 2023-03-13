@@ -44,6 +44,9 @@ export default function App({ Component, pageProps }: AppProps) {
             description: '데이터를 받아오고 있어요!',
             status: 'info',
             duration: 3000,
+            containerStyle: {
+              marginBottom: '380px',
+            },
           });
         }, 3000)
       );
