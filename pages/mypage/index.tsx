@@ -64,6 +64,7 @@ export default function Detail() {
               fontSize={24}
               fontWeight="bold"
               color="hey.main"
+              marginLeft={16}
             >
               사장님
             </Text>
@@ -78,6 +79,7 @@ export default function Detail() {
             color="hey.main"
             fontSize={24}
             fontWeight="bold"
+            marginLeft={14}
           >
             헤이, 케이크&nbsp;
           </Text>
@@ -149,7 +151,7 @@ export default function Detail() {
           padding={0}
           onClick={() => handleLogout()}
         >
-          <Text fontSize={18} color="hey.normalGray" marginRight={5}>
+          <Text fontSize={18} color="hey.normalGray">
             로그아웃
           </Text>
         </Container>
