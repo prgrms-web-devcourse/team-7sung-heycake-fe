@@ -36,9 +36,7 @@ export default function Orderlist() {
       <CountBar count={filteredOrderList.length} />
       <Container paddingTop={10} overflow="scroll">
         {filteredOrderList.length !== 0 ? (
-          filteredOrderList.map((order) => (
-            <Post key={order.id} {...order} count={orderList.length} />
-          ))
+          filteredOrderList.map((order) => <Post key={order.id} {...order} />)
         ) : (
           <NotExist />
         )}
