@@ -81,11 +81,11 @@ export function convertCakeCategory(cakeCategory: CakeCategory) {
 
 export const getOrderStatusText = (
   status: OrderStatus,
-  count: Order['offerCount']
+  offerCount: Order['offerCount']
 ) => {
   switch (status) {
     case 'NEW':
-      return `+ ${count}`;
+      return `+ ${offerCount}`;
     case 'RESERVED':
       return '선택 완료';
     case 'PAID':
