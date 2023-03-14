@@ -39,7 +39,7 @@ export interface MypagePost {
   createdAt: string;
   cakeInfo: MypagePostInfo;
   hopePrice: number;
-  count: number;
+  offerCount: number;
 }
 
 export interface MypagePostInfo {

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { BsDot } from 'react-icons/bs';
 
+import { CAKE_CATEGORY_COLOR } from '@/constants/Main';
 import useHandleAxiosError from '@/hooks/useHandleAxiosError';
 import { MypagePost } from '@/types/orders';
 import {
@@ -25,7 +26,7 @@ export default function Post({
   createdAt,
   cakeInfo,
   hopePrice,
-  count,
+  offerCount = 0,
 }: MypagePost) {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -103,6 +104,7 @@ export default function Post({
             fontSize={12}
             marginBottom={1}
             padding={0}
+            colorScheme={CAKE_CATEGORY_COLOR[cakeInfo.cakeCategory]}
           >
             {convertCakeCategory(cakeInfo.cakeCategory)}
           </Badge>
@@ -136,10 +138,10 @@ export default function Post({
               <BsDot />
             </Text>
             <Text color="hey.main" fontSize={12}>
-              {getOrderStatusText(orderStatus, count) !==
+              {getOrderStatusText(orderStatus, offerCount) !==
               ('선택 완료' || '거래 완료' || '알 수 없는 상태')
-                ? `오퍼 ${getOrderStatusText(orderStatus, count)}`
-                : getOrderStatusText(orderStatus, count)}
+                ? `오퍼 ${getOrderStatusText(orderStatus, offerCount)}`
+                : getOrderStatusText(orderStatus, offerCount)}
             </Text>
           </Container>
         </Container>
