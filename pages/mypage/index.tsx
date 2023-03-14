@@ -74,7 +74,7 @@ export default function Detail() {
           </Text>
         </Flex>
         <Container padding={0}>
-          {isMarket && (
+          {isMarket ? (
             <Text
               display="inline"
               color="hey.main"
@@ -84,15 +84,16 @@ export default function Detail() {
             >
               헤이, 케이크&nbsp;
             </Text>
+          ) : (
+            <Text
+              display="inline"
+              color="hey.main"
+              fontSize={24}
+              fontWeight="bold"
+            >
+              헤이, 케이크&nbsp;
+            </Text>
           )}
-          <Text
-            display="inline"
-            color="hey.main"
-            fontSize={24}
-            fontWeight="bold"
-          >
-            헤이, 케이크&nbsp;
-          </Text>
           <Text display="inline" fontSize={24} fontWeight="bold">
             입니다!
           </Text>
