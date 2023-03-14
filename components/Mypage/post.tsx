@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { BsDot } from 'react-icons/bs';
 
+import { CAKE_CATEGORY_COLOR } from '@/constants/Main';
 import useHandleAxiosError from '@/hooks/useHandleAxiosError';
 import { MypagePost } from '@/types/orders';
 import {
@@ -103,6 +104,7 @@ export default function Post({
             fontSize={12}
             marginBottom={1}
             padding={0}
+            colorScheme={CAKE_CATEGORY_COLOR[cakeInfo.cakeCategory]}
           >
             {convertCakeCategory(cakeInfo.cakeCategory)}
           </Badge>
