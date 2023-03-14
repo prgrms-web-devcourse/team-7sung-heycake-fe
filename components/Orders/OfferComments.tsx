@@ -130,6 +130,7 @@ export default function OfferComments({ offerId }: { offerId: number }) {
 
     try {
       await addCommentMutation.mutateAsync(newFormData);
+      commentRef.current.value = '';
     } catch (error) {
       handleAxiosError(error);
       const toastId = 'error';

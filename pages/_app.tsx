@@ -32,34 +32,13 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const toast = useToast();
   const [loading, setLoading] = useState(false);
-  const [timeoutId, setTimeoutId] = useState<number | null>(null);
 
   useEffect(() => {
     const handleStart = () => {
       setLoading(true);
-      setTimeoutId(
-        window.setTimeout(() => {
-          setLoading(false);
-          const toastId = 'info';
-          if (!toast.isActive(toastId)) {
-            toast({
-              id: toastId,
-              description: '데이터를 받아오고 있어요!',
-              status: 'info',
-              duration: 1000,
-              containerStyle: {
-                marginBottom: '60px',
-              },
-            });
-          }
-        }, 4000)
-      );
     };
     const handleComplete = () => {
       setLoading(false);
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
     };
 
     router.events.on('routeChangeStart', handleStart);
@@ -70,11 +49,8 @@ export default function App({ Component, pageProps }: AppProps) {
       router.events.off('routeChangeStart', handleStart);
       router.events.off('routeChangeComplete', handleComplete);
       router.events.off('routeChangeError', handleComplete);
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
     };
-  }, [router, loading, timeoutId, toast]);
+  }, [router, loading, toast]);
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -179,38 +179,41 @@ export default function Orders({ order, threads, orderId }: OrdersProps) {
             </Flex>
           </Flex>
         )}
-        {order.orderStatus === 'NEW' ? (
-          <Button
-            w="92%"
-            maxW="530px"
-            position="fixed"
-            zIndex="10"
-            bottom={8}
-            color="white"
-            background="hey.main"
-            height="3.75rem"
-            borderRadius="1rem"
-            type="submit"
-            _hover={{ bg: 'hey.main' }}
-            onClick={handleButtonClick}
-          >
-            신청하기
-          </Button>
-        ) : (
-          <Button
-            w="92%"
-            maxW="530px"
-            position="fixed"
-            zIndex="10"
-            bottom={8}
-            height="3.75rem"
-            borderRadius="1rem"
-            type="submit"
-            isDisabled
-          >
-            신청 종료
-          </Button>
-        )}
+        <Box
+          height="6rem"
+          bg="white"
+          w="92%"
+          maxW="530px"
+          position="fixed"
+          zIndex="10"
+          bottom={0}
+          paddingTop="1rem"
+        >
+          {order.orderStatus === 'NEW' ? (
+            <Button
+              w="100%"
+              color="white"
+              background="hey.main"
+              height="3.75rem"
+              borderRadius="1rem"
+              type="submit"
+              _hover={{ bg: 'hey.main' }}
+              onClick={handleButtonClick}
+            >
+              신청하기
+            </Button>
+          ) : (
+            <Button
+              w="100%"
+              height="3.75rem"
+              borderRadius="1rem"
+              type="submit"
+              isDisabled
+            >
+              신청 종료
+            </Button>
+          )}
+        </Box>
       </Flex>
     </>
   );
