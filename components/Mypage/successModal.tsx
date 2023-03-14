@@ -11,7 +11,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 import deleteAccessToken from '@/utils/deleteAccessToken';
 
@@ -27,7 +27,6 @@ export default function SuccessModal({ ...props }: SuccessInfo) {
   const router = useRouter();
   const toast = useToast();
 
-  const [open, setOpen] = useState(props.success);
   function handleSuccess() {
     const toastId = 'success';
     if (!toast.isActive(toastId)) {
@@ -48,7 +47,11 @@ export default function SuccessModal({ ...props }: SuccessInfo) {
   }
 
   return (
-    <Modal isOpen={open} onClose={() => setOpen(false)} closeOnOverlayClick>
+    <Modal
+      isOpen={props.success}
+      onClose={() => props.setSuccess(false)}
+      closeOnOverlayClick={false}
+    >
       <ModalOverlay />
       <ModalContent width={400} height={600} borderRadius="14px">
         <ModalHeader marginTop={8}>
