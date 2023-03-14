@@ -4,7 +4,7 @@ import AuthRequired from '@/utils/authRequire';
 export default function AdminPage() {
   return (
     <AuthRequired>
-      <Admin />;
+      <Admin />
     </AuthRequired>
   );
 }
