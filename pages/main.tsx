@@ -30,7 +30,7 @@ export default function Main() {
           localStorage.setItem('refresh_token', response.refreshToken);
         }
 
-        router.push('/main');
+        router.replace('/main');
       } catch (error) {
         handleAxiosError(error);
       }
@@ -39,7 +39,7 @@ export default function Main() {
   );
 
   useEffect(() => {
-    if (authCode) {
+    if (authCode && !getAccessToken()) {
       handleLogin(authCode as string);
     }
   }, [authCode, handleLogin]);
