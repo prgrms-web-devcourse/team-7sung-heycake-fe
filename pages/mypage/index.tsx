@@ -74,12 +74,22 @@ export default function Detail() {
           </Text>
         </Flex>
         <Container padding={0}>
+          {isMarket && (
+            <Text
+              display="inline"
+              color="hey.main"
+              fontSize={24}
+              fontWeight="bold"
+              marginLeft={14}
+            >
+              헤이, 케이크&nbsp;
+            </Text>
+          )}
           <Text
             display="inline"
             color="hey.main"
             fontSize={24}
             fontWeight="bold"
-            marginLeft={14}
           >
             헤이, 케이크&nbsp;
           </Text>
