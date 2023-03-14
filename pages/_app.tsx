@@ -105,8 +105,8 @@ export default function App({ Component, pageProps }: AppProps) {
                 thickness="5px"
                 speed="0.65s"
                 position="fixed"
-                top="50%"
-                left="45%"
+                top="40%"
+                left="47%"
                 transform="translate(-50%, -50%)"
                 zIndex="4"
               />
