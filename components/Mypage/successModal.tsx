@@ -11,12 +11,13 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 import deleteAccessToken from '@/utils/deleteAccessToken';
 
 interface SuccessInfo {
   success: boolean;
+  setSuccess: Dispatch<SetStateAction<boolean>>;
   marketName: string;
   ownerName: string;
   address: string;
@@ -25,7 +26,6 @@ interface SuccessInfo {
 export default function SuccessModal({ ...props }: SuccessInfo) {
   const router = useRouter();
   const toast = useToast();
-  const [open, setOpen] = useState(props.success);
 
   function handleSuccess() {
     const toastId = 'success';
@@ -45,8 +45,13 @@ export default function SuccessModal({ ...props }: SuccessInfo) {
     deleteAccessToken();
     router.push('/');
   }
+
   return (
-    <Modal isOpen={open} onClose={() => setOpen(false)} closeOnOverlayClick>
+    <Modal
+      isOpen={props.success}
+      onClose={() => props.setSuccess(false)}
+      closeOnOverlayClick={false}
+    >
       <ModalOverlay />
       <ModalContent width={400} height={600} borderRadius="14px">
         <ModalHeader marginTop={8}>
@@ -86,7 +91,10 @@ export default function SuccessModal({ ...props }: SuccessInfo) {
               height="3rem"
               mr={3}
               borderRadius="12px"
-              onClick={() => handleSuccess()}
+              onClick={() => {
+                props.setSuccess(true);
+                handleSuccess();
+              }}
             >
               맞습니다
             </Button>
