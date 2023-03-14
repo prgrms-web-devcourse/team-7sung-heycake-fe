@@ -61,7 +61,7 @@ export const getStaticProps: GetStaticProps = async () => {
         cursor: '',
       }),
     {
-      staleTime: 1000 * 30,
+      staleTime: 1000 * 20,
     }
   );
 
