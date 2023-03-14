@@ -38,6 +38,7 @@ export default function CakeMain() {
     if (role === 'ROLE_MARKET') {
       setIsMarket(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   const handleNewOrderClick = () => {
