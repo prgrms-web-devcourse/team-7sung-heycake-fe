@@ -45,4 +45,9 @@ export const CAKE_CATEGORY_COLOR = {
   '': '',
 };
 
-export const CAKE_SIZE = { MINI: '미니', NO_1: '1호', NO_2: '2호' };
+export const CAKE_SIZE = {
+  MINI: '미니',
+  NO_1: '1호',
+  NO_2: '2호',
+  ETC: '기타',
+};
