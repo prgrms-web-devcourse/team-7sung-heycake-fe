@@ -50,7 +50,7 @@ export interface MypagePostInfo {
 }
 
 export interface MypageCount {
-  count: number;
+  count: number | undefined;
 }
 
 export type OrderStatus = 'NEW' | 'RESERVED' | 'PAID';
