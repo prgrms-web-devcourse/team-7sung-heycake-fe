@@ -44,22 +44,18 @@ export default function Post({
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    if (orderStatus === 'RESERVED') {
-      const toastId = 'error';
-      if (!toast.isActive(toastId)) {
-        toast({
-          id: toastId,
-          status: 'error',
-          duration: 1000,
-          description: '예약된 주문은 삭제할 수 없습니다',
-          containerStyle: {
-            marginBottom: '60px',
-          },
-        });
-      }
-    } else {
-      deleteOrderMutation.mutate(id);
-    }
+
+    toast({
+      id: 'success',
+      status: 'success',
+      duration: 1000,
+      description: '주문 삭제가 완료되었습니다.',
+      containerStyle: {
+        marginBottom: '60px',
+      },
+    });
+
+    deleteOrderMutation.mutate(id);
   };
 
   return (
@@ -75,15 +71,17 @@ export default function Post({
         <Text fontSize={18} fontWeight="semibold">
           주문번호 {createdAt.slice(0, 10).replaceAll('-', '').concat(id)}
         </Text>
-        <Button
-          onClick={(e) => handleDelete(e)}
-          fontSize={12}
-          background="none"
-          color="hey.normalGray"
-          _hover={{ backgroundColor: 'none' }}
-        >
-          삭제
-        </Button>
+        {orderStatus === 'NEW' && (
+          <Button
+            onClick={(e) => handleDelete(e)}
+            fontSize={12}
+            background="none"
+            color="hey.normalGray"
+            _hover={{ backgroundColor: 'none' }}
+          >
+            삭제
+          </Button>
+        )}
       </Container>
       <Container display="flex" marginTop={2}>
         <Container width="240px" height="150px" borderRadius="7px" padding={0}>
