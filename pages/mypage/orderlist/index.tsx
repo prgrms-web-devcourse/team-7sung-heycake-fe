@@ -1,4 +1,4 @@
-import { Box, Container } from '@chakra-ui/react';
+import { Box, Container, Spinner } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
@@ -11,19 +11,34 @@ import HeaderTitle from '@/components/Shared/headerTitle';
 import { MypagePost } from '@/types/orders';
 
 export default function Orderlist() {
-  const [status, setStatus] = useState<string>('NEW');
+  const [currStatus, setStatus] = useState<string>('NEW');
 
-  const { data: orderList, isError } = useQuery<MypagePost[]>(
-    ['orderList'],
-    () => getOrderList({ cursorId: null, pageSize: null, orderStatus: null })
+  const {
+    data: orderList,
+    isLoading,
+    isError,
+  } = useQuery<MypagePost[]>(['orderList', currStatus], () =>
+    getOrderList({
+      cursorId: null,
+      pageSize: null,
+      orderStatus: currStatus,
+    })
   );
-
-  if (!orderList) {
-    return <Box>Loading...</Box>;
+  if (isLoading) {
+    return (
+      <Spinner
+        color="hey.main"
+        size="xl"
+        thickness="5px"
+        speed="0.65s"
+        position="fixed"
+        top="40%"
+        left="47%"
+        transform="translate(-50%, -50%)"
+        zIndex="4"
+      />
+    );
   }
-  const filteredOrderList = orderList.filter(
-    (order) => order.orderStatus === status
-  );
 
   if (isError) {
     return <Box>Error while fetching orderList</Box>;
@@ -32,11 +47,11 @@ export default function Orderlist() {
   return (
     <>
       <HeaderTitle title="마이 주문 리스트" />
-      <FilterBar setStatusFun={setStatus} status={status} />
-      <CountBar count={filteredOrderList.length} />
+      <FilterBar setStatusFun={setStatus} status={currStatus} />
+      <CountBar count={orderList.length} />
       <Container paddingTop={10} overflow="scroll">
-        {filteredOrderList.length !== 0 ? (
-          filteredOrderList.map((order) => <Post key={order.id} {...order} />)
+        {orderList.length !== 0 ? (
+          orderList.map((order) => <Post key={order.id} {...order} />)
         ) : (
           <NotExist />
         )}
