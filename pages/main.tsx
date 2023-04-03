@@ -1,5 +1,6 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 
@@ -47,7 +48,7 @@ export default function Main() {
   return <CakeMain />;
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
   const location = '강남구';
 
@@ -60,15 +61,14 @@ export const getStaticProps = async () => {
         cursor: '',
       }),
     {
-      staleTime: 1000 * 60 * 1,
+      staleTime: 1000 * 20,
     }
   );
 
   return {
     props: {
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
-      revalidate: 20,
-      fallback: true,
     },
+    revalidate: 20,
   };
 };

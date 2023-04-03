@@ -39,7 +39,7 @@ export interface MypagePost {
   createdAt: string;
   cakeInfo: MypagePostInfo;
   hopePrice: number;
-  count: number;
+  offerCount: number;
 }
 
 export interface MypagePostInfo {
@@ -50,7 +50,7 @@ export interface MypagePostInfo {
 }
 
 export interface MypageCount {
-  count: number;
+  count: number | undefined;
 }
 
 export type OrderStatus = 'NEW' | 'RESERVED' | 'PAID';

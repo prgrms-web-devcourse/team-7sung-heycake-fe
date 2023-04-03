@@ -103,6 +103,7 @@ export default function EnrollmentForm() {
     <Flex justifyContent="center">
       <SuccessModal
         success={success}
+        setSuccess={setSuccess}
         marketName={marketName}
         ownerName={ownerName}
         address={address}

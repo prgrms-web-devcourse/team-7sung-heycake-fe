@@ -16,6 +16,7 @@ import ERROR_MESSAGES from '@/constants/errorMessages';
 import { TAB_TABLE } from '@/constants/Main';
 import { NewOrderIcon } from '@/public/icon';
 import { getAccessToken } from '@/utils/getAccessToken';
+import { getRoleFromToken } from '@/utils/getDecodeToken';
 
 import CakeList from './cake/cakeList';
 import Header from './header';
@@ -24,12 +25,20 @@ import LocationSelectBox from './location/locationSelectBox';
 export default function CakeMain() {
   const router = useRouter();
   const [location, setLocation] = useState('강남구');
+  const [isMarket, setIsMarket] = useState(false);
   const accessToken = getAccessToken();
   const toast = useToast();
 
   useEffect(() => {
-    const localLocation = localStorage.getItem('location');
-    if (localLocation) setLocation(localLocation as string);
+    const localLocation = localStorage.getItem('location') as string;
+    const role = getRoleFromToken(accessToken as string);
+    if (localLocation) {
+      setLocation(localLocation);
+    }
+    if (role === 'ROLE_MARKET') {
+      setIsMarket(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   const handleNewOrderClick = () => {
@@ -103,43 +112,45 @@ export default function CakeMain() {
               </TabPanel>
             ))}
           </TabPanels>
-          <Button
-            w={{
-              base: '52px',
-              xl: '80px',
-            }}
-            h={{
-              base: '52px',
-              xl: '80px',
-            }}
-            colorScheme="heys"
-            bg="hey.main"
-            position="fixed"
-            zIndex="10"
-            borderRadius="104px"
-            right={{
-              base: '24px',
-              md: '120px',
-              lg: '240px',
-              xl: '30%',
-              '2xl': '35%',
-            }}
-            bottom={8}
-            p={0}
-            onClick={handleNewOrderClick}
-            _hover={{ backgroundColor: 'none' }}
-          >
-            <NewOrderIcon
+          {isMarket || (
+            <Button
               w={{
-                base: '24px',
-                xl: '38px',
+                base: '52px',
+                xl: '80px',
               }}
               h={{
-                base: '24px',
-                xl: '38px',
+                base: '52px',
+                xl: '80px',
               }}
-            />
-          </Button>
+              colorScheme="heys"
+              bg="hey.main"
+              position="fixed"
+              zIndex="10"
+              borderRadius="104px"
+              right={{
+                base: '24px',
+                md: '120px',
+                lg: '240px',
+                xl: '30%',
+                '2xl': '35%',
+              }}
+              bottom={8}
+              p={0}
+              onClick={handleNewOrderClick}
+              _hover={{ backgroundColor: 'none' }}
+            >
+              <NewOrderIcon
+                w={{
+                  base: '24px',
+                  xl: '38px',
+                }}
+                h={{
+                  base: '24px',
+                  xl: '38px',
+                }}
+              />
+            </Button>
+          )}
         </Tabs>
       </Flex>
     </>
